@@ -1,9 +1,9 @@
-#include "IncidenceStatistics.h"
+#include "IncidenceStatistic.h"
 
 namespace SimulationLib
 {
 
-	IncidenceStatistics::IncidenceStatistics(string inName) : name(inName) {
+	IncidenceStatistic::IncidenceStatistic(string inName) : name(inName) {
 		mean = 0;
 		variance = 0;
 		min = std::numeric_limits<double>::min();

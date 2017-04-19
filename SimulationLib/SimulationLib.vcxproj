@@ -130,10 +130,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IncidenceStatistics.h" />
+    <ClInclude Include="IncidenceStatistic.h" />
+    <ClInclude Include="IncidenceTimeSeries.h" />
+    <ClInclude Include="PrevalenceStatistic.h" />
+    <ClInclude Include="PrevalenceTimeSeries.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IncidenceStatistics.cpp" />
+    <ClCompile Include="IncidenceStatistic.cpp" />
+    <ClCompile Include="IncidenceTimeSeries.cpp" />
+    <ClCompile Include="PrevalenceStatistic.cpp" />
+    <ClCompile Include="PrevalenceTimeSeries.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

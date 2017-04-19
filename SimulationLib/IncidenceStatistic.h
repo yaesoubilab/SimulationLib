@@ -6,11 +6,11 @@ using namespace std;
 
 namespace SimulationLib
 {
-	class IncidenceStatistics
+	class IncidenceStatistic
 	{
 		public:
 			string name;
-			IncidenceStatistics(string inName);
+			IncidenceStatistic(string inName);
 
 		private:
 			double mean, variance, min, max, total;
