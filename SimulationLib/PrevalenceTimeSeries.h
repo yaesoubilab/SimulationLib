@@ -6,21 +6,16 @@ using namespace std;
 
 namespace SimulationLib
 {
-	struct PrevalenceObservation
-	{
-		double time;
-		double value;
-	};
-
 	class PrevalenceTimeSeries
 	{
 	public:
 		string name;
 		PrevalenceTimeSeries(string name);
-		void Record(double time, double value);
+		void Record(int time, int increment);
+		
+		vector<int> GetObservations();
 
 	private:
-		vector<PrevalenceObservation> observations;
 	};
 }
 

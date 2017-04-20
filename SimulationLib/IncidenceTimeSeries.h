@@ -10,8 +10,9 @@ namespace SimulationLib
 	{
 	public:
 		string name;
-		IncidenceTimeSeries(string name, double observationPeriodLength);
-		void Record(double time, double value);
+		IncidenceTimeSeries(string name, int time0, int observationPeriodLength); // observationPeriodLength specifies how often the recordings should be aggregated
+		void Record(int time, double value);
+		vector<double> GetObservations();
 
 	private:
 		double observationPeriodLength;

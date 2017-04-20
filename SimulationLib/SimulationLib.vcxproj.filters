@@ -18,34 +18,23 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PrevalenceStatistic.h">
+    <ClInclude Include="PrevalenceTimeSeries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IncidenceStatistic.h">
+    <ClInclude Include="ContinuousTimeStatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PyramidData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PyramidTimeSeries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IncidenceTimeSeries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PrevalenceTimeSeries.h">
+    <ClInclude Include="DiscreteTimeStatistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PrevalencePopulationPyramid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="IncidenceStatistic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PrevalenceStatistic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IncidenceTimeSeries.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PrevalenceTimeSeries.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

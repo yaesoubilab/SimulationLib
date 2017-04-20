@@ -6,12 +6,17 @@ using namespace std;
 
 namespace SimulationLib
 {
-	class PrevalenceStatistic
+	class ContinuousTimeStatistic
 	{
 	public:
 		string name;
-		PrevalenceStatistic(string name);
+		ContinuousTimeStatistic(string name);
 		void Record(double time, double increment);
+
+		double GetMean();
+		double GetVariance();
+		double GetMin();
+		double GetMax();
 
 	private:
 		double currentValue, mean, variance, min, max;
