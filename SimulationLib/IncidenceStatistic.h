@@ -11,6 +11,7 @@ namespace SimulationLib
 		public:
 			string name;
 			IncidenceStatistic(string inName);
+			void Record(double value);
 
 		private:
 			double mean, variance, min, max, total;
