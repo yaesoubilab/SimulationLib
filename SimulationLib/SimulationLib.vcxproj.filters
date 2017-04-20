@@ -30,6 +30,9 @@
     <ClInclude Include="PrevalenceTimeSeries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrevalencePopulationPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IncidenceStatistic.cpp">

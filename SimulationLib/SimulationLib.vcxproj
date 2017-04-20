@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="IncidenceStatistic.h" />
     <ClInclude Include="IncidenceTimeSeries.h" />
+    <ClInclude Include="PrevalencePopulationPyramid.h" />
     <ClInclude Include="PrevalenceStatistic.h" />
     <ClInclude Include="PrevalenceTimeSeries.h" />
   </ItemGroup>

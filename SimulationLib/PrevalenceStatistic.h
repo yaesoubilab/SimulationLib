@@ -11,10 +11,10 @@ namespace SimulationLib
 	public:
 		string name;
 		PrevalenceStatistic(string name);
-		void Record(double time, double value);
+		void Record(double time, double increment);
 
 	private:
-		double mean, variance, min, max;
+		double currentValue, mean, variance, min, max;
 	};
 
 }
