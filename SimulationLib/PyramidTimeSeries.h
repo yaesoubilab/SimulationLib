@@ -11,7 +11,7 @@ namespace SimulationLib
 	public:
 		PyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks);
 	private: 
-		vector<PyramidData> pyramids;
+		vector<PyramidData> pyramids; 
 	};
 
 	class PrevalencePyramid : public PyramidTimeSeries
