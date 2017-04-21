@@ -6,6 +6,7 @@
 
 namespace SimulationLib
 {
+	// to store a collection of pyramid data collected during a simulation run
 	class PyramidTimeSeries
 	{
 	public:
@@ -14,6 +15,7 @@ namespace SimulationLib
 		vector<PyramidData> pyramids; 
 	};
 
+	// to store a collection of prevalence data collected in the pyramid format during a simulation run
 	class PrevalencePyramid : public PyramidTimeSeries
 	{
 	public:
@@ -26,6 +28,7 @@ namespace SimulationLib
 		
 	};
 
+	// to store a collection of incidence data collected in the pyramid format during a simulation run
 	class IncidenceTimeSeries : public PyramidTimeSeries
 	{
 	public:
