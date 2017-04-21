@@ -18,9 +18,9 @@ namespace SimulationLib
 		void Update(int category, double age, int increment);
 		void Update(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved);
 		
-		long GetTotal();
-		long GetTotalInCategory(int categoryIndex);
-		long GetTotalInAgeGroup(double ageGroupIndex);
+		int GetTotal();
+		int GetTotalInCategory(int categoryIndex);
+		int GetTotalInAgeGroup(double ageGroupIndex);
 		void CalculateProportions();
 	private:
 		// declare a two-dimensional vector to store counts in each age group in each category
