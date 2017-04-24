@@ -77,10 +77,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ry87\Box Sync\Codes\MyCppResearchCodes\StatisticalDistributionsLib\StatisticalDistributionsLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalDependencies>StatisticalDistributionsLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\ry87\Box Sync\Codes\MyCppResearchCodes\StatisticalDistributionsLib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -132,10 +139,14 @@
   <ItemGroup>
     <ClInclude Include="DiscreteTimeStatistic.h" />
     <ClInclude Include="IncidenceTimeSeries.h" />
+    <ClInclude Include="Parameter.h" />
     <ClInclude Include="PyramidTimeSeries.h" />
     <ClInclude Include="PyramidData.h" />
     <ClInclude Include="ContinuousTimeStatistic.h" />
     <ClInclude Include="PrevalenceTimeSeries.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Parameter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
