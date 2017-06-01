@@ -69,6 +69,7 @@ artifacts/
 *.svclog
 *.scc
 *.vcxproj
+*.vcxproj.filters
 *.filters
 
 # Chutzpah Test files
