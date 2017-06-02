@@ -243,3 +243,9 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# OSX, emacs, and clang
+*.o
+*.h.gch
+**/.DS_Store
+*~
