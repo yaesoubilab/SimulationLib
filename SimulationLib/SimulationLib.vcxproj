@@ -148,6 +148,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="PyramidData.cpp" />
+    <ClCompile Include="PyramidTimeSeries.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

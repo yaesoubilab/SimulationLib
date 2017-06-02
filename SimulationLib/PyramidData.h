@@ -25,7 +25,10 @@ namespace SimulationLib
 			}
 		};
 			
+		void Update(int category, int ageGroupIndex, int increment)
+		{
 
+		}
 		void Update(int category, double age, int increment) {
 			
 			int index;
@@ -44,6 +47,7 @@ namespace SimulationLib
 		
 		};
 			// update the change in the specified category and age group (note that it takes the actual age) 
+		void Update(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {}
 		void Update(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved) {
 			// update the change in the specified category and age group by taking the number of people who 
 			//moved from one category-age group to another category-age group.
