@@ -16,27 +16,29 @@ namespace SimulationLib
 
 	public:
 		PyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks) : name{ name } {
-			/*int timeIndex = time0;
-			for (int j = 0; j < numObs; ++j) {
-				pyramids.push_back(PyramidData(timeIndex, numOfCategories, ageBreaks));
-				timeIndex += observationPeriodLength;
-			}*/
+			// create a new pyramid and add this to the vector of pyramids
+			
 		}
 
 	};
 
 	// to store a collection of prevalence data collected in the pyramid format during a simulation run
-	class PrevalencePyramid : public PyramidTimeSeries
+	class PrevalencePyramidTimeSeries : public PyramidTimeSeries
 	{
 	private:
 		string name;
 	public:
-		PrevalencePyramid(string name, int time0, int observationPeriodLength, int numObs, int numOfCategories, vector<double> ageBreaks) : name{ name } {
-
-
+		PrevalencePyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks) : name{ name } {
 		}
 
 		void Update(int time, int category, double age, int increment);
+		{
+			// TODO: modify the arguments to match your implementation of pyramidData
+			// check if time > lastTimePyramidCreated +  observationPeriodLength
+				// create a new pyramid and populate it with old pyramid data
+			// else
+				// update old pyramid
+		}
 		void Update(int time, int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved);
 
 	private:
@@ -44,12 +46,19 @@ namespace SimulationLib
 	};
 
 	// to store a collection of incidence data collected in the pyramid format during a simulation run
-	class IncidenceTimeSeries : public PyramidTimeSeries
+	class IncidencePyramidTimeSeries : public PyramidTimeSeries
 	{
 	public:
-		IncidenceTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks);
+		IncidencePyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks);
 
 		void Update(int time, int category, double age, int increment);
+		{
+			// TODO: modify the arguments to match your implementation of pyramidData
+			// check if time > lastTimePyramidCreated +  observationPeriodLength
+				// create a new empty pyramid 
+			// else
+				// update old pyramid
+		}
 
 	private:
 	};
