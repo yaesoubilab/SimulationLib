@@ -15,12 +15,12 @@ namespace SimulationLib
 		vector<PyramidData> pyramids;
 
 	public:
-		PyramidTimeSeries(string name, int time0, int observationPeriodLength, int numObs, int numOfCategories, vector<double> ageBreaks) : name{ name } {
-			int timeIndex = time0;
+		PyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks) : name{ name } {
+			/*int timeIndex = time0;
 			for (int j = 0; j < numObs; ++j) {
 				pyramids.push_back(PyramidData(timeIndex, numOfCategories, ageBreaks));
 				timeIndex += observationPeriodLength;
-			}
+			}*/
 		}
 
 	};
