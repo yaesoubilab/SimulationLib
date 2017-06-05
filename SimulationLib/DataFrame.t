@@ -1,7 +1,6 @@
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-#include <map>
 
 namespace SimulationLib {
   using namespace std;
@@ -59,10 +58,9 @@ namespace SimulationLib {
 	fscanf(ifile, "%*[^,],");
       else
 	fscanf(ifile, "%lf,", &timeRead);
-      if(ignoreGender)
-	fscanf(ifile, "%*[^,],");
-      else
-	fscanf(ifile, "%hhi,", (char *)&readFemale);
+      if(!ignoreGender)
+	readFemale = getc(ifile) == 'F';
+      fscanf(ifile, "%*[^,],");
       if(ignoreAge)
 	fscanf(ifile, "%*[^,],");
       else
@@ -105,10 +103,10 @@ namespace SimulationLib {
 
   template<class C>
   double DataFrame<C>::nextBracketStart(double age) const {
-    if(ignoreAge || age > ageBracket * ageCats)
+    if(ignoreAge || age > ageBracket * (ageCats - 1) + ageStart)
       return(INFINITY);
     if(age < ageStart)
-      return(ageStart);
+      return(ageStart + ageBracket);
     return(((int)((age - ageStart) / ageBracket) + 1) * ageBracket + ageStart);
   }
   
