@@ -13,7 +13,7 @@ namespace SimulationLib {
     double nextBracketStart(double age) const;
     double timeToNextBracket(double age) const;
   private:
-    double timeBracket, ageBracket, timeStart;
+    double timeBracket, ageBracket, timeStart, ageStart;
     std::vector<std::vector<std::shared_ptr<const C> > > m, f;
     int timeCats, ageCats;
     bool ignoreAge, ignoreTime, ignoreGender;

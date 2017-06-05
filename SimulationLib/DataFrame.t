@@ -30,8 +30,27 @@ namespace SimulationLib {
       ungetc(c, ifile);
       fscanf(ifile, "%lf%*s ", &ageBracket);
     }
+    // And the line that tells us bracket count.
+    if(ignoreTime) {
+      timeCats = 1;
+      fscanf(ifile, "%*[^,],,");
+    } else
+      fscanf(ifile, "%i,,", &timeCats);
+    if(ignoreAge)
+      ageCats = 1;
+    else
+      fscanf(ifile, "%i", &ageCats);
+    while((c = getc(ifile)) != EOF && c != '\n');
 
-    map<int, map<int, shared_ptr<const C> > > male, female;
+    m.resize(timeCats);
+    if(!ignoreGender)
+      f.resize(timeCats);
+    for(int i = 0; i < timeCats; i++) {
+      m[i].resize(ageCats);
+      if(!ignoreGender)
+	f[i].resize(ageCats);
+    }
+    
     double timeRead = 0, ageRead = 0;
     shared_ptr<const C> pC;
     bool readFemale = false;
@@ -53,25 +72,12 @@ namespace SimulationLib {
       });
     readLine();
     timeStart = timeRead;
+    ageStart = ageRead;
     do {
-      (readFemale? female : male)[(int)((timeRead - timeStart) / timeBracket)]
-	[(int)(ageRead / ageBracket)] = pC;
+      (readFemale? f : m)[(int)((timeRead - timeStart) / timeBracket)]
+	[(int)((ageRead - ageStart) / ageBracket)] = pC;
       readLine();
     } while(!feof(ifile));
-    m.resize(timeCats = male.rbegin()->first + 1);
-    ageCats = male[0].rbegin()->first + 1;
-    if(!ignoreGender)
-      f.resize(timeCats);
-    for(int i = 0; i < timeCats; i++) {
-      m[i].resize(ageCats);
-      if(!ignoreGender)
-	f[i].resize(ageCats);
-      for(int j = 0; j < ageCats; j++) {
-	m[i][j] = male[i][j];
-	if(!ignoreGender)
-	  f[i][j] = female[i][j];
-      }
-    }
   }
   
   template<class C>
@@ -89,7 +95,7 @@ namespace SimulationLib {
       timeBrk = timeCats - 1;
     else if(timeBrk < 0)
       timeBrk = 0;
-    int ageBrk = ignoreAge? 0 : (int)(age / ageBracket);
+    int ageBrk = ignoreAge? 0 : (int)((age - ageStart) / ageBracket);
     if(ageBrk < 0)
       ageBrk = 0;
     if(ageBrk >= ageCats)
@@ -101,9 +107,9 @@ namespace SimulationLib {
   double DataFrame<C>::nextBracketStart(double age) const {
     if(ignoreAge || age > ageBracket * ageCats)
       return(INFINITY);
-    if(age < 0)
-      return(0);
-    return(((int)(age / ageBracket) + 1) * ageBracket);
+    if(age < ageStart)
+      return(ageStart);
+    return(((int)((age - ageStart) / ageBracket) + 1) * ageBracket + ageStart);
   }
   
   template<class C>
