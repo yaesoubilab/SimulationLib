@@ -1,15 +1,16 @@
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-
+#ifndef DFRAMEBSIZE
+#define DFRAMEBSIZE 256
+#endif
 namespace SimulationLib {
   using namespace std;
-  
   template<class C>
   DataFrame<C>::DataFrame(const char *file, bool loopTime,
 			  shared_ptr<const C>(*g)(const char *))
     : loopTime(loopTime) {
-    char buf[200];
+    char buf[DFRAMEBSIZE];
     FILE *ifile = fopen(file, "r");
     fscanf(ifile, "%*s"); // Ignore first line.
     // Now we read the line that tells us bracket size.
@@ -65,7 +66,7 @@ namespace SimulationLib {
 	fscanf(ifile, "%*[^,],");
       else
 	fscanf(ifile, "%lf,", &ageRead);
-      fgets(buf, 200, ifile);
+      fgets(buf, DFRAMEBSIZE, ifile);
       pC = g(buf);
       });
     readLine();
@@ -123,3 +124,4 @@ namespace SimulationLib {
 	return(shared_ptr<const double>(d));
       }) {}
 }
+#undef DFRAMEBSIZE

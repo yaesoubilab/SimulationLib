@@ -7,7 +7,8 @@ namespace SimulationLib {
   public:
     DataFrame(const char *file, bool loopTime,
 	      std::shared_ptr<const C> (*g)(const char *));
-    // Only implemented for DataFrame<double>.
+    // Only implemented for DataFrame<double>, and for distributions on
+    // long, long double.
     DataFrame(const char *file, bool loopTime);
     const C &getValue(double time, bool isFemale, double age) const;
     double nextBracketStart(double age) const;
