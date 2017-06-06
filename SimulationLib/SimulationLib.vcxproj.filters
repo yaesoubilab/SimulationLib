@@ -39,7 +39,7 @@
     <ClInclude Include="Parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YearSexAgeDataFrame.h">
+    <ClInclude Include="DataFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,5 +53,10 @@
     <ClCompile Include="PyramidTimeSeries.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataFrame.t">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -137,6 +137,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataFrame.h" />
     <ClInclude Include="DiscreteTimeStatistic.h" />
     <ClInclude Include="IncidenceTimeSeries.h" />
     <ClInclude Include="Parameter.h" />
@@ -144,12 +145,14 @@
     <ClInclude Include="PyramidData.h" />
     <ClInclude Include="ContinuousTimeStatistic.h" />
     <ClInclude Include="PrevalenceTimeSeries.h" />
-    <ClInclude Include="YearSexAgeDataFrame.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PyramidData.cpp" />
     <ClCompile Include="PyramidTimeSeries.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataFrame.t" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
