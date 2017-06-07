@@ -31,7 +31,7 @@ namespace SimulationLib
 		PrevalencePyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks) : name{ name } {
 		}
 
-		void Update(int time, int category, double age, int increment);
+		void Update(int time, int category, double age, int increment)
 		{
 			// TODO: modify the arguments to match your implementation of pyramidData
 			// check if time > lastTimePyramidCreated +  observationPeriodLength
