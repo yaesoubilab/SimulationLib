@@ -68,6 +68,7 @@ namespace SimulationLib {
 	fscanf(ifile, "%lf,", &ageRead);
       fgets(buf, DFRAMEBSIZE, ifile);
       pC = g(buf);
+      while((c = getc(ifile)) != EOF && c != '\n');
       });
     readLine();
     timeStart = timeRead;
@@ -77,6 +78,7 @@ namespace SimulationLib {
 	[(int)((ageRead - ageStart) / ageBracket)] = pC;
       readLine();
     } while(!feof(ifile));
+    fclose(ifile);
   }
   
   template<class C>

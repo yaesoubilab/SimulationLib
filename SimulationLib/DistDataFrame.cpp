@@ -1,6 +1,6 @@
 #include <map>
 #include <cstdio>
-#include <cstring>
+#include <string>
 #include <iostream>
 #include "DataFrame.h"
 
@@ -36,11 +36,7 @@ namespace SimulationLib {
 
   typedef csip (*idmk)(const char *);
   
-  bool compstring(const char *a, const char *b) {
-    return(std::strcmp(a, b) < 0);
-  }
-  
-  static const std::map<const char *, const ddmk, decltype(&compstring)> mpd({
+  static const std::map<const std::string, const ddmk> mpd({
       make_pair("Beta", [](const char *i) -> csdp {
 	  long double alpha, beta, scale = 1, shift = 0;
 	  sscanf(i, "%Lf,%Lf,%Lf,%Lf", &alpha, &beta, &scale, &shift);
@@ -101,7 +97,7 @@ namespace SimulationLib {
 	    sscanf(i, "%Lf,%Lf", &a, &b);
 	    return new Weibull(a, b);
 	  })
-	}, compstring);
+	});
 
   template<>
   DataFrame<StatisticalDistribution<long double> >::DataFrame(const char *file,
@@ -123,7 +119,7 @@ namespace SimulationLib {
 	}
       }) {}
 
-  static const std::map<const char *, const idmk, decltype(&compstring)> mpi({
+  static const std::map<const std::string, const idmk> mpi({
       make_pair("Beta-binomial", [](const char *i) -> csip {
 	  long n;
 	  long double alpha = 1, beta = 1;
@@ -171,7 +167,7 @@ namespace SimulationLib {
 	    sscanf(i, "%li,%li", &low, &high);
 	    return new UniformDiscrete(low, high);
 	  })
-	}, compstring);
+	});
 
   template<>
   DataFrame<StatisticalDistribution<long> >::DataFrame(const char *file,
