@@ -10,7 +10,7 @@ namespace SimulationLib {
 #define BFSZ 255
 #endif
   using namespace StatisticalDistributions;
-  DemographicData::DemographicData(char *file) {
+  DemographicData::DemographicData(const char *file) {
     FILE *ifile = fopen(file, "r");
     int c;
     char buf[BFSZ + 1], t;
@@ -54,7 +54,7 @@ namespace SimulationLib {
     }
     fclose(ifile);
   }
-  double DemographicData::getVar(std::string name) const {
+  double DemographicData::getVar(const std::string &name) const {
     auto ptr = var.find(name);
     if(ptr == var.end()) {
       std::cerr << "Variable not found: " << '"' << name << '"' << std::endl;
@@ -63,7 +63,7 @@ namespace SimulationLib {
     return(ptr->second);
   }
   const DataFrame<double>
-  &DemographicData::getFrameVar(std::string name) const {
+  &DemographicData::getFrameVar(const std::string &name) const {
     try {
       return(*framevar.at(name));
     } catch(std::out_of_range e) {
@@ -72,7 +72,7 @@ namespace SimulationLib {
     }
   }
   const DataFrame<StatisticalDistribution<long> >
-  &DemographicData::getFrameDiscrete(std::string name) const {
+  &DemographicData::getFrameDiscrete(const std::string &name) const {
     try {
       return(*discrete.at(name));
     } catch(std::out_of_range e) {
@@ -82,7 +82,7 @@ namespace SimulationLib {
     }
   }
   const DataFrame<StatisticalDistribution<long double> >
-  &DemographicData::getFrameContinuous(std::string name) const {
+  &DemographicData::getFrameContinuous(const std::string &name) const {
     try {
       return(*continuous.at(name));
     } catch(std::out_of_range e) {

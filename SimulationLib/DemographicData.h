@@ -9,14 +9,14 @@ namespace SimulationLib {
   using namespace StatisticalDistributions;
   class DemographicData {
   public:
-    DemographicData(char *file);
-    double getVar(std::string name) const;
+    DemographicData(const char *file);
+    double getVar(const std::string &name) const;
     const DataFrame<double>
-    &getFrameVar(std::string name) const;
+    &getFrameVar(const std::string &name) const;
     const DataFrame<StatisticalDistribution<long> >
-    &getFrameDiscrete(std::string name) const;
+    &getFrameDiscrete(const std::string &name) const;
     const DataFrame<StatisticalDistribution<long double> >
-    &getFrameContinuous(std::string name) const;
+    &getFrameContinuous(const std::string &name) const;
   private:
     std::map<std::string, double> var;
     std::map<std::string,
