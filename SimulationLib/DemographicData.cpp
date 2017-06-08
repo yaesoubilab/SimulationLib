@@ -2,7 +2,8 @@
 #include <cstdio>
 #include <iostream>
 
-#define ST(x) #x
+#define ST(x) XST(x)
+#define XST(x) #x
 
 namespace SimulationLib {
 #ifndef BFSZ
@@ -20,7 +21,7 @@ namespace SimulationLib {
       std::string item = buf;
       bool loop = false;
       double v;
-      switch(type) {
+      switch(t) {
       case 'v':
 	fscanf(ifile, "%lf", &v);
 	var[item] = v;
@@ -29,26 +30,29 @@ namespace SimulationLib {
 	loop = true;
       case 'n':
 	fgets(buf, BFSZ + 1, ifile);
-	frameVar[item] = DataFrame<double>(buf, loopFrame);
+	framevar[item] = make_shared<DataFrame<double> >(buf, loop);
 	break;
       case 'D':
 	loop = true;
       case 'd':
 	fgets(buf, BFSZ + 1, ifile);
-	discrete[item] = DataFrame<StatisticalDistribution<long> >(buf, loop);
+	discrete[item]
+	  = make_shared<DataFrame<StatisticalDistribution<long> > >(buf, loop);
 	break;
       case 'C':
 	loop = true;
       case 'c':
 	fgets(buf, BFSZ + 1, ifile);
 	continuous[item]
-	  = DataFrame<StatisticalDistribution<long double> >(buf, loop);
+	  = make_shared<DataFrame<
+	    StatisticalDistribution<long double> > >(buf, loop);
 	break;
       default:
 	std::cerr << "Unknown type character " << t << std::endl;
       }
       while((c = getc(ifile)) != EOF && c != '\n');
     }
+    fclose(ifile);
   }
   double DemographicData::getVar(std::string name) const {
     auto ptr = var.find(name);
@@ -61,7 +65,7 @@ namespace SimulationLib {
   const DataFrame<double>
   &DemographicData::getFrameVar(std::string name) const {
     try {
-      return(frameVar.at(name));
+      return(*framevar.at(name));
     } catch(std::out_of_range e) {
       cerr << "Number frame not found: " << '"' << name << '"' << std::endl;
       throw(e);
@@ -70,7 +74,7 @@ namespace SimulationLib {
   const DataFrame<StatisticalDistribution<long> >
   &DemographicData::getFrameDiscrete(std::string name) const {
     try {
-      return(discrete.at(name));
+      return(*discrete.at(name));
     } catch(std::out_of_range e) {
       cerr << "Discrete distribution frame not found: "
 	   << '"' << name << '"' << endl;
@@ -78,9 +82,9 @@ namespace SimulationLib {
     }
   }
   const DataFrame<StatisticalDistribution<long double> >
-  DemographicData::getFrameContinuous(std::string name) const {
+  &DemographicData::getFrameContinuous(std::string name) const {
     try {
-      return(continuous.at(name));
+      return(*continuous.at(name));
     } catch(std::out_of_range e) {
       cerr << "Discrete distribution frame not found: "
 	   << '"' << name << '"' << endl;
