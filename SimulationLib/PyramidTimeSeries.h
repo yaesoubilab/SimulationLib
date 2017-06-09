@@ -33,11 +33,7 @@ namespace SimulationLib
 				PyramidTimeSeries new_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
 		}
 
-<<<<<<< Updated upstream
-		void Update(int time, int category, double age, int increment)
-=======
 		void Update(int time, int category, double ageGroupIndex, int increment);
->>>>>>> Stashed changes
 		{
 			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
 				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
