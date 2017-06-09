@@ -20,7 +20,8 @@ namespace SimulationLib
 			// create a new pyramid and add this to the vector of pyramids
 			PyramidData new_pyramid(time0, numOfCategories, ageBreaks);
 			pyramids.push_back(new_pyramid);
-	};
+		};
+	}
 
 	// to store a collection of prevalence data collected in the pyramid format during a simulation run
 	class PrevalencePyramidTimeSeries : public PyramidTimeSeries
@@ -33,7 +34,11 @@ namespace SimulationLib
 				PyramidTimeSeries new_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
 		}
 
-		void Update(int time, int category, double ageGroupIndex, int increment);
+<<<<<<< Updated upstream
+		void Update(int time, int category, double age, int increment)
+=======
+		void Update(int time, int category, int ageGroupIndex, int increment);
+>>>>>>> Stashed changes
 		{
 			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
 				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
