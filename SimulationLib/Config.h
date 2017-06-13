@@ -7,9 +7,9 @@
 
 namespace SimulationLib {
   using namespace StatisticalDistributions;
-  class DemographicData {
+  class Config {
   public:
-    DemographicData(const char *file);
+    Config(const char *file);
     double getVar(const std::string &name) const;
     const DataFrame<double>
     &getFrameVar(const std::string &name) const;
