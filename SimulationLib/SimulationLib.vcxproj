@@ -147,6 +147,7 @@
     <ClInclude Include="PrevalenceTimeSeries.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DistDataFrame.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PyramidData.cpp" />
     <ClCompile Include="PyramidTimeSeries.cpp" />
