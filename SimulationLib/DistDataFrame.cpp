@@ -172,6 +172,11 @@ namespace SimulationLib {
 	    long low, high;
 	    sscanf(i, "%li,%li", &low, &high);
 	    return new UniformDiscrete(low, high);
+	  }),
+	make_pair("Constant", [](const char *i) -> csip {
+	    long v;
+	    sscanf(i, "%li", &v);
+	    return new KroneckerDelta(v);
 	  })
 	});
 
