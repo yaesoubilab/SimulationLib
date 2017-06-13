@@ -10,7 +10,7 @@ namespace SimulationLib {
     // Only implemented for DataFrame<double>, and for distributions on
     // long, long double.
     DataFrame(const char *file, bool loopTime);
-    const C &getValue(double time, bool isFemale, double age) const;
+    shared_ptr<const C> getValue(double time, bool isFemale, double age) const;
     double nextBracketStart(double age) const;
     double timeToNextBracket(double age) const;
   private:

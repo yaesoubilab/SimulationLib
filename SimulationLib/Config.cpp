@@ -62,29 +62,29 @@ namespace SimulationLib {
     }
     return(ptr->second);
   }
-  const DataFrame<double>
-  &Config::getFrameVar(const std::string &name) const {
+  std::shared_ptr<const DataFrame<double> >
+  Config::getFrameVar(const std::string &name) const {
     try {
-      return(*framevar.at(name));
+      return(framevar.at(name));
     } catch(std::out_of_range e) {
       cerr << "Number frame not found: " << '"' << name << '"' << std::endl;
       throw(e);
     }
   }
-  const DataFrame<StatisticalDistribution<long> >
-  &Config::getFrameDiscrete(const std::string &name) const {
+  std::shared_ptr<const DataFrame<StatisticalDistribution<long> > >
+  Config::getFrameDiscrete(const std::string &name) const {
     try {
-      return(*discrete.at(name));
+      return(discrete.at(name));
     } catch(std::out_of_range e) {
       cerr << "Discrete distribution frame not found: "
 	   << '"' << name << '"' << endl;
       throw(e);
     }
   }
-  const DataFrame<StatisticalDistribution<long double> >
-  &Config::getFrameContinuous(const std::string &name) const {
+  std::shared_ptr<const DataFrame<StatisticalDistribution<long double> > >
+  Config::getFrameContinuous(const std::string &name) const {
     try {
-      return(*continuous.at(name));
+      return(continuous.at(name));
     } catch(std::out_of_range e) {
       cerr << "Discrete distribution frame not found: "
 	   << '"' << name << '"' << endl;

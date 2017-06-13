@@ -82,7 +82,7 @@ namespace SimulationLib {
   }
   
   template<class C>
-  const C &DataFrame<C>::getValue(double time, bool isFemale, double age)
+  shared_ptr<const C> DataFrame<C>::getValue(double time, bool isFemale, double age)
     const {
     const vector<vector<shared_ptr<const C> > > &from =
       isFemale && !ignoreGender ? f : m;
@@ -101,7 +101,7 @@ namespace SimulationLib {
       ageBrk = 0;
     if(ageBrk >= ageCats)
       ageBrk = ageCats - 1;
-    return(*from[timeBrk][ageBrk]);
+    return(from[timeBrk][ageBrk]);
   }
 
   template<class C>
