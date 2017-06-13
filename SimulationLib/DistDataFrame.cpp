@@ -16,6 +16,7 @@
 #include "Triangular.h"
 #include "Uniform.h"
 #include "Weibull.h"
+#include "DiracDelta.h"
 
 #include "BetaBinomial.h"
 #include "Binomial.h"
@@ -96,7 +97,12 @@ namespace SimulationLib {
 	    long double a = 1, b = 1;
 	    sscanf(i, "%Lf,%Lf", &a, &b);
 	    return new Weibull(a, b);
-	  })
+	  }),
+	make_pair("Constant", [](const char *i) -> csdp {
+	    long double v = 0;
+	    sscanf(i, "%Lf", &v);
+	    return new DiracDelta(v);
+	  }
 	});
 
   template<>
