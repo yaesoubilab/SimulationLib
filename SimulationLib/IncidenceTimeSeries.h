@@ -11,21 +11,36 @@ namespace SimulationLib
 	{
 	public:
 		string name;
-		IncidenceTimeSeries(string name, int time0, int observationPeriodLength); 
-			// time0: the initial simulation time (usually 0)
-			// observationPeriodLength: specifies how often the recordings should be aggregated
-		template<typename T> void Record(int time, T value); 
-			// record a new data point that was observed at the given time (note that time is integer) 
-			// note: observations should be aggregated depending on the value of observationPeriodLength 
-				// (observationPeriodLength = 5 means that 5 recordings should be summed up to get 1 data point.) 
-		template<typename T> vector<T> GetObservations(); 
-			// return the vector of recorded data points
-		template<typename T> T GetLastObservation();
-			// return the last (aggregated) observation stored
-		template<typename T> T GetTotal(); 
-			// return the sum of all recorded data points
+
+		// Initializes a new IncidenceTimeSeries.
+	    // 'name': name of the time series
+	    // 'time0': first time point in simulation (usually 0)
+	    // 'observationPeriodLength': how often recordings are aggregated
+		IncidenceTimeSeries(string _name, int _time0, int _observationPeriodLength);
+
+	    // Records a new value at time 'time' and adds it to the current
+	    //   aggregation.
+	    // For successive calls, 'time' must monotonically increase. In other words,
+	    //   the function will issue an error if called with a 'time' of lower value
+	    //   than one which was seen in any previous invocation of the function.
+	    template<typename T> void Record(int time, T value);
+
+	    // Returns a vector containing all complete aggregations, and the current
+	    //   incomplete aggregation.
+	    template<typename T> vector<T> GetObservations();
+
+	    // Returns a value of type 'T' containing the sum of the incomplete
+	    //   aggregation. If no points have yet been added to this aggregation,
+	    //   returns 0.
+	    template<typename T> T GetLastObservation();
+
+	    // Returns the summed value of all complete aggregations, and the incomplete
+	    //   aggregation
+	    template<typename T> T GetTotal();
 
 	private:
+		int time0;
+		int timeMax;
 		double observationPeriodLength;
 		double aggregatedObservation;
 		vector<double> observations;
