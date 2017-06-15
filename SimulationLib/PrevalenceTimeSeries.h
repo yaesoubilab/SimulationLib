@@ -6,7 +6,7 @@ using namespace std;
 
 namespace SimulationLib
 {
-	// to store time-series prevalence data 
+	// to store time-series prevalence data
 	class PrevalenceTimeSeries
 	{
 	public:
