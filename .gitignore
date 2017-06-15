@@ -244,8 +244,13 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-# OSX, emacs, and clang
+# OSX, emacs, sftp, and clang
 *.o
 *.h.gch
 **/.DS_Store
 *~
+sftp-config.json
+
+# Executables
+*.out
+*.out.dSYM
