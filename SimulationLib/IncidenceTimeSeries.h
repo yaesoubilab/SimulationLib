@@ -23,7 +23,9 @@ namespace SimulationLib
 	    // For successive calls, 'time' must monotonically increase. In other words,
 	    //   the function will issue an error if called with a 'time' of lower value
 	    //   than one which was seen in any previous invocation of the function.
-	    template<typename T> void Record(int time, T value);
+	    // template<typename T> void Record(int time, T value);
+	    void Record(int time, int value);
+
 
 	    // Returns a vector containing all complete aggregations, and the current
 	    //   incomplete aggregation.
@@ -32,7 +34,9 @@ namespace SimulationLib
 	    // Returns a value of type 'T' containing the sum of the incomplete
 	    //   aggregation. If no points have yet been added to this aggregation,
 	    //   returns 0.
-	    template<typename T> T GetLastObservation();
+	    // template<typename T> T GetLastObservation();
+	    int GetLastObservation();
+
 
 	    // Returns the summed value of all complete aggregations, and the incomplete
 	    //   aggregation

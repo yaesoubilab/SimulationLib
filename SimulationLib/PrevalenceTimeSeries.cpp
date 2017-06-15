@@ -7,6 +7,7 @@ namespace SimulationLib {
     PrevalenceTimeSeries::PrevalenceTimeSeries(string _name) {
         name = _name;
         currentPrevalence = 0;
+        deltaPrevalence = vector<int>(1, 0);
     };
 
     void PrevalenceTimeSeries::Record(int time, int increment) {

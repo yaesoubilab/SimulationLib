@@ -17,6 +17,7 @@ namespace SimulationLib {
         time0 =   _time0;
         timeMax = _time0;
         observationPeriodLength = _observationPeriodLength;
+        observations = vector<double>(1, 0);
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -24,7 +25,9 @@ namespace SimulationLib {
     // For successive calls, 'time' must monotonically increase. In other words,
     //   the function will issue an error if called with a 'time' of lower value
     //   than one which was seen in any previous invocation of the function.
-    template<typename T> void IncidenceTimeSeries::Record(int time, T value) {
+    // template<typename T> void IncidenceTimeSeries::Record(int time, T value) {
+    void IncidenceTimeSeries::Record(int time, int value) {
+
         int currentPeriod; // Vector index of current period being aggregated
         int timePeriod;    // Vector index of period corresponding to val of 'time'
 
@@ -71,7 +74,8 @@ namespace SimulationLib {
     // Returns a value of type 'T' containing the sum of the incomplete
     //   aggregation. If no points have yet been added to this aggregation,
     //   returns 0.
-    template<typename T> T IncidenceTimeSeries::GetLastObservation() {
+    // template<typename T> T IncidenceTimeSeries::GetLastObservation() {
+    int IncidenceTimeSeries::GetLastObservation() {
         return observations.back();
     }
 
