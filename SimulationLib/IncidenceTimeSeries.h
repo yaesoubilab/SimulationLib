@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 #include <cmath>
@@ -26,8 +27,9 @@ namespace SimulationLib
 		// Initializes a new IncidenceTimeSeries.
 	    // 'name': name of the time series
 	    // 'time0': first time point in simulation (usually 0)
-	    // 'observationPeriodLength': how often recordings are aggregated
-		IncidenceTimeSeries(string _name, double _time0, double _observationPeriodLength);
+	    // 'timeMax': max time point in simulation
+	    // 'periodLength': how often recordings are aggregated
+		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength);
 
 	    // Records a new value at time 'time' and adds it to the current
 	    //   aggregation.
@@ -52,8 +54,11 @@ namespace SimulationLib
 	private:
 		double time0;
 		double timeMax;
-		double observationPeriodLength;
+		double periodLength;
+
+		double mostRecentTime;
 		T aggregatedObservation;
+
 		vector<T> observations;
 	};
 }
