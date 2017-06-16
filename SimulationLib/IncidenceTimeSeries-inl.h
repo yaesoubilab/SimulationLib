@@ -17,11 +17,11 @@ namespace SimulationLib {
         if (_observationPeriodLength <= 0)
             printf("Error: observationPeriodLength must be a positive integer\n");
 
-        name = _name;
-        time0 =   _time0;
-        timeMax = _time0;
+        name                    = _name;
+        time0                   = _time0;
+        timeMax                 = _time0;
         observationPeriodLength = _observationPeriodLength;
-        observations = vector<T>(1, 0);
+        observations            = vector<T>(1, 0);
     }
 
     // Records a new value at time 'time' and adds it to the current

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -56,5 +57,3 @@ namespace SimulationLib
 		vector<T> observations;
 	};
 }
-
-#include "IncidenceTimeSeries.inl"
