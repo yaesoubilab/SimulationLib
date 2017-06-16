@@ -24,7 +24,9 @@ namespace SimulationLib
 
 	private:
 		double mean, variance, min, max, total;
+		double varianceNominator;
 		int count;
+		int numObservations;
 		vector<double*> observations;
 	};
 
