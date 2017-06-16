@@ -1,5 +1,4 @@
 #include "PrevalenceTimeSeries.h"
-#include <limits.h>
 
 namespace SimulationLib {
     using namespace std;
@@ -19,10 +18,10 @@ namespace SimulationLib {
         currentPrevalence = (T)0;
         currentTime       = (T)0;
         prevalence        = vector<T>(numPeriods + 1, (T)0);
-    };
+    }
 
     template <typename T>
-    void PrevalenceTimeSeries<T>::Record(int time, T increment) {
+    void PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
 
         // Is 'time' a non-negative integer?
@@ -55,12 +54,12 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    vector<T> PrevalenceTimeSeries::GetObservations(void) {
-        return deltaPrevalence;
+    vector<T> PrevalenceTimeSeries<T>::GetObservations(void) {
+        return prevalence;
     }
 
     template <typename T>
-    T PrevalenceTimeSeries::GetCurrentPrevalence(void) {
+    T PrevalenceTimeSeries<T>::GetCurrentPrevalence(void) {
         return currentPrevalence;
     }
 }
