@@ -67,7 +67,7 @@ namespace SimulationLib {
         aggregatedObservation += value;
         mostRecentTime = time;
 
-        observations[timePeriod] = value;
+        observations[timePeriod] += value;
         return;
     }
 
