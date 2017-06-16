@@ -148,7 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DistDataFrame.cpp" />
+    <ClCompile Include="IncidenceTimeSeries.cpp" />
     <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="PrevalenceTimeSeries.cpp" />
     <ClCompile Include="PyramidData.cpp" />
     <ClCompile Include="PyramidTimeSeries.cpp" />
   </ItemGroup>
