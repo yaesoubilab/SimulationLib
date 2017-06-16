@@ -35,8 +35,10 @@ int main(int argc, char const *argv[])
     bool verbose = (++i < argc && !strcmp(argv[i], "-v")) ? true : false;
 
     PrevalenceTimeSeries population("Population size");
-    IncidenceTimeSeries<int>births("Births per month", time0_births, aggregation_period);
-    IncidenceTimeSeries<int>deaths("Deaths per month", time0_deaths, aggregation_period);
+    IncidenceTimeSeries<int>
+      births("Births per month", time0_births, aggregation_period);
+    IncidenceTimeSeries<int>
+      deaths("Deaths per month", time0_deaths, aggregation_period);
 
     int numBirths;
     int numDeaths;
