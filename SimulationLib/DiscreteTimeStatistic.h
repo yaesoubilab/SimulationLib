@@ -11,6 +11,7 @@ namespace SimulationLib
 	public:
 		string name;
 		DiscreteTimeStatistic(string name);
+		DiscreteTimeStatistic(string name, int numOfObservationsToStore);
 		void Record(double value);
 
 		double GetSum();
