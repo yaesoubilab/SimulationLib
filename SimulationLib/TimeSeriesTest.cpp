@@ -8,13 +8,23 @@ using namespace SimulationLib;
 
 #define SCALAR_DEATH 0.8
 
+void printVector(char *name, vector<int> v)
+{
+    int i = 0;
+
+    printf("%s:\n", name);
+    for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+        printf("\t[%2d]: %2d\n", i++, *it);
+    printf("\n");
+}
+
 // Parameters:
 // 1: Length of the random walk in time units
-// 2: Aggregation period
-// 3: time0 for births
-// 4: time0 for deaths
-// 5: Max number of births in a time unit
-// (6:) "-v" flag produces verbose output
+// 2: Period length of precedence
+// 3: Period length of incidence
+// 4: time0
+// 5: timeMax
+// 6: Max number of births in 1 time unit
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
@@ -25,46 +35,41 @@ int main(int argc, char const *argv[])
     }
 
     int i = 0;
-    int walk_length        = atoi(argv[++i]);
-    int aggregation_period = atoi(argv[++i]);
-    int time0_births       = atoi(argv[++i]);
-    int time0_deaths       = atoi(argv[++i]);
-    int max_births         = atoi(argv[++i]);
+    int walk_length = atoi(argv[++i]);
+    int period1     = atoi(argv[++i]);
+    int period2     = atoi(argv[++i]);
+    int time0       = atoi(argv[++i]);
+    int timeMax     = atoi(argv[++i]);
+    int maxBirths   = atoi(argv[++i]);
 
-    // Verbose flag?
-    bool verbose = (++i < argc && !strcmp(argv[i], "-v")) ? true : false;
-
-    PrevalenceTimeSeries population("Population size");
+    PrevalenceTimeSeries<int>
+      population("Population size", timeMax, period1);
     IncidenceTimeSeries<int>
-      births("Births per month", time0_births, aggregation_period);
+      births("Births per period", time0, timeMax, period2);
     IncidenceTimeSeries<int>
-      deaths("Deaths per month", time0_deaths, aggregation_period);
+      deaths("Deaths per period", time0, timeMax, period2);
 
-    int numBirths;
-    int numDeaths;
+    int numBirths, numDeaths;
+    double off1, off2;
     for (int i = 0; i < walk_length; ++i)
     {
-        numBirths = rand() % (max_births + 1);
-        numDeaths = rand() % ((int)(SCALAR_DEATH*max_births) + 1);
+        numBirths = rand() % (maxBirths + 1);
+        numDeaths = rand() % ((int)(SCALAR_DEATH * maxBirths) + 1);
 
-        births.Record(i, numBirths);
-        deaths.Record(i, numDeaths);
+        off1 = !i ? 0 : (double)(rand() % 100) / 100;
+        off2 = !i ? 0 : (double)(rand() % 100) / 100;
 
-        printf("t%3d: %3d births, %3d deaths\n", i, numBirths, numDeaths);
+        births.Record(i + off1, numBirths);
+        deaths.Record(i + off2, numDeaths);
+        population.Record(i, numBirths - numDeaths);
 
-        if ((i+1) % aggregation_period == 0) {
-            // int agBirths = births.GetLastObservation<int>();
-            // int agDeaths = deaths.GetLastObservation<int>();
-            int agBirths = births.GetLastObservation();
-            int agDeaths = deaths.GetLastObservation();
-
-            population.Record(i / aggregation_period, agBirths - agDeaths);
-
-            printf("t%3d: AGGREGATE(%3d): %3d Δ, %3d total\n",
-                    i, i/aggregation_period, agBirths-agDeaths, \
-                    population.GetCurrentPrevalence());
-        }
+        printf("t%4.2f: %3d births\n", i + off1, numBirths);
+        printf("t%4.2f: %3d deaths\n\n", i + off2, numDeaths);
     }
+
+    printVector("Total population per period1", population.GetObservations());
+    printVector("Births per period2", births.GetObservations());
+    printVector("Deaths per period2", deaths.GetObservations());
 
     return 0;
 }
