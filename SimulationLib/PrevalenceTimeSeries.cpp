@@ -23,7 +23,7 @@ namespace SimulationLib {
 
         // Is 'time' a non-negative integer?
         if (time < 0) {
-            printf("Error: 'time' is a negative integer\n");
+            printf("Error: 'time' must be non-negative\n");
             return;
         }
 
