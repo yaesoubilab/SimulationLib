@@ -4,38 +4,53 @@
 
 using namespace std;
 
+/// This class uses Drake's `-inl.h` pattern.  When seeing linker errors from
+/// this class, please refer to http://drake.mit.edu/cxx_inl.html.
+///
+/// Instantiated templates for the following kinds of T's are provided:
+/// - double
+/// - int
+///
+/// They are already available to link against in the containing library.
 namespace SimulationLib
 {
+	template <typename T>
 	class PrevalenceTimeSeries
 	{
 	public:
 		string name;
 
-		// Initializes a new time series. Time unit 0 is valued at 0. The name
-		//   'name' of the time series is stored in PrevalenceTimeSeries::name.
-		PrevalenceTimeSeries(string name);
+		// Initializes a new time series. Time unit 0 is valued at 0.
+		// - 'name': name of the time series
+		// - 'timeMax': the upper boundary of time. Time domain is [0, timeMax].
+		// - 'periodLength': the length of each period
+		PrevalenceTimeSeries(string name, double timeMax, double periodLength);
 
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
-		void Record(int time, int increment);
+		void Record(double time, T increment);
 
-		// Returns an integer vector where an element at index 'i' represents
-		// the change in prevalence at time unit 'i'
-		vector<int> GetObservations(void);
+		// Returns a vector. Element 'i' represents the prevalence at the most
+		// recent observation <= 'i'.
+		vector<T> GetObservations(void);
 
 		// Returns the current prevalence (the current prevalence is defined
 		//   as the sum of every change in prevalence already recorded through
 		//   calling 'Record').
-		int GetCurrentPrevalence(void);
+		T GetCurrentPrevalence(void);
 
 	private:
-		// Sum of elements 'deltaPrevalence' vector, updated in constant time
-		int currentPrevalence;
+		double timeMax;
+		double periodLength;
 
-		// Each element of 'deltaPrevalence' holds the *change* in prevalence.
-		// Element of highest index is the most recent change.
-		// Indices for which no change in prevalence has yet been recorded
-		//   are assigned a change of 0.
-		vector<int> deltaPrevalence;
+		// Updated in constant time
+		T currentPrevalence;
+		double currentTime;
+
+		// Each element of 'prevalence' represents a period of length
+		//   'periodLength', who value is the most recent observation (the
+		//   observation of highest time-value recorded for that period).
+		// Element of highest index is the most recent.
+		vector<T> prevalence;
 	};
 }
