@@ -6,7 +6,6 @@ using namespace std;
 
 namespace SimulationLib
 {
-	// to store time-series prevalence data
 	class PrevalenceTimeSeries
 	{
 	public:
@@ -30,7 +29,7 @@ namespace SimulationLib
 		int GetCurrentPrevalence(void);
 
 	private:
-		// Integral of 'deltaPrevalence' vector, updated in constant time
+		// Sum of elements 'deltaPrevalence' vector, updated in constant time
 		int currentPrevalence;
 
 		// Each element of 'deltaPrevalence' holds the *change* in prevalence.
