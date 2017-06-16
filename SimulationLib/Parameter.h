@@ -12,15 +12,17 @@ namespace SimulationLib {
   public: 
     const variant<shared_ptr<const StatisticalDistribution<long> >,
 		  shared_ptr<const StatisticalDistribution<long double> >,
-		  double> dist;
-    const double min, max;
+		  long double> dist;
+    const long double min, max;
+    const bool calibrate;
     long double operator()(mt19937_64 &);
-    inline Parameter(double d) : dist(d), min(d), max(d) {}
+    inline Parameter(double d)
+      : dist(d), min(d), max(d), calibrate(false) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long> > dist,
-		     double min, double max)
-      : dist(dist), min(min), max(max) {}
+		     long double min, long double max, bool c)
+      : dist(dist), min(min), max(max), calibrate(c) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long double> > dist,
-		     double min, double max)
-      : dist(dist), min(min), max(max) {}
+		     long double min, long double max, bool c)
+      : dist(dist), min(min), max(max), calibrate(c) {}
   };
 }

@@ -25,6 +25,7 @@
 #include "NegBinomial.h"
 #include "Poisson.h"
 #include "UniformDiscrete.h"
+#include "KroneckerDelta.h"
 
 namespace SimulationLib {
   using namespace StatisticalDistributions;
