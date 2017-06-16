@@ -1,13 +1,24 @@
 #pragma once
+
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
+
+// This class uses Drake's `-inl.h` pattern.  When seeing linker errors from
+// this class, please refer to http://drake.mit.edu/cxx_inl.html.
+//
+// Instantiated templates for the following kinds of T's are provided:
+// - double
+// - int
+//
+// They are already available to link against in the containing library.
 
 namespace SimulationLib
 {
 	// to store time-series incidence data and to perform calculations on the time-series
-	template <class T>
+	template <typename T>
 	class IncidenceTimeSeries
 	{
 	public:
@@ -16,8 +27,9 @@ namespace SimulationLib
 		// Initializes a new IncidenceTimeSeries.
 	    // 'name': name of the time series
 	    // 'time0': first time point in simulation (usually 0)
-	    // 'observationPeriodLength': how often recordings are aggregated
-		IncidenceTimeSeries(string _name, double _time0, double _observationPeriodLength);
+	    // 'timeMax': max time point in simulation
+	    // 'periodLength': how often recordings are aggregated
+		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength);
 
 	    // Records a new value at time 'time' and adds it to the current
 	    //   aggregation.
@@ -42,8 +54,11 @@ namespace SimulationLib
 	private:
 		double time0;
 		double timeMax;
-		double observationPeriodLength;
+		double periodLength;
+
+		double mostRecentTime;
 		T aggregatedObservation;
+
 		vector<T> observations;
 	};
 }
