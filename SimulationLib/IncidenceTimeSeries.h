@@ -1,13 +1,23 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
+
+// This class uses Drake's `-inl.h` pattern.  When seeing linker errors from
+// this class, please refer to http://drake.mit.edu/cxx_inl.html.
+//
+// Instantiated templates for the following kinds of T's are provided:
+// - double
+// - int
+//
+// They are already available to link against in the containing library.
 
 namespace SimulationLib
 {
 	// to store time-series incidence data and to perform calculations on the time-series
-	template <class T>
+	template <typename T>
 	class IncidenceTimeSeries
 	{
 	public:
