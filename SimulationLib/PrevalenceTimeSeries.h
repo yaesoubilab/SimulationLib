@@ -46,12 +46,16 @@ namespace SimulationLib
 
 		// Updated in constant time
 		T currentPrevalence;
-		double currentTime;
+
+		double lastTime;
+		int lastPeriod;
 
 		// Each element of 'prevalence' represents a period of length
 		//   'periodLength', who value is the most recent observation (the
 		//   observation of highest time-value recorded for that period).
 		// Element of highest index is the most recent.
 		vector<T> prevalence;
+
+		void _storePrevalence(int period);
 	};
 }
