@@ -2,13 +2,14 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include "TimeStatistic.h"
 
 
 using namespace std;
 
 namespace SimulationLib
 {
-	class DiscreteTimeStatistic
+	class DiscreteTimeStatistic : public TimeStatistic
 	{
 	public:
 		// Name of the statistic bundle
@@ -18,13 +19,13 @@ namespace SimulationLib
 		// To record observations for later access via the ::GetObservations()
 		//   method, specify 'numOfObservationsToStore' on instantiation.
 		DiscreteTimeStatistic(string name);
-		DiscreteTimeStatistic(string name, int numOfObservationsToStore);
+		DiscreteTimeStatistic(string name, long numOfObservationsToStore);
 
 		// Receives a value 'value', updating statistics in constant time.
 		// Records the value if 'numOfObservationsToStore' > 0. Throws error
 		//   if no room left to hold observations.
 		//
-		void Record(double value);
+		virtual void Record(double time, double value);
 
 		// Accessor methods for statistics, current to the last call of ::Record.
 		double GetSum();
@@ -40,10 +41,12 @@ namespace SimulationLib
 		vector<double> GetObservations();
 
 	private:
+		void _record(double value, long locationIndex);
+
 		double mean, variance, min, max, total;
 		double varianceNominator;
 		int count;
-		int numObservations;
+		long numObservations;
 		vector<double> observations;
 	};
 

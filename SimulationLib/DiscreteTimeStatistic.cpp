@@ -29,13 +29,13 @@ namespace SimulationLib
         varianceNominator = 0;
     }
 
-    void DiscreteTimeStatistic::Record(double value)
+    void DiscreteTimeStatistic::Record(double _, double value)
     {
         return Record(value, count - 1);
     }
 
     // TODO: implement storing observations
-    void DiscreteTimeStatistic::Record(double value, long locationIndex)
+    void DiscreteTimeStatistic::_record(double value, long locationIndex)
     {
         double inc = value - mean;
 
@@ -52,7 +52,7 @@ namespace SimulationLib
 
         // Attempt to record the value if observation-recording is enabled
         if (numObservations > 0 && locationIndex < numObservations)
-            vector[locationIndex] = value;
+            observations[locationIndex] = value;
         else if (locationIndex >= numObservations)
             printf("Error: Attempted to record too many observations\n");
     }
