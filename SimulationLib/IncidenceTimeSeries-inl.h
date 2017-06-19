@@ -61,7 +61,7 @@ namespace SimulationLib {
             return;
         }
 
-        timePeriod =    (int)floor(time / periodLength);
+        timePeriod = (int)floor(time / periodLength);
 
         // Update sum of all aggregates and max time yet seen
         aggregatedObservation += value;
@@ -83,7 +83,7 @@ namespace SimulationLib {
     //   returns 0.
     template<typename T>
     T IncidenceTimeSeries<T>::GetLastObservation() {
-        return observations.back();
+        return observations[(int)floor(mostRecentTime / periodLength)];
     }
 
     // Returns the summed value of all complete aggregations, and the incomplete
