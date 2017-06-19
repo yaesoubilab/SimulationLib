@@ -5,7 +5,15 @@ namespace SimulationLib {
 
     template <typename T>
     PrevalenceTimeSeries<T>::PrevalenceTimeSeries
-      (string _name, double _timeMax, double _periodLength) {
+      (string name, double timeMax, double periodLength)
+    {
+        PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL);
+    }
+
+    template <typename T>
+    PrevalenceTimeSeries<T>::PrevalenceTimeSeries
+      (string _name, double _timeMax, double _periodLength,
+       int _recordPeriod, TimeStatistics *_stats) {
 
         int numPeriods; // Number of periods to allocate memory for
 
@@ -21,6 +29,9 @@ namespace SimulationLib {
         lastPeriod        = 0;
 
         prevalence        = vector<T>(numPeriods + 1, (T)0);
+
+        recordPeriod = _recordPeriod;
+        stats        = _stats;
     }
 
     template <typename T>
@@ -48,15 +59,29 @@ namespace SimulationLib {
         // negative.
         thisPeriod = (int)ceil(time / periodLength);
 
+        if (stats && recordPeriod == RECORD_ON_ALL)
+            stats->Record(time, (double)(currentPrevalence + increment));
+        else if (stats &&
+                 thisPeriod > lastPeriod &&
+                 (lastPeriod % recordPeriod) == 0)
+            stats->Record(lastPeriod, (double)currentPrevalence);
+
         if (thisPeriod > lastPeriod)
             _storePrevalence(lastPeriod);
 
         currentPrevalence += increment;
-
         lastTime = time;
         lastPeriod = thisPeriod;
 
         return;
+    }
+
+    template <typename T>
+    vector<T> PrevalenceTimeSeries<T>::Close(void) {
+        if (stats && recordPeriod > 0)
+            stats->Record(lastPeriod, (double)currentPrevalence);
+
+        return prevalence;
     }
 
     template <typename T>
