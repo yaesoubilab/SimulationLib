@@ -11,8 +11,9 @@ namespace SimulationLib
 	public:
 		string name;
 		DiscreteTimeStatistic(string name);
-		DiscreteTimeStatistic(string name, int numOfObservationsToStore);
+		DiscreteTimeStatistic(string name, long numOfObservationsToStore);
 		void Record(double value);
+		void Record(double value, long locationIndex);
 
 		double GetSum();
 		double GetCount();
@@ -24,7 +25,8 @@ namespace SimulationLib
 
 	private:
 		double mean, variance, min, max, total;
-		int count;
+		long count, numObservations;
+
 		vector<double*> observations;
 	};
 
