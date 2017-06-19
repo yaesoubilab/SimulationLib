@@ -13,7 +13,7 @@ namespace SimulationLib {
     template <typename T>
     PrevalenceTimeSeries<T>::PrevalenceTimeSeries
       (string _name, double _timeMax, double _periodLength,
-       int _recordPeriod, TimeStatistics *_stats) {
+       int _recordPeriod, TimeStatistic *_stats) {
 
         int numPeriods; // Number of periods to allocate memory for
 
@@ -77,11 +77,9 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    vector<T> PrevalenceTimeSeries<T>::Close(void) {
+    void PrevalenceTimeSeries<T>::Close(void) {
         if (stats && recordPeriod > 0)
             stats->Record(lastPeriod, (double)currentPrevalence);
-
-        return prevalence;
     }
 
     template <typename T>
