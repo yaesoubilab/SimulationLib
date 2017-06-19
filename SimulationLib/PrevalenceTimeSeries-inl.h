@@ -16,7 +16,10 @@ namespace SimulationLib {
         numPeriods   = (int)ceil(timeMax / periodLength);
 
         currentPrevalence = (T)0;
-        currentTime       = (T)0;
+
+        lastTime          = (T)0;
+        lastPeriod        = 0;
+
         prevalence        = vector<T>(numPeriods + 1, (T)0);
     }
 
@@ -35,7 +38,7 @@ namespace SimulationLib {
             return;
         }
 
-        if (time < currentTime) {
+        if (time < lastTime) {
             printf("Error: Successive calls to ::Record must have \
                       monotonically increasing time\n");
             return;
@@ -45,21 +48,32 @@ namespace SimulationLib {
         // negative.
         thisPeriod = (int)ceil(time / periodLength);
 
-        currentPrevalence += increment;
-        currentTime = time;
+        if (thisPeriod > lastPeriod)
+            _storePrevalence(lastPeriod);
 
-        prevalence[thisPeriod] = currentPrevalence;
+        currentPrevalence += increment;
+
+        lastTime = time;
+        lastPeriod = thisPeriod;
 
         return;
     }
 
     template <typename T>
     vector<T> PrevalenceTimeSeries<T>::GetObservations(void) {
+        // Make sure vector is current with last data
+        _storePrevalence(lastPeriod);
+
         return prevalence;
     }
 
     template <typename T>
     T PrevalenceTimeSeries<T>::GetCurrentPrevalence(void) {
         return currentPrevalence;
+    }
+
+    template <typename T>
+    void PrevalenceTimeSeries<T>::_storePrevalence(int period) {
+        prevalence[period] = currentPrevalence;
     }
 }
