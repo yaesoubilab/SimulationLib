@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <limits>
+
 
 using namespace std;
 
@@ -27,7 +29,7 @@ namespace SimulationLib
 		double varianceNominator;
 		int count;
 		int numObservations;
-		vector<double*> observations;
+		vector<double> observations;
 	};
 
 }

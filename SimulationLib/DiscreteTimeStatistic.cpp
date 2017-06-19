@@ -1,10 +1,5 @@
 #include "DiscreteTimeStatistic.h"
 
-#pragma once
-#include <string>
-#include <vector>
-#include <limits>
-
 using namespace std;
 
 namespace SimulationLib
@@ -17,11 +12,15 @@ namespace SimulationLib
         name = _name;
         numObservations = numOfObservationsToStore;
 
+        // If recording, allocate memory for vector and zero everything
         if (numObservations)
-            observations = vector<double*>(numObservations, NULL);
+            observations = vector<double>(numObservations, 0);
 
+        // Min/max begin as the boundaries of 'double'
         min = numeric_limits<double>::min();
         max = numeric_limits<double>::max();
+
+        // Initialize more statistics
         total    = 0;
         count    = 0;
         mean     = 0;
@@ -30,48 +29,28 @@ namespace SimulationLib
         varianceNominator = 0;
     }
 
+    // TODO: implement storing observations
     void DiscreteTimeStatistic::Record(double value)
     {
         double inc = value - mean;
 
-        min    = (value < min) ? value : min;
-        max    = (value > max) ? value : max;
+        min = (value < min) ? value : min;
+        max = (value > max) ? value : max;
 
         total += value;
         count += 1;
 
-        mean += obs - _mean;
+        mean += value - mean;
         varianceNominator += (count - 1) * inc * (inc / count);
 
         if (count) variance = varianceNominator / (count - 1);
     }
 
-    double DiscreteTimeStatistic::GetSum()
-    {
-
-    }
-    double DiscreteTimeStatistic::GetCount()
-    {
-
-    }
-    double DiscreteTimeStatistic::GetMean()
-    {
-
-    }
-    double DiscreteTimeStatistic::GetVariance()
-    {
-
-    }
-    double DiscreteTimeStatistic::GetMin()
-    {
-
-    }
-    double DiscreteTimeStatistic::GetMax()
-    {
-
-    }
-    vector<double> DiscreteTimeStatistic::GetObservations()
-    {
-
-    }
+    double DiscreteTimeStatistic::GetSum() {return total;}
+    double DiscreteTimeStatistic::GetCount() {return count;}
+    double DiscreteTimeStatistic::GetMean() {return mean;}
+    double DiscreteTimeStatistic::GetVariance() {return variance;}
+    double DiscreteTimeStatistic::GetMin() {return min;}
+    double DiscreteTimeStatistic::GetMax() {return max;}
+    vector<double> DiscreteTimeStatistic::GetObservations() {return observations;}
 }
