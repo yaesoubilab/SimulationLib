@@ -42,11 +42,12 @@ void report(DiscreteTimeStatistic *stats)
 // 2: Aggregation period length
 // 3: Min number of births/deaths per incident
 // 4: Max number of births/deaths per incident
+
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
 
-    if (argc < 4) {
+    if (argc < 5) {
         printf("Error: Too few parameters\n");
         return 1;
     }
