@@ -7,11 +7,28 @@ namespace SimulationLib {
 
     // Initializes a new IncidenceTimeSeries.
     // 'name': name of the time series
-    // 'time0': first time point in simulation (usually 0, must be non-negative)
-    // 'observationPeriodLength': how often recordings are aggregated
+    // 'time0': first time point in simulation (usually 0)
+    // 'timeMax': max time point in simulation
+    // 'periodLength': how often recordings are aggregated
+    //
+    // Optional parameters:
+    // [ 'recordPeriodLength': the number of periods to aggregate before
+    //     recording a statistic. Must be a positive integer (1 or greater),
+    //     or, if 'RECORD_ON_ALL' is passed, the ::Record method will be
+    //     called on every value input.
+    //   'stats': an instance of a TimeStatistic class (for now,
+    //     DiscreteTimeStatistic or ContinuousTimeStatistic). Its ::Record
+    //     method will be called in accordance with 'recordPeriodLength'. ]
     template <typename T>
     IncidenceTimeSeries<T>::IncidenceTimeSeries
-      (string _name, double _time0, double _timeMax, double _periodLength) {
+      (string name, double time0, double timeMax, double periodLength) {
+        IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL);
+    }
+
+    template <typename T>
+    IncidenceTimeSeries<T>::IncidenceTimeSeries
+      (string _name, double _time0, double _timeMax, double _periodLength,
+        int _recordPeriod, TimeStatistic *_stats) {
 
         // Number of periods which will be recorded
         int numPeriods;
@@ -26,15 +43,24 @@ namespace SimulationLib {
             printf("Error: timeMax must be >= periodLength\n");
         if (_time0 > _timeMax)
             printf("Error: timeMax must be >= time0\n");
+        if (_stats && (_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
+            printf("Error: recordPeriod must be RECORD_ON_ALL or a positive int\n");
 
-        name                    = _name;
-        time0                   = _time0;
-        mostRecentTime          = _time0;
-        timeMax                 = _timeMax;
-        periodLength            = _periodLength;
+        name                  = _name;
 
-        numPeriods              = (int)ceil(timeMax / periodLength);
-        observations            = vector<T>(numPeriods, (T)0);
+        time0                 = _time0;
+        lastTime              = _time0;
+        timeMax               = _timeMax;
+
+        lastPeriod            = 0;
+        periodLength          = _periodLength;
+        numPeriods            = (int)ceil(timeMax / periodLength);
+
+        observations          = vector<T>(numPeriods, (T)0);
+        aggregatedObservation = (T)0;
+
+        recordPeriod          = _recordPeriod;
+        stats                 = _stats;
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -46,8 +72,7 @@ namespace SimulationLib {
     template <typename T>
     void IncidenceTimeSeries<T>::Record(double time, T value) {
 
-        int currentPeriod; // Vector index of current period being aggregated
-        int timePeriod;    // Vector index of period corresponding to val of 'time'
+        int currentPeriod; // Vector index of period corresponding to val of 'time'
 
         // Is 'time' too low?
         if (time < time0) {
@@ -56,18 +81,41 @@ namespace SimulationLib {
         }
 
         // Is 'time' previous to the latest time yet seen?
-        if (time < mostRecentTime) {
+        if (time < lastTime) {
             printf("Error: successive entries must be monotonically non-decreasing\n");
             return;
         }
 
-        timePeriod = (int)floor(time / periodLength);
+        currentPeriod = (int)floor(time / periodLength);
 
-        // Update sum of all aggregates and max time yet seen
-        aggregatedObservation += value;
-        mostRecentTime = time;
+        // Call Record if:
+        // 1. recordPeriod is set to 'RECORD_ON_ALL': we always call Record,
+        //    and pass in the time associated with the new value.
+        //
+        // 2. We have just completed a period, and and the period completed is
+        //    was the 'recordPeriod'-th period after the last period after which
+        //    Record was called. In this case, we pass the period number, rather
+        //    than the time.
+        if (stats && recordPeriod == RECORD_ON_ALL)
+            stats->Record(time, (double)aggregatedObservation + (double)value);
+        else if (stats &&
+                 currentPeriod > lastPeriod &&
+                 (lastPeriod % recordPeriod) == 0)
+            stats->Record(lastPeriod, (double)aggregatedObservation);
 
-        observations[timePeriod] += value;
+        aggregatedObservation       += value;
+        observations[currentPeriod] += value;
+
+        lastTime   = time;
+        lastPeriod = currentPeriod;
+
+        return;
+    }
+
+    template <typename T>
+    void IncidenceTimeSeries<T>::Close(void) {
+        if (stats && recordPeriod > 0)
+            stats->Record(lastPeriod, (double)aggregatedObservation);
         return;
     }
 
@@ -83,7 +131,7 @@ namespace SimulationLib {
     //   returns 0.
     template<typename T>
     T IncidenceTimeSeries<T>::GetLastObservation() {
-        return observations[(int)floor(mostRecentTime / periodLength)];
+        return observations[(int)floor(lastTime / periodLength)];
     }
 
     // Returns the summed value of all complete aggregations, and the incomplete
