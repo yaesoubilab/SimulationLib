@@ -46,17 +46,21 @@ namespace SimulationLib {
         if (_stats && (_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
             printf("Error: recordPeriod must be RECORD_ON_ALL or a positive int\n");
 
-        name           = _name;
-        time0          = _time0;
-        lastTime       = _time0;
-        timeMax        = _timeMax;
-        periodLength   = _periodLength;
+        name                  = _name;
 
-        numPeriods     = (int)ceil(timeMax / periodLength);
-        observations   = vector<T>(numPeriods, (T)0);
+        time0                 = _time0;
+        lastTime              = _time0;
+        timeMax               = _timeMax;
 
-        recordPeriod   = _recordPeriod;
-        stats          = _stats;
+        lastPeriod            = 0;
+        periodLength          = _periodLength;
+        numPeriods            = (int)ceil(timeMax / periodLength);
+
+        observations          = vector<T>(numPeriods, (T)0);
+        aggregatedObservation = (T)0;
+
+        recordPeriod          = _recordPeriod;
+        stats                 = _stats;
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -93,7 +97,7 @@ namespace SimulationLib {
         //    Record was called. In this case, we pass the period number, rather
         //    than the time.
         if (stats && recordPeriod == RECORD_ON_ALL)
-            stats->Record(time, (double)aggregatedObservation + value);
+            stats->Record(time, (double)aggregatedObservation + (double)value);
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
