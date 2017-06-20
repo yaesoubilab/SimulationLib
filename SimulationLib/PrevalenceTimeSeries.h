@@ -65,6 +65,9 @@ namespace SimulationLib
 
 		void _storePrevalence(int period);
 
+		bool writable; // Whether or not the TimeSeries can be recorded to.
+					   // Becomes false after ::Close() is called.
+
 		int recordPeriod;
 		TimeStatistic *stats;
 	};

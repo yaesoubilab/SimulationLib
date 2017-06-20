@@ -17,11 +17,11 @@ namespace SimulationLib {
 
         int numPeriods; // Number of periods to allocate memory for
 
-        name = _name;
+        name              = _name;
 
-        timeMax      = _timeMax;
-        periodLength = _periodLength;
-        numPeriods   = (int)ceil(timeMax / periodLength);
+        timeMax           = _timeMax;
+        periodLength      = _periodLength;
+        numPeriods        = (int)ceil(timeMax / periodLength);
 
         currentPrevalence = (T)0;
 
@@ -30,13 +30,20 @@ namespace SimulationLib {
 
         prevalence        = vector<T>(numPeriods + 1, (T)0);
 
-        recordPeriod = _recordPeriod;
-        stats        = _stats;
+        recordPeriod      = _recordPeriod;
+        stats             = _stats;
+
+        writable          = true;
     }
 
     template <typename T>
     void PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
+
+        if (!writable) {
+            printf("Erorr: TimeSeries has already been closed\n");
+            return;
+        }
 
         // Is 'time' a non-negative integer?
         if (time < 0) {
