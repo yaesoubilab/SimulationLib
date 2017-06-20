@@ -87,6 +87,9 @@ namespace SimulationLib {
     void PrevalenceTimeSeries<T>::Close(void) {
         if (stats && recordPeriod > 0)
             stats->Record(lastPeriod, (double)currentPrevalence);
+        writable = false;
+
+        return;
     }
 
     template <typename T>
