@@ -12,13 +12,9 @@ namespace SimulationLib
         name = _name;
         numObservations = numOfObservationsToStore;
 
-        // If recording, allocate memory for vector and zero everything
-        if (numObservations)
-            observations = vector<double>(numObservations, 0);
-
         // Min/max begin as the boundaries of 'double'
-        min = numeric_limits<double>::min();
-        max = numeric_limits<double>::max();
+        min = numeric_limits<double>::max();
+        max = numeric_limits<double>::min();
 
         // Initialize more statistics
         total    = 0;
@@ -27,11 +23,15 @@ namespace SimulationLib
         variance = 0;
 
         varianceNominator = 0;
+
+        // If recording, allocate memory for vector and zero everything
+        if (numObservations)
+            observations = vector<double>(numObservations, 0);
     }
 
     void DiscreteTimeStatistic::Record(double _, double value)
     {
-        return Record(value, count - 1);
+        return _record(value, count - 1);
     }
 
     // TODO: implement storing observations
@@ -45,15 +45,15 @@ namespace SimulationLib
         total += value;
         count += 1;
 
-        mean += value - mean;
+        mean += inc / (double)count;
         varianceNominator += (count - 1) * inc * (inc / count);
 
-        if (count > 0) variance = varianceNominator / (count - 1);
+        if (count > 1) variance = varianceNominator / (count - 1);
 
         // Attempt to record the value if observation-recording is enabled
         if (numObservations > 0 && locationIndex < numObservations)
             observations[locationIndex] = value;
-        else if (locationIndex >= numObservations)
+        else if (numObservations > 0 && locationIndex >= numObservations)
             printf("Error: Attempted to record too many observations\n");
     }
 
