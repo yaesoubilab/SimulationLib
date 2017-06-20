@@ -97,11 +97,11 @@ namespace SimulationLib {
         //    Record was called. In this case, we pass the period number, rather
         //    than the time.
         if (stats && recordPeriod == RECORD_ON_ALL)
-            stats->Record(time, (double)aggregatedObservation + (double)value);
+            stats->Record(time, (double)value);
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
-            stats->Record(lastPeriod, (double)aggregatedObservation);
+            stats->Record(lastPeriod, (double)observations[lastPeriod]);
 
         aggregatedObservation       += value;
         observations[currentPeriod] += value;
