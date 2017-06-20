@@ -82,6 +82,8 @@ namespace SimulationLib
 		T aggregatedObservation;
 		vector<T> observations;
 
+		bool writable;
+
 		int recordPeriod;
 		TimeStatistic *stats;
 	};

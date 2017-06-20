@@ -59,6 +59,8 @@ namespace SimulationLib {
         observations          = vector<T>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
 
+        writable              = true;
+
         recordPeriod          = _recordPeriod;
         stats                 = _stats;
     }
@@ -73,6 +75,11 @@ namespace SimulationLib {
     void IncidenceTimeSeries<T>::Record(double time, T value) {
 
         int currentPeriod; // Vector index of period corresponding to val of 'time'
+
+        if (!writable) {
+            printf("Error: Close() has already been called\n");
+            return;
+        }
 
         // Is 'time' too low?
         if (time < time0) {
@@ -116,6 +123,8 @@ namespace SimulationLib {
     void IncidenceTimeSeries<T>::Close(void) {
         if (stats && recordPeriod > 0)
             stats->Record(lastPeriod, (double)aggregatedObservation);
+        writable = false;
+
         return;
     }
 
