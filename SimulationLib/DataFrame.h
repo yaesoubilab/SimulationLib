@@ -6,7 +6,7 @@ namespace SimulationLib {
     class DataFrame {
   public:
     DataFrame(const char *file, bool loopTime,
-	      std::shared_ptr<const C> (*g)(const char *));
+	      std::shared_ptr<C> (*g)(const char *));
     // Only implemented for DataFrame<double>, and for distributions on
     // long, long double, and for parameters.
     DataFrame(const char *file, bool loopTime);

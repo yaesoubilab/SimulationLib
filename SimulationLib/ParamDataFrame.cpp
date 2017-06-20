@@ -203,7 +203,7 @@ namespace SimulationLib {
   DataFrame<Parameter>::DataFrame(const char *file, bool loopTime)
     : DataFrame(file, loopTime, paramFromString) {}
 
-  shared_ptr<const Parameter> paramFromString(const char *str) {
+  shared_ptr<Parameter> paramFromString(const char *str) {
     long double d;
     if(sscanf(str, "%llf", &d))
       return(make_shared<Parameter>(d));
@@ -212,13 +212,13 @@ namespace SimulationLib {
     strcpy(buf, str);
     buf[fstcomma] = 0;
     try {
-      return(shared_ptr<const Parameter>
+      return(shared_ptr<Parameter>
 	     (mpd.at(buf)(buf + fstcomma + 1)));
       
     } catch(out_of_range x) {
       cerr << "Distribution not found: " << '"'
 		<< buf << '"' << endl;
-      return(shared_ptr<const Parameter>());
+      return(shared_ptr<Parameter>());
     }
   }
   
