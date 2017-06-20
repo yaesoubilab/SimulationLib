@@ -43,7 +43,7 @@ namespace SimulationLib {
             printf("Error: timeMax must be >= periodLength\n");
         if (_time0 > _timeMax)
             printf("Error: timeMax must be >= time0\n");
-        if (_stats && (_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
+        if (_stats && !(_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
             printf("Error: recordPeriod must be RECORD_ON_ALL or a positive int\n");
 
         name                  = _name;
