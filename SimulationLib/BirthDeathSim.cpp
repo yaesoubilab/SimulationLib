@@ -14,20 +14,20 @@ namespace SimulationLib {
         dDistribution = new Binomial(nPeople, pDeath);
 
         birthStatistics = new DiscreteTimeStatistic("Births");
-        deathStatistics = new DiscreteTimeStatistic("Deaths")
+        deathStatistics = new DiscreteTimeStatistic("Deaths");
         populationStatistics = new ContinuousTimeStatistic("Population");
 
-        births = new IncidenceTimeSeries("Births", 1, timeMax, periodLength, 1, birthStatistics);
-        deaths = new IncidenceTimeSeries("Deaths", 1, timeMax, periodLength, 1, deathStatistics);
-        population = new PrevalenceTimeSeries("Population", timeMax, periodLength, 1, populationStatistics);
+        births = new IncidenceTimeSeries<int>("Births", 1, timeMax, periodLength, 1, birthStatistics);
+        deaths = new IncidenceTimeSeries<int>("Deaths", 1, timeMax, periodLength, 1, deathStatistics);
+        population = new PrevalenceTimeSeries<int>("Population", (double)timeMax, (double)periodLength, 1, populationStatistics);
     }
 
     void BirthDeathSim::Run(void) {
         int nBirths, nDeaths, delta;
         for (int t = 0; t < timeMax; ++t)
         {
-            nBirths  = bDistribution->Sample(rng);
-            nDeaths  = bDistribution->Sample(rng);
+            nBirths  = bDistribution->Sample(*rng);
+            nDeaths  = bDistribution->Sample(*rng);
             delta    = nBirths - nDeaths;
             nPeople += delta;
 
@@ -39,7 +39,7 @@ namespace SimulationLib {
         }
     }
 
-    void BirthDeathSim::refreshDists(long nPeople) {
+    void BirthDeathSim::refreshDists(void) {
         bDistribution = new(bDistribution) Binomial(nPeople, pBirth);
         dDistribution = new(dDistribution) Binomial(nPeople, pBirth);
     }

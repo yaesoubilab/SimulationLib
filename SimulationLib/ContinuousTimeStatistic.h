@@ -2,12 +2,13 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include "TimeStatistic.h"
 
 using namespace std;
 
 namespace SimulationLib
 {
-	class ContinuousTimeStatistic
+	class ContinuousTimeStatistic : public TimeStatistic
 	{
 	public:
 		string name;

@@ -1,13 +1,14 @@
 #pragma once
 #include <ctime>
-#include "StatisticalDistribution.h"
+#include <string>
+#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
 #include "PrevalenceTimeSeries.h"
 #include "IncidenceTimeSeries.h"
 #include "ContinuousTimeStatistic.h"
 #include "DiscreteTimeStatistic.h"
 
 using namespace std;
-using namesapce StatisticalDistributions;
+using namespace StatisticalDistributions;
 
 namespace SimulationLib {
     class BirthDeathSim
@@ -15,23 +16,26 @@ namespace SimulationLib {
     public:
         BirthDeathSim(int timeMax, int periodLength, long nPeople,
                       double pDeath, double pBirth);
-        void Run();
-        void Write(fname);
+        void Run(void);
+        void Write(string fname);
 
     private:
-        int nPeriods, nPeople, pDeath, pBirth;
+        int timeMax, periodLength;
+        long nPeople;
+        double pDeath, pBirth;
 
-        StatisticalDistribution *bDistribution;
-        StatisticalDistribution *dDistribution;
+        Binomial *bDistribution;
+        Binomial *dDistribution;
         RNG *rng;
 
-        void refreshDists(long nPeople);
+        void refreshDists(void);
 
-        IncidenceTimeSeries   *births;
-        IncidenceTimeSeries   *deaths;
-        DiscreteTimeStatistic *birthStatistics;
-        DiscreteTimeStatistic *deathStatistics;
+        IncidenceTimeSeries<int>  *births;
+        IncidenceTimeSeries<int>  *deaths;
+        DiscreteTimeStatistic   *birthStatistics;
+        DiscreteTimeStatistic   *deathStatistics;
 
-        PrevalenceTimeSeries *population;
+        PrevalenceTimeSeries<int> *population;
+        ContinuousTimeStatistic *populationStatistics;
     };
 }
