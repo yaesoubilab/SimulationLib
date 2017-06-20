@@ -254,3 +254,4 @@ sftp-config.json
 # Executables
 *.out
 *.out.dSYM
+BirthDeathSim
