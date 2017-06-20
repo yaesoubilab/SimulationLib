@@ -2,8 +2,11 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include "TimeStatistic.h"
 
 using namespace std;
+
+#define RECORD_ON_ALL -1
 
 /// This class uses Drake's `-inl.h` pattern.  When seeing linker errors from
 /// this class, please refer to http://drake.mit.edu/cxx_inl.html.
@@ -26,10 +29,14 @@ namespace SimulationLib
 		// - 'timeMax': the upper boundary of time. Time domain is [0, timeMax].
 		// - 'periodLength': the length of each period
 		PrevalenceTimeSeries(string name, double timeMax, double periodLength);
+		PrevalenceTimeSeries(string name, double timeMax, double periodLength,
+       						 int recordPeriod, TimeStatistic *stats);
 
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
 		void Record(double time, T increment);
+
+		void Close(void);
 
 		// Returns a vector. Element 'i' represents the prevalence at the most
 		// recent observation <= 'i'.
@@ -57,5 +64,11 @@ namespace SimulationLib
 		vector<T> prevalence;
 
 		void _storePrevalence(int period);
+
+		bool writable; // Whether or not the TimeSeries can be recorded to.
+					   // Becomes false after ::Close() is called.
+
+		int recordPeriod;
+		TimeStatistic *stats;
 	};
 }

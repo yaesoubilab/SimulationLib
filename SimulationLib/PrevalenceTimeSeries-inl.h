@@ -5,15 +5,23 @@ namespace SimulationLib {
 
     template <typename T>
     PrevalenceTimeSeries<T>::PrevalenceTimeSeries
-      (string _name, double _timeMax, double _periodLength) {
+      (string name, double timeMax, double periodLength)
+    {
+        PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL);
+    }
+
+    template <typename T>
+    PrevalenceTimeSeries<T>::PrevalenceTimeSeries
+      (string _name, double _timeMax, double _periodLength,
+       int _recordPeriod, TimeStatistic *_stats) {
 
         int numPeriods; // Number of periods to allocate memory for
 
-        name = _name;
+        name              = _name;
 
-        timeMax      = _timeMax;
-        periodLength = _periodLength;
-        numPeriods   = (int)ceil(timeMax / periodLength);
+        timeMax           = _timeMax;
+        periodLength      = _periodLength;
+        numPeriods        = (int)ceil(timeMax / periodLength);
 
         currentPrevalence = (T)0;
 
@@ -21,11 +29,21 @@ namespace SimulationLib {
         lastPeriod        = 0;
 
         prevalence        = vector<T>(numPeriods + 1, (T)0);
+
+        recordPeriod      = _recordPeriod;
+        stats             = _stats;
+
+        writable          = true;
     }
 
     template <typename T>
     void PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
+
+        if (!writable) {
+            printf("Erorr: TimeSeries has already been closed\n");
+            return;
+        }
 
         // Is 'time' a non-negative integer?
         if (time < 0) {
@@ -48,13 +66,28 @@ namespace SimulationLib {
         // negative.
         thisPeriod = (int)ceil(time / periodLength);
 
+        if (stats && recordPeriod == RECORD_ON_ALL)
+            stats->Record(time, (double)(currentPrevalence + increment));
+        else if (stats &&
+                 thisPeriod > lastPeriod &&
+                 (lastPeriod % recordPeriod) == 0)
+            stats->Record(lastPeriod, (double)currentPrevalence);
+
         if (thisPeriod > lastPeriod)
             _storePrevalence(lastPeriod);
 
         currentPrevalence += increment;
-
         lastTime = time;
         lastPeriod = thisPeriod;
+
+        return;
+    }
+
+    template <typename T>
+    void PrevalenceTimeSeries<T>::Close(void) {
+        if (stats && recordPeriod > 0)
+            stats->Record(lastPeriod, (double)currentPrevalence);
+        writable = false;
 
         return;
     }
