@@ -58,22 +58,19 @@ int main(int argc, char const *argv[])
     int min_change    = atoi(argv[++i]);
     int max_change    = atoi(argv[++i]);
 
-    DiscreteTimeStatistic stats("Population size stats");
-    IncidenceTimeSeries<int> population("Population size", 0,
-                                        (double)walk_length, period_length,
-                                        RECORD_ON_ALL, &stats);
+    DiscreteTimeStatistic *stats = new DiscreteTimeStatistic("Population size stats");
+    IncidenceTimeSeries<int> *population = new IncidenceTimeSeries<int>("Population size", 0, (double)walk_length, period_length, RECORD_ON_ALL, stats);
 
     double lastTime = 0;
     Point pt;
     for (int i = 0; i < walk_length; ++i)
     {
-        pt = newPoint(lastTime, 1, min_change, max_change);
+        pt = newPoint(lastTime, 2, min_change, max_change);
 
         printf("pt: t=%4.2f, v=%2d\n", pt.time, pt.value);
+        population->Record(pt.time, pt.value);
 
-        population.Record(pt.time, pt.value);
-
-        report(&stats);
+        report(stats);
 
         lastTime = pt.time;
     }

@@ -12,10 +12,6 @@ namespace SimulationLib
         name = _name;
         numObservations = numOfObservationsToStore;
 
-        // If recording, allocate memory for vector and zero everything
-        if (numObservations)
-            observations = vector<double>(numObservations, 0);
-
         // Min/max begin as the boundaries of 'double'
         min = numeric_limits<double>::max();
         max = numeric_limits<double>::min();
@@ -27,6 +23,10 @@ namespace SimulationLib
         variance = 0;
 
         varianceNominator = 0;
+
+        // If recording, allocate memory for vector and zero everything
+        if (numObservations)
+            observations = vector<double>(numObservations, 0);
     }
 
     void DiscreteTimeStatistic::Record(double _, double value)
