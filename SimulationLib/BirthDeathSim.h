@@ -16,6 +16,7 @@ namespace SimulationLib {
     public:
         BirthDeathSim(int timeMax, int periodLength, long nPeople,
                       double pDeath, double pBirth);
+        ~BirthDeathSim(void);
         void Run(void);
         void Write(string fname);
 
@@ -29,6 +30,7 @@ namespace SimulationLib {
         RNG *rng;
 
         void refreshDists(void);
+        void reportStats(int t, long nPeople, int nBirths, int nDeaths);
 
         IncidenceTimeSeries<int>  *births;
         IncidenceTimeSeries<int>  *deaths;

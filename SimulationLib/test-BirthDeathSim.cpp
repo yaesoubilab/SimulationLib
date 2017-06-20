@@ -33,9 +33,12 @@ int main(int argc, char const *argv[])
     pDeath       = stof(argv[++i], NULL);
     pBirth       = stof(argv[++i], NULL);
 
-    printf("Args:\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n", timeMax, periodLength, nPeople, pDeath, pBirth);
+    printf("Args:\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", timeMax, periodLength, nPeople, pDeath, pBirth);
 
     bdsim = new BirthDeathSim(timeMax, periodLength, nPeople, pDeath, pBirth);
+    bdsim->Run();
+
+    delete bdsim;
 
     return 0;
 }
