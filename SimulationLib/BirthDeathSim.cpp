@@ -22,12 +22,27 @@ namespace SimulationLib {
         population = new PrevalenceTimeSeries<int>("Population", (double)timeMax, (double)periodLength, 1, populationStatistics);
     }
 
+    BirthDeathSim::~BirthDeathSim(void) {
+        delete rng;
+
+        delete bDistribution;
+        delete dDistribution;
+
+        delete birthStatistics;
+        delete deathStatistics;
+        delete populationStatistics;
+
+        delete births;
+        delete deaths;
+        delete population;
+    }
+
     void BirthDeathSim::Run(void) {
         int nBirths, nDeaths, delta;
-        for (int t = 0; t < timeMax; ++t)
+        for (int t = 1; t < timeMax; ++t)
         {
-            nBirths  = bDistribution->Sample(*rng);
-            nDeaths  = bDistribution->Sample(*rng);
+            nBirths  = (int)bDistribution->Sample(*rng);
+            nDeaths  = (int)dDistribution->Sample(*rng);
             delta    = nBirths - nDeaths;
             nPeople += delta;
 
@@ -35,12 +50,17 @@ namespace SimulationLib {
             deaths->Record(t, nDeaths);
             population->Record(t, delta);
 
+            reportStats(t, nPeople, nBirths, nDeaths);
             refreshDists();
         }
     }
 
+    void BirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
+        printf("[%3d] nPeople %5ld | nBirths %2d | nDeaths %2d\n", t, nPeople, nBirths, nDeaths);
+    }
+
     void BirthDeathSim::refreshDists(void) {
         bDistribution = new(bDistribution) Binomial(nPeople, pBirth);
-        dDistribution = new(dDistribution) Binomial(nPeople, pBirth);
+        dDistribution = new(dDistribution) Binomial(nPeople, pDeath);
     }
 }
