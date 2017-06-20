@@ -24,7 +24,6 @@ namespace SimulationLib
 		// Receives a value 'value', updating statistics in constant time.
 		// Records the value if 'numOfObservationsToStore' > 0. Throws error
 		//   if no room left to hold observations.
-		//
 		virtual void Record(double time, double value);
 
 		// Accessor methods for statistics, current to the last call of ::Record.
@@ -44,9 +43,8 @@ namespace SimulationLib
 		void _record(double value, long locationIndex);
 
 		double mean, variance, min, max, total;
+		long count, numObservations;
 		double varianceNominator;
-		int count;
-		long numObservations;
 		vector<double> observations;
 	};
 
