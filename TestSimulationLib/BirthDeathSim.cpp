@@ -9,7 +9,13 @@ namespace SimulationLib {
         pDeath       = _pDeath;
         pBirth       = _pBirth;
 
+        // Seed random number generator with current time
         rng = new RNG(time(NULL));
+
+        // The memory pointed to by 'bDistribution' and 'dDistribution' are
+        //   recycled throughout execution as new Binomial classes are
+        //   instantiated on these locations to reflect changes in the size
+        //   of the population.
         bDistribution = new Binomial(nPeople, pBirth);
         dDistribution = new Binomial(nPeople, pDeath);
 
@@ -17,6 +23,9 @@ namespace SimulationLib {
         deathStatistics = new DiscreteTimeStatistic("Deaths");
         populationStatistics = new ContinuousTimeStatistic("Population");
 
+        // We assume there are no births or deaths during the period [-inf, 0],
+        //   so time0 is set to 1 for 'births' and 'deaths'. Statistics are
+        //   collected on every period.
         births = new IncidenceTimeSeries<int>("Births", 1, timeMax, periodLength, 1, birthStatistics);
         deaths = new IncidenceTimeSeries<int>("Deaths", 1, timeMax, periodLength, 1, deathStatistics);
         population = new PrevalenceTimeSeries<int>("Population", (double)timeMax, (double)periodLength, 1, populationStatistics);
@@ -59,6 +68,8 @@ namespace SimulationLib {
         printf("[%3d] nPeople %5ld | nBirths %2d | nDeaths %2d\n", t, nPeople, nBirths, nDeaths);
     }
 
+    // Create new distributions in-place to reflect changes in the size of
+    //   the population.
     void BirthDeathSim::refreshDists(void) {
         bDistribution = new(bDistribution) Binomial(nPeople, pBirth);
         dDistribution = new(dDistribution) Binomial(nPeople, pDeath);
