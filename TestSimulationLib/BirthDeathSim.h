@@ -6,6 +6,7 @@
 #include "../SimulationLib/IncidenceTimeSeries.h"
 #include "../SimulationLib/ContinuousTimeStatistic.h"
 #include "../SimulationLib/DiscreteTimeStatistic.h"
+#include "../SimulationLib/CSVExport.h"
 
 using namespace std;
 using namespace StatisticalDistributions;

@@ -48,6 +48,9 @@ namespace SimulationLib {
 
     void BirthDeathSim::Run(void) {
         int nBirths, nDeaths, delta;
+
+        CSVExport<int> exporter("BirthDeathSim-output.csv");
+
         for (int t = 1; t < timeMax; ++t)
         {
             nBirths  = (int)bDistribution->Sample(*rng);
@@ -62,6 +65,14 @@ namespace SimulationLib {
             reportStats(t, nPeople, nBirths, nDeaths);
             refreshDists();
         }
+
+        births->Close();
+        deaths->Close();
+        population->Close();
+
+        exporter.AddTimeSeries(births);
+        exporter.AddTimeSeries(deaths);
+        exporter.Write();
     }
 
     void BirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {

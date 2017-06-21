@@ -109,7 +109,7 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    string PrevalenceTimeSeries<T>::GetTime0(void) {
+    string PrevalenceTimeSeries<T>::GetName(void) {
         return name;
     }
 
