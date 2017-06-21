@@ -109,6 +109,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    string PrevalenceTimeSeries<T>::GetTime0(void) {
+        return name;
+    }
+
+    template <typename T>
     bool PrevalenceTimeSeries<T>::IsWritable(void) {
         return writable;
     }

@@ -6,4 +6,3 @@ namespace SimulationLib
     template class IncidenceTimeSeries<int>;
     // Add more supported types here...
 }
-

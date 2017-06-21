@@ -22,7 +22,7 @@ namespace SimulationLib {
     {
     public:
         CSVExport(string fname);
-        ~CSVExport();
+        // ~CSVExport();
 
         void AddTimeSeries(TimeSeries<T> *ts);
         void Write(void);
@@ -31,7 +31,7 @@ namespace SimulationLib {
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;
         vector<string>      tsNames;
-        vector<long>        tsSize;
+        vector<long>        tsSizes;
 
         string fname;
 

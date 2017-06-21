@@ -21,12 +21,6 @@ namespace SimulationLib {
     //     method will be called in accordance with 'recordPeriodLength'. ]
     template <typename T>
     IncidenceTimeSeries<T>::IncidenceTimeSeries
-      (string name, double time0, double timeMax, double periodLength) {
-        IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL);
-    }
-
-    template <typename T>
-    IncidenceTimeSeries<T>::IncidenceTimeSeries
       (string _name, double _time0, double _timeMax, double _periodLength,
         int _recordPeriod, TimeStatistic *_stats) {
 
@@ -129,7 +123,6 @@ namespace SimulationLib {
         if (stats && recordPeriod > 0)
             stats->Record(lastPeriod, (double)aggregatedObservation);
         writable = false;
-
         return;
     }
 
@@ -146,6 +139,11 @@ namespace SimulationLib {
     template <typename T>
     double IncidenceTimeSeries<T>::GetTime0(void) {
         return time0;
+    }
+
+    template <typename T>
+    string IncidenceTimeSeries<T>::GetName(void) {
+        return name;
     }
 
     template <typename T>

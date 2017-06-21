@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 using namespace std;
 
@@ -8,7 +9,7 @@ namespace SimulationLib
     class TimeSeries
     {
     public:
-        string name;
+        virtual string GetName(void) = 0;
         virtual double GetTime0(void) = 0;
         virtual bool IsWritable(void) = 0;
         virtual vector<T> *GetVector(void) = 0;

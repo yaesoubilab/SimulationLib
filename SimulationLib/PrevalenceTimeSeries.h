@@ -49,6 +49,7 @@ namespace SimulationLib
 
 		virtual vector<T> *GetVector(void);
 		virtual double GetTime0();
+		virtual string GetName();
 		virtual bool IsWritable();
 
 	private:

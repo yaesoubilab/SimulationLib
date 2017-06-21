@@ -6,17 +6,12 @@ namespace SimulationLib {
         tsVectors = vector<vector<T> *>();
         tsTime0s  = vector<double>();
         tsNames   = vector<string>();
-        tsSize    = vector<long>();
+        tsSizes   = vector<long>();
 
         fname = _fname;
 
         tMax = 0;
         nTimeSeries = 0;
-    }
-
-    template <typename T>
-    CSVExport<T>::~CSVExport() {
-        delete tsVectors, tsTime0s, tsNames;
     }
 
     template<typename T>
@@ -31,7 +26,7 @@ namespace SimulationLib {
             return;
         }
 
-        if (ts->IsWritable) {
+        if (ts->IsWritable()) {
             printf("Error: TimeSeries is still writable\n");
             return;
         }
@@ -48,13 +43,13 @@ namespace SimulationLib {
         //   t=0.
         tsTime0   = ceil(ts->GetTime0());
         tsPointer = ts->GetVector();
-        tsName    = ts->name;
+        tsName    = ts->GetName();
         tsSize    = tsPointer->size();
 
         tsTime0s.push_back(tsTime0);
         tsVectors.push_back(tsPointer);
         tsNames.push_back(tsName);
-        tsSize.push_back(tsSize);
+        tsSizes.push_back(tsSize);
 
         // Update the largest value of 't' that will be written to CSV
         // file, and the number of TimeSeries subject to export.
@@ -67,7 +62,7 @@ namespace SimulationLib {
 
     template<typename T>
     void CSVExport<T>::Write(void) {
-        int tMax, stringSize;
+        int stringSize;
         string buf, comma, newline;
         FILE *fs;
 
@@ -77,7 +72,7 @@ namespace SimulationLib {
         }
 
         // Open file descriptor
-        if (!(fs = fopen(fname, "a"))) {
+        if (!(fs = fopen(fname.c_str(), "a"))) {
             printf("Error: fopen() returned NULL pointer\n");
             return;
         }
@@ -91,7 +86,6 @@ namespace SimulationLib {
             buf += (comma + tsNames[i]);
         buf += newline;
 
-
         for (int t = 0; t < tMax + 1; ++t)
         {
             buf += to_string(t);
@@ -99,7 +93,7 @@ namespace SimulationLib {
             T n;
             for (int i = 0; i < nTimeSeries; ++i)
             {
-                if (tsTime0s[i] <= t && t <= tsTime0s[i] + tsSize[i] - 1) {
+                if (tsTime0s[i] <= t && t <= tsTime0s[i] + tsSizes[i] - 1) {
                     n = tsVectors[i]->at(t - tsTime0s[i]);
                     buf += (comma + to_string(n));
                 } else
@@ -110,7 +104,7 @@ namespace SimulationLib {
 
         // Perform write
         stringSize = buf.size();
-        if (fwrite(c_str(buf), sizeof(CharT), stringSize, fs) < stringSize) {
+        if (fwrite(buf.c_str(), sizeof(char), stringSize, fs) < stringSize) {
             printf("Error: std::fwrite returned an error\n");
             return;
         }

@@ -42,11 +42,13 @@ namespace SimulationLib
 	    //   'stats': an instance of a TimeStatistic class (for now,
 	    //     DiscreteTimeStatistic or ContinuousTimeStatistic). Its ::Record
 	    //     method will be called in accordance with 'recordPeriodLength'. ]
-		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength);
 
 		IncidenceTimeSeries(string name, double time0, double timeMax, \
 							double periodLength, int recordPeriod,
 							TimeStatistic *stats);
+
+		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength) :\
+		  IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL) {}
 
 		~IncidenceTimeSeries();
 
@@ -75,6 +77,7 @@ namespace SimulationLib
 	    T GetTotal();
 
 	    double GetTime0();
+	    string GetName();
 	    bool IsWritable();
 
 	private:
