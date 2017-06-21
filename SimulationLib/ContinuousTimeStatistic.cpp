@@ -8,6 +8,7 @@ namespace SimulationLib {
         mean      = 0;
         variance  = 0;
 
+        // Guarantees that first value will be recorded as the max and the min
         min       = numeric_limits<double>::max();
         max       = numeric_limits<double>::min();
 
@@ -16,6 +17,12 @@ namespace SimulationLib {
         tot       = 0;
         // currentValue = ;  TODO: what is this for?
     }
+
+    void ContinuousTimeStatistic::Record(double increment) {
+        printf("Error: ContinuousTimeStatistic requires time dimension\n");
+        return;
+    }
+
     void ContinuousTimeStatistic::Record(double time, double increment) {
         count += 1;
 
