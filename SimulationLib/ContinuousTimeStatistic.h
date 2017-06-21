@@ -13,6 +13,7 @@ namespace SimulationLib
 	public:
 		string name;
 		ContinuousTimeStatistic(string name);
+		void Record(double increment);
 		void Record(double time, double increment);
 
 		double GetMean();

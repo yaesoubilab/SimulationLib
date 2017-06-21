@@ -29,6 +29,11 @@ namespace SimulationLib
             observations = vector<double>(numObservations, 0);
     }
 
+    void DiscreteTimeStatistic::Record(double value)
+    {
+        return _record(value, count - 1);
+    }
+
     void DiscreteTimeStatistic::Record(double _, double value)
     {
         return _record(value, count - 1);
