@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include "TimeStatistic.h"
+#include "TimeSeries.h"
 
 using namespace std;
 
@@ -19,7 +20,7 @@ using namespace std;
 namespace SimulationLib
 {
 	template <typename T>
-	class PrevalenceTimeSeries
+	class PrevalenceTimeSeries : public TimeSeries<T>
 	{
 	public:
 		string name;
@@ -40,12 +41,15 @@ namespace SimulationLib
 
 		// Returns a vector. Element 'i' represents the prevalence at the most
 		// recent observation <= 'i'.
-		vector<T> GetObservations(void);
 
 		// Returns the current prevalence (the current prevalence is defined
 		//   as the sum of every change in prevalence already recorded through
 		//   calling 'Record').
 		T GetCurrentPrevalence(void);
+
+		virtual vector<T> *GetVector(void);
+		virtual double GetTime0();
+		virtual bool IsWritable();
 
 	private:
 		double timeMax;
@@ -61,7 +65,7 @@ namespace SimulationLib
 		//   'periodLength', who value is the most recent observation (the
 		//   observation of highest time-value recorded for that period).
 		// Element of highest index is the most recent.
-		vector<T> prevalence;
+		vector<T> *prevalence;
 
 		void _storePrevalence(int period);
 

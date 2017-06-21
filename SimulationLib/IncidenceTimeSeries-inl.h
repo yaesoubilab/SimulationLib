@@ -56,13 +56,18 @@ namespace SimulationLib {
         periodLength          = _periodLength;
         numPeriods            = (int)ceil(timeMax / periodLength);
 
-        observations          = vector<T>(numPeriods, (T)0);
+        observations          = new vector<T>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
 
         writable              = true;
 
         recordPeriod          = _recordPeriod;
         stats                 = _stats;
+    }
+
+    template <typename T>
+    IncidenceTimeSeries<T>::~IncidenceTimeSeries(void) {
+        delete observations;
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -108,10 +113,10 @@ namespace SimulationLib {
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
-            stats->Record(lastPeriod, (double)observations[lastPeriod]);
+            stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
 
         aggregatedObservation       += value;
-        observations[currentPeriod] += value;
+        (*observations)[currentPeriod] += value;
 
         lastTime   = time;
         lastPeriod = currentPeriod;
@@ -131,8 +136,21 @@ namespace SimulationLib {
     // Returns a vector containing all complete aggregations, and the current
     //   incomplete aggregation.
     template<typename T>
-    vector<T> IncidenceTimeSeries<T>::GetObservations() {
+    vector<T> *IncidenceTimeSeries<T>::GetVector() {
+        if (writable)
+            printf("Warning: IncidenceTimeSeries is still writable.\n");
+
         return observations;
+    }
+
+    template <typename T>
+    double IncidenceTimeSeries<T>::GetTime0(void) {
+        return time0;
+    }
+
+    template <typename T>
+    bool IncidenceTimeSeries<T>::IsWritable(void) {
+        return writable;
     }
 
     // Returns a value of type 'T' containing the sum of the incomplete
@@ -140,7 +158,7 @@ namespace SimulationLib {
     //   returns 0.
     template<typename T>
     T IncidenceTimeSeries<T>::GetLastObservation() {
-        return observations[(int)floor(lastTime / periodLength)];
+        return (*observations)[(int)floor(lastTime / periodLength)];
     }
 
     // Returns the summed value of all complete aggregations, and the incomplete

@@ -4,6 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "TimeStatistic.h"
+#include "TimeSeries.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ namespace SimulationLib
 {
 	// to store time-series incidence data and to perform calculations on the time-series
 	template <typename T>
-	class IncidenceTimeSeries
+	class IncidenceTimeSeries : public TimeSeries<T>
 	{
 	public:
 		string name;
@@ -47,6 +48,8 @@ namespace SimulationLib
 							double periodLength, int recordPeriod,
 							TimeStatistic *stats);
 
+		~IncidenceTimeSeries();
+
 	    // Records a new value at time 'time' and adds it to the current
 	    //   aggregation.
 	    // For successive calls, 'time' must monotonically increase. In other words,
@@ -60,7 +63,7 @@ namespace SimulationLib
 
 	    // Returns a vector containing all complete aggregations, and the current
 	    //   incomplete aggregation.
-	    vector<T> GetObservations();
+	    virtual vector<T> *GetVector();
 
 	    // Returns a value of type 'T' containing the sum of the incomplete
 	    //   aggregation. If no points have yet been added to this aggregation,
@@ -71,6 +74,9 @@ namespace SimulationLib
 	    //   aggregation
 	    T GetTotal();
 
+	    double GetTime0();
+	    bool IsWritable();
+
 	private:
 		double time0;
 		double timeMax;
@@ -80,7 +86,7 @@ namespace SimulationLib
 		int    lastPeriod;
 
 		T aggregatedObservation;
-		vector<T> observations;
+		vector<T> *observations;
 
 		bool writable;
 

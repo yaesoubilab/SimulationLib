@@ -28,7 +28,7 @@ namespace SimulationLib {
         lastTime          = (T)0;
         lastPeriod        = 0;
 
-        prevalence        = vector<T>(numPeriods + 1, (T)0);
+        prevalence        = new vector<T>(numPeriods + 1, (T)0);
 
         recordPeriod      = _recordPeriod;
         stats             = _stats;
@@ -93,11 +93,24 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    vector<T> PrevalenceTimeSeries<T>::GetObservations(void) {
+    vector<T> *PrevalenceTimeSeries<T>::GetVector(void) {
+        if (writable)
+            printf("Warning: TimeSeries is still writable\n");
+
         // Make sure vector is current with last data
         _storePrevalence(lastPeriod);
 
         return prevalence;
+    }
+
+    template <typename T>
+    double PrevalenceTimeSeries<T>::GetTime0(void) {
+        return 0;
+    }
+
+    template <typename T>
+    bool PrevalenceTimeSeries<T>::IsWritable(void) {
+        return writable;
     }
 
     template <typename T>
@@ -107,6 +120,6 @@ namespace SimulationLib {
 
     template <typename T>
     void PrevalenceTimeSeries<T>::_storePrevalence(int period) {
-        prevalence[period] = currentPrevalence;
+        (*prevalence)[period] = currentPrevalence;
     }
 }
