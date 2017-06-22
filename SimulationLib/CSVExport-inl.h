@@ -86,15 +86,15 @@ namespace SimulationLib {
             buf += (comma + tsNames[i]);
         buf += newline;
 
-        for (int t = 0; t < tMax + 1; ++t)
+        for (int t = 0; t < tMax; ++t)
         {
             buf += to_string(t);
 
             T n;
             for (int i = 0; i < nTimeSeries; ++i)
             {
-                if (tsTime0s[i] <= t && t <= tsTime0s[i] + tsSizes[i] - 1) {
-                    n = tsVectors[i]->at(t - tsTime0s[i]);
+                if (tsTime0s[i] <= t && t < tsSizes[i]) {
+                    n = tsVectors[i]->at(t);
                     buf += (comma + to_string(n));
                 } else
                     buf += comma;

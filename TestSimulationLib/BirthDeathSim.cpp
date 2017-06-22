@@ -46,10 +46,20 @@ namespace SimulationLib {
         delete population;
     }
 
+    // void printVector(vector<int> *v) {
+    //     for (int i = 0; i < v->size(); ++i)
+    //     {
+    //         printf("x: %2d y: %2d\n", i, (*v)[i]);
+    //     }
+    //     printf("\n");
+    // }
+
     void BirthDeathSim::Run(void) {
         int nBirths, nDeaths, delta;
 
         CSVExport<int> exporter("BirthDeathSim-output.csv");
+
+        population->Record(0, nPeople);
 
         for (int t = 1; t < timeMax; ++t)
         {
@@ -70,6 +80,7 @@ namespace SimulationLib {
         deaths->Close();
         population->Close();
 
+        exporter.AddTimeSeries(population);
         exporter.AddTimeSeries(births);
         exporter.AddTimeSeries(deaths);
         exporter.Write();
