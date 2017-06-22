@@ -41,13 +41,13 @@ namespace SimulationLib
 
 		// Returns a vector. Element 'i' represents the prevalence at the most
 		// recent observation <= 'i'.
+		virtual vector<T> *GetVector(void);
 
 		// Returns the current prevalence (the current prevalence is defined
 		//   as the sum of every change in prevalence already recorded through
 		//   calling 'Record').
 		T GetCurrentPrevalence(void);
 
-		virtual vector<T> *GetVector(void);
 		virtual double GetTime0();
 		virtual string GetName();
 		virtual bool IsWritable();

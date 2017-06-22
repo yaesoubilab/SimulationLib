@@ -109,7 +109,7 @@ namespace SimulationLib {
                  (lastPeriod % recordPeriod) == 0)
             stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
 
-        aggregatedObservation       += value;
+        aggregatedObservation          += value;
         (*observations)[currentPeriod] += value;
 
         lastTime   = time;
