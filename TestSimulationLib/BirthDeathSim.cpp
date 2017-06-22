@@ -1,49 +1,116 @@
 #include "BirthDeathSim.h"
 
 namespace SimulationLib {
-    BirthDeathSim::BirthDeathSim(int _timeMax, int _periodLength, long _nPeople,
+    BirthDeathSim::BirthDeathSim(string _fileName, int _nTrials, int _timeMax,
+                                 int _periodLength, long _nPeople,
                                  double _pDeath, double _pBirth) {
+
+        fileName     = _fileName;
+        nTrials      = _nTrials;
         timeMax      = _timeMax;
         periodLength = _periodLength;
         nPeople      = _nPeople,
         pDeath       = _pDeath;
         pBirth       = _pBirth;
 
+        birthsArr               = new IncidenceTimeSeries<int>*[nTrials];
+        deathsArr               = new IncidenceTimeSeries<int>*[nTrials];
+        populationArr           = new PrevalenceTimeSeries<int>*[nTrials];
+
+        birthStatisticsArr      = new DiscreteTimeStatistic*[nTrials];
+        deathStatisticsArr      = new DiscreteTimeStatistic*[nTrials];
+        populationStatisticsArr = new ContinuousTimeStatistic*[nTrials];
+
+        bDistributionArr        = new Binomial*[nTrials];
+        dDistributionArr        = new Binomial*[nTrials];
+
+        if (_fileName.empty()) {
+            printf("Error: No fileName specified\n");
+            return;
+        }
+
+        if (nTrials == 0) {
+            printf("Error: nTrials = 0\n");
+            return;
+        }
+
+        if (nPeople == 0) {
+            printf("Error: nPeople = 0\n");
+        }
+
+        if (periodLength == 0) {
+            printf("Error: periodLength = 0\n");
+        }
+
         // Seed random number generator with current time
         rng = new RNG(time(NULL));
 
-        // The memory pointed to by 'bDistribution' and 'dDistribution' are
-        //   recycled throughout execution as new Binomial classes are
-        //   instantiated on these locations to reflect changes in the size
-        //   of the population.
-        bDistribution = new Binomial(nPeople, pBirth);
-        dDistribution = new Binomial(nPeople, pDeath);
+        for (int i = 0; i < nTrials; ++i)
+        {
+            string b = string("births[");
+            string d = string("deaths[");
+            string p = string("population[");
+            string s = to_string(i) + string("]");
 
-        birthStatistics = new DiscreteTimeStatistic("Births");
-        deathStatistics = new DiscreteTimeStatistic("Deaths");
-        populationStatistics = new ContinuousTimeStatistic("Population");
+            birthStatisticsArr[i]      = new DiscreteTimeStatistic(b + s);
+            deathStatisticsArr[i]      = new DiscreteTimeStatistic(d + s);
+            populationStatisticsArr[i] = new ContinuousTimeStatistic(p + s);
 
-        // We assume there are no births or deaths during the period [-inf, 0],
-        //   so time0 is set to 1 for 'births' and 'deaths'. Statistics are
-        //   collected on every period.
-        births = new IncidenceTimeSeries<int>("Births", 1, timeMax, periodLength, 1, birthStatistics);
-        deaths = new IncidenceTimeSeries<int>("Deaths", 1, timeMax, periodLength, 1, deathStatistics);
-        population = new PrevalenceTimeSeries<int>("Population", (double)timeMax, (double)periodLength, 1, populationStatistics);
+
+            // We assume there are no births or deaths during the period [-inf, 0],
+            //   so time0 is set to 1 for 'births' and 'deaths'. Statistics are
+            //   collected on every period.
+            birthsArr[i] = new IncidenceTimeSeries<int>(b + s, \
+                                                        1, timeMax, periodLength, \
+                                                        1, birthStatisticsArr[i]);
+            deathsArr[i] = new IncidenceTimeSeries<int>(d + s, \
+                                                        1, timeMax, periodLength, \
+                                                        1, deathStatisticsArr[i]);
+            populationArr[i] = \
+              new PrevalenceTimeSeries<int>(p + s, \
+                                            (double)timeMax, (double)periodLength, \
+                                            1, populationStatisticsArr[i]);
+
+            // The memory pointed to by 'bDistribution' and 'dDistribution' are
+            //   recycled throughout execution as new Binomial classes are
+            //   instantiated on these locations to reflect changes in the size
+            //   of the population.
+            bDistributionArr[i] = new Binomial(nPeople, pBirth);
+            dDistributionArr[i] = new Binomial(nPeople, pBirth);
+        }
+
     }
 
     BirthDeathSim::~BirthDeathSim(void) {
+        // Free elements of each array
+        for (int i = 0; i < nTrials; ++i)
+        {
+            delete bDistributionArr[i];
+            delete dDistributionArr[i];
+
+            delete birthStatisticsArr[i];
+            delete deathStatisticsArr[i];
+            delete populationStatisticsArr[i];
+
+            delete birthsArr[i];
+            delete deathsArr[i];
+            delete populationArr[i];
+        }
+
+        // Free arrays themselves
+        delete bDistributionArr;
+        delete dDistributionArr;
+
+        delete birthStatisticsArr;
+        delete deathStatisticsArr;
+        delete populationStatisticsArr;
+
+        delete birthsArr;
+        delete deathsArr;
+        delete populationArr;
+
+        // Free RNG
         delete rng;
-
-        delete bDistribution;
-        delete dDistribution;
-
-        delete birthStatistics;
-        delete deathStatistics;
-        delete populationStatistics;
-
-        delete births;
-        delete deaths;
-        delete population;
     }
 
     // void printVector(vector<int> *v) {
@@ -55,9 +122,38 @@ namespace SimulationLib {
     // }
 
     void BirthDeathSim::Run(void) {
-        int nBirths, nDeaths, delta;
+        CSVExport<int>     exportBirths(fileName + string("-births.csv"));
+        CSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
+        CSVExport<int> exportPopulation(fileName + string("-population.csv"));
 
-        CSVExport<int> exporter("BirthDeathSim-output.csv");
+        for (int i = 0; i < nTrajectories; ++i)
+        {
+            _runTrajectory(birthsArr[i],
+                           deathsArr[i],
+                           populationArr[i],
+                           bDistributionArr[i],
+                           dDistributionArr[i],
+                           nPeople);
+        }
+
+        for (int i = 0; i < nTrajectories; ++i)
+        {
+            exportBirths.AddTimeSeries(birthsArr[i]);
+            exportDeaths.AddTimeSeries(deathsArr[i]);
+
+            exportPopulation.AddTimeSeries(populationArr[i])
+        }
+
+        exporter.Write();
+    }
+
+    void BirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>  *births, \
+                                       IncidenceTimeSeries<int>  *deaths, \
+                                       PrevalenceTimeSeries<int> *population,
+                                       Binomial *bDistribution,
+                                       Binomial *dDistribution,
+                                       int nPeople) {
+        int nBirths, nDeaths, delta;
 
         population->Record(0, nPeople);
 
@@ -73,17 +169,12 @@ namespace SimulationLib {
             population->Record(t, delta);
 
             reportStats(t, nPeople, nBirths, nDeaths);
-            refreshDists();
+            refreshDists(nPeople, &bDistribution, &dDistribution);
         }
 
         births->Close();
         deaths->Close();
         population->Close();
-
-        exporter.AddTimeSeries(population);
-        exporter.AddTimeSeries(births);
-        exporter.AddTimeSeries(deaths);
-        exporter.Write();
     }
 
     void BirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
@@ -92,8 +183,10 @@ namespace SimulationLib {
 
     // Create new distributions in-place to reflect changes in the size of
     //   the population.
-    void BirthDeathSim::refreshDists(void) {
-        bDistribution = new(bDistribution) Binomial(nPeople, pBirth);
-        dDistribution = new(dDistribution) Binomial(nPeople, pDeath);
+    void BirthDeathSim::refreshDists(int nPeople,
+                                     Binomial **bDistribution,
+                                     Binomial **dDistribution) {
+        *bDistribution = new(*bDistribution) Binomial(nPeople, pBirth);
+        *dDistribution = new(*dDistribution) Binomial(nPeople, pDeath);
     }
 }

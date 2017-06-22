@@ -15,14 +15,14 @@ namespace SimulationLib {
     class BirthDeathSim
     {
     public:
-        BirthDeathSim(int timeMax, int periodLength, long nPeople,
-                      double pDeath, double pBirth);
+        BirthDeathSim(string fileName, int nTrials, int timeMax, int periodLength, \
+                      long nPeople, double pDeath, double pBirth);
         ~BirthDeathSim(void);
         void Run(void);
-        void Write(string fname);
 
     private:
-        int timeMax, periodLength;
+        string fileName;
+        int nTrajectories, timeMax, periodLength;
         long nPeople;
         double pDeath, pBirth;
 
@@ -30,15 +30,22 @@ namespace SimulationLib {
         Binomial *dDistribution;
         RNG *rng;
 
+        void _runTrajectory(IncidenceTimeSeries<int>  *births, \
+                            IncidenceTimeSeries<int>  *deaths, \
+                            PrevalenceTimeSeries<int> *population,
+                            Binomial *bDistribution,
+                            Binomial *dDistribution,
+                            int nPeople);
+
         void refreshDists(void);
         void reportStats(int t, long nPeople, int nBirths, int nDeaths);
 
-        IncidenceTimeSeries<int>  *births;
-        IncidenceTimeSeries<int>  *deaths;
-        DiscreteTimeStatistic   *birthStatistics;
-        DiscreteTimeStatistic   *deathStatistics;
+        IncidenceTimeSeries<int>  *birthsArr[];
+        IncidenceTimeSeries<int>  *deathsArr[];
+        DiscreteTimeStatistic   *birthStatisticsArr[];
+        DiscreteTimeStatistic   *deathStatisticsArr[];
 
-        PrevalenceTimeSeries<int> *population;
-        ContinuousTimeStatistic *populationStatistics;
+        PrevalenceTimeSeries<int> *populationArr[];
+        ContinuousTimeStatistic *populationStatisticsArr[];
     };
 }

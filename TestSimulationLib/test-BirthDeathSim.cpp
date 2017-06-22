@@ -3,42 +3,50 @@
 using namespace SimulationLib;
 
 // Parameters:
-// 1: timeMax:
+// 1: fileName:
+//      Prefix of .csv file name (do not specify extension). Three files will
+//        be created: [fileName]-births.csv, [fileName]-deaths.csv,
+//        [filename]-population.csv
+// 2: nTrajectories:
+//      number of trajectories to run under the following parameters:
+// 3: timeMax:
 //      largest value of t to run simulation to
-// 2: periodLength:
+// 4: periodLength:
 //      length of period, in units of t (integer)
-// 3: nPeople:
+// 5: nPeople:
 //      initial size of population
-// 4: pDeath:
+// 6: pDeath:
 //      individual probability of death over 1 time unit
-// 5: pBirth:
+// 7: pBirth:
 //      individual probability of single reproduction over 1 time unit
 int main(int argc, char const *argv[])
 {
-    int timeMax, periodLength;
+    int i;
+    char *fileName;
+    int nTrajectories, timeMax, periodLength;
     long nPeople;
     double pDeath, pBirth;
 
     BirthDeathSim *bdsim;
 
-    if (argc < 6) {
+    if (argc < 8) {
         printf("Error: too few arguments\n");
         exit(1);
     }
 
-    int i = 0;
-    timeMax      = atoi(argv[++i]);
-    periodLength = atoi(argv[++i]);
-    nPeople      = atol(argv[++i]);
-    pDeath       = stof(argv[++i], NULL);
-    pBirth       = stof(argv[++i], NULL);
+    i = 0;
+    fileName      = string(argv[++i]);
+    nTrajectories = atoi(argv[++i])
+    timeMax       = atoi(argv[++i]);
+    periodLength  = atoi(argv[++i]);
+    nPeople       = atol(argv[++i]);
+    pDeath        = stof(argv[++i], NULL);
+    pBirth        = stof(argv[++i], NULL);
 
-    printf("Args:\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", timeMax, periodLength, nPeople, pDeath, pBirth);
+    printf("Args:\n\tfileName=%s\n\tnTrajectories=%d\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
 
-    bdsim = new BirthDeathSim(timeMax, periodLength, nPeople, pDeath, pBirth);
-
+    bdsim = new BirthDeathSim(fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
     bdsim->Run();
-
     delete bdsim;
 
     return 0;
