@@ -1,3 +1,4 @@
+#include <string>
 #include "BirthDeathSim.h"
 
 using namespace SimulationLib;
@@ -22,7 +23,7 @@ using namespace SimulationLib;
 int main(int argc, char const *argv[])
 {
     int i;
-    char *fileName;
+    string fileName;
     int nTrajectories, timeMax, periodLength;
     long nPeople;
     double pDeath, pBirth;
@@ -36,14 +37,14 @@ int main(int argc, char const *argv[])
 
     i = 0;
     fileName      = string(argv[++i]);
-    nTrajectories = atoi(argv[++i])
+    nTrajectories = atoi(argv[++i]);
     timeMax       = atoi(argv[++i]);
     periodLength  = atoi(argv[++i]);
     nPeople       = atol(argv[++i]);
     pDeath        = stof(argv[++i], NULL);
     pBirth        = stof(argv[++i], NULL);
 
-    printf("Args:\n\tfileName=%s\n\tnTrajectories=%d\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
+    printf("Args:\n\tfileName=%s\n\tnTrajectories=%d\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", fileName.c_str(), nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
 
     bdsim = new BirthDeathSim(fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
     bdsim->Run();

@@ -1,36 +1,36 @@
 #include "BirthDeathSim.h"
 
 namespace SimulationLib {
-    BirthDeathSim::BirthDeathSim(string _fileName, int _nTrials, int _timeMax,
+    BirthDeathSim::BirthDeathSim(string _fileName, int _nTrajectories, int _timeMax,
                                  int _periodLength, long _nPeople,
                                  double _pDeath, double _pBirth) {
 
-        fileName     = _fileName;
-        nTrials      = _nTrials;
-        timeMax      = _timeMax;
-        periodLength = _periodLength;
-        nPeople      = _nPeople,
-        pDeath       = _pDeath;
-        pBirth       = _pBirth;
+        fileName      = _fileName;
+        nTrajectories = _nTrajectories;
+        timeMax       = _timeMax;
+        periodLength  = _periodLength;
+        nPeople       = _nPeople,
+        pDeath        = _pDeath;
+        pBirth        = _pBirth;
 
-        birthsArr               = new IncidenceTimeSeries<int>*[nTrials];
-        deathsArr               = new IncidenceTimeSeries<int>*[nTrials];
-        populationArr           = new PrevalenceTimeSeries<int>*[nTrials];
+        birthsArr               = new IncidenceTimeSeries<int>*[nTrajectories];
+        deathsArr               = new IncidenceTimeSeries<int>*[nTrajectories];
+        populationArr           = new PrevalenceTimeSeries<int>*[nTrajectories];
 
-        birthStatisticsArr      = new DiscreteTimeStatistic*[nTrials];
-        deathStatisticsArr      = new DiscreteTimeStatistic*[nTrials];
-        populationStatisticsArr = new ContinuousTimeStatistic*[nTrials];
+        birthStatisticsArr      = new DiscreteTimeStatistic*[nTrajectories];
+        deathStatisticsArr      = new DiscreteTimeStatistic*[nTrajectories];
+        populationStatisticsArr = new ContinuousTimeStatistic*[nTrajectories];
 
-        bDistributionArr        = new Binomial*[nTrials];
-        dDistributionArr        = new Binomial*[nTrials];
+        bDistributionArr        = new Binomial*[nTrajectories];
+        dDistributionArr        = new Binomial*[nTrajectories];
 
         if (_fileName.empty()) {
             printf("Error: No fileName specified\n");
             return;
         }
 
-        if (nTrials == 0) {
-            printf("Error: nTrials = 0\n");
+        if (nTrajectories == 0) {
+            printf("Error: nTrajectories = 0\n");
             return;
         }
 
@@ -45,7 +45,7 @@ namespace SimulationLib {
         // Seed random number generator with current time
         rng = new RNG(time(NULL));
 
-        for (int i = 0; i < nTrials; ++i)
+        for (int i = 0; i < nTrajectories; ++i)
         {
             string b = string("births[");
             string d = string("deaths[");
@@ -83,7 +83,7 @@ namespace SimulationLib {
 
     BirthDeathSim::~BirthDeathSim(void) {
         // Free elements of each array
-        for (int i = 0; i < nTrials; ++i)
+        for (int i = 0; i < nTrajectories; ++i)
         {
             delete bDistributionArr[i];
             delete dDistributionArr[i];
@@ -128,12 +128,14 @@ namespace SimulationLib {
 
         for (int i = 0; i < nTrajectories; ++i)
         {
+            printf("Trajectory %d:\n", i);
             _runTrajectory(birthsArr[i],
                            deathsArr[i],
                            populationArr[i],
                            bDistributionArr[i],
                            dDistributionArr[i],
                            nPeople);
+            printf("\n");
         }
 
         for (int i = 0; i < nTrajectories; ++i)
@@ -141,10 +143,12 @@ namespace SimulationLib {
             exportBirths.AddTimeSeries(birthsArr[i]);
             exportDeaths.AddTimeSeries(deathsArr[i]);
 
-            exportPopulation.AddTimeSeries(populationArr[i])
+            exportPopulation.AddTimeSeries(populationArr[i]);
         }
 
-        exporter.Write();
+        exportBirths.Write();
+        exportDeaths.Write();
+        exportPopulation.Write();
     }
 
     void BirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>  *births, \
@@ -156,7 +160,6 @@ namespace SimulationLib {
         int nBirths, nDeaths, delta;
 
         population->Record(0, nPeople);
-
         for (int t = 1; t < timeMax; ++t)
         {
             nBirths  = (int)bDistribution->Sample(*rng);

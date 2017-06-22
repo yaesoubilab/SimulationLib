@@ -26,8 +26,6 @@ namespace SimulationLib {
         long nPeople;
         double pDeath, pBirth;
 
-        Binomial *bDistribution;
-        Binomial *dDistribution;
         RNG *rng;
 
         void _runTrajectory(IncidenceTimeSeries<int>  *births, \
@@ -37,15 +35,16 @@ namespace SimulationLib {
                             Binomial *dDistribution,
                             int nPeople);
 
-        void refreshDists(void);
+        void refreshDists(int nPeople, Binomial **bDistribution, Binomial **dDistribution);
         void reportStats(int t, long nPeople, int nBirths, int nDeaths);
 
-        IncidenceTimeSeries<int>  *birthsArr[];
-        IncidenceTimeSeries<int>  *deathsArr[];
-        DiscreteTimeStatistic   *birthStatisticsArr[];
-        DiscreteTimeStatistic   *deathStatisticsArr[];
-
-        PrevalenceTimeSeries<int> *populationArr[];
-        ContinuousTimeStatistic *populationStatisticsArr[];
+        Binomial                   **bDistributionArr;
+        Binomial                   **dDistributionArr;
+        IncidenceTimeSeries<int>   **birthsArr;
+        IncidenceTimeSeries<int>   **deathsArr;
+        DiscreteTimeStatistic      **birthStatisticsArr;
+        DiscreteTimeStatistic      **deathStatisticsArr;
+        PrevalenceTimeSeries<int>  **populationArr;
+        ContinuousTimeStatistic    **populationStatisticsArr;
     };
 }
