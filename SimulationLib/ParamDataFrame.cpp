@@ -15,6 +15,7 @@
 #include "Exponential.h"
 #include "Gamma.h"
 #include "GammaPoisson.h"
+#include "Geometric.h"
 #include "JohnsonSb.h"
 #include "JohnsonSl.h"
 #include "JohnsonSu.h"
@@ -113,6 +114,13 @@ namespace SimulationLib {
 	sscanf(i, "%llf,%llf", &alpha, &beta);
 	auto f = extract(i);
 	return new Parameter(make_shared<GammaPoisson>(alpha, beta),
+			     get<1>(f), get<2>(f), get<0>(f));
+      }),
+    make_pair("Geometric", [](const char *i) -> Parameter * {
+	long double p = 1;
+	sscanf(i, "%llf", &p);
+	auto f = extract(i);
+	return new Parameter(make_shared<Geometric>(p),
 			     get<1>(f), get<2>(f), get<0>(f));
       }),
     make_pair("Johnson Sb", [](const char *i) -> Parameter * {
