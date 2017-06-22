@@ -21,12 +21,6 @@ namespace SimulationLib {
     //     method will be called in accordance with 'recordPeriodLength'. ]
     template <typename T>
     IncidenceTimeSeries<T>::IncidenceTimeSeries
-      (string name, double time0, double timeMax, double periodLength) {
-        IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL);
-    }
-
-    template <typename T>
-    IncidenceTimeSeries<T>::IncidenceTimeSeries
       (string _name, double _time0, double _timeMax, double _periodLength,
         int _recordPeriod, TimeStatistic *_stats) {
 
@@ -43,7 +37,7 @@ namespace SimulationLib {
             printf("Error: timeMax must be >= periodLength\n");
         if (_time0 > _timeMax)
             printf("Error: timeMax must be >= time0\n");
-        if (_stats && (_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
+        if (_stats && !(_recordPeriod != RECORD_ON_ALL || _recordPeriod > 0))
             printf("Error: recordPeriod must be RECORD_ON_ALL or a positive int\n");
 
         name                  = _name;
@@ -56,13 +50,18 @@ namespace SimulationLib {
         periodLength          = _periodLength;
         numPeriods            = (int)ceil(timeMax / periodLength);
 
-        observations          = vector<T>(numPeriods, (T)0);
+        observations          = new vector<T>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
 
         writable              = true;
 
         recordPeriod          = _recordPeriod;
         stats                 = _stats;
+    }
+
+    template <typename T>
+    IncidenceTimeSeries<T>::~IncidenceTimeSeries(void) {
+        delete observations;
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -108,10 +107,10 @@ namespace SimulationLib {
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
-            stats->Record(lastPeriod, (double)observations[lastPeriod]);
+            stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
 
         aggregatedObservation       += value;
-        observations[currentPeriod] += value;
+        (*observations)[currentPeriod] += value;
 
         lastTime   = time;
         lastPeriod = currentPeriod;
@@ -124,15 +123,32 @@ namespace SimulationLib {
         if (stats && recordPeriod > 0)
             stats->Record(lastPeriod, (double)aggregatedObservation);
         writable = false;
-
         return;
     }
 
     // Returns a vector containing all complete aggregations, and the current
     //   incomplete aggregation.
     template<typename T>
-    vector<T> IncidenceTimeSeries<T>::GetObservations() {
+    vector<T> *IncidenceTimeSeries<T>::GetVector() {
+        if (writable)
+            printf("Warning: IncidenceTimeSeries is still writable.\n");
+
         return observations;
+    }
+
+    template <typename T>
+    double IncidenceTimeSeries<T>::GetTime0(void) {
+        return time0;
+    }
+
+    template <typename T>
+    string IncidenceTimeSeries<T>::GetName(void) {
+        return name;
+    }
+
+    template <typename T>
+    bool IncidenceTimeSeries<T>::IsWritable(void) {
+        return writable;
     }
 
     // Returns a value of type 'T' containing the sum of the incomplete
@@ -140,7 +156,7 @@ namespace SimulationLib {
     //   returns 0.
     template<typename T>
     T IncidenceTimeSeries<T>::GetLastObservation() {
-        return observations[(int)floor(lastTime / periodLength)];
+        return (*observations)[(int)floor(lastTime / periodLength)];
     }
 
     // Returns the summed value of all complete aggregations, and the incomplete
