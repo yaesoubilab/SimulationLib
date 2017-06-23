@@ -22,6 +22,7 @@
 #include "Binomial.h"
 #include "Empirical.h"
 #include "GammaPoisson.h"
+#include "Geometric.h"
 #include "NegBinomial.h"
 #include "Poisson.h"
 #include "UniformDiscrete.h"
@@ -157,6 +158,11 @@ namespace SimulationLib {
 	    long double alpha = 1, beta = 1;
 	    sscanf(i, "%Lf,%Lf", &alpha, &beta);
 	    return new GammaPoisson(alpha, beta);
+	  }),
+	make_pair("Geometric", [](const char *i) -> csip {
+	    long double p = 1;
+	    sscanf(i, "%Lf", &p);
+	    return new Poisson(p);
 	  }),
 	make_pair("Negative binomial", [](const char *i) -> csip {
 	    long n;

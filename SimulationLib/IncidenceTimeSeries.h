@@ -4,6 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "TimeStatistic.h"
+#include "TimeSeries.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ namespace SimulationLib
 {
 	// to store time-series incidence data and to perform calculations on the time-series
 	template <typename T>
-	class IncidenceTimeSeries
+	class IncidenceTimeSeries : public TimeSeries<T>
 	{
 	public:
 		string name;
@@ -41,11 +42,15 @@ namespace SimulationLib
 	    //   'stats': an instance of a TimeStatistic class (for now,
 	    //     DiscreteTimeStatistic or ContinuousTimeStatistic). Its ::Record
 	    //     method will be called in accordance with 'recordPeriodLength'. ]
-		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength);
 
 		IncidenceTimeSeries(string name, double time0, double timeMax, \
 							double periodLength, int recordPeriod,
 							TimeStatistic *stats);
+
+		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength) :\
+		  IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL) {}
+
+		~IncidenceTimeSeries();
 
 	    // Records a new value at time 'time' and adds it to the current
 	    //   aggregation.
@@ -60,7 +65,7 @@ namespace SimulationLib
 
 	    // Returns a vector containing all complete aggregations, and the current
 	    //   incomplete aggregation.
-	    vector<T> GetObservations();
+	    virtual vector<T> *GetVector();
 
 	    // Returns a value of type 'T' containing the sum of the incomplete
 	    //   aggregation. If no points have yet been added to this aggregation,
@@ -71,6 +76,10 @@ namespace SimulationLib
 	    //   aggregation
 	    T GetTotal();
 
+	    double GetTime0();
+	    string GetName();
+	    bool IsWritable();
+
 	private:
 		double time0;
 		double timeMax;
@@ -80,7 +89,9 @@ namespace SimulationLib
 		int    lastPeriod;
 
 		T aggregatedObservation;
-		vector<T> observations;
+		vector<T> *observations;
+
+		bool writable;
 
 		int recordPeriod;
 		TimeStatistic *stats;
