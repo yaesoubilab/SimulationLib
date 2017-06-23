@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <limits>
 #include "TimeStatistic.h"
 
 using namespace std;
