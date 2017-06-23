@@ -38,7 +38,7 @@ namespace SimulationLib {
 
   typedef csip (*idmk)(const char *);
   
-  static const std::map<const std::string, const ddmk> mpd({
+  static const std::map<const std::string, const ddmk> mpd = {
       make_pair("Beta", [](const char *i) -> csdp {
 	  long double alpha, beta, scale = 1, shift = 0;
 	  sscanf(i, "%Lf,%Lf,%Lf,%Lf", &alpha, &beta, &scale, &shift);
@@ -103,8 +103,8 @@ namespace SimulationLib {
 	    long double v = 0;
 	    sscanf(i, "%Lf", &v);
 	    return new DiracDelta(v);
-	  }
-	});
+	  })
+  };
 
   template<>
   DataFrame<StatisticalDistribution<long double> >::DataFrame(const char *file,
@@ -196,8 +196,7 @@ namespace SimulationLib {
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
 		    << buf << '"' << std::endl;
-	  return(std::shared_ptr<
-		 const StatisticalDistribution<long> >());
+	  return(std::shared_ptr<const StatisticalDistribution<long> >());
 	}
       }) {}
   

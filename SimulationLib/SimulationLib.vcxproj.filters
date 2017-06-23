@@ -42,6 +42,15 @@
     <ClInclude Include="DataFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrevalenceTimeSeries-inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IncidenceTimeSeries-inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeStatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parameter.cpp">
@@ -60,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PrevalenceTimeSeries.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscreteTimeStatistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

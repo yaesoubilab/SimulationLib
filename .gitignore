@@ -254,3 +254,8 @@ sftp-config.json
 # Executables
 *.out
 *.out.dSYM
+/SimulationLib.sln
+/SimulationLib.sln
+*.sln
+/SimulationLib.sln
+/SimulationLib.sln
