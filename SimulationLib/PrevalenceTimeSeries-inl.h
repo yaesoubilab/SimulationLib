@@ -30,29 +30,29 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    void PrevalenceTimeSeries<T>::Record(double time, T increment) {
+    bool PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
 
         if (!writable) {
             printf("Erorr: TimeSeries has already been closed\n");
-            return;
+            return false;
         }
 
         // Is 'time' a non-negative integer?
         if (time < 0) {
             printf("Error: 'time' must be non-negative\n");
-            return;
+            return false;
         }
 
         if (time > timeMax) {
             printf("Error: 'time' cannot be greater than 'timeMax'\n");
-            return;
+            return false;
         }
 
         if (time < lastTime) {
             printf("Error: Successive calls to ::Record must have \
                       monotonically increasing time\n");
-            return;
+            return false;
         }
 
         // Update current prevalence, note 'increment' can be positive or
@@ -73,7 +73,7 @@ namespace SimulationLib {
         lastTime = time;
         lastPeriod = thisPeriod;
 
-        return;
+        return true;
     }
 
     template <typename T>

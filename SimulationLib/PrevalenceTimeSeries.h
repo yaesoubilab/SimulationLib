@@ -36,7 +36,7 @@ namespace SimulationLib
 
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
-		void Record(double time, T increment);
+		bool Record(double time, T increment);
 
 		void Close(void);
 
