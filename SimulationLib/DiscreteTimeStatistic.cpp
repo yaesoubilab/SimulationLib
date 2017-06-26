@@ -4,8 +4,6 @@ using namespace std;
 
 namespace SimulationLib
 {
-    DiscreteTimeStatistic::DiscreteTimeStatistic(string name)
-        { DiscreteTimeStatistic(name, 0); }
 
     DiscreteTimeStatistic::DiscreteTimeStatistic(string _name, long numOfObservationsToStore)
     {
