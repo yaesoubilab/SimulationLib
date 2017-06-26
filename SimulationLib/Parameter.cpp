@@ -4,7 +4,7 @@
 namespace SimulationLib {
   using namespace std;
   using namespace StatisticalDistributions;
-  long double Parameter::operator()(mt19937_64 &g) {
+  long double Parameter::operator()(mt19937_64 &g) const {
     if(holds_alternative<long double>(dist))
       return(get<long double>(dist));
     if(holds_alternative<shared_ptr<const StatisticalDistribution<long> > >(dist))

@@ -15,7 +15,7 @@ namespace SimulationLib {
 		  long double> dist;
     const long double min, max;
     const bool calibrate;
-    long double operator()(mt19937_64 &);
+    long double operator()(mt19937_64 &) const;
     inline Parameter(double d)
       : dist(d), min(d), max(d), calibrate(false) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long> > dist,
