@@ -29,9 +29,10 @@ namespace SimulationLib
 		// - 'name': name of the time series
 		// - 'timeMax': the upper boundary of time. Time domain is [0, timeMax].
 		// - 'periodLength': the length of each period
-		PrevalenceTimeSeries(string name, double timeMax, double periodLength);
 		PrevalenceTimeSeries(string name, double timeMax, double periodLength,
        						 int recordPeriod, TimeStatistic *stats);
+		PrevalenceTimeSeries(string name, double timeMax, double periodLength) : \
+		  PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL) {}
 
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
