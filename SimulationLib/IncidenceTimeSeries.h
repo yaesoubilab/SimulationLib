@@ -57,7 +57,7 @@ namespace SimulationLib
 	    // For successive calls, 'time' must monotonically increase. In other words,
 	    //   the function will issue an error if called with a 'time' of lower value
 	    //   than one which was seen in any previous invocation of the function.
-	    void Record(double time, T value);
+	    bool Record(double time, T value);
 
 	    // Call at the end of the time series to trigger Record of statistics
 	    // for current period
