@@ -32,7 +32,7 @@ namespace SimulationLib {
 	loop = true;
       case 'f':
 	fgets(buf, BFSZ + 1, ifile);
-	framevar[item] = make_shared<DataFrame<Parameter> >(buf, loop);
+	var[item] = make_shared<DataFrame<Parameter> >(buf, loop);
 	break;
       default:
 	std::cerr << "Unknown type character " << t << std::endl;
