@@ -5,13 +5,6 @@ namespace SimulationLib {
 
     template <typename T>
     PrevalenceTimeSeries<T>::PrevalenceTimeSeries
-      (string name, double timeMax, double periodLength)
-    {
-        PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL);
-    }
-
-    template <typename T>
-    PrevalenceTimeSeries<T>::PrevalenceTimeSeries
       (string _name, double _timeMax, double _periodLength,
        int _recordPeriod, TimeStatistic *_stats) {
 
