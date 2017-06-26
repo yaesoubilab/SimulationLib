@@ -13,11 +13,11 @@ PyramidData::PyramidData(int timeIndex, int numOfCategories, vector<double> ageB
     }
 }
 
-void PyramidData::Update(int category, int ageGroupIndex, int increment) {
+void PyramidData::UpdateByIdx(int category, int ageGroupIndex, int increment) {
     popCounts[category][ageGroupIndex] += increment;
 }
 
-void PyramidData::Update(int category, double age, int increment) {
+void PyramidData::UpdateByAge(int category, double age, int increment) {
     int index = 0;
     if (age < ageBreaks[0]) {
         popCounts[category][0] += increment;
@@ -31,12 +31,12 @@ void PyramidData::Update(int category, double age, int increment) {
 }
 
 // update the change in the specified category and age group (note that it takes the actual age)
-void PyramidData::Update(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {
+void PyramidData::MoveByIdx(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {
     popCounts[oldCategory][oldAgeGroupIndex] -= numberMoved;
     popCounts[newCategory][newAgeGroupIndex] += numberMoved;
 }
 
-void PyramidData::Update(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved) {
+void PyramidData::MoveByAge(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved) {
     // update the change in the specified category and age group by taking the number of people who
     // moved from one category-age group to another category-age group.
     int oldAgeInd = 0;

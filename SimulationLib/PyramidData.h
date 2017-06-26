@@ -11,7 +11,7 @@ namespace SimulationLib
 	{
 
 	private:
-		vector<vector<int>> popCounts;
+		int **popCounts;
 		vector<double> ageBreaks;
 	public:
 		string name;
@@ -19,11 +19,11 @@ namespace SimulationLib
 
 		PyramidData(int timeIndex, int numOfCategories, vector<double> ageBreaks);
 
-		void Update(int category, int ageGroupIndex, int increment);
-		void Update(int category, double age, int increment);
+		void UpdateByIdx(int category, int ageGroupIndex, int increment);
+		void UpdateByAge(int category, double age, int increment);
 		// update the change in the specified category and age group (note that it takes the actual age)
-		void Update(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved);
-		void Update(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved);
+		void MoveByIdx(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved);
+		void MoveByAge(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved);
 
 		int GetTotal(void);
 
