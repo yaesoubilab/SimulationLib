@@ -30,6 +30,10 @@ TEST_CASE("PrevalenceTimeSeries: initialization w/o statistics", "[statistics]")
         REQUIRE( pts.Record(10.01, 1) == false);
     }
 
+    SECTION( "time = timeMax succeeds" ) {
+        REQUIRE( pts.Record(10.0, 1) == true );
+    }
+
     SECTION( "successively decreasing times fail" ) {
         pts.Record(1.0, 1);
         REQUIRE( pts.Record(0.99, 1) == false );
