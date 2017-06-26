@@ -2,9 +2,8 @@
 
 using namespace SimulationLib;
 
-PyramidData::PyramidData(int timeIndex, int numOfCategories, vector<double> ageBreaks)
+PyramidData::PyramidData(int numOfCategories, vector<double> ageBreaks)
 {
-    timeIndex = timeIndex;
     ageBreaks = ageBreaks;
 
     // example age breaks of {0, 5, 10, 15} represent age groups [0,5), [5, 10), [10, 15), [15+)

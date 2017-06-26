@@ -11,13 +11,12 @@ namespace SimulationLib
 	{
 
 	private:
-		int **popCounts;
+		vector<vector<int>>popCounts;
 		vector<double> ageBreaks;
 	public:
 		string name;
-		int timeIndex;
 
-		PyramidData(int timeIndex, int numOfCategories, vector<double> ageBreaks);
+		PyramidData(int numOfCategories, vector<double> ageBreaks);
 
 		void UpdateByIdx(int category, int ageGroupIndex, int increment);
 		void UpdateByAge(int category, double age, int increment);
