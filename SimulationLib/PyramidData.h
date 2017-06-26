@@ -22,8 +22,8 @@ namespace SimulationLib
 		void UpdateByIdx(int category, int ageGroupIndex, int increment);
 		void UpdateByAge(int category, double age, int increment);
 		// update the change in the specified category and age group (note that it takes the actual age)
-		void MoveByIdx(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved);
-		void MoveByAge(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved);
+		void MoveByIdx(int oldCategory, int oldAgeGroupIndex, int newCategory, int newAgeGroupIndex, int numberMoved);
+		void MoveByAge(int oldCategory, double oldAge, int newCategory, double newAge, int numberMoved);
 
 		int GetTotal(void);
 
