@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
@@ -11,15 +12,20 @@ namespace SimulationLib
 	{
 
 	private:
-		vector<vector<int>>popCounts;
+		int **popCounts;
+
+		int numCategories;
+		int numAgeGroups;
 		vector<double> ageBreaks;
+
+		int getAgeIdx(double age);
 	public:
 		string name;
 
 		// Initializes a PyramidData class, allocating memory for
 		//   (numCategories x size(ageBreaks)) values.
 		//
-		// 'numOfCategories': the number of categories the population is segmented
+		// 'numCategories': the number of categories the population is segmented
 		//   into. Must be >0
 		//
 		// 'ageBreaks': a vector defining the intervals of age along the spectrum
@@ -28,7 +34,7 @@ namespace SimulationLib
 		//   population category will be binned into one age group of bounds
 		//   [0, +inf]. Each member of the vector must be a positive, nonzero
 		//   double.
-		PyramidData(int numOfCategories, vector<double> ageBreaks);
+		PyramidData(int numCategories, vector<double> ageBreaks);
 
 		// Updates the specified category and age group index by 'increment'.
 		// Returns true on success, and false if the increment would cause
