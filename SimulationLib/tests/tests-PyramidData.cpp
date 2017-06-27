@@ -100,8 +100,8 @@ TEST_CASE("PyramidData: one age-break", "[pyramid]") {
         pd.UpdateByIdx(0, 0, 17); // 17 people of age [0, 10)
         pd.UpdateByIdx(0, 1, 18); // 18 people of age [10, +inf)
 
-        REQUIRE( pd.GetTotal() == 34 );
-        REQUIRE( pd.GetTotalInCategory(0) == 34 );
+        REQUIRE( pd.GetTotal() == 35 );
+        REQUIRE( pd.GetTotalInCategory(0) == 35 );
         REQUIRE( pd.GetTotalInAgeGroup(0) == 17 );
         REQUIRE( pd.GetTotalInAgeGroup(1) == 18 );
     }
@@ -110,8 +110,8 @@ TEST_CASE("PyramidData: one age-break", "[pyramid]") {
         pd.UpdateByAge(0, 5, 17);  // Add 17 people of age 5
         pd.UpdateByAge(0, 15, 18); // Add 18 people of age 15
 
-        REQUIRE( pd.GetTotal() == 34 );
-        REQUIRE( pd.GetTotalInCategory(0) == 34 );
+        REQUIRE( pd.GetTotal() == 35 );
+        REQUIRE( pd.GetTotalInCategory(0) == 35 );
         REQUIRE( pd.GetTotalInAgeGroup(0) == 17 );
         REQUIRE( pd.GetTotalInAgeGroup(1) == 18 );
     }
@@ -126,6 +126,10 @@ TEST_CASE("PyramidData: moving", "[pyramid]") {
 
     pd.UpdateByAge(0, 5, 33);
     pd.UpdateByAge(0, 15, 66);
+
+    REQUIRE( pd.GetTotalInAgeGroup(0) == 33 );
+    REQUIRE( pd.GetTotalInAgeGroup(1) == 66 );
+    REQUIRE( pd.GetTotalInCategory(0) == 99 );
 
     SECTION( "Moves that should throw exceptions" ) {
         threw = false;
@@ -152,8 +156,16 @@ TEST_CASE("PyramidData: moving", "[pyramid]") {
     }
 
     SECTION( "Moves that should return false" ) {
+        threw = false;
+
+        try {
+            pd.MoveByIdx(0, 0, 0, 0, -1);
+        } catch(...) {
+            threw = true;
+        }
+
         // Moving negative num
-        REQUIRE( pd.MoveByIdx(0, 0, 0, 0, -1) == false );
+        REQUIRE( threw == true );
 
         // Would result in -1 individuals in original group
         REQUIRE( pd.MoveByIdx(0, 0, 0, 1, 34) == false );

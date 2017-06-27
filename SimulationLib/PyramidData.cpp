@@ -3,10 +3,11 @@
 using namespace std;
 using namespace SimulationLib;
 
-PyramidData::PyramidData(int _numCategories, vector<double> ageBreaks)
+PyramidData::PyramidData(int _numCategories, vector<double> _ageBreaks)
 {
-    numAgeGroups  = ageBreaks.size() + 1;
+    numAgeGroups  = _ageBreaks.size() + 1;
     numCategories = _numCategories;
+    ageBreaks     = _ageBreaks;
 
     // Check to make sure at least one category requested
     if (numCategories < 1)
@@ -48,10 +49,8 @@ int PyramidData::getAgeIdx(double age) {
         throw out_of_range("Age specified must be >= 0");
 
     idx = 0;
-    for (int i = 0; i < ageBreaks.size(); ++i)
-        if (ageBreaks[i] <= age)
-            idx += 1;
-        else if (age < ageBreaks[i])
+    for (; idx < ageBreaks.size(); ++idx)
+        if (ageBreaks[idx] > age)
             break;
 
     return idx;
@@ -77,7 +76,6 @@ bool PyramidData::UpdateByIdx(int category, int ageGroupIndex, int increment) {
 
 bool PyramidData::UpdateByAge(int category, double age, int increment) {
     int ageGroupIndex;
-
     try { ageGroupIndex = getAgeIdx(age); } catch (...) { throw; }
 
     return UpdateByIdx(category, ageGroupIndex, increment);

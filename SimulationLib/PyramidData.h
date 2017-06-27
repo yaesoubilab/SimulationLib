@@ -52,10 +52,10 @@ namespace SimulationLib
 		// Moves 'numberMoved' individuals from an old category and age group
 		//   to a new category and age group. Returns true on success, and
 		//   false if either the 'numberMoved' is greater than the size of
-		//   the referenced 'old' population, or if 'numberMoved' is a negative
-		//   integer.
+		//   the referenced 'old' population.
 		// Throws an exception if either pair of indices specify a population
-		//   group that does not exist.
+		//   group that does not exist, or if 'numberMoved' is a negative
+		//   integer.
 		bool MoveByIdx(int oldCategory, int oldAgeGroupIndex, \
 					   int newCategory, int newAgeGroupIndex, int numberMoved);
 
