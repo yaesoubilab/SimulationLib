@@ -34,6 +34,8 @@ namespace SimulationLib
 		PrevalenceTimeSeries(string name, double timeMax, double periodLength) : \
 		  PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL) {}
 
+		~PrevalenceTimeSeries(void);
+
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
 		bool Record(double time, T increment);
