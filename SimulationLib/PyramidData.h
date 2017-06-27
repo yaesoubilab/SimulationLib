@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
@@ -11,99 +12,69 @@ namespace SimulationLib
 	{
 
 	private:
-		vector<vector<int>> popCounts;
+		int **popCounts;
+
+		int numCategories;
+		int numAgeGroups;
 		vector<double> ageBreaks;
+
+		int getAgeIdx(double age);
 	public:
 		string name;
-		int timeIndex;
 
-		PyramidData(int timeIndex, int numOfCategories, vector<double> ageBreaks) : timeIndex{ timeIndex }, ageBreaks{ ageBreaks }
-		{
-			// example age breaks of {0, 5, 10, 15} represent age groups [0,5), [5, 10), [10, 15), [15+)
-			for (int j = 0; j < numOfCategories; ++j) {
-				popCounts.push_back(vector<int>(ageBreaks.size(), 0));
-			}
-		};
+		// Initializes a PyramidData class, allocating memory for
+		//   (numCategories x size(ageBreaks)) values.
+		//
+		// 'numCategories': the number of categories the population is segmented
+		//   into. Must be >0
+		//
+		// 'ageBreaks': a vector defining the intervals of age along the spectrum
+		//   from [0, +inf]. A vector of {0, 5, 10} corresponds to the age groups
+		//   [0, 5), [5, 10), [10, +inf]. If an empty vector is passed, each
+		//   population category will be binned into one age group of bounds
+		//   [0, +inf]. Each member of the vector must be a positive, nonzero
+		//   double.
+		PyramidData(int numCategories, vector<double> ageBreaks);
+		~PyramidData(void);
 
-		void Update(int category, int ageGroupIndex, int increment) {
-			popCounts[category][ageGroupIndex] += increment;
-		}
+		// Updates the specified category and age group index by 'increment'.
+		// Returns true on success, and false if the increment would cause
+		//   the size of the specified population to become negative. Values of
+		//   'category' and 'ageGroupIndex' which are out-of-bounds will result
+		//   in an exception being thrown.
+		bool UpdateByIdx(int category, int ageGroupIndex, int increment);
 
-		void Update(int category, double age, int increment) {
-			int index = 0;
-			if (age < ageBreaks[0]) {
-				popCounts[category][0] += increment;
-			}
-			else {
-				while (index + 1 < ageBreaks.size() && ageBreaks[index + 1]) {
-					++index;
-				}
-				popCounts[category][index] += increment;
-			}
-		};
+		// The same, except age is specified directly, and subsequently translated
+		//   into the correct age group.
+		bool UpdateByAge(int category, double age, int increment);
 
 		// update the change in the specified category and age group (note that it takes the actual age)
-		void Update(int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {
-			popCounts[oldCategory][oldAgeGroupIndex] -= numberMoved;
-			popCounts[newCategory][newAgeGroupIndex] += numberMoved;
-		}
 
-		void Update(int oldCategory, int newCategory, double oldAge, double newAge, int numberMoved) {
-			// update the change in the specified category and age group by taking the number of people who
-			// moved from one category-age group to another category-age group.
-			int oldAgeInd = 0;
-			if (oldAge >= ageBreaks[0]){
-				while (oldAgeInd + 1 < ageBreaks.size() && ageBreaks[oldAgeInd + 1] < oldAge) {
-					++oldAgeInd;
-				}
-			}
-			popCounts[oldCategory][oldAgeInd] -= numberMoved;
-			int newAgeInd = 0;
-			if (newAge < ageBreaks[0]) {
-				while (newAgeInd + 1 < ageBreaks.size() && ageBreaks[newAgeInd + 1] < newAge) {
-					++newAgeInd;
-				}
-			}
-			popCounts[newCategory][newAgeInd] += numberMoved;
-		}
+		// Moves 'numberMoved' individuals from an old category and age group
+		//   to a new category and age group. Returns true on success, and
+		//   false if either the 'numberMoved' is greater than the size of
+		//   the referenced 'old' population.
+		// Throws an exception if either pair of indices specify a population
+		//   group that does not exist, or if 'numberMoved' is a negative
+		//   integer.
+		bool MoveByIdx(int oldCategory, int oldAgeGroupIndex, \
+					   int newCategory, int newAgeGroupIndex, int numberMoved);
 
-		int GetTotal() {
-			// return the total number of counts in all categories and all age groups
-			int total = 0;
-			for (int j = 0; j < ageBreaks.size(); ++j) {
-				for (int k = 0; k < popCounts.size(); ++k) {
-					total += popCounts[k][j];
-				}
-			}
-			return total;
-		}
+		// Similar, except age is explicitly specified and translated internally
+		//   into its corresponding age group.
+		bool MoveByAge(int oldCategory, double oldAge, \
+					   int newCategory, double newAge, int numberMoved);
 
-		int GetTotalInCategory(int categoryIndex) {
-			// return the total number of counts in the specified category
-			int total = 0;
-			for (int j = 0; j < ageBreaks.size(); ++j) {
-				total += popCounts[categoryIndex][j];
-			}
-			return total;
-		}
+		// Returns the total number of individuals across all categories and
+		//   age groups
+		int GetTotal(void);
 
-		int GetTotalInAgeGroup(int ageGroupIndex) {
-			//originally had double ageGroupIndex. I was confused so wrote two functions.
-			int total = 0;
-			for (int j = 0; j < popCounts.size(); ++j) {
-				total += popCounts[j][ageGroupIndex];
-			}
-			return total;
-		}
+		// Returns the total number of individuals in the specified category.
+		// Throws exception for invalid 'categoryIndex'.
+		int GetTotalInCategory(int categoryIndex);
 
-		int GetTotalInAgeGroup(int age) {
-			// return the total number of counts in the specified age group
-			int ageIndex = 0;
-			while (ageIndex < ageBreaks.size() - 1 && ageBreaks[ageIndex + 1] < age) {
-				++ageIndex;
-			}
-			return GetTotalInAgeGroup(ageIndex);
-		}
-
+		// Returns the total number of indivudals in the specified age group.
+		// Throws exception for invalid 'ageGroupIndex'.
+		int GetTotalInAgeGroup(int ageGroupIndex);
 	};
 }
