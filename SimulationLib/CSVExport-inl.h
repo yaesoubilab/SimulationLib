@@ -106,11 +106,11 @@ namespace SimulationLib {
         stringSize = buf.size();
         if (fwrite(buf.c_str(), sizeof(char), stringSize, fs) < stringSize) {
             printf("Error: std::fwrite returned an error\n");
-            fclose(buf);
+            fclose(fs);
             return;
         }
 
-        fclose(buf);
+        fclose(fs);
         return;
     }
 

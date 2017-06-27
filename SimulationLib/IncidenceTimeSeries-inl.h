@@ -103,11 +103,7 @@ namespace SimulationLib {
         //    Record was called. In this case, we pass the period number, rather
         //    than the time.
         if (stats && recordPeriod == RECORD_ON_ALL)
-<<<<<<< HEAD
             stats->Record(time, (double)aggregatedObservation + (double)value);
-=======
-            stats->Record(time, (double)value);
->>>>>>> CSVExport
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
