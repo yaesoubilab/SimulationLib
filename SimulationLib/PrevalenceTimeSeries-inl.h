@@ -30,6 +30,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    PrevalenceTimeSeries<T>::~PrevalenceTimeSeries(void) {
+        delete prevalence;
+    }
+
+    template <typename T>
     bool PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
 
