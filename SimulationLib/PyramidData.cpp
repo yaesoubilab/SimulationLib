@@ -40,6 +40,18 @@ PyramidData::PyramidData(int _numCategories, vector<double> _ageBreaks)
     }
 }
 
+PyramidData::~PyramidData(void)
+{
+    // Free each category array
+    for (int i = 0; i < numCategories; ++i)
+    {
+        delete popCounts[i];
+    }
+
+    // Free the array itself
+    delete popCounts;
+}
+
 // Returns the age group index corresponding to age 'age'. Throws exception
 //   if 'age' is below zero.
 int PyramidData::getAgeIdx(double age) {
