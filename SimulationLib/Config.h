@@ -11,20 +11,12 @@ namespace SimulationLib {
   class Config {
   public:
     Config(const char *file);
-    double getVar(const std::string &name) const;
-    shared_ptr<const DataFrame<double> >
-    getFrameVar(const std::string &name) const;
-    shared_ptr<const DataFrame<StatisticalDistribution<long> > >
-    getFrameDiscrete(const std::string &name) const;
-    shared_ptr<const DataFrame<StatisticalDistribution<long double> > >
-    getFrameContinuous(const std::string &name) const;
+    std::variant<std::shared_ptr<const Parameter>,
+		 std::shared_ptr<const DataFrame<Parameter> > >
+    getVar(const std::string &name) const;
   private:
-    std::map<std::string, double> var;
     std::map<std::string,
-      std::shared_ptr<DataFrame<StatisticalDistribution<long> > > > discrete;
-    std::map<std::string,
-      std::shared_ptr<DataFrame<StatisticalDistribution<long double> > > >
-    continuous;
-    std::map<std::string, std::shared_ptr<DataFrame<double> > > framevar;
+	     std::variant<std::shared_ptr<const Parameter>,
+			  std::shared_ptr<const DataFrame<Parameter> > > > var;
   };
 }

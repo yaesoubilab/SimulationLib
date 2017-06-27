@@ -10,6 +10,8 @@ namespace SimulationLib {
 #define BFSZ 255
 #endif
   using namespace StatisticalDistributions;
+  using namespace std;
+  extern shared_ptr<Parameter> paramFromString(const char *);
   Config::Config(const char *file) {
     FILE *ifile = fopen(file, "r");
     int c;
@@ -23,29 +25,14 @@ namespace SimulationLib {
       double v;
       switch(t) {
       case 'v':
-	fscanf(ifile, "%lf", &v);
-	var[item] = v;
+	fgets(buf, sizeof(buf), ifile);
+	var[item] = paramFromString(buf);
 	break;
-      case 'N':
+      case 'F':
 	loop = true;
-      case 'n':
+      case 'f':
 	fgets(buf, BFSZ + 1, ifile);
-	framevar[item] = make_shared<DataFrame<double> >(buf, loop);
-	break;
-      case 'D':
-	loop = true;
-      case 'd':
-	fgets(buf, BFSZ + 1, ifile);
-	discrete[item]
-	  = make_shared<DataFrame<StatisticalDistribution<long> > >(buf, loop);
-	break;
-      case 'C':
-	loop = true;
-      case 'c':
-	fgets(buf, BFSZ + 1, ifile);
-	continuous[item]
-	  = make_shared<DataFrame<
-	    StatisticalDistribution<long double> > >(buf, loop);
+	framevar[item] = make_shared<DataFrame<Parameter> >(buf, loop);
 	break;
       default:
 	std::cerr << "Unknown type character " << t << std::endl;
@@ -54,40 +41,13 @@ namespace SimulationLib {
     }
     fclose(ifile);
   }
-  double Config::getVar(const std::string &name) const {
-    auto ptr = var.find(name);
-    if(ptr == var.end()) {
-      std::cerr << "Variable not found: " << '"' << name << '"' << std::endl;
-      return(0);
-    }
-    return(ptr->second);
-  }
-  std::shared_ptr<const DataFrame<double> >
-  Config::getFrameVar(const std::string &name) const {
+  std::variant<std::shared_ptr<const Parameter>,
+	       std::shared_ptr<const DataFrame<Parameter> > >
+  Config::getVar(const std::string &name) const {
     try {
-      return(framevar.at(name));
+      return(var.at(name));
     } catch(std::out_of_range e) {
-      cerr << "Number frame not found: " << '"' << name << '"' << std::endl;
-      throw(e);
-    }
-  }
-  std::shared_ptr<const DataFrame<StatisticalDistribution<long> > >
-  Config::getFrameDiscrete(const std::string &name) const {
-    try {
-      return(discrete.at(name));
-    } catch(std::out_of_range e) {
-      cerr << "Discrete distribution frame not found: "
-	   << '"' << name << '"' << endl;
-      throw(e);
-    }
-  }
-  std::shared_ptr<const DataFrame<StatisticalDistribution<long double> > >
-  Config::getFrameContinuous(const std::string &name) const {
-    try {
-      return(continuous.at(name));
-    } catch(std::out_of_range e) {
-      cerr << "Discrete distribution frame not found: "
-	   << '"' << name << '"' << endl;
+      cerr <<"Variable not found: " << '"' << name << '"' << std::endl;
       throw(e);
     }
   }
