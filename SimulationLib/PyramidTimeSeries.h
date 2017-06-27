@@ -2,6 +2,9 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
+#include <cmath>
+
 #include "PyramidData.h"
 
 namespace SimulationLib
@@ -12,90 +15,36 @@ namespace SimulationLib
 	private:
 		string name;
 		int time0;
-		vector<PyramidData> pyramids;
+		int timeMax;
+		int periodLength;
+		int nCategories;
+		int nPeriods;
+
+		vector<double> ageBreaks;
+
+		PyramidData **pyramids;
 
 	public:
-		PyramidTimeSeries(string name, int time0, int observationPeriodLength,
-			int numOfCategories, vector<double> ageBreaks) : name{ name } {
-			// create a new pyramid and add this to the vector of pyramids
-			PyramidData new_pyramid(time0, numOfCategories, ageBreaks);
-			pyramids.push_back(new_pyramid);
-		};
-	}
+		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength,
+						  int nCategories, vector<double> ageBreaks);
 
-	// to store a collection of prevalence data collected in the pyramid format during a simulation run
-	class PrevalencePyramidTimeSeries : public PyramidTimeSeries
-	{
-	private:
-		string name;
-	public:
-		PrevalencePyramidTimeSeries(string name, int time0, int observationPeriodLength,
-			int numOfCategories, vector<double> ageBreaks) : name{ name } {
-				PyramidTimeSeries new_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
-		}
+		~PyramidTimeSeries();
 
-<<<<<<< Updated upstream
-		void Update(int time, int category, double age, int increment)
-=======
-		void Update(int time, int category, int ageGroupIndex, int increment);
->>>>>>> Stashed changes
-		{
-			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
-				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
-				new_prevalence_series.pyramids.back() = new_prevalence_series.pyramids.end()[-2];
-				new_prevalence_series.pyramids.back()[category][ageGroupIndex] += increment;
-			} else {
-				new_prevalence_series.pyramids.back()[category][ageGroupIndex] += increment;
-			}
-		}
+		bool UpdateByAge(int time, int category, double age, int increment);
+		bool UpdateByIdx(int time, int category, int ageGroupIdx, int increment);
 
-		void Update(int time, int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {
-			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
-				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
-				new_prevalence_series.pyramids.back() = new_prevalence_series.pyramids..end()[-2];
-				new_prevalence_series.pyramids.back()[oldCategory][oldAgeGroupIndex] -= numberMoved;
-				new_prevalence_series.pyramids.back()[newCategory][newAgeGroupIndex] += numberMoved;
-			} else {
-				new_prevalence_series.pyramids.back()[oldCategory][oldAgeGroupIndex] -= numberMoved;
-				new_prevalence_series.pyramids.back()[newCategory][newAgeGroupIndex] += numberMoved;
-			}
-		};
+		bool MoveByAge(int time, int oldCategory, double oldAge, \
+						         int newCategory, double newAge, int increment);
 
-	private:
+		bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
+						         int newCategory, int newAgeGroupIdx, int increment);
+	};
+
+	class IncidencePyramidTimeSeries : public PyramidTimeSeries {
 
 	};
 
-	// to store a collection of incidence data collected in the pyramid format during a simulation run
-	class IncidencePyramidTimeSeries : public PyramidTimeSeries
-	{
-	public:
-		IncidencePyramidTimeSeries(string name, int time0, int observationPeriodLength, int numOfCategories, vector<double> ageBreaks) {
-				PyramidTimeSeries new_incidence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks)
-		};
-
-		void Update(int time, int category, double ageGroupIndex, int increment);
-		{
-			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
-				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
-				new_prevalence_series.pyramids.back()[category][ageGroupIndex] += increment;
-			} else {
-				new_prevalence_series.pyramids.back()[category][ageGroupIndex] += increment;
-			}
-		}
-
-		void Update(int time, int oldCategory, int newCategory, int oldAgeGroupIndex, int newAgeGroupIndex, int numberMoved) {
-			if (time > new_prevalence_series.pyramids.back().timeIndex + observationPeriodLength) {
-				PyramidTimeSeries add_prevalence_series(name, time0, observationPeriodLength, numOfCategories, ageBreaks);
-				new_prevalence_series.pyramids.back()[oldCategory][oldAgeGroupIndex] -= numberMoved;
-				new_prevalence_series.pyramids.back()[newCategory][newAgeGroupIndex] += numberMoved;
-			} else {
-				new_prevalence_series.pyramids.back()[oldCategory][oldAgeGroupIndex] -= numberMoved;
-				new_prevalence_series.pyramids.back()[newCategory][newAgeGroupIndex] += numberMoved;
-			}
-		};
-
-	private:
+	class PrevalencePyramidTimeSeries : public PyramidTimeSeries {
 
 	};
-
 }
