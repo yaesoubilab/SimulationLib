@@ -26,7 +26,7 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
 
-    nPeriods     = ceil(timeMax / periodLength);
+    nPeriods     = calcNPeriods(timeMax, periodLength);
 
     pyramids     = new PyramidData *[nPeriods];
 
@@ -53,7 +53,7 @@ bool UpdateByAge(int time, int category, double age, int increment) {
     if (age < 0)
         throw out_of_range("age is < 0");
 
-    thisPeriod = (int)ceil((double)time / (double)periodLength);
+    thisPeriod = calcThisPeriod(time, periodLength);
 
     return pyramids[thisPeriod]->UpdateByAge(category, age, increment);
 }
@@ -68,7 +68,7 @@ bool UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
     if (ageGroupIdx < 0)
         throw out_of_range("ageGroupIdx is < 0");
 
-    thisPeriod = (int)ceil((double)time / (double)periodLength);
+    thisPeriod = calcThisPeriod(time, periodLength);
 
     return pyramids[thisPeriod]->UpdateByIdx(thisPeriod, category, ageGroupIdx, increment);
 }
@@ -88,7 +88,7 @@ bool MoveByAge(int time, int oldCategory, double oldAge, \
     if (newAge < 0)
         throw out_of_range("newAge is < 0");
 
-    thisPeriod = (int)ceil((double)time / (double)periodLength);
+    thisPeriod = calcThisPeriod(time, periodLength);
 
     return pyramids[thisPeriod] \
              ->MoveByAge(oldCategory, oldAge, newCategory, newAge, increment);
@@ -109,7 +109,7 @@ bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
     if (newAgeGroupIdx < 0)
         throw out_of_range("newAgeGroupIdx is < 0");
 
-    thisPeriod = (int)ceil((double)time / (double)periodLength);
+    thisPeriod = calcThisPeriod(time, periodLength);
 
     return pyramids[thisPeriod] \
              ->MoveByAge(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
