@@ -88,4 +88,13 @@ namespace SimulationLib
 		//   by an age group index, rather than an age in years.
 		bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
 						         int newCategory, int newAgeGroupIdx, int increment);
+
+		int GetTotalAtPeriod(int periodIdx);
+		int GetTotalAtTime(int time);
+
+		int GetTotalInCategoryAtPeriod(int periodIdx, int category);
+		int GetTotalInCategoryAtTime(int time, int category);
+
+		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
+		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 	};

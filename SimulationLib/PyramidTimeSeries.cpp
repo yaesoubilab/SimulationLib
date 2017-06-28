@@ -115,3 +115,73 @@ bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
              ->MoveByAge(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
 
 }
+
+int GetTotalAtPeriod(int periodIdx) {
+    if (periodIdx >= nPeriods)
+        throw out_of_range("periodIdx >= nPeriods");
+    if (periodIdx < 0)
+        throw out_of_range("periodIdx < 0");
+
+    return pyramids[periodIdx]->GetTotal();
+}
+
+int GetTotalAtTime(int time) {
+    int periodIdx;
+
+    if (time < 0)
+        throw out_of_range("time < 0");
+
+    periodIdx = calcThisPeriod(time, periodLength);
+
+    return GetTotalAtPeriod(periodIdx);
+}
+
+
+int GetTotalInCategoryAtPeriod(int periodIdx, int category) {
+    if (periodIdx >= nPeriods)
+        throw out_of_range("periodIdx >= nPeriods");
+    if (periodIdx < 0)
+        throw out_of_range("periodIdx < 0");
+    if (category >= nCategories)
+        throw out_of_range("category >= nCategories");
+    if (category < 0)
+        throw out_of_range("category < 0");
+
+    return pyramids[periodIdx]->GetTotalInCategory(category);
+}
+
+int GetTotalInCategoryAtTime(int time, int category) {
+    int periodIdx;
+
+    if (time < 0)
+        throw out_of_range("time < 0");
+
+    periodIdx = calcThisPeriod(time, periodLength);
+
+    return GetTotalInCategoryAtPeriod(periodIdx, category);
+}
+
+
+int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx) {
+    if (periodIdx >= nPeriods)
+        throw out_of_range("periodIdx >= nPeriods");
+    if (periodIdx < 0)
+        throw out_of_range("periodIdx < 0");
+    if (ageGroupIdx >= ageBreaks.size() + 1)
+        throw out_of_range("ageGroupIdx >= numAgeGroups");
+    if (ageGroupIdx < 0)
+        throw out_of_range("ageGroupIdx < 0");
+
+    return pyramids[periodIdx]->GetTotalInAgeGroup(ageGroupIdx);
+}
+
+int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
+    int periodIdx;
+
+    if (time < 0)
+        throw out_of_range("time < 0");
+
+    periodIdx = calcThisPeriod(time, periodLength);
+
+    return GetTotalInAgeGroupAtPeriod(periodIdx, ageGroupIdx);
+}
