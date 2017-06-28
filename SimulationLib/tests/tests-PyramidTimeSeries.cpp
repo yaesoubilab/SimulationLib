@@ -147,8 +147,8 @@ TEST_CASE( "Legal behavior" ) {
           ("Test", 0, 10, 2, 1, ageBreaks);
 
         ppts.UpdateByAge(0, 0, 100, 1);
-        ppts.UpdateByIdx(0, 0, 0, 1);
         ipts.UpdateByAge(0, 0, 100, 1);
+        ipts.UpdateByIdx(0, 0, 0, 1);
         ppts.UpdateByIdx(0, 0, 0, 1);
 
         REQUIRE( ppts.GetTotalAtPeriod(0) == 2 );
@@ -189,8 +189,8 @@ TEST_CASE( "Legal behavior" ) {
         ppts.UpdateByAge(0, 0, 5, 1);
         ipts.UpdateByAge(0, 0, 5, 1);
 
-        REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(1, 0) == 1);
-        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(1, 0) == 1);
+        REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 1) == 1);
+        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 1) == 1);
         REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
         REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
     }
@@ -214,7 +214,7 @@ TEST_CASE( "Legal behavior" ) {
         ipts.UpdateByAge(1, 0, 5, y);
 
         REQUIRE(ppts.GetTotalAtPeriod(0) == x);
-        REQUIRE(ipts.GetTotalAtPeriod(0) == y);
+        REQUIRE(ipts.GetTotalAtPeriod(0) == x + y);
     }
 
     SECTION( "Moving things into the population they came from" ) {
