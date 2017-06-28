@@ -1,5 +1,5 @@
 #include <string>
-#include "BirthDeathSim.h"
+#include "SerialBirthDeathSim.h"
 
 using namespace SimulationLib;
 
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
     long nPeople;
     double pDeath, pBirth;
 
-    BirthDeathSim *bdsim;
+    SerialBirthDeathSim *bdsim;
 
     if (argc < 8) {
         printf("Error: too few arguments\n");
@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
 
     printf("Args:\n\tfileName=%s\n\tnTrajectories=%d\n\ttimeMax=%d\n\tperiodLength=%d\n\tnPeople=%ld\n\tpDeath=%4.4f\n\tpBirth=%4.4f\n\n", fileName.c_str(), nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
 
-    bdsim = new BirthDeathSim(fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
+    bdsim = new SerialBirthDeathSim(fileName, nTrajectories, timeMax, periodLength, nPeople, pDeath, pBirth);
     bdsim->Run();
     delete bdsim;
 

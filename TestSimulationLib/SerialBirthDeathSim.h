@@ -12,12 +12,12 @@ using namespace std;
 using namespace StatisticalDistributions;
 
 namespace SimulationLib {
-    class BirthDeathSim
+    class SerialBirthDeathSim
     {
     public:
-        BirthDeathSim(string fileName, int nTrials, int timeMax, int periodLength, \
-                      long nPeople, double pDeath, double pBirth);
-        ~BirthDeathSim(void);
+        SerialBirthDeathSim(string fileName, int nTrials, int timeMax, int periodLength, \
+                            long nPeople, double pDeath, double pBirth);
+        ~SerialBirthDeathSim(void);
         void Run(void);
 
     private:

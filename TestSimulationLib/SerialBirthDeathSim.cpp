@@ -1,9 +1,9 @@
-#include "BirthDeathSim.h"
+#include "SerialBirthDeathSim.h"
 
 namespace SimulationLib {
-    BirthDeathSim::BirthDeathSim(string _fileName, int _nTrajectories, int _timeMax,
-                                 int _periodLength, long _nPeople,
-                                 double _pDeath, double _pBirth) {
+    SerialBirthDeathSim::SerialBirthDeathSim(string _fileName, int _nTrajectories, int _timeMax,
+                                             int _periodLength, long _nPeople,
+                                             double _pDeath, double _pBirth) {
 
         fileName      = _fileName;
         nTrajectories = _nTrajectories;
@@ -81,7 +81,7 @@ namespace SimulationLib {
 
     }
 
-    BirthDeathSim::~BirthDeathSim(void) {
+    SerialBirthDeathSim::~SerialBirthDeathSim(void) {
         // Free elements of each array
         for (int i = 0; i < nTrajectories; ++i)
         {
@@ -121,7 +121,7 @@ namespace SimulationLib {
     //     printf("\n");
     // }
 
-    void BirthDeathSim::Run(void) {
+    void SerialBirthDeathSim::Run(void) {
         CSVExport<int>     exportBirths(fileName + string("-births.csv"));
         CSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
         CSVExport<int> exportPopulation(fileName + string("-population.csv"));
@@ -151,12 +151,12 @@ namespace SimulationLib {
         exportPopulation.Write();
     }
 
-    void BirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>  *births, \
-                                       IncidenceTimeSeries<int>  *deaths, \
-                                       PrevalenceTimeSeries<int> *population,
-                                       Binomial *bDistribution,
-                                       Binomial *dDistribution,
-                                       int nPeople) {
+    void SerialBirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>  *births, \
+                                             IncidenceTimeSeries<int>  *deaths, \
+                                             PrevalenceTimeSeries<int> *population,
+                                             Binomial *bDistribution,
+                                             Binomial *dDistribution,
+                                             int nPeople) {
         int nBirths, nDeaths, delta;
 
         population->Record(0, nPeople);
@@ -180,13 +180,13 @@ namespace SimulationLib {
         population->Close();
     }
 
-    void BirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
+    void SerialBirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
         printf("[%3d] nPeople %5ld | nBirths %2d | nDeaths %2d\n", t, nPeople, nBirths, nDeaths);
     }
 
     // Create new distributions in-place to reflect changes in the size of
     //   the population.
-    void BirthDeathSim::refreshDists(int nPeople,
+    void SerialBirthDeathSim::refreshDists(int nPeople,
                                      Binomial **bDistribution,
                                      Binomial **dDistribution) {
         *bDistribution = new(*bDistribution) Binomial(nPeople, pBirth);
