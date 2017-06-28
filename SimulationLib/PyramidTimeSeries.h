@@ -24,13 +24,12 @@ namespace SimulationLib
 
 		PyramidData **pyramids;
 
-		// These are implemented in PrevalencePyramidTimeSeries and
+		// This implemented in PrevalencePyramidTimeSeries and
 		//   IncidencePyramidTimeSeries, abiding by the Template Method pattern
 		//   described here: http://www.gotw.ca/publications/mill18.htm
-		// Since these two functions can express the entire functional difference
+		// Since this function can express the entire functional difference
 		//   between Prevalence and Incidence, this pattern elegantly allows the
 		//   specification of the two derived classes with minimal code.
-		virtual int calcNPeriods(int timeMax, int periodLength) = 0;
 		virtual int calcThisPeriod(int time, int periodLength) = 0;
 
 	public:
@@ -59,7 +58,7 @@ namespace SimulationLib
 		// An out-of-range exception will be thrown for invalid specifications
 		//   of any of these parameters
 		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength, \
-						  int nCategories, vector<double> ageBreaks);
+						  int nPeriods, int nCategories, vector<double> ageBreaks);
 
 		~PyramidTimeSeries();
 
@@ -98,3 +97,4 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 	};
+}

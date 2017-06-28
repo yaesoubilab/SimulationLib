@@ -5,8 +5,8 @@ using namespace std;
 
 // Implementing for Prevalence first
 PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
-                                     int _periodLength, int _nCategories, \
-                                     vector<double> _ageBreaks)
+                                     int _periodLength, int _nPeriods,       \
+                                     int _nCategories, vector<double> _ageBreaks)
 {
     if (_time0 < 0)
         throw out_of_range("time0 must be >= 0");
@@ -26,7 +26,7 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
 
-    nPeriods     = calcNPeriods(timeMax, periodLength);
+    nPeriods     = _nPeriods;
 
     pyramids     = new PyramidData *[nPeriods];
 
@@ -43,7 +43,7 @@ PyramidTimeSeries::~PyramidTimeSeries()
     delete pyramids;
 }
 
-bool UpdateByAge(int time, int category, double age, int increment) {
+bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int increment) {
     int thisPeriod;
 
     if (time < time0 || time > timeMax)
@@ -58,7 +58,7 @@ bool UpdateByAge(int time, int category, double age, int increment) {
     return pyramids[thisPeriod]->UpdateByAge(category, age, increment);
 }
 
-bool UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
+bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
     int thisPeriod;
 
     if (time < time0 || time > timeMax)
@@ -70,10 +70,10 @@ bool UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
 
     thisPeriod = calcThisPeriod(time, periodLength);
 
-    return pyramids[thisPeriod]->UpdateByIdx(thisPeriod, category, ageGroupIdx, increment);
+    return pyramids[thisPeriod]->UpdateByIdx(category, ageGroupIdx, increment);
 }
 
-bool MoveByAge(int time, int oldCategory, double oldAge, \
+bool PyramidTimeSeries::MoveByAge(int time, int oldCategory, double oldAge, \
                          int newCategory, double newAge, int increment) {
     int thisPeriod;
 
@@ -94,7 +94,7 @@ bool MoveByAge(int time, int oldCategory, double oldAge, \
              ->MoveByAge(oldCategory, oldAge, newCategory, newAge, increment);
 }
 
-bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
+bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
                          int newCategory, int newAgeGroupIdx, int increment) {
     int thisPeriod;
 
@@ -116,7 +116,7 @@ bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
 
 }
 
-int GetTotalAtPeriod(int periodIdx) {
+int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -125,7 +125,7 @@ int GetTotalAtPeriod(int periodIdx) {
     return pyramids[periodIdx]->GetTotal();
 }
 
-int GetTotalAtTime(int time) {
+int PyramidTimeSeries::GetTotalAtTime(int time) {
     int periodIdx;
 
     if (time < 0)
@@ -137,7 +137,7 @@ int GetTotalAtTime(int time) {
 }
 
 
-int GetTotalInCategoryAtPeriod(int periodIdx, int category) {
+int PyramidTimeSeries::GetTotalInCategoryAtPeriod(int periodIdx, int category) {
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -150,7 +150,7 @@ int GetTotalInCategoryAtPeriod(int periodIdx, int category) {
     return pyramids[periodIdx]->GetTotalInCategory(category);
 }
 
-int GetTotalInCategoryAtTime(int time, int category) {
+int PyramidTimeSeries::GetTotalInCategoryAtTime(int time, int category) {
     int periodIdx;
 
     if (time < 0)
@@ -162,7 +162,7 @@ int GetTotalInCategoryAtTime(int time, int category) {
 }
 
 
-int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx) {
+int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx) {
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -175,7 +175,7 @@ int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx) {
     return pyramids[periodIdx]->GetTotalInAgeGroup(ageGroupIdx);
 }
 
-int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
+int PyramidTimeSeries::GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
     int periodIdx;
 
     if (time < 0)
