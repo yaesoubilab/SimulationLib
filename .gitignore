@@ -255,6 +255,7 @@ sftp-config.json
 *.out
 *.out.dSYM
 BirthDeathSim
+ParallelBirthDeathSim
 
 # Data output files
 *.csv
