@@ -5,8 +5,9 @@ using namespace std;
 
 // Implementing for Prevalence first
 PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
-                                     int _periodLength, int _nPeriods,       \
-                                     int _nCategories, vector<double> _ageBreaks)
+                                     int _periodLength,                      \
+                                     function<int (int, int)> calcNPeriods,  \
+                                     int _nCategories,  vector<double> _ageBreaks)
 {
     if (_time0 < 0)
         throw out_of_range("time0 must be >= 0");
@@ -26,7 +27,7 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
 
-    nPeriods     = _nPeriods;
+    nPeriods     = calcNPeriods(timeMax, periodLength);
 
     pyramids     = new PyramidData *[nPeriods];
 

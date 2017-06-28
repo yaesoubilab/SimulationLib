@@ -4,8 +4,11 @@
 #include <vector>
 #include <stdexcept>
 #include <cmath>
+#include <functional>
 
 #include "PyramidData.h"
+
+using namespace std;
 
 namespace SimulationLib
 {
@@ -47,6 +50,10 @@ namespace SimulationLib
 		//   are currently specified as integers, a 'periodLength' of 1 will
 		//   correspond to a period for each legal value of 'time'
 		//
+		// 'calcNPeriods': A lambda function which, given 'timeMax' and
+		//   'periodLength', calculates the number of periods which should be
+		//   stored.
+		//
 		// 'nCategories': The number of categories (e.g. sex, race) to allow
 		//   specification of. Must be >= 1.
 		//
@@ -57,8 +64,9 @@ namespace SimulationLib
 		//
 		// An out-of-range exception will be thrown for invalid specifications
 		//   of any of these parameters
-		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength, \
-						  int nPeriods, int nCategories, vector<double> ageBreaks);
+		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength,  \
+						  function<int (int, int)> calcNPeriods, int nCategories, \
+						  vector<double> ageBreaks);
 
 		~PyramidTimeSeries();
 
