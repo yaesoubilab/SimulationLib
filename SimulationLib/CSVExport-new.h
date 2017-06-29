@@ -52,9 +52,9 @@ namespace SimulationLib {
         virtual CellSpecItr getColumnIter(void) = 0;
         virtual CellSpecItr getRowIter(void) 0;
 
-        virtual string getRowName(CellSpecItr itr) = 0;
-        virtual string getColumnName(CellSpecItr itr) = 0;
-        virtual string getCell(CellSpec row, CellSpec column) = 0;
+        virtual string getRowName(CellSpec rowSpec) = 0;
+        virtual string getColumnName(CellSpec columnSpec) = 0;
+        virtual string getCell(CellSpec rowSpec, CellSpec columnSpec) = 0;
     };
 
 
@@ -82,9 +82,9 @@ namespace SimulationLib {
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
 
-        virtual string getRowName(CellSpecItr itr);
-        virtual string getColumnName(CellSpecItr itr);
-        virtual string getCell(CellSpec row, CellSpec column);
+        virtual string getRowName(CellSpec rowSpec);
+        virtual string getColumnName(CellSpec columnSpec);
+        virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
 
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;
@@ -113,9 +113,9 @@ namespace SimulationLib {
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
 
-        virtual string getRowName(CellSpecItr itr);
-        virtual string getColumnName(CellSpecItr itr);
-        virtual string getCell(CellSpec row, CellSpec column);
+        virtual string getRowName(CellSpec rowSpec);
+        virtual string getColumnName(CellSpec columnSpec);
+        virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
     };
 
 
@@ -140,9 +140,9 @@ namespace SimulationLib {
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
 
-        virtual string getRowName(CellSpecItr itr);
-        virtual string getColumnName(CellSpecItr itr);
-        virtual string getCell(CellSpec row, CellSpec column);
+        virtual string getRowName(CellSpec rowSpec);
+        virtual string getColumnName(CellSpec columnSpec);
+        virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
 
         uint8_t fieldFlags;
     };

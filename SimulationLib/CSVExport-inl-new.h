@@ -30,7 +30,8 @@ TimeSeriesCSVExport<T>::~TimeSeriesCSVExport()
 template <typename T>
 bool
 TimeSeriesCSVExport<T>::Add(TimeSeries<T> tse) {
-
+    // Boilerplate
+    return true;
 }
 
 template <typename T>
@@ -73,7 +74,8 @@ PyramidTimeSeriesCSVExport::~PyramidTimeSeriesCSVExport()
 
 bool
 PyramidTimeSeriesCSVExport::Add(PyramidTimeSeries/*<T>*/ ptse) {
-
+    // Boilerplate
+    return true;
 }
 
 
@@ -115,7 +117,8 @@ TimeStatisticCSVExport<T>::~TimeStatisticCSVExport()
 template<typename T>
 bool
 TimeStatisticCSVExport<T>::Add(TimeStatistics<T> tst) {
-
+    // Boilerplate
+    return true;
 }
 
 
