@@ -2,6 +2,7 @@
 #include <ctime>
 #include <string>
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
+#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/RNG.h"
 #include "../SimulationLib/PrevalenceTimeSeries.h"
 #include "../SimulationLib/IncidenceTimeSeries.h"
 #include "../SimulationLib/ContinuousTimeStatistic.h"
