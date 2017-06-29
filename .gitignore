@@ -254,7 +254,7 @@ sftp-config.json
 # Executables
 *.out
 *.out.dSYM
-BirthDeathSim
+SerialBirthDeathSim
 ParallelBirthDeathSim
 
 # Data output files
