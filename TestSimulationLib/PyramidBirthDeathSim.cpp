@@ -1,9 +1,9 @@
 #include "PyramidBirthDeathSim.h"
 
 namespace SimulationLib {
-    PyramidBirthDeathSim::PyramidBirthDeathSim(string _fileName, int _nTrajectories, int _timeMax,
-                                               int _periodLength, long _nPeople,
-                                               double _pDeath, double _pBirth) {
+    PyramidBirthDeathSim::PyramidBirthDeathSim \
+      (string _fileName, int _nTrajectories, int _timeMax, int _periodLength, \
+       long _nPeople, double _pDeath, double _pBirth, int _ageMin, int _ageMax) {
 
         fileName      = _fileName;
         nTrajectories = _nTrajectories;
@@ -12,6 +12,8 @@ namespace SimulationLib {
         nPeople       = _nPeople,
         pDeath        = _pDeath;
         pBirth        = _pBirth;
+        ageMin        = _ageMin;
+        ageMax        = _ageMax;
 
         birthsArr               = new IncidenceTimeSeries<int>*[nTrajectories];
         deathsArr               = new IncidenceTimeSeries<int>*[nTrajectories];
@@ -27,6 +29,8 @@ namespace SimulationLib {
 
         bDistributionArr        = new Binomial*[nTrajectories];
         dDistribution           = new Bernoulli(pDeath);
+        aDistribution           = new Uniform(ageMin, ageMax);
+        sDistribution           = new Bernoulli(0.5); // Assuming 50% chance male/female
 
         defaultAgeBreaks        = vector<int>{20, 40, 60, 80};
 
@@ -87,12 +91,11 @@ namespace SimulationLib {
               new PrevalencePyramidTimeSeries(p + s, 0, timeMax, periodLength, \
                                               2, defaultAgeBreaks);
 
-            // The memory pointed to by 'bDistribution' and 'dDistribution' are
+            // The memory pointed to by 'bDistribution' is
             //   recycled throughout execution as new Binomial classes are
-            //   instantiated on these locations to reflect changes in the size
+            //   instantiated on the same mem location to reflect changes in the size
             //   of the population.
             bDistributionArr[i] = new Binomial(nPeople, pBirth);
-            // dDistributionArr[i] = new Binomial(nPeople, pBirth);
         }
 
     }
@@ -119,6 +122,8 @@ namespace SimulationLib {
         // Free arrays themselves
         delete bDistributionArr;
         delete dDistribution;
+        delete aDistribution;
+        delete sDistribution;
 
         delete birthStatisticsArr;
         delete deathStatisticsArr;
@@ -168,6 +173,8 @@ namespace SimulationLib {
                            populationPyrArr[i],
                            bDistributionArr[i],
                            dDistribution,
+                           aDistribution,
+                           sDistributions
                            nPeople);
             printf("\n");
         }
@@ -192,9 +199,9 @@ namespace SimulationLib {
         exportDeaths.Write();
         exportPopulation.Write();
 
-        exportBirthsPyr.Write();
-        exportDeathsPyr.Write();
-        exportPopulationPyr.Write();
+        // exportBirthsPyr.Write();
+        // exportDeathsPyr.Write();
+        // exportPopulationPyr.Write();
     }
 
     void PyramidBirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>    *births,        \
@@ -206,30 +213,97 @@ namespace SimulationLib {
                                               Binomial  *bDistribution,                   \
                                               Bernoulli *dDistribution,                   \
                                               int nPeople); {
-        /////////////////////////////
-        // LEFT OFF HERE
-        /////////////////////////////
+
+        vector<Individual> individuals{};
         int nBirths, nDeaths, delta;
 
+        auto sexN = [](Individual i) { switch(i.sex) { case Sex::Male:   return 0;
+                                                       case Sex::Female: return 1; } };
+
+        // Generate all individuals
+        for (int i = 0; i < nPeople; ++i)
+        {
+            Individual idv = newIndividual(rng, MIN_AGE, MAX_AGE);
+
+            individuals.push_back(idv);
+            populationPyr->UpdateByAge(0, sexN(idv), idv.age);
+        }
+
         population->Record(0, nPeople);
+
         for (int t = 1; t < timeMax; ++t)
         {
+            nDeaths  = 0;
+
+            // Iterate through each individual and decide if they're going to
+            // die.
+            auto it =  individuals.cbegin()
+            while (it != individuals.cend()) {
+
+                // If the individual is going to die.
+                // This call returns a 'long' valued at 0 or 1
+                if ((bool)dDistribution->Sample(*rng)) {
+
+                    // Increase the number of deaths, decrement the population
+                    //   the individual belongs to by 1, increment the number
+                    //   of deaths in that population by one, and erase the
+                    //   individual from the 'individuals' vector
+                    nDeaths += 1;
+                    populationPyr->UpdateByAge(t, sexN(*it), (*it).age, -1);
+                    deathsPyr->UpdateByAge(t, sexN(*it), (*it).age, +1);
+                    it = individuals.erase(it)
+                } else it = next(it);
+
+
+            // For each in nBirths
+                // Get a new individual
+                // Push them onto the individuals vector
+                // Add them to the population pyramid
+                // Add them to the births pyramid
             nBirths  = (int)bDistribution->Sample(*rng);
-            nDeaths  = (int)dDistribution->Sample(*rng);
+            for (int i = 0; i < nBirths; ++i)
+            {
+                Individual idv = newIndividual(rng, 0, 100);
+
+                individuals.push_back(idv);
+                populationPyr->UpdateByAge(t, sexN(idv), idv.age, +1);
+                birthsPyr->UpdateByAge(t, sexN(idv), idv.age, +1);
+            }
+
+            // Update nPeople
             delta    = nBirths - nDeaths;
             nPeople += delta;
 
+            // Update birth, death, population timeseries
             births->Record(t, nBirths);
             deaths->Record(t, nDeaths);
             population->Record(t, delta);
 
             reportStats(t, nPeople, nBirths, nDeaths);
-            refreshDists(nPeople, &bDistribution, &dDistribution);
+
+            // Refresh the birth distribution to reflect changes in population
+            // size.
+            refreshDists(nPeople, &bDistribution);
         }
 
         births->Close();
         deaths->Close();
         population->Close();
+    }
+
+    Individual PyramidBirthDeathSim::newIndividual(RNG *rng) {
+        Individual idv;
+
+        // Assign sex
+        if ((bool)sDistribution->Sample(*rng))
+            idv.sex = Sex::Male;
+        else
+            idv.sex = Sex::Female;
+
+        // Assign age
+        idv.age = (int)aDistribution->Sample(*rng);
+
+        return idv;
     }
 
     void PyramidBirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
@@ -239,9 +313,7 @@ namespace SimulationLib {
     // Create new distributions in-place to reflect changes in the size of
     //   the population.
     void PyramidBirthDeathSim::refreshDists(int nPeople,
-                                     Binomial **bDistribution,
-                                     Binomial **dDistribution) {
+                                            Binomial **bDistribution) {
         *bDistribution = new(*bDistribution) Binomial(nPeople, pBirth);
-        *dDistribution = new(*dDistribution) Binomial(nPeople, pDeath);
     }
 }

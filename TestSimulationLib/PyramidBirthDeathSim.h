@@ -16,11 +16,19 @@ using namespace std;
 using namespace StatisticalDistributions;
 
 namespace SimulationLib {
+    enum class Sex {Male=0, Female=1};
+
+    using Individual =
+      struct {
+        int age;
+        Sex sex;
+      };
+
     class PyramidBirthDeathSim
     {
     public:
         PyramidBirthDeathSim(string fileName, int nTrials, int timeMax, int periodLength, \
-                             long nPeople, double pDeath, double pBirth);
+                             long nPeople, double pDeath, double pBirth, int ageMin, int ageMax);
         ~PyramidBirthDeathSim(void);
         void Run(void);
 
@@ -29,6 +37,7 @@ namespace SimulationLib {
         int nTrajectories, timeMax, periodLength;
         long nPeople;
         double pDeath, pBirth;
+        int ageMin, ageMax;
 
         RNG *rng;
 
@@ -40,19 +49,29 @@ namespace SimulationLib {
                             PrevalencePyramidTimeSeries *populationPyr, \
                             Binomial  *bDistribution,                   \
                             Bernoulli *dDistribution,                   \
+                            Uniform   *aDistribution,                   \
+                            Bernoulli *sDistribution,                   \
                             int nPeople);
 
+        Individual newIndividual(RNG rng);
         void refreshDist(int nPeople, Binomial **bDistribution);
         void reportStats(int t, long nPeople, int nBirths, int nDeaths);
 
-        Binomial                    **bDistributionArr;
-        Bernoulli                    *dDistribution;
+        Binomial                    **bDistributionArr; // Birth distributions
+                                                        //   (nPeople-dependent)
+        Bernoulli                    *dDistribution;    // Death distribution
+        Uniform                      *aDistribution;    // Age distribution
+        Bernoulli                    *sDistribution;    // Sex distribution
+
         IncidenceTimeSeries<int>    **birthsArr;
         IncidencePyramidTimeSeries  **birthsPyrArr;
+        DiscreteTimeStatistic       **birthStatisticsArr;
+
         IncidenceTimeSeries<int>    **deathsArr;
         IncidencePyramidTimeSeries  **deathsPyrArr;
-        DiscreteTimeStatistic       **birthStatisticsArr;
         DiscreteTimeStatistic       **deathStatisticsArr;
+
+
         PrevalenceTimeSeries<int>   **populationArr;
         PrevalencePyramidTimeSeries **populationPyrArr;
         ContinuousTimeStatistic     **populationStatisticsArr;
