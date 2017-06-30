@@ -23,15 +23,15 @@ using namespace std;
 namespace SimulationLib {
 
     using CellSpec = int;
-    using CellSpecItr = vector<CellSpec>::iterator
+    using CellSpecItr = vector<CellSpec>::const_iterator
 
     enum class TimeStatType : uint8_t {
-        sum       = 0 << 1,
-        count     = 0 << 2,
-        mean      = 0 << 3,
-        variance  = 0 << 4,
-        min       = 0 << 5,
-        max       = 0 << 6
+        Sum       = 0 << 1,
+        Count     = 0 << 2,
+        Mean      = 0 << 3,
+        Variance  = 0 << 4,
+        Min       = 0 << 5,
+        Max       = 0 << 6
     };
 
     /////////////////////////////////////////
@@ -50,7 +50,10 @@ namespace SimulationLib {
         string fname;
 
         virtual CellSpecItr getColumnIter(void) = 0;
-        virtual CellSpecItr getRowIter(void) 0;
+        virtual CellSpecItr getRowIter(void) = 0;
+
+        virtual bool isColumnHeader(void) = 0;
+        virtual bool isRowHeader(void) = 0;
 
         virtual string getRowName(CellSpec rowSpec) = 0;
         virtual string getColumnName(CellSpec columnSpec) = 0;
@@ -81,6 +84,9 @@ namespace SimulationLib {
     private:
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
+
+        virtual bool isColumnHeader(void);
+        virtual bool isRowHeader(void);
 
         virtual string getRowName(CellSpec rowSpec);
         virtual string getColumnName(CellSpec columnSpec);
@@ -113,6 +119,9 @@ namespace SimulationLib {
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
 
+        virtual bool isColumnHeader(void);
+        virtual bool isRowHeader(void);
+
         virtual string getRowName(CellSpec rowSpec);
         virtual string getColumnName(CellSpec columnSpec);
         virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
@@ -139,6 +148,9 @@ namespace SimulationLib {
     private:
         virtual CellSpecItr getColumnIter(void);
         virtual CellSpecItr getRowIter(void);
+
+        virtual bool isColumnHeader(void);
+        virtual bool isRowHeader(void);
 
         virtual string getRowName(CellSpec rowSpec);
         virtual string getColumnName(CellSpec columnSpec);
