@@ -4,6 +4,7 @@
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.h"
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/RNG.h"
+#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Uniform.h"
 #include "../SimulationLib/PrevalenceTimeSeries.h"
 #include "../SimulationLib/IncidenceTimeSeries.h"
 #include "../SimulationLib/PrevalencePyramidTimeSeries.h"

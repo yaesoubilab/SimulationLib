@@ -32,7 +32,8 @@ SRCS_PYBDSIM=run-PyramidBirthDeathSim.cpp PyramidBirthDeathSim.cpp \
              ../SimulationLib/PrevalencePyramidTimeSeries.cpp \
              ../SimulationLib/PyramidData.cpp \
              ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.cpp \
-             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.cpp
+             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.cpp \
+             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Uniform.cpp \
 OBJS_PYBDSIM=$(subst .cpp,.o,$(SRCS_PYBDSIM))
 
 all: SerialBirthDeathSim ParallelBirthDeathSim PyramidBirthDeathSim
