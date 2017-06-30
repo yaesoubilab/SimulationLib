@@ -147,6 +147,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    string IncidenceTimeSeries<T>::GetPeriodLength(void) {
+        return periodLength;
+    }
+
+    template <typename T>
     bool IncidenceTimeSeries<T>::IsWritable(void) {
         return writable;
     }

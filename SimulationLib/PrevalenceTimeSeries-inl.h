@@ -112,6 +112,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    string PrevalenceTimeSeries<T>::GetPeriodLength(void) {
+        return periodLength;
+    }
+
+    template <typename T>
     bool PrevalenceTimeSeries<T>::IsWritable(void) {
         return writable;
     }

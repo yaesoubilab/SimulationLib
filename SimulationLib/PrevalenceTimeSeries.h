@@ -51,9 +51,10 @@ namespace SimulationLib
 		//   calling 'Record').
 		T GetCurrentPrevalence(void);
 
-		virtual double GetTime0();
-		virtual string GetName();
-		virtual bool IsWritable();
+		double GetTime0();
+		string GetName();
+		int GetPeriodLength();
+		bool IsWritable();
 
 	private:
 		double timeMax;
