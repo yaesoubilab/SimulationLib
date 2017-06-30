@@ -29,28 +29,32 @@ namespace SimulationLib
 		// - 'name': name of the time series
 		// - 'timeMax': the upper boundary of time. Time domain is [0, timeMax].
 		// - 'periodLength': the length of each period
-		PrevalenceTimeSeries(string name, double timeMax, double periodLength);
 		PrevalenceTimeSeries(string name, double timeMax, double periodLength,
        						 int recordPeriod, TimeStatistic *stats);
+		PrevalenceTimeSeries(string name, double timeMax, double periodLength) : \
+		  PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL) {}
+
+		~PrevalenceTimeSeries();
 
 		// For a non-negative integer 'time', records the change in prevalence
 		//   'increment' at that time unit.
-		void Record(double time, T increment);
+		bool Record(double time, T increment);
 
 		void Close(void);
 
 		// Returns a vector. Element 'i' represents the prevalence at the most
 		// recent observation <= 'i'.
+		virtual vector<T> *GetVector(void);
 
 		// Returns the current prevalence (the current prevalence is defined
 		//   as the sum of every change in prevalence already recorded through
 		//   calling 'Record').
 		T GetCurrentPrevalence(void);
 
-		virtual vector<T> *GetVector(void);
-		virtual double GetTime0();
-		virtual string GetName();
-		virtual bool IsWritable();
+		double GetTime0();
+		string GetName();
+		int GetPeriodLength();
+		bool IsWritable();
 
 	private:
 		double timeMax;

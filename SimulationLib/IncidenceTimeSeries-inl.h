@@ -71,25 +71,25 @@ namespace SimulationLib {
     //   than one which was seen in any previous invocation of the function.
     // template<typename T> void IncidenceTimeSeries::Record(int time, T value) {
     template <typename T>
-    void IncidenceTimeSeries<T>::Record(double time, T value) {
+    bool IncidenceTimeSeries<T>::Record(double time, T value) {
 
         int currentPeriod; // Vector index of period corresponding to val of 'time'
 
         if (!writable) {
             printf("Error: Close() has already been called\n");
-            return;
+            return false;
         }
 
         // Is 'time' too low?
         if (time < time0) {
             printf("Error: Time specified is earlier than 'time0'\n");
-            return;
+            return false;
         }
 
         // Is 'time' previous to the latest time yet seen?
         if (time < lastTime) {
             printf("Error: successive entries must be monotonically non-decreasing\n");
-            return;
+            return false;
         }
 
         currentPeriod = (int)floor(time / periodLength);
@@ -103,19 +103,19 @@ namespace SimulationLib {
         //    Record was called. In this case, we pass the period number, rather
         //    than the time.
         if (stats && recordPeriod == RECORD_ON_ALL)
-            stats->Record(time, (double)value);
+            stats->Record(time, (double)aggregatedObservation + (double)value);
         else if (stats &&
                  currentPeriod > lastPeriod &&
                  (lastPeriod % recordPeriod) == 0)
             stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
 
-        aggregatedObservation       += value;
+        aggregatedObservation          += value;
         (*observations)[currentPeriod] += value;
 
         lastTime   = time;
         lastPeriod = currentPeriod;
 
-        return;
+        return true;
     }
 
     template <typename T>
@@ -144,6 +144,11 @@ namespace SimulationLib {
     template <typename T>
     string IncidenceTimeSeries<T>::GetName(void) {
         return name;
+    }
+
+    template <typename T>
+    string IncidenceTimeSeries<T>::GetPeriodLength(void) {
+        return periodLength;
     }
 
     template <typename T>

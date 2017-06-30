@@ -5,13 +5,6 @@ namespace SimulationLib {
 
     template <typename T>
     PrevalenceTimeSeries<T>::PrevalenceTimeSeries
-      (string name, double timeMax, double periodLength)
-    {
-        PrevalenceTimeSeries(name, timeMax, periodLength, 0, NULL);
-    }
-
-    template <typename T>
-    PrevalenceTimeSeries<T>::PrevalenceTimeSeries
       (string _name, double _timeMax, double _periodLength,
        int _recordPeriod, TimeStatistic *_stats) {
 
@@ -37,29 +30,34 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    void PrevalenceTimeSeries<T>::Record(double time, T increment) {
+    PrevalenceTimeSeries<T>::~PrevalenceTimeSeries(void) {
+        delete prevalence;
+    }
+
+    template <typename T>
+    bool PrevalenceTimeSeries<T>::Record(double time, T increment) {
         int thisPeriod;
 
         if (!writable) {
             printf("Erorr: TimeSeries has already been closed\n");
-            return;
+            return false;
         }
 
         // Is 'time' a non-negative integer?
         if (time < 0) {
             printf("Error: 'time' must be non-negative\n");
-            return;
+            return false;
         }
 
         if (time > timeMax) {
             printf("Error: 'time' cannot be greater than 'timeMax'\n");
-            return;
+            return false;
         }
 
         if (time < lastTime) {
             printf("Error: Successive calls to ::Record must have \
                       monotonically increasing time\n");
-            return;
+            return false;
         }
 
         // Update current prevalence, note 'increment' can be positive or
@@ -80,7 +78,7 @@ namespace SimulationLib {
         lastTime = time;
         lastPeriod = thisPeriod;
 
-        return;
+        return true;
     }
 
     template <typename T>
@@ -109,8 +107,13 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    string PrevalenceTimeSeries<T>::GetTime0(void) {
+    string PrevalenceTimeSeries<T>::GetName(void) {
         return name;
+    }
+
+    template <typename T>
+    string PrevalenceTimeSeries<T>::GetPeriodLength(void) {
+        return periodLength;
     }
 
     template <typename T>

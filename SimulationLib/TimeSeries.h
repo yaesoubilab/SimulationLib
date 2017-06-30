@@ -11,6 +11,7 @@ namespace SimulationLib
     public:
         virtual string GetName(void) = 0;
         virtual double GetTime0(void) = 0;
+        virtual int GetPeriodLength(void) = 0;
         virtual bool IsWritable(void) = 0;
         virtual vector<T> *GetVector(void) = 0;
     };
