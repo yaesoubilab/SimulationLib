@@ -8,6 +8,7 @@
 
 #include "TimeSeries.h"
 #include "TimeStatistic.h"
+#include "utils/Range.h"
 
 using namespace std;
 
@@ -73,13 +74,14 @@ namespace SimulationLib {
             tsNames     = vector<string>{};
             tsSizes     = vector<long>{};
 
-            tMax        = 0;
-            nTimeSeries = 0;
+            tMax         = 0;
+            nTimeSeries  = 0;
+            periodLength = 0;
         };
 
         ~TimeSeriesCSVExport();
 
-        bool Add(TimeSeries<T> tse);
+        bool Add(TimeSeries<T> *tse);
 
     private:
         virtual CellSpecItr getColumnIter(void);
@@ -113,7 +115,7 @@ namespace SimulationLib {
 
         ~PyramidTimeSeriesCSVExport();
 
-        bool Add(PyramidTimeSeries/*<T>*/ ptse);
+        bool Add(PyramidTimeSeries/*<T>*/ *ptse);
 
     private:
         virtual CellSpecItr getColumnIter(void);
@@ -141,7 +143,7 @@ namespace SimulationLib {
 
         ~TimeStatisticsCSVExport();
 
-        bool Add(TimeStatistics<T> tst);
+        bool Add(TimeStatistics<T> *tst);
 
         auto Flag = [](TimeStatType a) { return static_cast<uint8_t> a; };
 

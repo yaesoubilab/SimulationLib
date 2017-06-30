@@ -102,27 +102,75 @@ CSVExport::Write(void) {
 /////////////////////////////////////////
 template <typename T>
 TimeSeriesCSVExport<T>::~TimeSeriesCSVExport()
-{
-
-}
+{}
 
 template <typename T>
 bool
-TimeSeriesCSVExport<T>::Add(TimeSeries<T> tse) {
-    // Boilerplate
+TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
+    vector<T> *tsPointer;
+    int        tsTime0;
+    string     tsName;
+    long       tsSize;
+
+    if (ts == nullptr) {
+        printf("Error: TimeSeries pointer was NULL\n");
+        return false;
+    }
+
+    if (ts->IsWritable()) {
+        printf("Error: TimeSeries is still writable\n");
+        return false;
+    }
+
+    if (nTimeSeries != 0 && ts->GetPeriodLength() != periodLength) {
+        printf("Error: All TimeSeries must have the same periodLength\n");
+        return false;
+    } else if (nTimeSeries == 0)
+        periodLength = ts->GetPeriodLength();
+
+    // GetTime0 returns a double, but it needs to be an integer, so that
+    //   we can test which value of 't' the associated vector should first
+    //   show up at. If GetTime0 returns 3.5, then the first element in
+    //   its vector representa data collected over the period [3.5, 4).
+    // Therefore, we use the ceil() function on Time0, which yields
+    //   the value of 't' at which elements of this vector should begin
+    //   appearing in CSV output.
+    // Note that ceil(0) = 0, so TimeSeries which begin at t=0 (for instance,
+    //   population size) will still be represented for in the CSV file at
+    //   t=0.
+    tsTime0   = ceil(ts->GetTime0());
+    tsPointer = ts->GetVector();
+    tsName    = ts->GetName();
+    tsSize    = tsPointer->size();
+
+    tsTime0s.push_back(tsTime0);
+    tsVectors.push_back(tsPointer);
+    tsNames.push_back(tsName);
+    tsSizes.push_back(tsSize);
+
+    // Update the largest value of 't' that will be written to CSV
+    // file, and the number of TimeSeries subject to export.
+    tMax =   (tsTime0 + tsSize - 1) > tMax \
+           ? (tsTime0 + tsSize - 1) : tMax;
+
+    nTimeSeries += 1;
+
     return true;
 }
 
 template <typename T>
 CellSpecItr
 TimeSeriesCSVExport<T>::getColumnIter(void) {
-
+    // "-1+1" is to account for the inclusive nature of the upper bound
+    //   on range, and the extra column we need to represent time.
+    // Therefore, column 0 is for time, not value.
+    return Range<0, nTimeSeries - 1 + 1>{};
 }
 
 template <typename T>
 CellSpecItr
 TimeSeriesCSVExport<T>::getRowIter(void) {
-
+    return Range<0, timeMax>{};
 }
 
 template <typename T>
@@ -142,70 +190,84 @@ TimeSeriesCSVExport<T>::isRowHeader(void) {
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
-
+    return to_string(rowSpec);
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
+    string timeHeader = string("t");
 
+    if (columnSpec = 0)
+        return timeHeader;
+    else
+        return tsNames[columnSpec - 1];
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+    // 'rowSpec' corresponds to time because the first row is time=0.
+    // 'columnSpec'-1 corresponds to the index of the TimeSeries being
+    //   referenced.
+    int _time, _tsIdx;
 
+    if (columnSpec == 0)
+        return to_string(columnSpec);
+
+    _time  = rowSpec;
+    _tsIdx = columnSpec - 1;
 }
 
 /////////////////////////////////////////
 // PyramidTimeSeries CSV Exporter
 /////////////////////////////////////////
-PyramidTimeSeriesCSVExport::~PyramidTimeSeriesCSVExport()
+PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 {
 
 }
 
 bool
-PyramidTimeSeriesCSVExport::Add(PyramidTimeSeries/*<T>*/ ptse) {
+PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
     // Boilerplate
     return true;
 }
 
 
 CellSpecItr
-PyramidTimeSeriesCSVExport::getColumnIter(void) {
+PyramidTimeSeriesCSVExport/*<T>*/::getColumnIter(void) {
 
 }
 
 CellSpecItr
-PyramidTimeSeriesCSVExport::getRowIter(void) {
+PyramidTimeSeriesCSVExport/*<T>*/::getRowIter(void) {
 
 }
 
 virtual bool
-PyramidTimeSeriesCSVExport::isColumnHeader(void) {
+PyramidTimeSeriesCSVExport/*<T>*/::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 virtual bool
-PyramidTimeSeriesCSVExport::isRowHeader(void) {
+PyramidTimeSeriesCSVExport/*<T>*/::isRowHeader(void) {
     // Really?
     return true;
 }
 
 string
-PyramidTimeSeriesCSVExport::getRowName(CellSpec rowSpec) {
+PyramidTimeSeriesCSVExport/*<T>*/::getRowName(CellSpec rowSpec) {
 
 }
 
 string
-PyramidTimeSeriesCSVExport::getColumnName(CellSpec columnSpec) {
+PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
 
 }
 
 string
-PyramidTimeSeriesCSVExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
 }
 
@@ -221,7 +283,7 @@ TimeStatisticCSVExport<T>::~TimeStatisticCSVExport()
 
 template<typename T>
 bool
-TimeStatisticCSVExport<T>::Add(TimeStatistics<T> tst) {
+TimeStatisticCSVExport<T>::Add(TimeStatistics<T> *tst) {
     // Boilerplate
     return true;
 }
