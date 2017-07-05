@@ -52,6 +52,7 @@ namespace SimulationLib
 		T GetCurrentPrevalence(void);
 
 		double GetTime0();
+		double GetTimeMax(void);
 		string GetName();
 		int GetPeriodLength();
 		bool IsWritable();

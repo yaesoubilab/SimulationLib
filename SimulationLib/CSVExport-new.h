@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 #include <iterator>
+#include <algorithm>
 
 #include "TimeSeries.h"
 #include "TimeStatistic.h"
@@ -69,14 +70,16 @@ namespace SimulationLib {
     class TimeSeriesCSVExport<T> : public CSVExport {
     public:
         TimeSeriesCSVExport(string fname) : CSVExport(fname) {
-            tsVectors   = vector<vector<T> *>{};
-            tsTime0s    = vector<double>{};
-            tsNames     = vector<string>{};
-            tsSizes     = vector<long>{};
+            tsVectors      = vector<vector<T> *>{};
+            tsTime0s       = vector<double>{};
+            tsTimeMaxs     = vector<double>{};
+            tsNames        = vector<string>{};
+            tsSizes        = vector<long>{};
 
-            tMax         = 0;
-            nTimeSeries  = 0;
-            periodLength = 0;
+            tsPeriodLength = 0;
+            tMax           = 0;
+
+            nTimeSeries    = 0;
         };
 
         ~TimeSeriesCSVExport();
@@ -84,20 +87,26 @@ namespace SimulationLib {
         bool Add(TimeSeries<T> *tse);
 
     private:
-        virtual CellSpecItr getColumnIter(void);
-        virtual CellSpecItr getRowIter(void);
+        CellSpecItr getColumnIter(void);
+        CellSpecItr getRowIter(void);
 
-        virtual bool isColumnHeader(void);
-        virtual bool isRowHeader(void);
+        bool isColumnHeader(void);
+        bool isRowHeader(void);
 
-        virtual string getRowName(CellSpec rowSpec);
-        virtual string getColumnName(CellSpec columnSpec);
-        virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
+        string getRowName(CellSpec rowSpec);
+        string getColumnName(CellSpec columnSpec);
+        string getCell(CellSpec rowSpec, CellSpec columnSpec);
 
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;
+        vector<double>      tsTimeMaxs;
         vector<string>      tsNames;
         vector<long>        tsSizes;
+
+        int tsPeriodLength;
+        double tMax;
+
+        int nTimeSeries;
     };
 
 

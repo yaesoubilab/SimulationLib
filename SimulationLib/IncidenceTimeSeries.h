@@ -77,6 +77,7 @@ namespace SimulationLib
 	    T GetTotal();
 
 	    double GetTime0();
+	    double GetTimeMax();
 	    string GetName();
 	    int GetPeriodLength();
 	    bool IsWritable();

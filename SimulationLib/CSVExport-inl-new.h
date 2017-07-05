@@ -9,9 +9,7 @@ CSVExport::CSVExport(string _fname) {
     fname = _fname;
 }
 
-CSVExport::~CSVExport() {
-
-}
+CSVExport::~CSVExport() {}
 
 bool
 CSVExport::Write(void) {
@@ -108,7 +106,8 @@ template <typename T>
 bool
 TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
     vector<T> *tsPointer;
-    int        tsTime0;
+    double     tsTime0;
+    double     tsTimeMax;
     string     tsName;
     long       tsSize;
 
@@ -122,11 +121,11 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
         return false;
     }
 
-    if (nTimeSeries != 0 && ts->GetPeriodLength() != periodLength) {
+    if (nTimeSeries != 0 && ts->GetPeriodLength() != tsPeriodLength) {
         printf("Error: All TimeSeries must have the same periodLength\n");
         return false;
     } else if (nTimeSeries == 0)
-        periodLength = ts->GetPeriodLength();
+        tsPeriodLength = ts->GetPeriodLength();
 
     // GetTime0 returns a double, but it needs to be an integer, so that
     //   we can test which value of 't' the associated vector should first
@@ -139,11 +138,13 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
     //   population size) will still be represented for in the CSV file at
     //   t=0.
     tsTime0   = ceil(ts->GetTime0());
+    tsTimeMax = ts->GetTimeMax();
     tsPointer = ts->GetVector();
     tsName    = ts->GetName();
     tsSize    = tsPointer->size();
 
     tsTime0s.push_back(tsTime0);
+    tsTimeMaxs.push_back(tsTimeMax);
     tsVectors.push_back(tsPointer);
     tsNames.push_back(tsName);
     tsSizes.push_back(tsSize);
@@ -170,7 +171,13 @@ TimeSeriesCSVExport<T>::getColumnIter(void) {
 template <typename T>
 CellSpecItr
 TimeSeriesCSVExport<T>::getRowIter(void) {
-    return Range<0, timeMax>{};
+    int nPeriods;
+
+    nPeriods = ceil(tMax / tsPeriodLength) + 1;
+    vector<CellSpec>{nPeriods} periods;
+    iota(periods.begin(), periods.end(), (CellSpec)0);
+
+    return periods;
 }
 
 template <typename T>
@@ -190,7 +197,7 @@ TimeSeriesCSVExport<T>::isRowHeader(void) {
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
-    return to_string(rowSpec);
+    return to_string(rowSpec * tsPeriodLength);
 }
 
 template <typename T>
@@ -210,13 +217,27 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     // 'rowSpec' corresponds to time because the first row is time=0.
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
-    int _time, _tsIdx;
+    int period, tsIdx, tsTime0, tsTimeMax;
+    T cellVal;
+    string empty;
 
     if (columnSpec == 0)
         return to_string(columnSpec);
 
-    _time  = rowSpec;
-    _tsIdx = columnSpec - 1;
+    empty     = string("");
+
+    period    = rowSpec;
+    tsIdx     = columnSpec - 1;
+    tsTime0   = tsTime0s[tsIdx];
+    tsTimeMax = tsTimeMaxs[tsIdx];
+
+    if ( (period * periodLength) < tsTime0   || \
+         (period * periodLength) > tsTimeMax    )
+        return empty;
+
+    cellVal  = tsVectors[_txIdx]->at(period);
+
+    return cellVal;
 }
 
 /////////////////////////////////////////

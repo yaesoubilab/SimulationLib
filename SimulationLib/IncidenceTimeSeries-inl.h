@@ -142,6 +142,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    double IncidenceTimeSeries<T>::GetTimeMax() {
+        return timeMax;
+    }
+
+    template <typename T>
     string IncidenceTimeSeries<T>::GetName(void) {
         return name;
     }
