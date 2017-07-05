@@ -16,7 +16,7 @@ SRCS_TEST_DEPENDENCIES= ../DiscreteTimeStatistic.cpp \
                         ../PyramidTimeSeries.cpp \
                         ../PrevalencePyramidTimeSeries.cpp \
                         ../IncidencePyramidTimeSeries.cpp \
-                        ../CSVExport.cpp
+                        ../CSVExport-new.cpp
 OBJS_TEST_DEPENDENCIES=$(subst .cpp,.o,$(SRCS_TEST_DEPENDENCIES))
 
 test: testRunner

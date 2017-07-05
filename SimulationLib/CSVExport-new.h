@@ -5,8 +5,10 @@
 #include <vector>
 #include <cmath>
 #include <iterator>
-#include <algorithm>
+#include <numeric>
+#include <utility>
 
+#include "PyramidTimeSeries.h"
 #include "TimeSeries.h"
 #include "TimeStatistic.h"
 #include "utils/Range.h"
@@ -25,7 +27,11 @@ using namespace std;
 namespace SimulationLib {
 
     using CellSpec = int;
-    using CellSpecItr = vector<CellSpec>::const_iterator
+    using CellSpecItr = vector<CellSpec>::iterator;
+    using CellSpecItrs = struct {
+        CellSpecItr begin;
+        CellSpecItr end;
+    };
 
     enum class TimeStatType : uint8_t {
         Sum       = 0 << 1,
@@ -39,6 +45,7 @@ namespace SimulationLib {
     /////////////////////////////////////////
     // General CSV Exporter
     /////////////////////////////////////////
+    template <typename T>
     class CSVExport
     {
     public:
@@ -51,8 +58,8 @@ namespace SimulationLib {
     private:
         string fname;
 
-        virtual CellSpecItr getColumnIter(void) = 0;
-        virtual CellSpecItr getRowIter(void) = 0;
+        virtual CellSpecItrs getColumnIters(void) = 0;
+        virtual CellSpecItrs getRowIters(void) = 0;
 
         virtual bool isColumnHeader(void) = 0;
         virtual bool isRowHeader(void) = 0;
@@ -67,9 +74,9 @@ namespace SimulationLib {
     // TimeSeries CSV Exporter
     /////////////////////////////////////////
     template<typename T>
-    class TimeSeriesCSVExport<T> : public CSVExport {
+    class TimeSeriesCSVExport : public CSVExport<T> {
     public:
-        TimeSeriesCSVExport(string fname) : CSVExport(fname) {
+        TimeSeriesCSVExport(string fname) : CSVExport<T>(fname) {
             tsVectors      = vector<vector<T> *>{};
             tsTime0s       = vector<double>{};
             tsTimeMaxs     = vector<double>{};
@@ -82,13 +89,13 @@ namespace SimulationLib {
             nTimeSeries    = 0;
         };
 
-        ~TimeSeriesCSVExport();
+        ~TimeSeriesCSVExport() {};
 
         bool Add(TimeSeries<T> *tse);
 
     private:
-        CellSpecItr getColumnIter(void);
-        CellSpecItr getRowIter(void);
+        CellSpecItrs getColumnIters(void);
+        CellSpecItrs getRowIters(void);
 
         bool isColumnHeader(void);
         bool isRowHeader(void);
@@ -116,7 +123,7 @@ namespace SimulationLib {
     // For now, there are no class templates on PyramidTimeSeries, but that
     //   could change...
     // template <typename T>
-    class PyramidTimeSeriesCSVExport/*<T>*/ : public CSVExport {
+    class PyramidTimeSeriesCSVExport/*<T>*/ : public CSVExport<int> {
     public:
         PyramidTimeSeriesCSVExport(string fname) : CSVExport(fname) {
 
@@ -127,8 +134,8 @@ namespace SimulationLib {
         bool Add(PyramidTimeSeries/*<T>*/ *ptse);
 
     private:
-        virtual CellSpecItr getColumnIter(void);
-        virtual CellSpecItr getRowIter(void);
+        virtual CellSpecItrs getColumnIters(void);
+        virtual CellSpecItrs getRowIters(void);
 
         virtual bool isColumnHeader(void);
         virtual bool isRowHeader(void);
@@ -143,22 +150,23 @@ namespace SimulationLib {
     // TimeStatistic CSV Exporter
     /////////////////////////////////////////
     template<typename T>
-    class TimeStatisticsCSVExport<T> : public CSVExport {
+    class TimeStatisticsCSVExport : public CSVExport<T> {
     public:
         TimeStatisticsCSVExport(string fname, uint8_t _fieldFlags) \
-          : CSVExport(fname) {
+          : CSVExport<T>(fname) {
             fieldFlags = _fieldFlags;
         };
 
         ~TimeStatisticsCSVExport();
 
-        bool Add(TimeStatistics<T> *tst);
+        bool Add(TimeStatistic *tst);
 
-        auto Flag = [](TimeStatType a) { return static_cast<uint8_t> a; };
+        function<uint8_t (TimeStatType)> Flag = \
+          [](auto a) { return static_cast<uint8_t>(a); };
 
     private:
-        virtual CellSpecItr getColumnIter(void);
-        virtual CellSpecItr getRowIter(void);
+        virtual CellSpecItrs getColumnIters(void);
+        virtual CellSpecItrs getRowIters(void);
 
         virtual bool isColumnHeader(void);
         virtual bool isRowHeader(void);

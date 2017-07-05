@@ -1,36 +1,39 @@
-#include "CSVExport-inl-new.h"
+#include "CSVExport-new.h"
 
 namespace SimulationLib {
 
 /////////////////////////////////////////
 // General CSV Exporter
 /////////////////////////////////////////
-CSVExport::CSVExport(string _fname) {
+template <typename T>
+CSVExport<T>::CSVExport(string _fname) {
     fname = _fname;
 }
 
-CSVExport::~CSVExport() {}
+template <typename T>
+CSVExport<T>::~CSVExport() {}
 
+template <typename T>
 bool
-CSVExport::Write(void) {
+CSVExport<T>::Write(void) {
     int stringSize;
     string buf, comma, newline;
     FILE *fs;
-    CellSpecItr columnItr, rowItr;
+    CellSpecItrs columnItrs, rowItrs;
 
-    buf       = string("");
-    comma     = string(",");
-    newline   = string("\n");
+    buf        = string("");
+    comma      = string(",");
+    newline    = string("\n");
 
-    columnItr = getColumnIter();
-    rowItr    = getRowIter();
+    columnItrs = getColumnIters();
+    rowItrs    = getRowIters();
 
-    if (columnItr.cbegin() == columnItr.cend()) {
+    if (columnItrs.begin == columnItrs.end) {
         printf("Error: No columns to write\n");
         return false;
     }
 
-    if (rowItr.cbegin() == rowItr.cend()) {
+    if (rowItrs.begin == rowItrs.end) {
         printf("Error: No rows to write\n");
         return false;
     }
@@ -38,17 +41,17 @@ CSVExport::Write(void) {
     if (!(fs = fopen(fname.c_str(), "a"))) {
         printf("Error: fopen() returned NULL pointer\n");
         fclose(fs);
-        return;
+        return false;
     }
 
     // Print column header, if exists
     if (isColumnHeader()) {
-        for (CellSpecItr itr = columnItr.cbegin(); \
-             itr != columnItr.cend();              \
+        for (CellSpecItr itr = columnItrs.begin; \
+             itr != columnItrs.end;              \
              itr = next(itr)) {
 
             // Add comma, if not the first column
-            if (itr != columnItr.cbegin())
+            if (itr != columnItrs.begin)
                 buf += comma;
 
             // Add column name
@@ -59,8 +62,8 @@ CSVExport::Write(void) {
     }
 
     // For each row
-    for (CellSpecItr rItr = rowItr.cbegin(); \
-         rItr = rowItr.cend();               \
+    for (CellSpecItr rItr = rowItrs.begin; \
+         rItr != rowItrs.end;              \
          rItr = next(rItr)) {
 
         // Print row header if exists
@@ -68,12 +71,12 @@ CSVExport::Write(void) {
             buf += getRowName(*rItr) + comma;
 
         // For each column
-        for (CellSpecItr cItr = columnItr.cbegin();
-             cItr != columnItr.cend();
+        for (CellSpecItr cItr = columnItrs.begin;
+             cItr != columnItrs.end;
              cItr = next(cItr)) {
 
             // Add comma if not the first column
-            if (cItr != columnItr.cbegin())
+            if (cItr != columnItrs.begin)
                 buf += comma;
 
             buf += getCell(*rItr, *cItr);
@@ -84,7 +87,7 @@ CSVExport::Write(void) {
 
     // Perform write
     stringSize = buf.size();
-    if (fwrite(buf.c_str(), sizeof(char), stringSize, fs) < stringSize) {
+    if (fwrite(buf.c_str(), sizeof(char), stringSize, fs) < (size_t)stringSize) {
         printf("Error: std::fwrite returned an error\n");
         fclose(fs);
         return false;
@@ -98,13 +101,10 @@ CSVExport::Write(void) {
 /////////////////////////////////////////
 // TimeSeries CSV Exporter
 /////////////////////////////////////////
-template <typename T>
-TimeSeriesCSVExport<T>::~TimeSeriesCSVExport()
-{}
 
 template <typename T>
 bool
-TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
+TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
     vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
@@ -160,35 +160,47 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *tse) {
 }
 
 template <typename T>
-CellSpecItr
-TimeSeriesCSVExport<T>::getColumnIter(void) {
+CellSpecItrs
+TimeSeriesCSVExport<T>::getColumnIters(void) {
     // "-1+1" is to account for the inclusive nature of the upper bound
     //   on range, and the extra column we need to represent time.
     // Therefore, column 0 is for time, not value.
-    return Range<0, nTimeSeries - 1 + 1>{};
+    vector<CellSpec> columns(nTimeSeries + 1);
+    CellSpecItrs cellSpecItrs;
+
+    iota(columns.begin(), columns.end(), (CellSpec)0);
+
+    cellSpecItrs.begin = columns.begin();
+    cellSpecItrs.end   = columns.end();
+
+    return cellSpecItrs;
 }
 
 template <typename T>
-CellSpecItr
-TimeSeriesCSVExport<T>::getRowIter(void) {
+CellSpecItrs
+TimeSeriesCSVExport<T>::getRowIters(void) {
     int nPeriods;
+    CellSpecItrs cellSpecItrs;
 
     nPeriods = ceil(tMax / tsPeriodLength) + 1;
-    vector<CellSpec>{nPeriods} periods;
+    vector<CellSpec> periods{nPeriods};
     iota(periods.begin(), periods.end(), (CellSpec)0);
 
-    return periods;
+    cellSpecItrs.begin = periods.begin();
+    cellSpecItrs.end   = periods.end();
+
+    return cellSpecItrs;
 }
 
 template <typename T>
-virtual bool
+bool
 TimeSeriesCSVExport<T>::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 template <typename T>
-virtual bool
+bool
 TimeSeriesCSVExport<T>::isRowHeader(void) {
     // Really?
     return true;
@@ -205,7 +217,7 @@ string
 TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
     string timeHeader = string("t");
 
-    if (columnSpec = 0)
+    if (columnSpec == 0)
         return timeHeader;
     else
         return tsNames[columnSpec - 1];
@@ -231,13 +243,13 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     tsTime0   = tsTime0s[tsIdx];
     tsTimeMax = tsTimeMaxs[tsIdx];
 
-    if ( (period * periodLength) < tsTime0   || \
-         (period * periodLength) > tsTimeMax    )
+    if ( (period * tsPeriodLength) < tsTime0   || \
+         (period * tsPeriodLength) > tsTimeMax    )
         return empty;
 
-    cellVal  = tsVectors[_txIdx]->at(period);
+    cellVal  = tsVectors[tsIdx]->at(period);
 
-    return cellVal;
+    return to_string(cellVal);
 }
 
 /////////////////////////////////////////
@@ -255,23 +267,23 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 }
 
 
-CellSpecItr
-PyramidTimeSeriesCSVExport/*<T>*/::getColumnIter(void) {
+CellSpecItrs
+PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 
 }
 
-CellSpecItr
-PyramidTimeSeriesCSVExport/*<T>*/::getRowIter(void) {
+CellSpecItrs
+PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
 
 }
 
-virtual bool
+bool
 PyramidTimeSeriesCSVExport/*<T>*/::isColumnHeader(void) {
     // Really?
     return true;
 }
 
-virtual bool
+bool
 PyramidTimeSeriesCSVExport/*<T>*/::isRowHeader(void) {
     // Really?
     return true;
@@ -297,60 +309,60 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
 // TimeStatistic CSV Exporter
 /////////////////////////////////////////
 template<typename T>
-TimeStatisticCSVExport<T>::~TimeStatisticCSVExport()
+TimeStatisticsCSVExport<T>::~TimeStatisticsCSVExport()
 {
 
 }
 
 template<typename T>
 bool
-TimeStatisticCSVExport<T>::Add(TimeStatistics<T> *tst) {
+TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
     // Boilerplate
     return true;
 }
 
 
 template<typename T>
-CellSpecItr
-TimeStatisticCSVExport<T>::getColumnIter(void) {
+CellSpecItrs
+TimeStatisticsCSVExport<T>::getColumnIters(void) {
 
 }
 
 template<typename T>
-CellSpecItr
-TimeStatisticCSVExport<T>::getRowIter(void) {
+CellSpecItrs
+TimeStatisticsCSVExport<T>::getRowIters(void) {
 
 }
 
 template <typename T>
-virtual bool
-TimeStatisticCSVExport<T>::isColumnHeader(void) {
+bool
+TimeStatisticsCSVExport<T>::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 template <typename T>
-virtual bool
-TimeStatisticCSVExport<T>::isRowHeader(void) {
+bool
+TimeStatisticsCSVExport<T>::isRowHeader(void) {
     // Really?
     return true;
 }
 
 template<typename T>
 string
-TimeStatisticCSVExport<T>::getRowName(CellSpec rowSpec) {
+TimeStatisticsCSVExport<T>::getRowName(CellSpec rowSpec) {
 
 }
 
 template<typename T>
 string
-TimeStatisticCSVExport<T>::getColumnName(CellSpec columnSpec) {
+TimeStatisticsCSVExport<T>::getColumnName(CellSpec columnSpec) {
 
 }
 
 template<typename T>
 string
-TimeStatisticCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
 }
 
