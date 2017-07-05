@@ -16,7 +16,7 @@ PyramidData::PyramidData(int _numCategories, vector<double> _ageBreaks)
     // Check to make sure ageBreaks is monotonically increasing, and that
     // the first age-break is greater than zero
     double lastAge = 0;
-    for (int i = 0; i < ageBreaks.size(); ++i)
+    for (unsigned long i = 0; i < ageBreaks.size(); ++i)
     {
         if (ageBreaks[i] <= 0 || ageBreaks[i] <= lastAge)
             throw out_of_range("'ageBreaks' must be monotonically increasing and >0");
@@ -55,7 +55,7 @@ PyramidData::~PyramidData(void)
 // Returns the age group index corresponding to age 'age'. Throws exception
 //   if 'age' is below zero.
 int PyramidData::getAgeIdx(double age) {
-    int idx;
+    unsigned long idx;
 
     if (age < 0)
         throw out_of_range("Age specified must be >= 0");

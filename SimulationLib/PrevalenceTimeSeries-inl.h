@@ -117,7 +117,7 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    string PrevalenceTimeSeries<T>::GetPeriodLength(void) {
+    int PrevalenceTimeSeries<T>::GetPeriodLength(void) {
         return periodLength;
     }
 

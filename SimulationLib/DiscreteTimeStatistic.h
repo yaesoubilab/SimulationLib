@@ -22,6 +22,8 @@ namespace SimulationLib
 
 		DiscreteTimeStatistic(string name) : DiscreteTimeStatistic(name, 0) {}
 
+		~DiscreteTimeStatistic();
+
 		// Receives a value 'value', updating statistics in constant time.
 		// Records the value if 'numOfObservationsToStore' > 0. Throws error
 		//   if no room left to hold observations.
