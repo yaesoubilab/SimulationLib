@@ -1,7 +1,7 @@
 CC=gcc
 CXX=c++
 RM=rm -f -r
-CPPFLAGS=-g -std=c++1z
+CPPFLAGS=-g -std=c++1z -Wall -Wextra -pedantic
 
 SRCS_TESTS=tests-DiscreteTimeStatistic.cpp tests-PrevalenceTimeSeries.cpp tests-PyramidData.cpp tests-PyramidTimeSeries.cpp
 OBJS_TESTS=$(subst .cpp,.o,$(SRCS_TESTS))
