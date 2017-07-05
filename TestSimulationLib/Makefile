@@ -1,7 +1,7 @@
 CC=gcc
 CXX=c++
 RM=rm -f -r
-CPPFLAGS=-g -std=c++1z
+CPPFLAGS=-g -std=c++1z -Wall -Wextra -pedantic
 
 SRCS_SBDSIM=run-SerialBirthDeathSim.cpp SerialBirthDeathSim.cpp ../SimulationLib/ContinuousTimeStatistic.cpp ../SimulationLib/DiscreteTimeStatistic.cpp ../SimulationLib/IncidenceTimeSeries.cpp ../SimulationLib/PrevalenceTimeSeries.cpp ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.cpp ../SimulationLib/CSVExport.cpp
 OBJS_SBDSIM=$(subst .cpp,.o,$(SRCS_SBDSIM))
