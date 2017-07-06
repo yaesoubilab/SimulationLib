@@ -273,7 +273,7 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     tsTimeMax = tsTimeMaxs[tsIdx];
 
     if ( (period * tsPeriodLength) < tsTime0   || \
-         (period * tsPeriodLength) > tsTimeMax    )
+         (period * tsPeriodLength) >= tsTimeMax     )
         return empty;
 
     cellVal  = tsVectors[tsIdx]->at(period);
