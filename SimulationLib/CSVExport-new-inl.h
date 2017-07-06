@@ -50,6 +50,8 @@ CSVExport<T>::Write(void) {
              itr != columnItrs.end;              \
              itr = next(itr)) {
 
+            printf("printing column header\n");
+
             // Add comma, if not the first column
             if (itr != columnItrs.begin)
                 buf += comma;
@@ -74,6 +76,8 @@ CSVExport<T>::Write(void) {
         for (CellSpecItr cItr = columnItrs.begin;
              cItr != columnItrs.end;
              cItr = next(cItr)) {
+
+            printf("printing data column\n");
 
             // Add comma if not the first column
             if (cItr != columnItrs.begin)
@@ -124,8 +128,10 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
     if (nTimeSeries != 0 && ts->GetPeriodLength() != tsPeriodLength) {
         printf("Error: All TimeSeries must have the same periodLength\n");
         return false;
-    } else if (nTimeSeries == 0)
+    } else if (nTimeSeries == 0) {
         tsPeriodLength = ts->GetPeriodLength();
+        printf("::Add(): tsPeriodLength=%d\n", tsPeriodLength);
+    }
 
     // GetTime0 returns a double, but it needs to be an integer, so that
     //   we can test which value of 't' the associated vector should first
@@ -143,6 +149,9 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
     tsName    = ts->GetName();
     tsSize    = tsPointer->size();
 
+    rows      = nullptr;
+    columns   = nullptr;
+
     tsTime0s.push_back(tsTime0);
     tsTimeMaxs.push_back(tsTimeMax);
     tsVectors.push_back(tsPointer);
@@ -151,27 +160,40 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
 
     // Update the largest value of 't' that will be written to CSV
     // file, and the number of TimeSeries subject to export.
-    tMax =   (tsTime0 + tsSize - 1) > tMax \
-           ? (tsTime0 + tsSize - 1) : tMax;
+    tMax =   tsTimeMax > tMax \
+           ? tsTimeMax : tMax;
+
+    printf("::Add(): tMax=%f\n", tMax);
 
     nTimeSeries += 1;
 
     return true;
 }
 
+    void printVector(vector<int> *v) {
+        for (int i = 0; i < v->size(); ++i)
+        {
+            printf("x: %2d y: %2d\n", i, (*v)[i]);
+        }
+        printf("\n");
+    }
+
 template <typename T>
 CellSpecItrs
 TimeSeriesCSVExport<T>::getColumnIters(void) {
-    // "-1+1" is to account for the inclusive nature of the upper bound
-    //   on range, and the extra column we need to represent time.
+    // "+1" is to account for the extra column we need to represent time.
     // Therefore, column 0 is for time, not value.
-    vector<CellSpec> columns(nTimeSeries + 1);
+    columns = new vector<CellSpec>(nTimeSeries + 1);
     CellSpecItrs cellSpecItrs;
 
-    iota(columns.begin(), columns.end(), (CellSpec)0);
+    iota(columns->begin(), columns->end(), (CellSpec)0);
 
-    cellSpecItrs.begin = columns.begin();
-    cellSpecItrs.end   = columns.end();
+    printf("nTimeSeries=%d\n", nTimeSeries);
+    printf("printing columnIters vector:\n");
+    printVector(columns);
+
+    cellSpecItrs.begin = columns->begin();
+    cellSpecItrs.end   = columns->end();
 
     return cellSpecItrs;
 }
@@ -182,12 +204,18 @@ TimeSeriesCSVExport<T>::getRowIters(void) {
     int nPeriods;
     CellSpecItrs cellSpecItrs;
 
-    nPeriods = ceil(tMax / tsPeriodLength) + 1;
-    vector<CellSpec> periods{nPeriods};
-    iota(periods.begin(), periods.end(), (CellSpec)0);
+    nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
 
-    cellSpecItrs.begin = periods.begin();
-    cellSpecItrs.end   = periods.end();
+    rows = new vector<CellSpec>(nPeriods);
+
+    printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
+    iota(rows->begin(), rows->end(), (CellSpec)0);
+
+    printf("Printing rowIters vector:\n");
+    printVector(rows);
+
+    cellSpecItrs.begin = rows->begin();
+    cellSpecItrs.end   = rows->end();
 
     return cellSpecItrs;
 }
@@ -203,19 +231,20 @@ template <typename T>
 bool
 TimeSeriesCSVExport<T>::isRowHeader(void) {
     // Really?
-    return true;
+    return false;
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
-    return to_string(rowSpec * tsPeriodLength);
+    return string("");
+    // return to_string(rowSpec * tsPeriodLength);
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
-    string timeHeader = string("t");
+    string timeHeader = string("Period");
 
     if (columnSpec == 0)
         return timeHeader;
@@ -234,7 +263,7 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     string empty;
 
     if (columnSpec == 0)
-        return to_string(columnSpec);
+        return to_string(rowSpec);
 
     empty     = string("");
 

@@ -58,6 +58,9 @@ namespace SimulationLib {
     private:
         string fname;
 
+        CellSpecItrs rowItrs;
+        CellSpecItrs columnItrs;
+
         virtual CellSpecItrs getColumnIters(void) = 0;
         virtual CellSpecItrs getRowIters(void) = 0;
 
@@ -89,13 +92,19 @@ namespace SimulationLib {
             nTimeSeries    = 0;
         };
 
-        ~TimeSeriesCSVExport() {};
+        ~TimeSeriesCSVExport() {
+            delete rows;
+            delete columns;
+        };
 
         bool Add(TimeSeries<T> *tse);
 
     private:
         CellSpecItrs getColumnIters(void);
         CellSpecItrs getRowIters(void);
+
+        vector<CellSpec> *rows;
+        vector<CellSpec> *columns;
 
         bool isColumnHeader(void);
         bool isRowHeader(void);
