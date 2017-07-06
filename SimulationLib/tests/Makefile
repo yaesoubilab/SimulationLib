@@ -25,5 +25,8 @@ test: testRunner
 testRunner:
 	$(CXX) tests-main.cpp -c
 
-clean:
+clean: cleanCSV
 	$(RM) $(OBJS_TESTS) $(OBJS_TEST_DEPENDENCIES) tests-main.o tests *.dSYM
+
+cleanCSV:
+	$(RM) test-*-out.csv
