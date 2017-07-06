@@ -18,6 +18,8 @@ namespace SimulationLib {
         // currentValue = ;  TODO: what is this for?
     }
 
+    ContinuousTimeStatistic::~ContinuousTimeStatistic() {}
+
     void ContinuousTimeStatistic::Record(double increment) {
         printf("Error: ContinuousTimeStatistic requires time dimension\n");
         return;

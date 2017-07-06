@@ -13,7 +13,10 @@ namespace SimulationLib
 	{
 	public:
 		string name;
+
 		ContinuousTimeStatistic(string name);
+		~ContinuousTimeStatistic();
+
 		void Record(double increment);
 		void Record(double time, double increment);
 

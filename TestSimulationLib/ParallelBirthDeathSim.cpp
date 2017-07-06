@@ -122,9 +122,9 @@ namespace SimulationLib {
     // }
 
     void ParallelBirthDeathSim::Run(void) {
-        CSVExport<int>     exportBirths(fileName + string("-births.csv"));
-        CSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
-        CSVExport<int> exportPopulation(fileName + string("-population.csv"));
+        TimeSeriesCSVExport<int>     exportBirths(fileName + string("-births.csv"));
+        TimeSeriesCSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
+        TimeSeriesCSVExport<int> exportPopulation(fileName + string("-population.csv"));
 
         future<void> *futures = new future<void>[nTrajectories];
 
@@ -152,10 +152,10 @@ namespace SimulationLib {
 
         for (int i = 0; i < nTrajectories; ++i)
         {
-            exportBirths.AddTimeSeries(birthsArr[i]);
-            exportDeaths.AddTimeSeries(deathsArr[i]);
+            exportBirths.Add(birthsArr[i]);
+            exportDeaths.Add(deathsArr[i]);
 
-            exportPopulation.AddTimeSeries(populationArr[i]);
+            exportPopulation.Add(populationArr[i]);
         }
 
         exportBirths.Write();

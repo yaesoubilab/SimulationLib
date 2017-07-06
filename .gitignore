@@ -258,4 +258,4 @@ SerialBirthDeathSim
 ParallelBirthDeathSim
 
 # Data output files
-*.csv
+# *.csv is out for now because SimulationLib/tests/tests-CSVExport-files uses them

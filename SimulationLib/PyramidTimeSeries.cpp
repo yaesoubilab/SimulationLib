@@ -210,7 +210,7 @@ int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
         throw out_of_range("periodIdx < 0");
-    if (ageGroupIdx >= ageBreaks.size() + 1)
+    if ((unsigned long)ageGroupIdx >= ageBreaks.size() + 1)
         throw out_of_range("ageGroupIdx >= numAgeGroups");
     if (ageGroupIdx < 0)
         throw out_of_range("ageGroupIdx < 0");
