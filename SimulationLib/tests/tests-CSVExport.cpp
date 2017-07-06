@@ -3,7 +3,7 @@
 #include "../PrevalenceTimeSeries.h"
 
 // REMEMBER: remove "-new" when replacing old implementation
-#include "../CSVExport-new.h"
+#include "../CSVExport.h"
 
 using namespace std;
 using namespace SimulationLib;
