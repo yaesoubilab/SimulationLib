@@ -152,7 +152,7 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    string IncidenceTimeSeries<T>::GetPeriodLength(void) {
+    int IncidenceTimeSeries<T>::GetPeriodLength(void) {
         return periodLength;
     }
 
