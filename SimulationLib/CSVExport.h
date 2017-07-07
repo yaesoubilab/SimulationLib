@@ -11,7 +11,6 @@
 #include "PyramidTimeSeries.h"
 #include "TimeSeries.h"
 #include "TimeStatistic.h"
-#include "utils/Range.h"
 
 using namespace std;
 

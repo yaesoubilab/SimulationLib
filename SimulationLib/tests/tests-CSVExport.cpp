@@ -50,4 +50,6 @@ TEST_CASE("Basic PrevalenceTimeSeries", "[csv]") {
     REQUIRE( compare_files("test-t02-out.csv",
                            "tests-CSVExport-files/test-t02-answer.csv") == true );
 
+    delete pts1;
+    delete pts2;
 }
