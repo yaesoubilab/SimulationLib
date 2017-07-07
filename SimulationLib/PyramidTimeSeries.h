@@ -107,5 +107,6 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 
 		void Close(void);
+		bool IsWritable(void);
 	};
 }

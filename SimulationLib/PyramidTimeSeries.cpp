@@ -238,3 +238,7 @@ void PyramidTimeSeries::Close(void) {
 
     return;
 }
+
+bool PyramidTimeSeries::IsWritable(void) {
+    return !closed;
+}
