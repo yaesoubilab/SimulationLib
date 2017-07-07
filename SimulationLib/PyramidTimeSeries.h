@@ -27,7 +27,7 @@ namespace SimulationLib
 
 		PyramidData **pyramids;
 
-		// This implemented in PrevalencePyramidTimeSeries and
+		// This is implemented in PrevalencePyramidTimeSeries and
 		//   IncidencePyramidTimeSeries, abiding by the Template Method pattern
 		//   described here: http://www.gotw.ca/publications/mill18.htm
 		// Since this function can express the entire functional difference
@@ -75,8 +75,9 @@ namespace SimulationLib
 		// 		   'age'	  (age >= 0), updates the data structure by changing
 		//   the number of individuals in the specified group by 'increment'.
 		//   Note that 'age' is translated into its respective age bin. Throws
-		//   exceptions for illegal values, and returns false if 'increment'
-		//   would cause the population of the group to vall below zero.
+		//     exceptions for illegal values, and returns false if 'increment'
+		//     would cause the population of the group to vall below zero, or
+		//     if the TimeSeries has been Close()'d.
 		bool UpdateByAge(int time, int category, double age, int increment);
 
 		// Idential to UpdateByAge, except age is specified using age group index,
@@ -87,7 +88,7 @@ namespace SimulationLib
 		//   specified new group. Throws exceptions for illegal parameters.
 		//   'increment' must be a non-negative integer. Returns false if the
 		//   move would cause the number of individuals in the specified old
-		//   group to become negative.
+		//   group to become negative, or if the TimeSeries has been Close()'d.
 		bool MoveByAge(int time, int oldCategory, double oldAge, \
 						         int newCategory, double newAge, int increment);
 
@@ -104,5 +105,8 @@ namespace SimulationLib
 
 		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
+
+		void Close(void);
+		bool IsWritable(void);
 	};
 }

@@ -27,6 +27,8 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
 
+    closed = false
+
     nPeriods     = calcNPeriods(timeMax, periodLength);
 
     pyramids     = new PyramidData *[nPeriods];
@@ -47,6 +49,11 @@ PyramidTimeSeries::~PyramidTimeSeries()
 bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int increment) {
     int thisPeriod;
 
+    if (closed == true) {
+        printf("Update failed: PyramidTimeSeries has been closed.\n");
+        return false;
+    }
+
     if (time < time0 || time > timeMax)
         throw out_of_range("time specified is < time0 or > timeMax");
     if (category < 0 || category >= nCategories)
@@ -61,6 +68,11 @@ bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int incr
 
 bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
     int thisPeriod;
+
+    if (closed == true) {
+        printf("Update failed: PyramidTimeSeries has been closed.\n");
+        return false;
+    }
 
     if (time < time0 || time > timeMax)
         throw out_of_range("time specified is < time0 or > timeMax");
@@ -77,6 +89,11 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
 bool PyramidTimeSeries::MoveByAge(int time, int oldCategory, double oldAge, \
                          int newCategory, double newAge, int increment) {
     int thisPeriod;
+
+    if (closed == true) {
+        printf("Update failed: PyramidTimeSeries has been closed.\n");
+        return false;
+    }
 
     if (time < time0 || time > timeMax)
         throw out_of_range("time specified is < time0 or > timeMax");
@@ -99,6 +116,11 @@ bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx,
                          int newCategory, int newAgeGroupIdx, int increment) {
     int thisPeriod;
 
+    if (closed == true) {
+        printf("Update failed: PyramidTimeSeries has been closed.\n");
+        return false;
+    }
+
     if (time < time0 || time > timeMax)
         throw out_of_range("time specified is < time0 or > timeMax");
     if (oldCategory < 0 || oldCategory >= nCategories)
@@ -118,6 +140,10 @@ bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx,
 }
 
 int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -129,6 +155,10 @@ int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
 int PyramidTimeSeries::GetTotalAtTime(int time) {
     int periodIdx;
 
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (time < 0)
         throw out_of_range("time < 0");
 
@@ -139,6 +169,10 @@ int PyramidTimeSeries::GetTotalAtTime(int time) {
 
 
 int PyramidTimeSeries::GetTotalInCategoryAtPeriod(int periodIdx, int category) {
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -154,6 +188,10 @@ int PyramidTimeSeries::GetTotalInCategoryAtPeriod(int periodIdx, int category) {
 int PyramidTimeSeries::GetTotalInCategoryAtTime(int time, int category) {
     int periodIdx;
 
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (time < 0)
         throw out_of_range("time < 0");
 
@@ -164,6 +202,10 @@ int PyramidTimeSeries::GetTotalInCategoryAtTime(int time, int category) {
 
 
 int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx) {
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (periodIdx >= nPeriods)
         throw out_of_range("periodIdx >= nPeriods");
     if (periodIdx < 0)
@@ -179,10 +221,24 @@ int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx
 int PyramidTimeSeries::GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
     int periodIdx;
 
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
     if (time < 0)
         throw out_of_range("time < 0");
 
     periodIdx = calcThisPeriod(time, periodLength);
 
     return GetTotalInAgeGroupAtPeriod(periodIdx, ageGroupIdx);
+}
+
+void PyramidTimeSeries::Close(void) {
+    closed = true;
+
+    return;
+}
+
+bool PyramidTimeSeries::IsWritable(void) {
+    return !closed;
 }
