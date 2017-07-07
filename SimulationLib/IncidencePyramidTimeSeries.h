@@ -41,6 +41,9 @@ public:
                           [] (int tMax, int pLength) -> int          \
                              {return ceil(tMax/pLength);},           \
                           nCategories, ageBreaks) {}
+      // ^(Note use of lambda function in call to PyramidTimeSeries constructor)
+
+
 private:
     int calcThisPeriod(int time, int periodLength);
 };

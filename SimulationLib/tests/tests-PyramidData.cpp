@@ -7,6 +7,8 @@ using namespace SimulationLib;
 TEST_CASE("PyramidData: weird initializations", "[pyramid]") {
     bool failed;
 
+    // Each section is run independently of one another: see
+    //   https://github.com/philsquared/Catch/blob/master/docs/test-cases-and-sections.md
     SECTION( "no categories" ) {
         failed = false;
         vector<double> ageBreaks = {10, 20, 30};

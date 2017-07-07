@@ -14,10 +14,10 @@ namespace SimulationLib {
 
         lastValue = 0;
         lastTime  = 0;
-        tot       = 0;
-        // currentValue = ;  TODO: what is this for?
+        tot       = 0; // Intermediate variable used to simplify calculations
     }
 
+    // (Empty destructor)
     ContinuousTimeStatistic::~ContinuousTimeStatistic() {}
 
     void ContinuousTimeStatistic::Record(double increment) {
@@ -48,6 +48,7 @@ namespace SimulationLib {
 
     }
 
+    // Getter methods
     double ContinuousTimeStatistic::GetMean()     { return mean;}
     double ContinuousTimeStatistic::GetCount()    { return count; }
     double ContinuousTimeStatistic::GetVariance() { return variance; }

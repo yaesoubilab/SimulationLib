@@ -10,24 +10,27 @@ CSVExport<T>::CSVExport(string _fname) {
     fname = _fname;
 }
 
+// Empty destructor, for now.
 template <typename T>
 CSVExport<T>::~CSVExport() {}
 
 template <typename T>
 bool
 CSVExport<T>::Write(void) {
-    int stringSize;
-    string buf, comma, newline;
-    FILE *fs;
-    CellSpecItrs columnItrs, rowItrs;
+    int stringSize;                    // Size of the string to be written to the file buffer
+    string buf;                        // Output buffer
+    string comma, newline;             // Strings for commonly used symbols
+    FILE *fs;                          // File buffer
+    CellSpecItrs columnItrs, rowItrs;  // Iterators against rows and columns
 
     buf        = string("");
     comma      = string(",");
     newline    = string("\n");
 
-    columnItrs = getColumnIters();
-    rowItrs    = getRowIters();
+    columnItrs = getColumnIters();     // Get iterators from the methods of the
+    rowItrs    = getRowIters();        //   child class (via virtual functions).
 
+    // Make sure that there are in fact rows and columns to write
     if (columnItrs.begin == columnItrs.end) {
         printf("Error: No columns to write\n");
         return false;
@@ -38,19 +41,21 @@ CSVExport<T>::Write(void) {
         return false;
     }
 
+    // By default we append to files, meaning that if 'fname' already exists,
+    //   it will be appended to, rather than overwritten.
     if (!(fs = fopen(fname.c_str(), "a"))) {
         printf("Error: fopen() returned NULL pointer\n");
         fclose(fs);
         return false;
     }
 
-    // Print column header, if exists
+    // Print column header, if it exists
     if (isColumnHeader()) {
+
+        // Iterate over each column
         for (CellSpecItr itr = columnItrs.begin; \
              itr != columnItrs.end;              \
              itr = next(itr)) {
-
-            printf("printing column header\n");
 
             // Add comma, if not the first column
             if (itr != columnItrs.begin)
@@ -60,10 +65,11 @@ CSVExport<T>::Write(void) {
             buf += getColumnName(*itr);
         }
 
+        // Terminate line
         buf += newline;
     }
 
-    // For each row
+    // Iterate over each row
     for (CellSpecItr rItr = rowItrs.begin; \
          rItr != rowItrs.end;              \
          rItr = next(rItr)) {
@@ -72,20 +78,21 @@ CSVExport<T>::Write(void) {
         if (isRowHeader())
             buf += getRowName(*rItr) + comma;
 
-        // For each column
+        // Iterate over each column
         for (CellSpecItr cItr = columnItrs.begin;
              cItr != columnItrs.end;
              cItr = next(cItr)) {
-
-            printf("printing data column\n");
 
             // Add comma if not the first column
             if (cItr != columnItrs.begin)
                 buf += comma;
 
+            // Retrieve the contents of this (row, column) pair and add
+            //   it to the output buffer.
             buf += getCell(*rItr, *cItr);
         }
 
+        // Terminate line
         buf += newline;
     }
 
@@ -115,16 +122,21 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
     string     tsName;
     long       tsSize;
 
+    // Make sure TimeSeries exists
     if (ts == nullptr) {
         printf("Error: TimeSeries pointer was NULL\n");
         return false;
     }
 
+    // Make sure ::Close() has already been called on the time series
     if (ts->IsWritable()) {
         printf("Error: TimeSeries is still writable\n");
         return false;
     }
 
+    // Make sure that the period length of the time series being added
+    //   is identical to the period length of other time series which
+    //   have already been queued for export.
     if (nTimeSeries != 0 && ts->GetPeriodLength() != tsPeriodLength) {
         printf("Error: All TimeSeries must have the same periodLength\n");
         return false;
@@ -163,21 +175,25 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
     tMax =   tsTimeMax > tMax \
            ? tsTimeMax : tMax;
 
-    printf("::Add(): tMax=%f\n", tMax);
-
     nTimeSeries += 1;
 
     return true;
 }
 
-    void printVector(vector<int> *v) {
-        for (int i = 0; i < v->size(); ++i)
-        {
-            printf("x: %2d y: %2d\n", i, (*v)[i]);
-        }
-        printf("\n");
+// Utility function for debugging: prints a vector of integers by taking
+//   a pointer to said vector.
+void printVector(vector<int> *v) {
+    for (int i = 0; i < v->size(); ++i)
+    {
+        printf("x: %2d y: %2d\n", i, (*v)[i]);
     }
+    printf("\n");
+}
 
+// POTENTIAL MEMORY LEAK: reallocation of 'columns' variable over successive
+//   calls to ::getColumnIters, ::getRowIters may lead to wasted memory
+//   as pointer to previous vector referenced by 'columns' and 'rows' is
+//   lost.
 template <typename T>
 CellSpecItrs
 TimeSeriesCSVExport<T>::getColumnIters(void) {
@@ -198,6 +214,7 @@ TimeSeriesCSVExport<T>::getColumnIters(void) {
     return cellSpecItrs;
 }
 
+// See above
 template <typename T>
 CellSpecItrs
 TimeSeriesCSVExport<T>::getRowIters(void) {
@@ -230,20 +247,26 @@ TimeSeriesCSVExport<T>::isColumnHeader(void) {
 template <typename T>
 bool
 TimeSeriesCSVExport<T>::isRowHeader(void) {
-    // Really?
+    // We don't represent time/period using a row header, so in this case
+    //   we return false.
     return false;
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
+    // While ::getRowName(CellSpec) should never be called by CSVExport,
+    //   we return a dummy string just to be safe.
     return string("");
-    // return to_string(rowSpec * tsPeriodLength);
 }
 
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
+    // Right now, we call the first column "Period". In the future, this
+    //   may be changed to "Time," in which case columnSpecs > 0 will
+    //   have to return a different value than they currently due, assuming
+    //   periodLength != 1.
     string timeHeader = string("Period");
 
     if (columnSpec == 0)
@@ -255,27 +278,31 @@ TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
 template <typename T>
 string
 TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
-    // 'rowSpec' corresponds to time because the first row is time=0.
+    // 'rowSpec' corresponds to period because the first row is period=0.
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
     int period, tsIdx, tsTime0, tsTimeMax;
     T cellVal;
     string empty;
 
+    // Return period # if first column
     if (columnSpec == 0)
         return to_string(rowSpec);
 
     empty     = string("");
 
-    period    = rowSpec;
-    tsIdx     = columnSpec - 1;
-    tsTime0   = tsTime0s[tsIdx];
-    tsTimeMax = tsTimeMaxs[tsIdx];
+    period    = rowSpec;           // Which period is being requested
+    tsIdx     = columnSpec - 1;    // Which timeSeries is being requested
+    tsTime0   = tsTime0s[tsIdx];   // time0 for this timeSeries
+    tsTimeMax = tsTimeMaxs[tsIdx]; // timeMax for this timeSeries
 
+    // If time is below time0 or above timeMax, output empty string
     if ( (period * tsPeriodLength) < tsTime0   || \
          (period * tsPeriodLength) >= tsTimeMax     )
         return empty;
 
+    // Otherwise, retrieve value from the timeSeries, convert to a string,
+    //   and return.
     cellVal  = tsVectors[tsIdx]->at(period);
 
     return to_string(cellVal);
