@@ -273,7 +273,7 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     tsTimeMax = tsTimeMaxs[tsIdx];
 
     if ( (period * tsPeriodLength) < tsTime0   || \
-         (period * tsPeriodLength) >= tsTimeMax     )
+         (period * tsPeriodLength) > tsTimeMax     )
         return empty;
 
     cellVal  = tsVectors[tsIdx]->at(period);
@@ -286,11 +286,13 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 /////////////////////////////////////////
 PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 {
-
+// Deallocate any memory allocated on instantiation
 }
 
 bool
 PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
+    // TODO
+
     // Boilerplate
     return true;
 }
@@ -298,12 +300,13 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 
 CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
+    // TODO
 
 }
 
 CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
-
+    // TODO
 }
 
 bool
@@ -320,17 +323,17 @@ PyramidTimeSeriesCSVExport/*<T>*/::isRowHeader(void) {
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getRowName(CellSpec rowSpec) {
-
+    // TODO
 }
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
-
+    // TODO
 }
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
-
+    // TODO
 }
 
 

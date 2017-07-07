@@ -48,7 +48,7 @@ namespace SimulationLib {
 
         lastPeriod            = 0;
         periodLength          = _periodLength;
-        numPeriods            = (int)ceil(timeMax / periodLength);
+        numPeriods            = (int)ceil(timeMax / periodLength) + 1;
 
         observations          = new vector<T>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
