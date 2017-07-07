@@ -12,13 +12,32 @@ namespace SimulationLib
 	class DiscreteTimeStatistic : public TimeStatistic
 	{
 	public:
-		// Name of the statistic bundle
-		string name;
-
 		// DiscreteTimeStatistic calculates time-independent point statistics.
 		// To record observations for later access via the ::GetObservations()
 		//   method, specify 'numOfObservationsToStore' on instantiation.
 		DiscreteTimeStatistic(string name, long numOfObservationsToStore);
+
+		DiscreteTimeStatistic(string _name, long numOfObservationsToStore) :
+		  TimeStatistic(_name)
+	    {
+	        numObservations = numOfObservationsToStore;
+
+	        // Min/max begin as the boundaries of 'double'
+	        min = numeric_limits<double>::max();
+	        max = numeric_limits<double>::min();
+
+	        // Initialize more statistics
+	        total    = 0;
+	        count    = 0;
+	        mean     = 0;
+	        variance = 0;
+
+	        varianceNominator = 0;
+
+	        // If recording, allocate memory for vector and zero everything
+	        if (numObservations)
+	            observations = vector<double>(numObservations, 0);
+	    }
 
 		DiscreteTimeStatistic(string name) : DiscreteTimeStatistic(name, 0) {}
 

@@ -4,29 +4,6 @@ using namespace std;
 
 namespace SimulationLib
 {
-
-    DiscreteTimeStatistic::DiscreteTimeStatistic(string _name, long numOfObservationsToStore)
-    {
-        name = _name;
-        numObservations = numOfObservationsToStore;
-
-        // Min/max begin as the boundaries of 'double'
-        min = numeric_limits<double>::max();
-        max = numeric_limits<double>::min();
-
-        // Initialize more statistics
-        total    = 0;
-        count    = 0;
-        mean     = 0;
-        variance = 0;
-
-        varianceNominator = 0;
-
-        // If recording, allocate memory for vector and zero everything
-        if (numObservations)
-            observations = vector<double>(numObservations, 0);
-    }
-
     DiscreteTimeStatistic::~DiscreteTimeStatistic() {}
 
     void DiscreteTimeStatistic::Record(double value)
