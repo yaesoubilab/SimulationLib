@@ -7,6 +7,7 @@
 #include <iterator>
 #include <numeric>
 #include <utility>
+#include <map>
 
 #include "PyramidTimeSeries.h"
 #include "TimeSeries.h"
@@ -200,9 +201,9 @@ namespace SimulationLib {
     template<typename T>
     class TimeStatisticsCSVExport : public CSVExport<T> {
     public:
-        TimeStatisticsCSVExport(string fname, uint8_t _fieldFlags) \
+        TimeStatisticsCSVExport(string fname, map<TimeStatType, string> _columns) \
           : CSVExport<T>(fname) {
-            fieldFlags = _fieldFlags;
+            columns = _columns;
         };
 
         ~TimeStatisticsCSVExport();
@@ -223,6 +224,7 @@ namespace SimulationLib {
         virtual string getColumnName(CellSpec columnSpec);
         virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
 
-        uint8_t fieldFlags;
+        map<TimeStatType, string> columns;
+        vector<TimeStatistic *> stats;
     };
 };

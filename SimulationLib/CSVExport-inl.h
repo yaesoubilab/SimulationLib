@@ -376,7 +376,14 @@ TimeStatisticsCSVExport<T>::~TimeStatisticsCSVExport()
 template<typename T>
 bool
 TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
-    // Boilerplate
+
+    if (tst == nullptr) {
+        printf("Error: TimeStatistics pointer was NULL\n");
+        return false;
+    }
+
+    stats.push_back(tst);
+
     return true;
 }
 
@@ -410,19 +417,93 @@ TimeStatisticsCSVExport<T>::isRowHeader(void) {
 template<typename T>
 string
 TimeStatisticsCSVExport<T>::getRowName(CellSpec rowSpec) {
-
+    return stats.at(rowSpec)->name;
 }
 
 template<typename T>
 string
 TimeStatisticsCSVExport<T>::getColumnName(CellSpec columnSpec) {
+    int j;
+    string rowName;
 
+    // Look through the columns map in the default sorted order. When map entry
+    //   #'columnSpec' is found, return the string associated with this map entry.
+    j = 0;
+    for (const_iterator i = columns.cbegin(); \
+         i != columns.cend();                 \
+         ++i, ++j)
+        if (j == (int)columnSpec)
+            return i->second;
+
+    // Should not reach this point
+    throw out_of_range("columnSpec was >= columns.size()");
+
+    return string("");
 }
 
 template<typename T>
 string
 TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+    TimeStatistic *tst;               // Pointer to TimeStatistic referenced by
+                                      //   rowSpec
+    TimeStatType statType;            // Holds the TimeStatType implied by
+                                      //   'columnSpec'
+    function <double(void)> accessor; // Holds pointer to function to retrieve
+                                      //   value requested by (rowSpec, columnSpec)
+    double result;                    // Holds result of call to getter method
+                                      //   of the indicated TimeStatistic object
+                                      //   (getter is referenced by 'accessor')
+    int j;                            // To keep track of numeric index on columns
+                                      //   std::map
+    bool found;                       // Indicates whether columnSpec specified
+                                      //   a valid column
 
+    j     = 0;
+    found = false;
+    for (const_iterator i = columns.cbegin(); \
+         i != columns.cend();                 \
+         ++i, ++j)
+        if (j == (int)columnSpec) {
+            statType = columns->first;
+            found    = true;
+        }
+
+    // Did the loop fail to find the right TimeStatType?
+    if (!found) {
+        throw out_of_range("columnSpec failed to match with an enum!");
+        return string("");
+    }
+
+    // Identify the TimeStatistic class from which data will be drawn
+    try { tst = stats.at(rowSpec) } catch (...) {
+        throw out_of_range("rowSpec was >= stats.size()");
+    }
+
+    switch (statType) {
+        case TimeStatType::Sum      : accessor = tst->GetSum;
+                                      break;
+        case TimeStatType::Count    : accessor = tst->GetCount;
+                                      break;
+        case TimeStatType::Mean     : accessor = tst->GetMean;
+                                      break;
+        case TimeStatType::Variance : accessor = tst->GetVariance;
+                                      break;
+        case TimeStatType::Min      : accessor = tst->GetMin;
+                                      break;
+        case TimeStatType::Max      : accessor = tst->GetMax;
+                                      break;
+        default                     : accessor = nullptr;
+                                      break;
+    }
+
+    if (accessor == nullptr) {
+        throw out_of_range("Unsupported TimeStatType");
+        return string("");
+    }
+
+    result = accessor();
+
+    return to_string(result);
 }
 
 
