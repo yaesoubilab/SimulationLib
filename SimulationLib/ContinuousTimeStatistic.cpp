@@ -49,6 +49,7 @@ namespace SimulationLib {
     }
 
     // Getter methods
+    double ContinuousTimeStatistic::GetSum()      { return 0; } // WARNING: not properly implemented at the moment!
     double ContinuousTimeStatistic::GetMean()     { return mean;}
     double ContinuousTimeStatistic::GetCount()    { return count; }
     double ContinuousTimeStatistic::GetVariance() { return variance; }

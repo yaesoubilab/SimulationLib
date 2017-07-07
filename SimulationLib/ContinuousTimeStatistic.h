@@ -41,6 +41,7 @@ namespace SimulationLib
 		void Record(double time, double increment);
 
 		// Getter methods
+		double GetSum();   // WARNING: GetSum() is unimplemented!!
 		double GetMean();
 		double GetCount();
 		double GetVariance();
