@@ -1,8 +1,10 @@
 #include "catch.hpp"
-#include "utils/compare_files.h"
-#include "../PrevalenceTimeSeries.h"
 
-// REMEMBER: remove "-new" when replacing old implementation
+// Provides "compare_files" function for comparing output of CSVExporter's
+//   to reference output
+#include "utils/compare_files.h"
+
+#include "../PrevalenceTimeSeries.h"
 #include "../CSVExport.h"
 
 using namespace std;

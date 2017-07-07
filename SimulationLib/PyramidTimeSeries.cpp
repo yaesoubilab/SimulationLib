@@ -27,7 +27,7 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
 
-    closed = false
+    closed = false;
 
     nPeriods     = calcNPeriods(timeMax, periodLength);
 

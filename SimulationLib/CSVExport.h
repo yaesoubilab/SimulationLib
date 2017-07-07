@@ -32,6 +32,9 @@ namespace SimulationLib {
         CellSpecItr end;
     };
 
+    // This enum represents the various statistics that are collected by the
+    //   TimeStatistics classes. Later on they will be used to articulate
+    //   which statistics are to be exported (for the TimeSeriesCSVExporter)
     enum class TimeStatType : uint8_t {
         Sum       = 0 << 1,
         Count     = 0 << 2,
@@ -48,10 +51,15 @@ namespace SimulationLib {
     class CSVExport
     {
     public:
+        // 'fname' is the file to be written to. Specify extention (probably
+        //   .csv). Note that currently, files are appended to: if 'fname'
+        //   already exists
         CSVExport(string fname);
         ~CSVExport();
 
-        // bool Add(ObjType obj);
+        // Writes the .csv representation of any classes (TimeSeries,
+        //   PyramidTimeSeries, TimeStatistics) which have been added to the
+        //   exporter out to disk. Returns false if the write fails.
         bool Write(void);
 
     private:
@@ -60,14 +68,34 @@ namespace SimulationLib {
         CellSpecItrs rowItrs;
         CellSpecItrs columnItrs;
 
+        // The following functions must be implemented by classes inheriting
+        //   from CSVExporter (TimeSeriesCSVExport, PyramidTimeSeriesCSVExport,
+        //   TimeStatisticsCSVExport). They are called by the ::Write() method
+        //   of CSVExport in order to iterate over rows and columns and obtain
+        //   values of headers and "cells" to be written.
+
+        // Returns iterators for columns and rows so that ::Write() can iterate
+        //   over each cell to be written
         virtual CellSpecItrs getColumnIters(void) = 0;
         virtual CellSpecItrs getRowIters(void) = 0;
 
+        // Allows ::Write() to know if a header for rows and/or columns
+        //   should be written to the file
         virtual bool isColumnHeader(void) = 0;
         virtual bool isRowHeader(void) = 0;
 
+        // If ::isRowHeader()==true, then allows retrieval of a header
+        //   for a particular row, given 'rowSpec'. Analogous case for
+        //   ::getColumnName().
         virtual string getRowName(CellSpec rowSpec) = 0;
         virtual string getColumnName(CellSpec columnSpec) = 0;
+
+        // Returns a string representing the value to a 'cell' identified by
+        //   the position of the iterators 'rowSpec' and 'columnSpec'.
+        //   Cell (0,0) (or equivalent) represents the cell at the first
+        //   row and column. Important: iterators do NOT reflect any presence/
+        //   absence of row or column headers - they iterate over data cells,
+        //   regardless of and headers that may or may not exist.
         virtual string getCell(CellSpec rowSpec, CellSpec columnSpec) = 0;
     };
 
@@ -79,12 +107,17 @@ namespace SimulationLib {
     class TimeSeriesCSVExport : public CSVExport<T> {
     public:
         TimeSeriesCSVExport(string fname) : CSVExport<T>(fname) {
+            // The following five vectors store information about TimeSeries
+            //   to be exported. Index 'i' of any of these vectors stores
+            //   information about the 'i'th TimeSeries added to TimeSeriesCSVExport
+            //   via ::Add(TimeSeries<T>).
             tsVectors      = vector<vector<T> *>{};
             tsTime0s       = vector<double>{};
             tsTimeMaxs     = vector<double>{};
             tsNames        = vector<string>{};
             tsSizes        = vector<long>{};
 
+            //
             tsPeriodLength = 0;
             tMax           = 0;
 
@@ -96,14 +129,17 @@ namespace SimulationLib {
             delete columns;
         };
 
+        // Adds a TimeSeries to the list of TimeSeries which will be exported.
+        //   The periodLength of this TimeSeries must be equal to that of
+        //   any other TimeSeries already ::Add()'ed. Returns false if this
+        //   condition is not met, or if 'tse' is =nullptr, or if ::Close()
+        //   has not been called on 'tse'.
         bool Add(TimeSeries<T> *tse);
 
     private:
+        // Implementations of virtual methods inherited from CSVExport
         CellSpecItrs getColumnIters(void);
         CellSpecItrs getRowIters(void);
-
-        vector<CellSpec> *rows;
-        vector<CellSpec> *columns;
 
         bool isColumnHeader(void);
         bool isRowHeader(void);
@@ -111,6 +147,10 @@ namespace SimulationLib {
         string getRowName(CellSpec rowSpec);
         string getColumnName(CellSpec columnSpec);
         string getCell(CellSpec rowSpec, CellSpec columnSpec);
+
+        // Class specific variables
+        vector<CellSpec> *rows;
+        vector<CellSpec> *columns;
 
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;

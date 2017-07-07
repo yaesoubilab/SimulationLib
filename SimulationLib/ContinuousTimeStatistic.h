@@ -14,12 +14,18 @@ namespace SimulationLib
 	public:
 		string name;
 
+		// Instantiates a new ContinuousTimeStatistic class. 'name' is any
+		//   string describing the data to be stored in the class.
 		ContinuousTimeStatistic(string name);
 		~ContinuousTimeStatistic();
 
+		// Note: Record(double) will fail, because a time dimension must be
+		//   specified for ContinuousTimeStatistic. In the future, this may
+		//   cause an error to be thrown.
 		void Record(double increment);
 		void Record(double time, double increment);
 
+		// Getter methods
 		double GetMean();
 		double GetCount();
 		double GetVariance();
