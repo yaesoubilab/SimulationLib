@@ -238,3 +238,23 @@ void PyramidTimeSeries::Close(void) {
 
     return;
 }
+
+int PyramidTimeSeries::GetNumberCategories(void) {
+    return nCategories;
+}
+
+vector<double> PyramidTimeSeries::GetAgeBreaks(void) {
+    return ageBreaks;
+}
+
+int PyramidTimeSeries::GetPeriodLength(void) {
+    return periodLength;
+}
+
+int PyramidTimeSeries::GetTimeMax(void) {
+    return timeMax;
+}
+
+int PyramidTimeSeries::GetTime0(void) {
+    return time0;
+}
