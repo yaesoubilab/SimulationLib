@@ -49,6 +49,9 @@ CSVExport<T>::Write(void) {
         return false;
     }
 
+    if (isRowHeader())
+        buf += comma;
+
     // Print column header, if it exists
     if (isColumnHeader()) {
 
@@ -491,16 +494,16 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
 /////////////////////////////////////////
 // TimeStatistic CSV Exporter
 /////////////////////////////////////////
-template<typename T>
-TimeStatisticsCSVExport<T>::~TimeStatisticsCSVExport()
+
+TimeStatisticsCSVExport::~TimeStatisticsCSVExport()
 {
     delete _columns;
     delete _rows;
 }
 
-template<typename T>
+
 bool
-TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
+TimeStatisticsCSVExport::Add(TimeStatistic *tst) {
 
     if (tst == nullptr) {
         printf("Error: TimeStatistics pointer was NULL\n");
@@ -514,9 +517,8 @@ TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
 }
 
 
-template<typename T>
 CellSpecItrs
-TimeStatisticsCSVExport<T>::getColumnIters(void) {
+TimeStatisticsCSVExport::getColumnIters(void) {
     _columns = new vector<CellSpec>(columns.size());
     CellSpecItrs cellSpecItrs;
 
@@ -528,9 +530,9 @@ TimeStatisticsCSVExport<T>::getColumnIters(void) {
     return cellSpecItrs;
 }
 
-template<typename T>
+
 CellSpecItrs
-TimeStatisticsCSVExport<T>::getRowIters(void) {
+TimeStatisticsCSVExport::getRowIters(void) {
     _rows = new vector<CellSpec>(nStats);
     CellSpecItrs cellSpecItrs;
 
@@ -542,29 +544,27 @@ TimeStatisticsCSVExport<T>::getRowIters(void) {
     return cellSpecItrs;
 }
 
-template <typename T>
 bool
-TimeStatisticsCSVExport<T>::isColumnHeader(void) {
+TimeStatisticsCSVExport::isColumnHeader(void) {
     // Really?
     return true;
 }
 
-template <typename T>
 bool
-TimeStatisticsCSVExport<T>::isRowHeader(void) {
+TimeStatisticsCSVExport::isRowHeader(void) {
     // Really?
     return true;
 }
 
-template<typename T>
+
 string
-TimeStatisticsCSVExport<T>::getRowName(CellSpec rowSpec) {
+TimeStatisticsCSVExport::getRowName(CellSpec rowSpec) {
     return stats.at(rowSpec)->name;
 }
 
-template<typename T>
+
 string
-TimeStatisticsCSVExport<T>::getColumnName(CellSpec columnSpec) {
+TimeStatisticsCSVExport::getColumnName(CellSpec columnSpec) {
     int j;
     string rowName;
 
@@ -583,9 +583,9 @@ TimeStatisticsCSVExport<T>::getColumnName(CellSpec columnSpec) {
     return string("");
 }
 
-template<typename T>
+
 string
-TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+TimeStatisticsCSVExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     TimeStatistic *tst;               // Pointer to TimeStatistic referenced by
                                       //   rowSpec
     TimeStatType statType;            // Holds the TimeStatType implied by

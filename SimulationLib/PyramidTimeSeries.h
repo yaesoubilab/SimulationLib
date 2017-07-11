@@ -112,6 +112,8 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
 
 		void Close(void);
+
+		// Returns false if data is closed, true otherwise
 		bool IsWritable(void);
 
 		// Get the number of categories
@@ -128,8 +130,5 @@ namespace SimulationLib
 
 		// Return the time0
 		int GetTime0(void);
-
-		// Returns false if data is closed, true otherwise
-		bool IsWritable(void);
 	};
 }

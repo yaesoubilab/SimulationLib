@@ -195,7 +195,7 @@ namespace SimulationLib {
 
         PyramidTimeSeries *PTSptr;
 
-        bool hasData; 
+        bool hasData;
 
         // vector<vector<int>> data;
 
@@ -226,11 +226,10 @@ namespace SimulationLib {
     /////////////////////////////////////////
     // TimeStatistic CSV Exporter
     /////////////////////////////////////////
-    template<typename T>
-    class TimeStatisticsCSVExport : public CSVExport<T> {
+    class TimeStatisticsCSVExport : public CSVExport<double> {
     public:
         TimeStatisticsCSVExport(string fname, map<TimeStatType, string> _columns) \
-          : CSVExport<T>(fname) {
+          : CSVExport<double>(fname) {
             columns = _columns;
             nStats  = 0;
         };

@@ -7,6 +7,7 @@
 #include "utils/compare_files.h"
 #include "../PrevalenceTimeSeries.h"
 #include "../PrevalencePyramidTimeSeries.h"
+#include "../DiscreteTimeStatistic.h"
 
 #include "../CSVExport.h"
 
@@ -139,8 +140,8 @@ TEST_CASE("Basic TimeStatistic export", "[csv]") {
     map<TimeStatType, string> columns {
         {TimeStatType::Mean, "Average"}
     };
-    DiscreteTimeStatistic dts = new DiscreteTimeStatistic("Statistics!");
-    TimeStatisticCSVExporter tse("test-tstats01-out.csv", columns);
+    DiscreteTimeStatistic *dts = new DiscreteTimeStatistic("Statistics!");
+    TimeStatisticsCSVExport tse("test-tstats01-out.csv", columns);
 
     dts->Record(1);
     dts->Record(2);
