@@ -514,7 +514,8 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
 template<typename T>
 TimeStatisticsCSVExport<T>::~TimeStatisticsCSVExport()
 {
-
+    delete _columns;
+    delete _rows;
 }
 
 template<typename T>
@@ -527,6 +528,7 @@ TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
     }
 
     stats.push_back(tst);
+    nStats += 1;
 
     return true;
 }
@@ -535,13 +537,29 @@ TimeStatisticsCSVExport<T>::Add(TimeStatistic *tst) {
 template<typename T>
 CellSpecItrs
 TimeStatisticsCSVExport<T>::getColumnIters(void) {
+    _columns = new vector<CellSpec>(columns.size());
+    CellSpecItrs cellSpecItrs;
 
+    iota(_columns->begin(), _columns->end(), (CellSpec) 0);
+
+    cellSpecItrs.begin = _columns->begin();
+    cellSpecItrs.end   = _columns->end();
+
+    return cellSpecItrs;
 }
 
 template<typename T>
 CellSpecItrs
 TimeStatisticsCSVExport<T>::getRowIters(void) {
+    _rows = new vector<CellSpec>(nStats);
+    CellSpecItrs cellSpecItrs;
 
+    iota(_rows->begin(), _rows->end(), (CellSpec) 0);
+
+    cellSpecItrs.begin = _rows->begin();
+    cellSpecItrs.end   = _rows->end();
+
+    return cellSpecItrs;
 }
 
 template <typename T>
@@ -573,7 +591,7 @@ TimeStatisticsCSVExport<T>::getColumnName(CellSpec columnSpec) {
     // Look through the columns map in the default sorted order. When map entry
     //   #'columnSpec' is found, return the string associated with this map entry.
     j = 0;
-    for (const_iterator i = columns.cbegin(); \
+    for (auto i = columns.cbegin(); \
          i != columns.cend();                 \
          ++i, ++j)
         if (j == (int)columnSpec)
@@ -592,11 +610,8 @@ TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
                                       //   rowSpec
     TimeStatType statType;            // Holds the TimeStatType implied by
                                       //   'columnSpec'
-    function <double(void)> accessor; // Holds pointer to function to retrieve
-                                      //   value requested by (rowSpec, columnSpec)
-    double result;                    // Holds result of call to getter method
-                                      //   of the indicated TimeStatistic object
-                                      //   (getter is referenced by 'accessor')
+    double result;                    // Holds result of call to TimeStatistic
+                                      //   getter class
     int j;                            // To keep track of numeric index on columns
                                       //   std::map
     bool found;                       // Indicates whether columnSpec specified
@@ -604,11 +619,11 @@ TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     j     = 0;
     found = false;
-    for (const_iterator i = columns.cbegin(); \
-         i != columns.cend();                 \
+    for (auto i = columns.cbegin(); \
+         i != columns.cend();       \
          ++i, ++j)
         if (j == (int)columnSpec) {
-            statType = columns->first;
+            statType = i->first;
             found    = true;
         }
 
@@ -619,33 +634,32 @@ TimeStatisticsCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     }
 
     // Identify the TimeStatistic class from which data will be drawn
-    try { tst = stats.at(rowSpec) } catch (...) {
+    try { tst = stats.at(rowSpec); } catch (...) {
         throw out_of_range("rowSpec was >= stats.size()");
     }
 
+    /* SKETCHY!!!!! */
     switch (statType) {
-        case TimeStatType::Sum      : accessor = tst->GetSum;
+        case TimeStatType::Sum      : result = -100;
                                       break;
-        case TimeStatType::Count    : accessor = tst->GetCount;
+        case TimeStatType::Count    : result = tst->GetCount();
                                       break;
-        case TimeStatType::Mean     : accessor = tst->GetMean;
+        case TimeStatType::Mean     : result = tst->GetMean();
                                       break;
-        case TimeStatType::Variance : accessor = tst->GetVariance;
+        case TimeStatType::Variance : result = tst->GetVariance();
                                       break;
-        case TimeStatType::Min      : accessor = tst->GetMin;
+        case TimeStatType::Min      : result = tst->GetMin();
                                       break;
-        case TimeStatType::Max      : accessor = tst->GetMax;
+        case TimeStatType::Max      : result = tst->GetMax();
                                       break;
-        default                     : accessor = nullptr;
+        default                     : result = -100;
                                       break;
     }
 
-    if (accessor == nullptr) {
+    if (result == -100) {
         throw out_of_range("Unsupported TimeStatType");
         return string("");
     }
-
-    result = accessor();
 
     return to_string(result);
 }

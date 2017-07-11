@@ -36,14 +36,7 @@ namespace SimulationLib {
     // This enum represents the various statistics that are collected by the
     //   TimeStatistics classes. Later on they will be used to articulate
     //   which statistics are to be exported (for the TimeSeriesCSVExporter)
-    enum class TimeStatType : uint8_t {
-        Sum       = 0 << 1,
-        Count     = 0 << 2,
-        Mean      = 0 << 3,
-        Variance  = 0 << 4,
-        Min       = 0 << 5,
-        Max       = 0 << 6
-    };
+    enum class TimeStatType { Sum, Count, Mean, Variance, Min, Max };
 
     /////////////////////////////////////////
     // General CSV Exporter
@@ -182,7 +175,7 @@ namespace SimulationLib {
             // tsSizes        = vector<long>{};
 
             ageBreaks = vector<double>{};
-            
+
             ptsePeriodLength = 0;
             tMax             = 0;
 
@@ -235,6 +228,7 @@ namespace SimulationLib {
         TimeStatisticsCSVExport(string fname, map<TimeStatType, string> _columns) \
           : CSVExport<T>(fname) {
             columns = _columns;
+            nStats  = 0;
         };
 
         ~TimeStatisticsCSVExport();
@@ -254,6 +248,11 @@ namespace SimulationLib {
         virtual string getRowName(CellSpec rowSpec);
         virtual string getColumnName(CellSpec columnSpec);
         virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
+
+        // Class specific variables
+        int              nStats;
+        vector<CellSpec> *_rows;
+        vector<CellSpec> *_columns;
 
         map<TimeStatType, string> columns;
         vector<TimeStatistic *> stats;

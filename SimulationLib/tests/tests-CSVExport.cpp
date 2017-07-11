@@ -2,6 +2,8 @@
 
 // Provides "compare_files" function for comparing output of CSVExporter's
 //   to reference output
+#include <map>
+#include <string>
 #include "utils/compare_files.h"
 #include "../PrevalenceTimeSeries.h"
 #include "../PrevalencePyramidTimeSeries.h"
@@ -93,4 +95,21 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
                            "tests-CSVExport-files/test-t03-answer.csv") == true );
 
 
+}
+
+TEST_CASE("Basic TimeStatistic export", "[csv]") {
+    map<TimeStatType, string> columns {
+        {TimeStatType::Mean, "Average"}
+    };
+    DiscreteTimeStatistic dts = new DiscreteTimeStatistic("Statistics!");
+    TimeStatisticCSVExporter tse("test-tstats01-out.csv", columns);
+
+    dts->Record(1);
+    dts->Record(2);
+    dts->Record(3);
+
+    REQUIRE( tse.Add(dts) == true );
+    REQUIRE( tse.Write()  == true );
+    REQUIRE( compare_files("test-tstats01-out.csv",
+                           "tests-CSVExport-files/test-tstats01-answer.csv") == true );
 }

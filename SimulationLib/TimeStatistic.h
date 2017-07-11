@@ -7,7 +7,7 @@ namespace SimulationLib
     class TimeStatistic
     {
     public:
-        TimeStatistic(string ;name) {
+        TimeStatistic(string _name) {
             name = _name;
         }
 

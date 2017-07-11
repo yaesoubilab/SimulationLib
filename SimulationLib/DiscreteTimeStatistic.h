@@ -15,8 +15,6 @@ namespace SimulationLib
 		// DiscreteTimeStatistic calculates time-independent point statistics.
 		// To record observations for later access via the ::GetObservations()
 		//   method, specify 'numOfObservationsToStore' on instantiation.
-		DiscreteTimeStatistic(string name, long numOfObservationsToStore);
-
 		DiscreteTimeStatistic(string _name, long numOfObservationsToStore) :
 		  TimeStatistic(_name)
 	    {
