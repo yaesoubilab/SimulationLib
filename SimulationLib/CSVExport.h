@@ -7,6 +7,7 @@
 #include <iterator>
 #include <numeric>
 #include <utility>
+#include <fstream>
 
 #include "PyramidTimeSeries.h"
 #include "TimeSeries.h"

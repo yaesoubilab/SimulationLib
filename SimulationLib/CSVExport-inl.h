@@ -17,18 +17,17 @@ CSVExport<T>::~CSVExport() {}
 template <typename T>
 bool
 CSVExport<T>::Write(void) {
-    int stringSize;                    // Size of the string to be written to the file buffer
-    string buf;                        // Output buffer
     string comma, newline;             // Strings for commonly used symbols
-    FILE *fs;                          // File buffer
     CellSpecItrs columnItrs, rowItrs;  // Iterators against rows and columns
 
-    buf        = string("");
     comma      = string(",");
     newline    = string("\n");
 
     columnItrs = getColumnIters();     // Get iterators from the methods of the
     rowItrs    = getRowIters();        //   child class (via virtual functions).
+
+    // Create output buffer
+    ofstream fout(fname);
 
     // Make sure that there are in fact rows and columns to write
     if (columnItrs.begin == columnItrs.end) {
@@ -38,14 +37,6 @@ CSVExport<T>::Write(void) {
 
     if (rowItrs.begin == rowItrs.end) {
         printf("Error: No rows to write\n");
-        return false;
-    }
-
-    // By default we append to files, meaning that if 'fname' already exists,
-    //   it will be appended to, rather than overwritten.
-    if (!(fs = fopen(fname.c_str(), "a"))) {
-        printf("Error: fopen() returned NULL pointer\n");
-        fclose(fs);
         return false;
     }
 
@@ -59,14 +50,14 @@ CSVExport<T>::Write(void) {
 
             // Add comma, if not the first column
             if (itr != columnItrs.begin)
-                buf += comma;
+                fout << comma;
 
             // Add column name
-            buf += getColumnName(*itr);
+            fout << getColumnName(*itr);
         }
 
         // Terminate line
-        buf += newline;
+        fout << newline;
     }
 
     // Iterate over each row
@@ -76,7 +67,7 @@ CSVExport<T>::Write(void) {
 
         // Print row header if exists
         if (isRowHeader())
-            buf += getRowName(*rItr) + comma;
+            fout << getRowName(*rItr) + comma;
 
         // Iterate over each column
         for (CellSpecItr cItr = columnItrs.begin;
@@ -85,27 +76,21 @@ CSVExport<T>::Write(void) {
 
             // Add comma if not the first column
             if (cItr != columnItrs.begin)
-                buf += comma;
+                fout << comma;
 
             // Retrieve the contents of this (row, column) pair and add
             //   it to the output buffer.
-            buf += getCell(*rItr, *cItr);
+            fout << getCell(*rItr, *cItr);
         }
 
         // Terminate line
-        buf += newline;
+        fout << newline;
     }
 
-    // Perform write
-    stringSize = buf.size();
-    if (fwrite(buf.c_str(), sizeof(char), stringSize, fs) < (size_t)stringSize) {
-        printf("Error: std::fwrite returned an error\n");
-        fclose(fs);
-        return false;
-    }
+    // Flush and close output buffer
+    fout.flush();
+    fout.close();
 
-    // Free memory for file pointer and return victorious
-    fclose(fs);
     return true;
 }
 
