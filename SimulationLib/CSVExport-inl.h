@@ -358,10 +358,6 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 
     PTSptr = ptse;
 
-    //copy data from pyramid structure into vector of vectors<int>
-    //this seems very inefficient?? but I thought if I used pointers to the vectors, it would break the private/public set up we were trying to create
-
-
     // for (int categoryIdx = 0; categoryIdx < nCategories; categoryIdx++)
     // {
     //     vector<int> vec;
@@ -384,8 +380,8 @@ CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 
 
-    // "+1" is to account for the extra column we need to represent time.
-    // "+1" is to account for the extra column needed to represent the age group.
+    // The first "+1" is to account for the extra column we need to represent time.
+    // The second "+1" is to account for the extra column needed to represent the age group.
     // Therefore, column 0 is for time, not value, and column 1 is for the age group.
     columns = new vector<CellSpec>(1 + 1 + nCategories);
     CellSpecItrs cellSpecItrs;
@@ -492,7 +488,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
         {
             ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-" + to_string((int)ageBreaks[ageGroupIdx]));
         }
-        
+
         return ageRange;
     }
 
