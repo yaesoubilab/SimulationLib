@@ -73,8 +73,11 @@ namespace SimulationLib
 		// Throws exception for invalid 'categoryIndex'.
 		int GetTotalInCategory(int categoryIndex);
 
-		// Returns the total number of indivudals in the specified age group.
+		// Returns the total number of individuals in the specified age group.
 		// Throws exception for invalid 'ageGroupIndex'.
 		int GetTotalInAgeGroup(int ageGroupIndex);
+
+		// Returns the total number of individuals in the specified category and age group. 
+		int GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
 	};
 }
