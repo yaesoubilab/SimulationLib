@@ -275,10 +275,6 @@ void PyramidTimeSeries::Close(void) {
     return;
 }
 
-bool PyramidTimeSeries::IsWritable(void) {
-    return !closed;
-}
-
 int PyramidTimeSeries::GetNumberCategories(void) {
     return nCategories;
 }
@@ -297,4 +293,8 @@ int PyramidTimeSeries::GetTimeMax(void) {
 
 int PyramidTimeSeries::GetTime0(void) {
     return time0;
+}
+
+bool PyramidTimeSeries::IsWritable(void) {
+    return !closed;
 }

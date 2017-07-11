@@ -328,22 +328,21 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
         return false;
     }
 
-    // // Make sure ::Close() has already been called on the time series
-    // if (ts->IsWritable()) {
-    //     printf("Error: TimeSeries is still writable\n");
-    //     return false;
-    // }
+    // Make sure ::Close() has already been called on the time series
+    if (ptse->IsWritable()) {
+        printf("Error: PyramidTimeSeries is still writable\n");
+        return false;
+    }
 
-    // // Make sure that the period length of the time series being added
-    // //   is identical to the period length of other time series which
-    // //   have already been queued for export.
-    // if (nTimeSeries != 0 && ts->GetPeriodLength() != tsPeriodLength) {
-    //     printf("Error: All TimeSeries must have the same periodLength\n");
-    //     return false;
-    // } else if (nTimeSeries == 0) {
-    //     tsPeriodLength = ts->GetPeriodLength();
-    //     printf("::Add(): tsPeriodLength=%d\n", tsPeriodLength);
-    // }
+    // Make sure that data has not been added before
+    if (hasData) {
+        printf("Error: PyramidTimeSeries data has already been added. Only 1 PyramidTimeSeries data can be added.\n");
+        return false;
+    }
+    else
+    {
+        hasData = true;
+    }
 
     rows      = nullptr;
     columns   = nullptr;
@@ -357,20 +356,6 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 
 
     PTSptr = ptse;
-
-    // for (int categoryIdx = 0; categoryIdx < nCategories; categoryIdx++)
-    // {
-    //     vector<int> vec;
-    //     vec = vector<int>{};
-    //     for (int t = 0; t < tMax; t += ptsePeriodLength)
-    //     {
-    //         vec.push_back(ptse->GetTotalInCategoryAtTime(t, categoryIdx));
-    //     }
-
-    //     data.push_back(vec);
-    // }
-
-    // printf("::Add(): tMax=%f\n", tMax);
 
     return true;
 }
@@ -389,8 +374,6 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
 
-    // printf("nTimeSeries=%d\n", nTimeSeries);
-    // printf("printing columnIters vector:\n");
     printVector(columns);
 
     cellSpecItrs.begin = columns->begin();
@@ -407,17 +390,11 @@ PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
 
     nPeriods = (int)ceil(tMax / (double)ptsePeriodLength) + 1;
 
-    printf("%d age \n", nPeriods);
-
     nAgeGroups = ageBreaks.size() + 1;
 
     rows = new vector<CellSpec>(nPeriods * nAgeGroups);
 
-    // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, ptsePeriodLength, nPeriods);
     iota(rows->begin(), rows->end(), (CellSpec)0);
-
-    // printf("Printing rowIters vector:\n");
-    // printVector(rows);
 
     cellSpecItrs.begin = rows->begin();
     cellSpecItrs.end   = rows->end();
@@ -461,9 +438,14 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
 
     string empty, ageRange;
 
+    // there is one more age group than there are age breaks
     nAgeGroups = ageBreaks.size() + 1;
 
+    // calculate period by finding the quotient of rowSpec and nAgeGroups
     period = rowSpec/nAgeGroups;
+
+    // Find age group index (0,1,...)
+    ageGroupIdx = rowSpec % nAgeGroups;
 
     // Return period # if first column
     if (columnSpec == 0)
@@ -472,8 +454,6 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
     // Return age-range if second column
     if (columnSpec == 1)
     {
-        // Find age group index (0,1,...)
-        ageGroupIdx = rowSpec % nAgeGroups;
 
         // Return different strings depending on age group index
         if (ageGroupIdx == 0)
@@ -499,7 +479,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
     timeMax = tMax;
 
     if ( (period * ptsePeriodLength) < time0   || \
-         (period * ptsePeriodLength) >= timeMax     )
+         (period * ptsePeriodLength) > timeMax     )
         return empty;
 
     cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
