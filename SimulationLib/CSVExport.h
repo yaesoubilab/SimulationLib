@@ -197,7 +197,9 @@ namespace SimulationLib {
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;
 
-        vector<vector<int>> data;
+        PyramidTimeSeries *PTSptr;
+
+        // vector<vector<int>> data;
 
         vector<string> categoryNames;
         vector<double> ageBreaks;

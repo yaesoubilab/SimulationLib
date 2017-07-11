@@ -355,6 +355,9 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
     tMax             = ptse->GetTimeMax();
     time0            = ptse->GetTime0();
 
+
+    PTSptr = ptse;
+
     //copy data from pyramid structure into vector of vectors<int>
     //this seems very inefficient?? but I thought if I used pointers to the vectors, it would break the private/public set up we were trying to create
 
@@ -500,11 +503,16 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
     time0 = 0;
     timeMax = tMax;
 
+    if ( (period * ptsePeriodLength) < time0   || \
+         (period * ptsePeriodLength) >= timeMax     )
+        return empty;
+
     // cellVal = data[categoryIdx][]; //placeholder for actual lookup
+    cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
 
-    // return to_string(cellVal);
+    return to_string(cellVal);
 
-    return string("empty for now");
+    // return string("empty for now");
 
 }
 
