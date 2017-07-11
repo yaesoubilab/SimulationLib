@@ -107,7 +107,6 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 
-
 		int GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
 		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
 

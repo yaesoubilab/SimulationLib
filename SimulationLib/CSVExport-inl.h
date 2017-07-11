@@ -145,7 +145,7 @@ TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
         return false;
     } else if (nTimeSeries == 0) {
         tsPeriodLength = ts->GetPeriodLength();
-        printf("::Add(): tsPeriodLength=%d\n", tsPeriodLength);
+        // printf("::Add(): tsPeriodLength=%d\n", tsPeriodLength);
     }
 
     // GetTime0 returns a double, but it needs to be an integer, so that
@@ -207,9 +207,9 @@ TimeSeriesCSVExport<T>::getColumnIters(void) {
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
 
-    printf("nTimeSeries=%d\n", nTimeSeries);
-    printf("printing columnIters vector:\n");
-    printVector(columns);
+    // printf("nTimeSeries=%d\n", nTimeSeries);
+    // printf("printing columnIters vector:\n");
+    // printVector(columns);
 
     cellSpecItrs.begin = columns->begin();
     cellSpecItrs.end   = columns->end();
@@ -228,7 +228,7 @@ TimeSeriesCSVExport<T>::getRowIters(void) {
 
     rows = new vector<CellSpec>(nPeriods);
 
-    printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
+    // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
     iota(rows->begin(), rows->end(), (CellSpec)0);
 
     printf("Printing rowIters vector:\n");
@@ -377,7 +377,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
 
-    printVector(columns);
+    // printVector(columns);
 
     cellSpecItrs.begin = columns->begin();
     cellSpecItrs.end   = columns->end();
@@ -482,7 +482,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
     timeMax = tMax;
 
     if ( (period * ptsePeriodLength) < time0   || \
-         (period * ptsePeriodLength) > timeMax     )
+         (period * ptsePeriodLength) /*> - EVENTUALLY FIX!*/>= timeMax )
         return empty;
 
     cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);

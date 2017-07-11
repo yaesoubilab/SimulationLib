@@ -1,6 +1,7 @@
 #pragma once
 #include <ctime>
 #include <string>
+#include <map>
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.h"
 #include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/RNG.h"
@@ -54,9 +55,8 @@ namespace SimulationLib {
                             Bernoulli *sDistribution,                   \
                             int nPeople);
 
-        Individual newIndividual(RNG rng);
-        void refreshDist(int nPeople, Binomial **bDistribution);
-        void reportStats(int t, long nPeople, int nBirths, int nDeaths);
+        void refreshDists(int nPeople, Binomial **bDistribution);
+        Individual newIndividual(RNG *rng);
 
         Binomial                    **bDistributionArr; // Birth distributions
                                                         //   (nPeople-dependent)
@@ -76,5 +76,7 @@ namespace SimulationLib {
         PrevalenceTimeSeries<int>   **populationArr;
         PrevalencePyramidTimeSeries **populationPyrArr;
         ContinuousTimeStatistic     **populationStatisticsArr;
+
+        vector<double>                 defaultAgeBreaks;
     };
 }

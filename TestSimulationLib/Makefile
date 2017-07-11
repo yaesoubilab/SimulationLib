@@ -8,6 +8,8 @@ SRCS_SBDSIM=run-SerialBirthDeathSim.cpp SerialBirthDeathSim.cpp \
             ../SimulationLib/DiscreteTimeStatistic.cpp \
             ../SimulationLib/IncidenceTimeSeries.cpp \
             ../SimulationLib/PrevalenceTimeSeries.cpp \
+            ../SimulationLib/PyramidTimeSeries.cpp \
+            ../SimulationLib/PyramidData.cpp \
             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.cpp \
             ../SimulationLib/CSVExport.cpp
 OBJS_SBDSIM=$(subst .cpp,.o,$(SRCS_SBDSIM))
@@ -17,6 +19,8 @@ SRCS_PBDSIM=run-ParallelBirthDeathSim.cpp \
             ../SimulationLib/ContinuousTimeStatistic.cpp \
             ../SimulationLib/DiscreteTimeStatistic.cpp \
             ../SimulationLib/IncidenceTimeSeries.cpp \
+            ../SimulationLib/PyramidTimeSeries.cpp \
+            ../SimulationLib/PyramidData.cpp \
             ../SimulationLib/PrevalenceTimeSeries.cpp \
             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.cpp \
             ../SimulationLib/CSVExport.cpp
@@ -28,12 +32,13 @@ SRCS_PYBDSIM=run-PyramidBirthDeathSim.cpp PyramidBirthDeathSim.cpp \
              ../SimulationLib/DiscreteTimeStatistic.cpp \
              ../SimulationLib/IncidenceTimeSeries.cpp \
              ../SimulationLib/PrevalenceTimeSeries.cpp \
+             ../SimulationLib/PyramidTimeSeries.cpp \
              ../SimulationLib/IncidencePyramidTimeSeries.cpp \
              ../SimulationLib/PrevalencePyramidTimeSeries.cpp \
              ../SimulationLib/PyramidData.cpp \
              ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.cpp \
              ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.cpp \
-             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Uniform.cpp \
+             ../../StatisticalDistributionsLib/StatisticalDistributionsLib/Uniform.cpp
 OBJS_PYBDSIM=$(subst .cpp,.o,$(SRCS_PYBDSIM))
 
 all: SerialBirthDeathSim ParallelBirthDeathSim PyramidBirthDeathSim
@@ -53,4 +58,4 @@ clean: cleanCSV
           *.dSYM
 
 cleanCSV:
-	$(RM) *.csv
+	$(RM) **/*.csv

@@ -19,9 +19,9 @@ namespace SimulationLib {
         deathsArr               = new IncidenceTimeSeries<int>*[nTrajectories];
         populationArr           = new PrevalenceTimeSeries<int>*[nTrajectories];
 
-        birthsPyrArr            = new IncidencePyramidTimeSeries<int>*[nTrajectories];
-        deathsPyrArr            = new IncidencePyramidTimeSeries<int>*[nTrajectories];
-        populationPyrArr        = new PrevalencePyramidTimeSeries<int>*[nTrajectories];
+        birthsPyrArr            = new IncidencePyramidTimeSeries*[nTrajectories];
+        deathsPyrArr            = new IncidencePyramidTimeSeries*[nTrajectories];
+        populationPyrArr        = new PrevalencePyramidTimeSeries*[nTrajectories];
 
         birthStatisticsArr      = new DiscreteTimeStatistic*[nTrajectories];
         deathStatisticsArr      = new DiscreteTimeStatistic*[nTrajectories];
@@ -32,7 +32,7 @@ namespace SimulationLib {
         aDistribution           = new Uniform(ageMin, ageMax);
         sDistribution           = new Bernoulli(0.5); // Assuming 50% chance male/female
 
-        defaultAgeBreaks        = vector<int>{20, 40, 60, 80};
+        defaultAgeBreaks        = vector<double>{20, 40, 60, 80};
 
         if (_fileName.empty()) {
             printf("Error: No fileName specified\n");
@@ -150,14 +150,38 @@ namespace SimulationLib {
     // }
 
     void PyramidBirthDeathSim::Run(void) {
-        CSVExport<int>     exportBirths(fileName + string("-births.csv"));
-        CSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
-        CSVExport<int> exportPopulation(fileName + string("-population.csv"));
-        // Pending implementation:
-        //   PyramidCSVExport     exportBirthsPyr(fileName + string("-pyramid-births.csv"));
-        //   PyramidCSVExport     exportDeathsPyr(fileName + string("-pyramid-deaths.csv"));
-        //   PyramidCSVExport exportPopulationPyr(fileName + string("-pyramid-population.csv"));
-        //
+        TimeSeriesCSVExport<int>     exportBirths(fileName + string("-births.csv"));
+        TimeSeriesCSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
+        TimeSeriesCSVExport<int> exportPopulation(fileName + string("-population.csv"));
+
+        PyramidTimeSeriesCSVExport     exportBirthsPyr(fileName + string("-pyramid-births.csv"));
+        PyramidTimeSeriesCSVExport     exportDeathsPyr(fileName + string("-pyramid-deaths.csv"));
+        PyramidTimeSeriesCSVExport exportPopulationPyr(fileName + string("-pyramid-population.csv"));
+
+        map<TimeStatType, string> columnsBirths {
+            {TimeStatType::Count, "Total births"},
+            {TimeStatType::Mean, "Average # births"},
+            {TimeStatType::Min, "Minimum # births"},
+            {TimeStatType::Max, "Maximum # births"}
+        };
+
+        map<TimeStatType, string> columnsDeaths {
+            {TimeStatType::Count, "Total deaths"},
+            {TimeStatType::Mean, "Average # deaths"},
+            {TimeStatType::Min, "Minimum # deaths"},
+            {TimeStatType::Max, "Maximum # deaths"}
+        };
+
+        map<TimeStatType, string> columnsPopulation {
+            {TimeStatType::Mean, "Average population size"},
+            {TimeStatType::Min, "Minimum population size"},
+            {TimeStatType::Max, "Maximum population size"}
+        };
+
+        TimeStatisticsCSVExport      exportBirthStats(fileName + string("-stats-births.csv"), columnsBirths);
+        TimeStatisticsCSVExport      exportDeathStats(fileName + string("-stats-deaths.csv"), columnsDeaths);
+        TimeStatisticsCSVExport exportPopulationStats(fileName + string("-stats-population.csv"), columnsPopulation);
+
         // Also pending implementation:
         //   Exporting of statistics for each trajectory
         //   Exporting of summary statistics across each trajectory
@@ -174,23 +198,28 @@ namespace SimulationLib {
                            bDistributionArr[i],
                            dDistribution,
                            aDistribution,
-                           sDistributions
+                           sDistribution,
                            nPeople);
             printf("\n");
         }
 
         for (int i = 0; i < nTrajectories; ++i)
         {
-            exportBirths.AddTimeSeries(birthsArr[i]);
-            exportDeaths.AddTimeSeries(deathsArr[i]);
-            exportPopulation.AddTimeSeries(populationArr[i]);
+            exportBirths.Add(birthsArr[i]);
+            exportDeaths.Add(deathsArr[i]);
+            exportPopulation.Add(populationArr[i]);
 
-            // Pending implementation:
-            //   exportBirthsPyr.Add(birthsPyrArr[i]);
-            //   exportDeathsPyr.Add(deathsPyrArr[i]);
-            //   exportPopulationPyr.Add(populationPyrArr[i]);
-            // This is also likely where statistics for each trajectory would be
-            // run.
+            // Right now we can only add one Pyramid to an exporter. This may
+            //   change in the future.
+            if (i == 0) {
+                exportBirthsPyr.Add(birthsPyrArr[i]);
+                exportDeathsPyr.Add(deathsPyrArr[i]);
+                exportPopulationPyr.Add(populationPyrArr[i]);
+            }
+
+            exportBirthStats.Add(birthStatisticsArr[i]);
+            exportDeathStats.Add(deathStatisticsArr[i]);
+            exportPopulationStats.Add(populationStatisticsArr[i]);
         }
 
         // This is likely where summary statistics would be run
@@ -199,9 +228,13 @@ namespace SimulationLib {
         exportDeaths.Write();
         exportPopulation.Write();
 
-        // exportBirthsPyr.Write();
-        // exportDeathsPyr.Write();
-        // exportPopulationPyr.Write();
+        exportBirthsPyr.Write();
+        exportDeathsPyr.Write();
+        exportPopulationPyr.Write();
+
+        exportBirthStats.Write();
+        exportDeathStats.Write();
+        exportPopulationStats.Write();
     }
 
     void PyramidBirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>    *births,        \
@@ -212,7 +245,9 @@ namespace SimulationLib {
                                               PrevalencePyramidTimeSeries *populationPyr, \
                                               Binomial  *bDistribution,                   \
                                               Bernoulli *dDistribution,                   \
-                                              int nPeople); {
+                                              Uniform   *aDistribution,                   \
+                                              Bernoulli  *sDistribution,                  \
+                                              int nPeople) {
 
         vector<Individual> individuals{};
         int nBirths, nDeaths, delta;
@@ -223,10 +258,10 @@ namespace SimulationLib {
         // Generate all individuals
         for (int i = 0; i < nPeople; ++i)
         {
-            Individual idv = newIndividual(rng, MIN_AGE, MAX_AGE);
+            Individual idv = newIndividual(rng);
 
             individuals.push_back(idv);
-            populationPyr->UpdateByAge(0, sexN(idv), idv.age);
+            populationPyr->UpdateByAge(0, sexN(idv), idv.age, 1);
         }
 
         population->Record(0, nPeople);
@@ -237,12 +272,12 @@ namespace SimulationLib {
 
             // Iterate through each individual and decide if they're going to
             // die.
-            auto it =  individuals.cbegin()
+            auto it = individuals.cbegin();
             while (it != individuals.cend()) {
 
                 // If the individual is going to die.
                 // This call returns a 'long' valued at 0 or 1
-                if ((bool)dDistribution->Sample(*rng)) {
+                if ((bool)dDistribution->Sample(*rng) == 1) {
 
                     // Increase the number of deaths, decrement the population
                     //   the individual belongs to by 1, increment the number
@@ -251,9 +286,9 @@ namespace SimulationLib {
                     nDeaths += 1;
                     populationPyr->UpdateByAge(t, sexN(*it), (*it).age, -1);
                     deathsPyr->UpdateByAge(t, sexN(*it), (*it).age, +1);
-                    it = individuals.erase(it)
+                    it = individuals.erase(it);
                 } else it = next(it);
-
+            }
 
             // For each in nBirths
                 // Get a new individual
@@ -263,7 +298,7 @@ namespace SimulationLib {
             nBirths  = (int)bDistribution->Sample(*rng);
             for (int i = 0; i < nBirths; ++i)
             {
-                Individual idv = newIndividual(rng, 0, 100);
+                Individual idv = newIndividual(rng);
 
                 individuals.push_back(idv);
                 populationPyr->UpdateByAge(t, sexN(idv), idv.age, +1);
@@ -279,7 +314,7 @@ namespace SimulationLib {
             deaths->Record(t, nDeaths);
             population->Record(t, delta);
 
-            reportStats(t, nPeople, nBirths, nDeaths);
+            printf("t=%2d: %d births, %d deaths, %d population size\n", t, nBirths, nDeaths, nPeople);
 
             // Refresh the birth distribution to reflect changes in population
             // size.
@@ -289,6 +324,10 @@ namespace SimulationLib {
         births->Close();
         deaths->Close();
         population->Close();
+
+        birthsPyr->Close();
+        deathsPyr->Close();
+        populationPyr->Close();
     }
 
     Individual PyramidBirthDeathSim::newIndividual(RNG *rng) {
@@ -304,10 +343,6 @@ namespace SimulationLib {
         idv.age = (int)aDistribution->Sample(*rng);
 
         return idv;
-    }
-
-    void PyramidBirthDeathSim::reportStats(int t, long nPeople, int nBirths, int nDeaths) {
-        printf("[%3d] nPeople %5ld | nBirths %2d | nDeaths %2d\n", t, nPeople, nBirths, nDeaths);
     }
 
     // Create new distributions in-place to reflect changes in the size of

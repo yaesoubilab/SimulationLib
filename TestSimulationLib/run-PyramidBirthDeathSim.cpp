@@ -1,5 +1,5 @@
 #include <string>
-#include "SerialBirthDeathSim.h"
+#include "PyramidBirthDeathSim.h"
 
 using namespace SimulationLib;
 
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     double pDeath, pBirth;
     int ageMin, ageMax;
 
-    SerialBirthDeathSim *bdsim;
+    PyramidBirthDeathSim *bdsim;
 
     if (argc < 8) {
         printf("Error: too few arguments\n");
