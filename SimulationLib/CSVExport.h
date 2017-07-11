@@ -53,8 +53,7 @@ namespace SimulationLib {
     {
     public:
         // 'fname' is the file to be written to. Specify extention (probably
-        //   .csv). Note that currently, files are appended to: if 'fname'
-        //   already exists
+        //   .csv). 
         CSVExport(string fname);
         ~CSVExport();
 
