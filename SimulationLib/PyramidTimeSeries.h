@@ -109,10 +109,19 @@ namespace SimulationLib
 
 		void Close(void);
 
+		// Get the number of categories 
 		int GetNumberCategories(void);
+
+		// Return the vector of age breaks
 		vector<double> GetAgeBreaks(void);
+
+		// Return the length of the period
 		int GetPeriodLength(void);
+
+		// Return the max time
 		int GetTimeMax(void);
+
+		// Return the time0
 		int GetTime0(void);
 	};
 }
