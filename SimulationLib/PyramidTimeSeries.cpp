@@ -233,6 +233,42 @@ int PyramidTimeSeries::GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
     return GetTotalInAgeGroupAtPeriod(periodIdx, ageGroupIdx);
 }
 
+int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category) {
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
+    if (periodIdx >= nPeriods)
+        throw out_of_range("periodIdx >= nPeriods");
+    if (periodIdx < 0)
+        throw out_of_range("periodIdx < 0");
+    if ((unsigned long)ageGroupIdx >= ageBreaks.size() + 1)
+        throw out_of_range("ageGroupIdx >= numAgeGroups");
+    if (ageGroupIdx < 0)
+        throw out_of_range("ageGroupIdx < 0");
+    if (category >= nCategories)
+        throw out_of_range("category >= nCategories");
+    if (category < 0)
+        throw out_of_range("category < 0");
+
+    return pyramids[periodIdx]->GetTotalInAgeGroupAndCategory(ageGroupIdx, category);
+}
+
+int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category) {
+    int periodIdx;
+
+    if (!closed) {
+        printf("Warning: PyramidTimeSeries not closed\n");
+    }
+
+    if (time < 0)
+        throw out_of_range("time < 0");
+
+    periodIdx = calcThisPeriod(time, periodLength);
+
+    return GetTotalInAgeGroupAndCategoryAtPeriod(periodIdx, ageGroupIdx, category);
+}
+
 void PyramidTimeSeries::Close(void) {
     closed = true;
 
@@ -241,4 +277,24 @@ void PyramidTimeSeries::Close(void) {
 
 bool PyramidTimeSeries::IsWritable(void) {
     return !closed;
+}
+
+int PyramidTimeSeries::GetNumberCategories(void) {
+    return nCategories;
+}
+
+vector<double> PyramidTimeSeries::GetAgeBreaks(void) {
+    return ageBreaks;
+}
+
+int PyramidTimeSeries::GetPeriodLength(void) {
+    return periodLength;
+}
+
+int PyramidTimeSeries::GetTimeMax(void) {
+    return timeMax;
+}
+
+int PyramidTimeSeries::GetTime0(void) {
+    return time0;
 }

@@ -22,6 +22,7 @@ namespace SimulationLib
 		int periodLength;
 		int nCategories;
 		int nPeriods;
+		bool closed;
 
 		vector<double> ageBreaks;
 
@@ -76,11 +77,11 @@ namespace SimulationLib
 		//   the number of individuals in the specified group by 'increment'.
 		//   Note that 'age' is translated into its respective age bin. Throws
 		//     exceptions for illegal values, and returns false if 'increment'
-		//     would cause the population of the group to vall below zero, or
+		//     would cause the population of the group to fall below zero, or
 		//     if the TimeSeries has been Close()'d.
 		bool UpdateByAge(int time, int category, double age, int increment);
 
-		// Idential to UpdateByAge, except age is specified using age group index,
+		// Identical to UpdateByAge, except age is specified using age group index,
 		//  rather than an age in years.
 		bool UpdateByIdx(int time, int category, int ageGroupIdx, int increment);
 
@@ -92,7 +93,7 @@ namespace SimulationLib
 		bool MoveByAge(int time, int oldCategory, double oldAge, \
 						         int newCategory, double newAge, int increment);
 
-		// Idential to MoveByAge, but the old and new groups are specified
+		// Identical to MoveByAge, but the old and new groups are specified
 		//   by an age group index, rather than an age in years.
 		bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
 						         int newCategory, int newAgeGroupIdx, int increment);
@@ -106,7 +107,26 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 
+
+		int GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
+		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
+
 		void Close(void);
 		bool IsWritable(void);
+
+		// Get the number of categories
+		int GetNumberCategories(void);
+
+		// Return the vector of age breaks
+		vector<double> GetAgeBreaks(void);
+
+		// Return the length of the period
+		int GetPeriodLength(void);
+
+		// Return the max time
+		int GetTimeMax(void);
+
+		// Return the time0
+		int GetTime0(void);
 	};
 }

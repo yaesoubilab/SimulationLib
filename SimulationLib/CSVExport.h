@@ -175,6 +175,18 @@ namespace SimulationLib {
     class PyramidTimeSeriesCSVExport/*<T>*/ : public CSVExport<int> {
     public:
         PyramidTimeSeriesCSVExport(string fname) : CSVExport(fname) {
+            // ptseVectors      = vector<vector<T> *>{};
+            // ptseTime0s       = vector<double>{};
+            // ptseTimeMaxs     = vector<double>{};
+            categoryNames        = vector<string>{};
+            // tsSizes        = vector<long>{};
+
+            ageBreaks = vector<double>{};
+            
+            ptsePeriodLength = 0;
+            tMax             = 0;
+
+            nCategories      = 0;
 
         };
 
@@ -183,8 +195,27 @@ namespace SimulationLib {
         bool Add(PyramidTimeSeries/*<T>*/ *ptse);
 
     private:
-        virtual CellSpecItrs getColumnIters(void);
-        virtual CellSpecItrs getRowIters(void);
+        vector<CellSpec> *rows;
+        vector<CellSpec> *columns;
+
+        PyramidTimeSeries *PTSptr;
+
+        // vector<vector<int>> data;
+
+        vector<string> categoryNames;
+        vector<double> ageBreaks;
+
+        int ptsePeriodLength;
+        int time0;
+        int tMax;
+
+        int nCategories;
+
+
+        // virtual CellSpecItrs getColumnIters(void);
+        // virtual CellSpecItrs getRowIters(void);
+        CellSpecItrs getColumnIters(void);
+        CellSpecItrs getRowIters(void);
 
         virtual bool isColumnHeader(void);
         virtual bool isRowHeader(void);

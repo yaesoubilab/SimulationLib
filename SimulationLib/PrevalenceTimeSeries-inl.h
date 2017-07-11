@@ -39,7 +39,7 @@ namespace SimulationLib {
         int thisPeriod;
 
         if (!writable) {
-            printf("Erorr: TimeSeries has already been closed\n");
+            printf("Error: TimeSeries has already been closed\n");
             return false;
         }
 

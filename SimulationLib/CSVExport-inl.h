@@ -311,6 +311,9 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 /////////////////////////////////////////
 // PyramidTimeSeries CSV Exporter
 /////////////////////////////////////////
+
+
+
 PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 {
 // Deallocate any memory allocated on instantiation
@@ -318,9 +321,57 @@ PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 
 bool
 PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
-    // TODO
 
-    // Boilerplate
+    // Make sure PyramidTimeSeries exists
+    if (ptse == nullptr) {
+        printf("Error: PyramidTimeSeries pointer was NULL\n");
+        return false;
+    }
+
+    // // Make sure ::Close() has already been called on the time series
+    // if (ts->IsWritable()) {
+    //     printf("Error: TimeSeries is still writable\n");
+    //     return false;
+    // }
+
+    // // Make sure that the period length of the time series being added
+    // //   is identical to the period length of other time series which
+    // //   have already been queued for export.
+    // if (nTimeSeries != 0 && ts->GetPeriodLength() != tsPeriodLength) {
+    //     printf("Error: All TimeSeries must have the same periodLength\n");
+    //     return false;
+    // } else if (nTimeSeries == 0) {
+    //     tsPeriodLength = ts->GetPeriodLength();
+    //     printf("::Add(): tsPeriodLength=%d\n", tsPeriodLength);
+    // }
+
+    rows      = nullptr;
+    columns   = nullptr;
+
+    nCategories = ptse->GetNumberCategories();
+    ageBreaks = ptse->GetAgeBreaks();
+
+    ptsePeriodLength = ptse->GetPeriodLength();
+    tMax             = ptse->GetTimeMax();
+    time0            = ptse->GetTime0();
+
+
+    PTSptr = ptse;
+
+    // for (int categoryIdx = 0; categoryIdx < nCategories; categoryIdx++)
+    // {
+    //     vector<int> vec;
+    //     vec = vector<int>{};
+    //     for (int t = 0; t < tMax; t += ptsePeriodLength)
+    //     {
+    //         vec.push_back(ptse->GetTotalInCategoryAtTime(t, categoryIdx));
+    //     }
+
+    //     data.push_back(vec);
+    // }
+
+    // printf("::Add(): tMax=%f\n", tMax);
+
     return true;
 }
 
@@ -329,11 +380,49 @@ CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
     // TODO
 
+
+    // The first "+1" is to account for the extra column we need to represent time.
+    // The second "+1" is to account for the extra column needed to represent the age group.
+    // Therefore, column 0 is for time, not value, and column 1 is for the age group.
+    columns = new vector<CellSpec>(1 + 1 + nCategories);
+    CellSpecItrs cellSpecItrs;
+
+    iota(columns->begin(), columns->end(), (CellSpec)0);
+
+    // printf("nTimeSeries=%d\n", nTimeSeries);
+    // printf("printing columnIters vector:\n");
+    printVector(columns);
+
+    cellSpecItrs.begin = columns->begin();
+    cellSpecItrs.end   = columns->end();
+
+    return cellSpecItrs;
+
 }
 
 CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
-    // TODO
+    int nPeriods, nAgeGroups;
+    CellSpecItrs cellSpecItrs;
+
+    nPeriods = (int)ceil(tMax / (double)ptsePeriodLength) + 1;
+
+    printf("%d age \n", nPeriods);
+
+    nAgeGroups = ageBreaks.size() + 1;
+
+    rows = new vector<CellSpec>(nPeriods * nAgeGroups);
+
+    // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, ptsePeriodLength, nPeriods);
+    iota(rows->begin(), rows->end(), (CellSpec)0);
+
+    // printf("Printing rowIters vector:\n");
+    // printVector(rows);
+
+    cellSpecItrs.begin = rows->begin();
+    cellSpecItrs.end   = rows->end();
+
+    return cellSpecItrs;
 }
 
 bool
@@ -345,22 +434,77 @@ PyramidTimeSeriesCSVExport/*<T>*/::isColumnHeader(void) {
 bool
 PyramidTimeSeriesCSVExport/*<T>*/::isRowHeader(void) {
     // Really?
-    return true;
+    return false;
 }
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getRowName(CellSpec rowSpec) {
-    // TODO
+    return string("");
 }
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
-    // TODO
+    string timeHeader = string("Period");
+
+    if (columnSpec == 0)
+        return timeHeader;
+    else if (columnSpec == 1)
+        return string("Age Group");
+    else
+        return string("Category ") + to_string(columnSpec-2);
 }
 
 string
 PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
-    // TODO
+
+    int period, categoryIdx, nAgeGroups, ageGroupIdx, time0, timeMax, cellVal;
+
+    string empty, ageRange;
+
+    nAgeGroups = ageBreaks.size() + 1;
+
+    period = rowSpec/nAgeGroups;
+
+    // Return period # if first column
+    if (columnSpec == 0)
+        return to_string(period);
+
+    // Return age-range if second column
+    if (columnSpec == 1)
+    {
+        // Find age group index (0,1,...)
+        ageGroupIdx = rowSpec % nAgeGroups;
+
+        // Return different strings depending on age group index
+        if (ageGroupIdx == 0)
+        {
+            ageRange = string("0-" + to_string((int)ageBreaks[0]));
+        }
+        else if (ageGroupIdx == nAgeGroups - 1)
+        {
+            ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-inf");
+        }
+        else
+        {
+            ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-" + to_string((int)ageBreaks[ageGroupIdx]));
+        }
+
+        return ageRange;
+    }
+
+    empty = string("");
+
+    categoryIdx = columnSpec - 2;
+    time0 = 0;
+    timeMax = tMax;
+
+    if ( (period * ptsePeriodLength) < time0   || \
+         (period * ptsePeriodLength) >= timeMax     )
+        return empty;
+
+    cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
+
+    return to_string(cellVal);
 }
 
 

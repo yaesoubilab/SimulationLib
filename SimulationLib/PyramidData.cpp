@@ -165,3 +165,20 @@ int PyramidData::GetTotalInAgeGroup(int ageGroupIndex) {
 
     return total;
 }
+
+int PyramidData::GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex) {
+    int total;
+
+    if (categoryIndex < 0 || categoryIndex >= numCategories)
+        throw out_of_range("categoryIndex was negative or greater than #categories-1");
+
+    if (ageGroupIndex < 0 || ageGroupIndex >= numAgeGroups)
+        throw out_of_range("ageGroupIndex was negative or greater than #ageGroups-1");
+
+    total = 0;
+
+    total += popCounts[categoryIndex][ageGroupIndex];
+
+    return total;
+}
+
