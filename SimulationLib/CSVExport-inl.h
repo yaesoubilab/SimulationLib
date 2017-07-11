@@ -452,7 +452,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
     if (columnSpec == 0)
         return timeHeader;
     else if (columnSpec == 1)
-        return string("Age Breaks");
+        return string("Age Group");
     else
         return string("Category ") + to_string(columnSpec-2);
 
@@ -492,8 +492,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
         {
             ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-" + to_string((int)ageBreaks[ageGroupIdx]));
         }
-
-        // printf("%i, %s\n", columnSpec, ageRange);
+        
         return ageRange;
     }
 
@@ -507,13 +506,9 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
          (period * ptsePeriodLength) >= timeMax     )
         return empty;
 
-    // cellVal = data[categoryIdx][]; //placeholder for actual lookup
     cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
 
     return to_string(cellVal);
-
-    // return string("empty for now");
-
 }
 
 
