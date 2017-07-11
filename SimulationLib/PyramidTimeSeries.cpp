@@ -294,3 +294,7 @@ int PyramidTimeSeries::GetTimeMax(void) {
 int PyramidTimeSeries::GetTime0(void) {
     return time0;
 }
+
+bool PyramidTimeSeries::IsWritable(void) {
+    return !closed;
+}

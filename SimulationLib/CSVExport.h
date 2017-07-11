@@ -187,6 +187,8 @@ namespace SimulationLib {
 
             nCategories      = 0;
 
+            hasData = false;
+
         };
 
         ~PyramidTimeSeriesCSVExport();
@@ -198,6 +200,8 @@ namespace SimulationLib {
         vector<CellSpec> *columns;
 
         PyramidTimeSeries *PTSptr;
+
+        bool hasData; 
 
         // vector<vector<int>> data;
 

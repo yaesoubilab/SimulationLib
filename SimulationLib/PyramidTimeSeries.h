@@ -127,5 +127,8 @@ namespace SimulationLib
 
 		// Return the time0
 		int GetTime0(void);
+
+		// Returns false if data is closed, true otherwise
+		bool IsWritable(void);
 	};
 }
