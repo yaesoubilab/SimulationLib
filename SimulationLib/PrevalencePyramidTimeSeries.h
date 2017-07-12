@@ -40,7 +40,7 @@ public:
                           [] (int tMax,int pLength) -> int                         \
                              {return (tMax % pLength == 0) ? (tMax/pLength + 1)    \
                                                            : ceil(tMax/pLength);}, \
-                          nCategories, ageBreaks) {}
+                          nCategories, ageBreaks, false) {}
 private:
     int calcThisPeriod(int time, int periodLength);
 };

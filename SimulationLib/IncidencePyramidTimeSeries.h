@@ -40,7 +40,7 @@ public:
       : PyramidTimeSeries(name, time0, timeMax, periodLength,        \
                           [] (int tMax, int pLength) -> int          \
                              {return ceil(tMax/pLength);},           \
-                          nCategories, ageBreaks) {}
+                          nCategories, ageBreaks, true) {}
       // ^(Note use of lambda function in call to PyramidTimeSeries constructor)
 
 

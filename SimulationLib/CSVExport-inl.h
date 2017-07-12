@@ -231,9 +231,6 @@ TimeSeriesCSVExport<T>::getRowIters(void) {
     // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
     iota(rows->begin(), rows->end(), (CellSpec)0);
 
-    printf("Printing rowIters vector:\n");
-    printVector(rows);
-
     cellSpecItrs.begin = rows->begin();
     cellSpecItrs.end   = rows->end();
 

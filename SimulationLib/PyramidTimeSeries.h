@@ -19,10 +19,14 @@ namespace SimulationLib
 		string name;
 		int time0;
 		int timeMax;
+		int lastTime;
+		int lastPeriod;
 		int periodLength;
 		int nCategories;
 		int nPeriods;
 		bool closed;
+		bool reset;
+		int *currentValues;
 
 		vector<double> ageBreaks;
 
@@ -35,6 +39,10 @@ namespace SimulationLib
 		//   between Prevalence and Incidence, this pattern elegantly allows the
 		//   specification of the two derived classes with minimal code.
 		virtual int calcThisPeriod(int time, int periodLength) = 0;
+
+		int _getAgeIdx(double age);
+
+		bool _storeCurrentValues(int period);
 
 	public:
 		// Initializes a new PyramidTimeSeries.
@@ -67,7 +75,7 @@ namespace SimulationLib
 		//   of any of these parameters
 		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength,  \
 						  function<int (int, int)> calcNPeriods, int nCategories, \
-						  vector<double> ageBreaks);
+						  vector<double> ageBreaks, bool reset);
 
 		~PyramidTimeSeries();
 

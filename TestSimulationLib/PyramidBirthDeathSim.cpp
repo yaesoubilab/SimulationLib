@@ -30,7 +30,7 @@ namespace SimulationLib {
         bDistributionArr        = new Binomial*[nTrajectories];
         dDistribution           = new Bernoulli(pDeath);
         aDistribution           = new Uniform(ageMin, ageMax);
-        sDistribution           = new Bernoulli(0.5); // Assuming 50% chance male/female
+        sDistribution           = new Bernoulli(0.50); // Assuming 50% chance male/female
 
         defaultAgeBreaks        = vector<double>{20, 40, 60, 80};
 
@@ -243,17 +243,17 @@ namespace SimulationLib {
                                               IncidencePyramidTimeSeries  *deathsPyr,     \
                                               PrevalenceTimeSeries<int>   *population,    \
                                               PrevalencePyramidTimeSeries *populationPyr, \
-                                              Binomial  *bDistribution,                   \
-                                              Bernoulli *dDistribution,                   \
-                                              Uniform   *aDistribution,                   \
+                                              Binomial   *bDistribution,                  \
+                                              Bernoulli  *dDistribution,                  \
+                                              Uniform    *aDistribution,                  \
                                               Bernoulli  *sDistribution,                  \
                                               int nPeople) {
 
         vector<Individual> individuals{};
         int nBirths, nDeaths, delta;
 
-        auto sexN = [](Individual i) { switch(i.sex) { case Sex::Male:   return 0;
-                                                       case Sex::Female: return 1; } };
+        auto sexN = [](Individual i) { switch(i.sex) { case Sex::Male   : return 0;
+                                                       case Sex::Female : return 1; } };
 
         // Generate all individuals
         for (int i = 0; i < nPeople; ++i)
@@ -265,10 +265,11 @@ namespace SimulationLib {
         }
 
         population->Record(0, nPeople);
+        delta = 0;
 
         for (int t = 1; t < timeMax; ++t)
         {
-            nDeaths  = 0;
+            nDeaths = 0;
 
             // Iterate through each individual and decide if they're going to
             // die.
@@ -299,6 +300,7 @@ namespace SimulationLib {
             for (int i = 0; i < nBirths; ++i)
             {
                 Individual idv = newIndividual(rng);
+                idv.age = 0;
 
                 individuals.push_back(idv);
                 populationPyr->UpdateByAge(t, sexN(idv), idv.age, +1);
