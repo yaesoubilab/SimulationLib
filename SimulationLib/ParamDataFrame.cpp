@@ -30,6 +30,8 @@
 #include "UniformDiscrete.h"
 #include "Weibull.h"
 
+// Implements DataFrame construction for parameters.
+
 namespace SimulationLib {
   using namespace StatisticalDistributions;
   using namespace std;

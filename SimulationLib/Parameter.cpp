@@ -17,3 +17,4 @@ namespace SimulationLib {
     exit(1);
   }
 }
+// Huge hassle. Basically implements parameter-reading.

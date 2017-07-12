@@ -15,9 +15,11 @@ namespace SimulationLib {
     std::variant<std::shared_ptr<const Parameter>,
 		 std::shared_ptr<const DataFrame<Parameter> > >
     getVar(const std::string &name) const;
+    // Either gives a parameter, or a data frame thereof.
   private:
     std::map<std::string,
 	     std::variant<std::shared_ptr<const Parameter>,
 			  std::shared_ptr<const DataFrame<Parameter> > > > var;
+    // Holds a map from strings to whatevers.
   };
 }

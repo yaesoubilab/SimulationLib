@@ -41,7 +41,7 @@ namespace SimulationLib {
     else
       fscanf(ifile, "%i", &ageCats);
     while((c = getc(ifile)) != EOF && c != '\n');
-
+    
     m.resize(timeCats);
     if(!ignoreGender)
       f.resize(timeCats);
@@ -50,10 +50,11 @@ namespace SimulationLib {
       if(!ignoreGender)
 	f[i].resize(ageCats);
     }
-    
+    // So now we read in the data.
     double timeRead = 0, ageRead = 0;
     shared_ptr<const C> pC;
     bool readFemale = false;
+    // A function to read in a line.
     auto readLine = ([&]() {
       if(ignoreTime)
 	fscanf(ifile, "%*[^,],");
@@ -67,7 +68,8 @@ namespace SimulationLib {
       else
 	fscanf(ifile, "%lf,", &ageRead);
       fgets(buf, DFRAMEBSIZE, ifile);
-      pC = g(buf);
+      if(*buf)
+	pC = g(buf); // Don't call on a null string.
       while((c = getc(ifile)) != EOF && c != '\n');
       });
     readLine();
@@ -76,8 +78,9 @@ namespace SimulationLib {
     do {
       (readFemale? f : m)[(int)((timeRead - timeStart) / timeBracket)]
 	[(int)((ageRead - ageStart) / ageBracket)] = pC;
+      // Put it in the right place, then read the next line.
       readLine();
-    } while(!feof(ifile));
+    } while(!feof(ifile)); // If we've hit EOF, then quit.
     fclose(ifile);
   }
   
@@ -101,13 +104,14 @@ namespace SimulationLib {
       ageBrk = 0;
     if(ageBrk >= ageCats)
       ageBrk = ageCats - 1;
+    // Basically a huge collection of hacks to get the right values.
     return(from[timeBrk][ageBrk]);
   }
 
   template<class C>
   double DataFrame<C>::nextBracketStart(double age) const {
     if(ignoreAge || age > ageBracket * (ageCats - 1) + ageStart)
-      return(INFINITY);
+      return(INFINITY); // Reasonably obvious.
     if(age < ageStart)
       return(ageStart + ageBracket);
     return(((int)((age - ageStart) / ageBracket) + 1) * ageBracket + ageStart);
@@ -124,6 +128,6 @@ namespace SimulationLib {
 	double *d = (double *)malloc(sizeof(double));
 	*d = atof(str);
 	return(shared_ptr<const double>(d));
-      }) {}
+      }) {} 
 }
 #undef DFRAMEBSIZE

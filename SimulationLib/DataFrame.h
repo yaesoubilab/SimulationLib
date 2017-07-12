@@ -11,8 +11,10 @@ namespace SimulationLib {
     // long, long double, and for parameters.
     DataFrame(const char *file, bool loopTime);
     std::shared_ptr<const C>
-      getValue(double time, bool isFemale, double age) const;
+      getValue(double time, bool isFemale, double age) const; // Get a value
+    // When's the next bracket start?
     double nextBracketStart(double age) const;
+    // In how long?
     double timeToNextBracket(double age) const;
     inline bool ignoresTime() const {
       return(ignoreTime);
@@ -22,6 +24,7 @@ namespace SimulationLib {
     }
   private:
     double timeBracket, ageBracket, timeStart, ageStart;
+    // The data.
     std::vector<std::vector<std::shared_ptr<const C> > > m, f;
     int timeCats, ageCats;
     bool ignoreAge, ignoreTime, ignoreGender;

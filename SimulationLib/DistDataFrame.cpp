@@ -27,7 +27,7 @@
 #include "Poisson.h"
 #include "UniformDiscrete.h"
 #include "KroneckerDelta.h"
-
+// Basically, implements DataFrame construction for distributions of all kinds.
 namespace SimulationLib {
   using namespace StatisticalDistributions;
 
