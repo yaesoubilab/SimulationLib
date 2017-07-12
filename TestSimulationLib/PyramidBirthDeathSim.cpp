@@ -235,6 +235,7 @@ namespace SimulationLib {
         exportBirthStats.Write();
         exportDeathStats.Write();
         exportPopulationStats.Write();
+
     }
 
     void PyramidBirthDeathSim::_runTrajectory(IncidenceTimeSeries<int>    *births,        \
