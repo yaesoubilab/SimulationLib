@@ -135,6 +135,8 @@ namespace SimulationLib
 		// Return the max time
 		int GetTimeMax(void);
 
+		int GetNPeriods(void);
+
 		// Return the time0
 		int GetTime0(void);
 	};

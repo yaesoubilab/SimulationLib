@@ -87,8 +87,8 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
     lastTime   = time;
     lastPeriod = thisPeriod;
 
-    printf("assigning %d change to currentValues[%d]\n", increment, category * nCategories + ageGroupIdx);
-    currentValues[category * nCategories + ageGroupIdx] += increment;
+    printf("assigning %d change to currentValues[%d]\n", increment, category * (ageBreaks.size() + 1) + ageGroupIdx);
+    currentValues[category * (ageBreaks.size() + 1) + ageGroupIdx] += increment;
 
     return res;
 }
@@ -110,15 +110,16 @@ int PyramidTimeSeries::_getAgeIdx(double age) {
 bool PyramidTimeSeries::_storeCurrentValues(int period) {
     printf("_storeCurrentValues called for period #%d\n", period);
     bool success = true;
+    int nAgeBreaks = ageBreaks.size() + 1;
     for (int i = 0; i < nCategories; ++i)
     {
-        for (unsigned long j = 0; j < ageBreaks.size() + 1; ++j)
+        for (unsigned long j = 0; j < nAgeBreaks; ++j)
         {
-            printf("currentValues[%d] = %d\n", i*nCategories+j, currentValues[i*nCategories+j]);
-            if (!pyramids[period]->UpdateByIdx(i, j, currentValues[i * nCategories + j]))
+            printf("currentValues[%d] = %d\n", i*nAgeBreaks+j, currentValues[i*nAgeBreaks+j]);
+            if (!pyramids[period]->UpdateByIdx(i, j, currentValues[i * nAgeBreaks + j]))
                 success = false;
             if (reset)
-                currentValues[i * nCategories + j] = 0;
+                currentValues[i * nAgeBreaks + j] = 0;
         }
     }
 
@@ -328,6 +329,10 @@ int PyramidTimeSeries::GetPeriodLength(void) {
 
 int PyramidTimeSeries::GetTimeMax(void) {
     return timeMax;
+}
+
+int PyramidTimeSeries::GetNPeriods(void) {
+    return nPeriods;
 }
 
 int PyramidTimeSeries::GetTime0(void) {

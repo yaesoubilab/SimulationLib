@@ -12,6 +12,7 @@ namespace SimulationLib {
 
     void ContinuousTimeStatistic::Record(double time, double increment) {
         count += 1;
+        value = increment;
 
         if (time == baseTime) {
             lastTime = time;

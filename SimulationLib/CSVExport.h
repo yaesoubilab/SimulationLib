@@ -203,6 +203,7 @@ namespace SimulationLib {
         vector<double> ageBreaks;
 
         int ptsePeriodLength;
+        int nPeriods;
         int time0;
         int tMax;
 

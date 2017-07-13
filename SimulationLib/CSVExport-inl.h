@@ -353,6 +353,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
     ptsePeriodLength = ptse->GetPeriodLength();
     tMax             = ptse->GetTimeMax();
     time0            = ptse->GetTime0();
+    nPeriods         = ptse->GetNPeriods();
 
 
     PTSptr = ptse;
@@ -385,10 +386,8 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 
 CellSpecItrs
 PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
-    int nPeriods, nAgeGroups;
+    int nAgeGroups;
     CellSpecItrs cellSpecItrs;
-
-    nPeriods = (int)ceil(tMax / (double)ptsePeriodLength) + 1;
 
     nAgeGroups = ageBreaks.size() + 1;
 

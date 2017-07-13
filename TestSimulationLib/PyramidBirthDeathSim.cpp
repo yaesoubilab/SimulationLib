@@ -270,6 +270,7 @@ namespace SimulationLib {
 
         for (int t = 1; t < timeMax; ++t)
         {
+            printf("t = %d\n", t);
             nDeaths = 0;
 
             // Iterate through each individual and decide if they're going to
@@ -301,7 +302,7 @@ namespace SimulationLib {
             for (int i = 0; i < nBirths; ++i)
             {
                 Individual idv = newIndividual(rng);
-                idv.age = 0;
+                idv.age = 0; // They were just born so they are 0 years old
 
                 individuals.push_back(idv);
                 populationPyr->UpdateByAge(t, sexN(idv), idv.age, +1);
