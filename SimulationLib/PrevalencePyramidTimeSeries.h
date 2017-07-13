@@ -39,7 +39,7 @@ public:
       : PyramidTimeSeries(name, time0, timeMax, periodLength,                      \
                           [] (int tMax,int pLength) -> int                         \
                              {return (tMax % pLength == 0) ? (tMax/pLength + 1)    \
-                                                           : ceil(tMax/pLength);}, \
+                                                           : ceil(tMax/pLength) + 1;}, \
                           nCategories, ageBreaks, false) {}
 private:
     int calcThisPeriod(int time, int periodLength);

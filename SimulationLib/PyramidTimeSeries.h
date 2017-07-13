@@ -126,7 +126,7 @@ namespace SimulationLib
 		// Get the number of categories
 		int GetNumberCategories(void);
 
-		// Return the vector of age breaks
+		// Return a copy of the vector of age breaks
 		vector<double> GetAgeBreaks(void);
 
 		// Return the length of the period
@@ -135,7 +135,11 @@ namespace SimulationLib
 		// Return the max time
 		int GetTimeMax(void);
 
+		// Returns the number of periods 
 		int GetNPeriods(void);
+
+		// Returns a copy of the vector of current values
+		vector<int> GetCurrentValues(void);
 
 		// Return the time0
 		int GetTime0(void);

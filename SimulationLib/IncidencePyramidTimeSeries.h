@@ -39,11 +39,14 @@ public:
                                 vector<double> ageBreaks)            \
       : PyramidTimeSeries(name, time0, timeMax, periodLength,        \
                           [] (int tMax, int pLength) -> int          \
-                             {return ceil(tMax/pLength);},           \
-                          nCategories, ageBreaks, true) {}
+                             {return ceil(tMax/pLength) + 1;},           \
+                          nCategories, ageBreaks, true) {initializeZeroes();}
       // ^(Note use of lambda function in call to PyramidTimeSeries constructor)
+      // added 1 to ceil and added initializeZeroes function to fix
+      // first period entries as 0
 
 
 private:
     int calcThisPeriod(int time, int periodLength);
+    void initializeZeroes(void);
 };

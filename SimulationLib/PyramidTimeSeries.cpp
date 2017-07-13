@@ -311,6 +311,7 @@ int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGrou
 
 void PyramidTimeSeries::Close(void) {
     closed = true;
+    _storeCurrentValues(lastPeriod);
 
     return;
 }
@@ -320,7 +321,10 @@ int PyramidTimeSeries::GetNumberCategories(void) {
 }
 
 vector<double> PyramidTimeSeries::GetAgeBreaks(void) {
-    return ageBreaks;
+    vector<double> copy;
+    for (int i = 0; i < ageBreaks.size(); i++)
+        copy.push_back(ageBreaks[i]);
+    return copy;
 }
 
 int PyramidTimeSeries::GetPeriodLength(void) {
