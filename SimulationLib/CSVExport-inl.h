@@ -482,7 +482,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
     timeMax = tMax;
 
     if ( (period * ptsePeriodLength) < time0   || \
-         (period * ptsePeriodLength) /*> - EVENTUALLY FIX!*/>= timeMax )
+         (period * ptsePeriodLength) /*> - EVENTUALLY FIX!*/> timeMax )
         return empty;
 
     cellVal = PTSptr->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
