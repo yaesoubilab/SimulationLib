@@ -71,10 +71,10 @@ namespace SimulationLib {
             //   so time0 is set to 1 for 'births' and 'deaths'. Statistics are
             //   collected on every period.
             birthsArr[i] = new IncidenceTimeSeries<int>(b + s, \
-                                                        1, timeMax, periodLength, \
+                                                        0, timeMax, periodLength, \
                                                         1, birthStatisticsArr[i]);
             deathsArr[i] = new IncidenceTimeSeries<int>(d + s, \
-                                                        1, timeMax, periodLength, \
+                                                        0, timeMax, periodLength, \
                                                         1, deathStatisticsArr[i]);
             populationArr[i] = \
               new PrevalenceTimeSeries<int>(p + s, \
@@ -159,14 +159,14 @@ namespace SimulationLib {
         PyramidTimeSeriesCSVExport exportPopulationPyr(fileName + string("-pyramid-population.csv"));
 
         map<TimeStatType, string> columnsBirths {
-            {TimeStatType::Count, "Total births"},
+            {TimeStatType::Sum, "Total births"},
             {TimeStatType::Mean, "Average # births"},
             {TimeStatType::Min, "Minimum # births"},
             {TimeStatType::Max, "Maximum # births"}
         };
 
         map<TimeStatType, string> columnsDeaths {
-            {TimeStatType::Count, "Total deaths"},
+            {TimeStatType::Sum, "Total deaths"},
             {TimeStatType::Mean, "Average # deaths"},
             {TimeStatType::Min, "Minimum # deaths"},
             {TimeStatType::Max, "Maximum # deaths"}

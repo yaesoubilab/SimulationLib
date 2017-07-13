@@ -305,6 +305,10 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     //   and return.
     cellVal  = tsVectors[tsIdx]->at(period);
 
+    // printf("Printing tsVectors[%d]\n", tsIdx);
+    // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
+    //     printf("\tPrinting element: %4f\n", (double)tsVectors[tsIdx]->at(i));
+
     return to_string(cellVal);
 }
 
@@ -616,7 +620,7 @@ TimeStatisticsCSVExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     /* SKETCHY!!!!! */
     switch (statType) {
-        case TimeStatType::Sum      : result = -100;
+        case TimeStatType::Sum      : result = tst->GetSum();
                                       break;
         case TimeStatType::Count    : result = tst->GetCount();
                                       break;
@@ -628,13 +632,8 @@ TimeStatisticsCSVExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
                                       break;
         case TimeStatType::Max      : result = tst->GetMax();
                                       break;
-        default                     : result = -100;
+        default                     : throw out_of_range("Unsupported TimeStatType");
                                       break;
-    }
-
-    if (result == -100) {
-        throw out_of_range("Unsupported TimeStatType");
-        return string("");
     }
 
     return to_string(result);
