@@ -1,4 +1,4 @@
-#include "PrevalenceTimeSeries.h"
+#include "../include/SimulationLib/PrevalenceTimeSeries.h"
 
 namespace SimulationLib {
     using namespace std;

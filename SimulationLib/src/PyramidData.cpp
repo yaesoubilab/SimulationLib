@@ -1,4 +1,4 @@
-#include "PyramidData.h"
+#include "../include/SimulationLib/PyramidData.h"
 
 using namespace std;
 using namespace SimulationLib;

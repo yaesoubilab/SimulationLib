@@ -1,4 +1,4 @@
-#include "IncidencePyramidTimeSeries.h"
+#include "../include/SimulationLib/IncidencePyramidTimeSeries.h"
 
 using namespace std;
 using namespace SimulationLib;

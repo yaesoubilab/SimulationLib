@@ -9,7 +9,7 @@ namespace SimulationLib {
   using namespace StatisticalDistributions;
   using namespace std;
   class Parameter {
-  public: 
+  public:
     const variant<shared_ptr<const StatisticalDistribution<long> >,
 		  shared_ptr<const StatisticalDistribution<long double> >,
 		  long double> dist;

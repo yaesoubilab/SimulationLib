@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IncidenceTimeSeries.h"
+#include "../include/SimulationLib/IncidenceTimeSeries.h"
 
 namespace SimulationLib {
     using namespace std;

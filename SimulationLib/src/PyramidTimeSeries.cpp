@@ -1,4 +1,4 @@
-#include "PyramidTimeSeries.h"
+#include "../include/SimulationLib/PyramidTimeSeries.h"
 
 using namespace SimulationLib;
 using namespace std;
