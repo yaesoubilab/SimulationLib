@@ -305,9 +305,9 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     //   and return.
     cellVal  = tsVectors[tsIdx]->at(period);
 
-    printf("Printing tsVectors[%d]\n", tsIdx);
-    for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
-        printf("\tPrinting element: %4f\n", (double)tsVectors[tsIdx]->at(i));
+    // printf("Printing tsVectors[%d]\n", tsIdx);
+    // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
+    //     printf("\tPrinting element: %4f\n", (double)tsVectors[tsIdx]->at(i));
 
     return to_string(cellVal);
 }
@@ -469,7 +469,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
         return string("Age Group");
     } else {
         categoryStr += string("[");
-        categoryStr += to_string(ptseIdx);
+        categoryStr += ptsePointers[ptseIdx]->GetName();
         categoryStr += string("]Category ");
         categoryStr += to_string(categoryIdx);
         return categoryStr;
