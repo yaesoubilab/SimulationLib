@@ -346,3 +346,11 @@ int PyramidTimeSeries::GetTime0(void) {
 bool PyramidTimeSeries::IsWritable(void) {
     return !closed;
 }
+
+void PyramidTimeSeries::PrintPyramidTimeSeries(void) {
+    for (int i = 0; i < nPeriods; ++i)
+    {
+        printf("This is period number %d\n", i);
+        pyramids[i]->PrintPyramid();
+    }
+}

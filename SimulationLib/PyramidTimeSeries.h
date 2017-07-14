@@ -143,5 +143,8 @@ namespace SimulationLib
 
 		// Return the time0
 		int GetTime0(void);
+
+		// For debugging, prints out all of the contents of the PTS
+		void PrintPyramidTimeSeries(void);
 	};
 }
