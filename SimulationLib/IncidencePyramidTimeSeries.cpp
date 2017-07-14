@@ -5,7 +5,7 @@ using namespace SimulationLib;
 
 
 int IncidencePyramidTimeSeries::calcThisPeriod(int time, int periodLength) {
-    return (int)ceil((double)time / (double)periodLength);
+    return (int)floor((double)time / (double)periodLength) + 1;
 }
 
 void IncidencePyramidTimeSeries::initializeZeroes(void) {
