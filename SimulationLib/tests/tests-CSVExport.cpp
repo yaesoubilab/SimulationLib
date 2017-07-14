@@ -76,13 +76,17 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
     REQUIRE( ptse1->UpdateByAge(0,0,8,12) == true );
     REQUIRE( ptse1->UpdateByAge(0,0,12,14) == true );
 
-    REQUIRE( ptse1->UpdateByAge(1,0,4,9) == true );
-    REQUIRE( ptse1->UpdateByAge(1,0,8,14) == true );
-    REQUIRE( ptse1->UpdateByAge(1,0,12,17) == true );
+    REQUIRE( ptse1->UpdateByAge(1,0,4,-1) == true );
+    REQUIRE( ptse1->UpdateByAge(1,0,8,+2) == true );
+    REQUIRE( ptse1->UpdateByAge(1,0,12,+3) == true );
 
-    REQUIRE( ptse1->UpdateByAge(4,0,4,11) == true );
-    REQUIRE( ptse1->UpdateByAge(4,0,8,11) == true );
-    REQUIRE( ptse1->UpdateByAge(4,0,12,18) == true );
+    REQUIRE( ptse1->UpdateByAge(4,0,4,+2) == true );
+    REQUIRE( ptse1->UpdateByAge(4,0,8,-3) == true );
+    REQUIRE( ptse1->UpdateByAge(4,0,12,+1) == true );
+
+    REQUIRE( ptse1->UpdateByAge(6,0,4,0) == true );
+    REQUIRE( ptse1->UpdateByAge(6,0,8,0) == true );
+    REQUIRE( ptse1->UpdateByAge(6,0,12,0) == true );
 
     //ptse2
     REQUIRE( ptse2->UpdateByAge(0,0,5,10) == true );
@@ -95,25 +99,25 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
     REQUIRE( ptse2->UpdateByAge(0,1,25,10) == true );
     REQUIRE( ptse2->UpdateByAge(0,1,35,10) == true );
 
-    REQUIRE( ptse2->UpdateByAge(5,0,5,14) == true );
-    REQUIRE( ptse2->UpdateByAge(5,0,15,11) == true );
-    REQUIRE( ptse2->UpdateByAge(5,0,25,12) == true );
-    REQUIRE( ptse2->UpdateByAge(5,0,35,13) == true );
+    REQUIRE( ptse2->UpdateByAge(5,0,5,+4) == true );
+    REQUIRE( ptse2->UpdateByAge(5,0,15,+1) == true );
+    REQUIRE( ptse2->UpdateByAge(5,0,25,+2) == true );
+    REQUIRE( ptse2->UpdateByAge(5,0,35,+3) == true );
 
-    REQUIRE( ptse2->UpdateByAge(5,1,5,11) == true );
-    REQUIRE( ptse2->UpdateByAge(5,1,15,8) == true );
-    REQUIRE( ptse2->UpdateByAge(5,1,25,12) == true );
-    REQUIRE( ptse2->UpdateByAge(5,1,35,10) == true );
+    REQUIRE( ptse2->UpdateByAge(5,1,5,+1) == true );
+    REQUIRE( ptse2->UpdateByAge(5,1,15,-2) == true );
+    REQUIRE( ptse2->UpdateByAge(5,1,25,+2) == true );
+    REQUIRE( ptse2->UpdateByAge(5,1,35,0) == true );
 
-    REQUIRE( ptse2->UpdateByAge(11,0,5,18) == true );
-    REQUIRE( ptse2->UpdateByAge(11,0,15,14) == true );
-    REQUIRE( ptse2->UpdateByAge(11,0,25,11) == true );
-    REQUIRE( ptse2->UpdateByAge(11,0,35,16) == true );
+    REQUIRE( ptse2->UpdateByAge(11,0,5,+4) == true );
+    REQUIRE( ptse2->UpdateByAge(11,0,15,+3) == true );
+    REQUIRE( ptse2->UpdateByAge(11,0,25,-1) == true );
+    REQUIRE( ptse2->UpdateByAge(11,0,35,+3) == true );
 
-    REQUIRE( ptse2->UpdateByAge(11,1,5,9) == true );
-    REQUIRE( ptse2->UpdateByAge(11,1,15,7) == true );
-    REQUIRE( ptse2->UpdateByAge(11,1,25,14) == true );
-    REQUIRE( ptse2->UpdateByAge(11,1,35,11) == true );
+    REQUIRE( ptse2->UpdateByAge(11,1,5,-2) == true );
+    REQUIRE( ptse2->UpdateByAge(11,1,15,-1) == true );
+    REQUIRE( ptse2->UpdateByAge(11,1,25,+2) == true );
+    REQUIRE( ptse2->UpdateByAge(11,1,35,+1) == true );
 
     // Close TimeSeries
     ptse1->Close();
