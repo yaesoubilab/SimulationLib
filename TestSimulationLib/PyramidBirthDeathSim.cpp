@@ -209,13 +209,9 @@ namespace SimulationLib {
             exportDeaths.Add(deathsArr[i]);
             exportPopulation.Add(populationArr[i]);
 
-            // Right now we can only add one Pyramid to an exporter. This may
-            //   change in the future.
-            if (i == 0) {
-                exportBirthsPyr.Add(birthsPyrArr[i]);
-                exportDeathsPyr.Add(deathsPyrArr[i]);
-                exportPopulationPyr.Add(populationPyrArr[i]);
-            }
+            exportBirthsPyr.Add(birthsPyrArr[i]);
+            exportDeathsPyr.Add(deathsPyrArr[i]);
+            exportPopulationPyr.Add(populationPyrArr[i]);
 
             exportBirthStats.Add(birthStatisticsArr[i]);
             exportDeathStats.Add(deathStatisticsArr[i]);
