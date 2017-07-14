@@ -175,10 +175,21 @@ int PyramidData::GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIn
     if (ageGroupIndex < 0 || ageGroupIndex >= numAgeGroups)
         throw out_of_range("ageGroupIndex was negative or greater than #ageGroups-1");
 
-    total = 0;
-
-    total += popCounts[categoryIndex][ageGroupIndex];
+    total = popCounts[categoryIndex][ageGroupIndex];
 
     return total;
+}
+
+void PyramidData::PrintPyramid(void)
+{
+    for (int i = 0; i < numCategories; ++i)
+    {
+        printf("This is category %d\n", i);
+        for (int j = 0; j < numAgeGroups; ++j)
+        {
+            printf("%d: %d\n", j, popCounts[i][j]);
+        }
+    }
+    return;
 }
 

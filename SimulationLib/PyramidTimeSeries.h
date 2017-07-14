@@ -19,10 +19,14 @@ namespace SimulationLib
 		string name;
 		int time0;
 		int timeMax;
+		int lastTime;
+		int lastPeriod;
 		int periodLength;
 		int nCategories;
 		int nPeriods;
 		bool closed;
+		bool reset;
+		int *currentValues;
 
 		vector<double> ageBreaks;
 
@@ -35,6 +39,10 @@ namespace SimulationLib
 		//   between Prevalence and Incidence, this pattern elegantly allows the
 		//   specification of the two derived classes with minimal code.
 		virtual int calcThisPeriod(int time, int periodLength) = 0;
+
+		int _getAgeIdx(double age);
+
+		bool _storeCurrentValues(int period);
 
 	public:
 		// Initializes a new PyramidTimeSeries.
@@ -67,7 +75,7 @@ namespace SimulationLib
 		//   of any of these parameters
 		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength,  \
 						  function<int (int, int)> calcNPeriods, int nCategories, \
-						  vector<double> ageBreaks);
+						  vector<double> ageBreaks, bool reset);
 
 		~PyramidTimeSeries();
 
@@ -107,7 +115,6 @@ namespace SimulationLib
 		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
 		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 
-
 		int GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
 		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
 
@@ -119,7 +126,7 @@ namespace SimulationLib
 		// Get the number of categories
 		int GetNumberCategories(void);
 
-		// Return the vector of age breaks
+		// Return a copy of the vector of age breaks
 		vector<double> GetAgeBreaks(void);
 
 		// Return the length of the period
@@ -128,7 +135,20 @@ namespace SimulationLib
 		// Return the max time
 		int GetTimeMax(void);
 
+		// Returns the number of periods 
+		int GetNPeriods(void);
+
+		// Returns a copy of the vector of current values
+		vector<int> GetCurrentValues(void);
+
 		// Return the time0
 		int GetTime0(void);
+
+		// Return the name of the PyramidTimeSeries
+		string GetName(void);
+
+
+		// For debugging, prints out all of the contents of the Pyramid Time Series
+		void PrintPyramidTimeSeries(void);
 	};
 }

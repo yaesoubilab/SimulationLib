@@ -168,20 +168,18 @@ namespace SimulationLib {
     class PyramidTimeSeriesCSVExport/*<T>*/ : public CSVExport<int> {
     public:
         PyramidTimeSeriesCSVExport(string fname) : CSVExport(fname) {
-            // ptseVectors      = vector<vector<T> *>{};
-            // ptseTime0s       = vector<double>{};
-            // ptseTimeMaxs     = vector<double>{};
-            categoryNames        = vector<string>{};
-            // tsSizes        = vector<long>{};
+            ptsePointers     = vector<PyramidTimeSeries *>{};
+            ptseTime0s       = vector<int>{};
+            ptseTimeMaxs     = vector<int>{};
 
             ageBreaks = vector<double>{};
 
-            ptsePeriodLength = 0;
-            tMax             = 0;
+            ptsePeriodLength   = 0;
+            tMax               = 0;
 
-            nCategories      = 0;
-
-            hasData = false;
+            nCategories        = 0;
+            // nTotalCategories   = 0;
+            nPyramidTimeSeries = 0;
 
         };
 
@@ -193,19 +191,22 @@ namespace SimulationLib {
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;
 
-        PyramidTimeSeries *PTSptr;
-
-        bool hasData;
-
-        // vector<vector<int>> data;
+        vector<int>      ptseTime0s;
+        vector<int>      ptseTimeMaxs;
+        vector<PyramidTimeSeries *> ptsePointers;
 
         vector<string> categoryNames;
         vector<double> ageBreaks;
 
         int ptsePeriodLength;
-        int time0;
         int tMax;
 
+        int nPyramidTimeSeries;
+
+        // Total categories could be used instead in the future 
+        // if assumption that all PyramidTimeSeries having
+        // same number of categories is no longer desired
+        // int nTotalCategories;
         int nCategories;
 
 

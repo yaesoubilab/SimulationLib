@@ -18,6 +18,7 @@ namespace SimulationLib
         virtual void Record(double value) = 0;
         virtual void Record(double time, double value) = 0;
 
+        virtual double GetSum(void)      = 0;
         virtual double GetCount(void)    = 0;
         virtual double GetMean(void)     = 0;
         virtual double GetVariance(void) = 0;

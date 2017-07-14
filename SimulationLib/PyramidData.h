@@ -79,5 +79,8 @@ namespace SimulationLib
 
 		// Returns the total number of individuals in the specified category and age group. 
 		int GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
+
+		// For debugging, prints out the content of the Pyramid data structure.
+		void PrintPyramid(void);
 	};
 }
