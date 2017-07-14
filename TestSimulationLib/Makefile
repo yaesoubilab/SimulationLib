@@ -1,3 +1,5 @@
+# ALERT: None of this will compile!!!!
+
 CC=gcc
 CXX=c++
 RM=rm -f -r
