@@ -8,6 +8,7 @@
 #include <numeric>
 #include <utility>
 #include <map>
+#include <fstream>
 
 #include "PyramidTimeSeries.h"
 #include "TimeSeries.h"
@@ -46,8 +47,7 @@ namespace SimulationLib {
     {
     public:
         // 'fname' is the file to be written to. Specify extention (probably
-        //   .csv). Note that currently, files are appended to: if 'fname'
-        //   already exists
+        //   .csv).
         CSVExport(string fname);
         ~CSVExport();
 
@@ -203,7 +203,7 @@ namespace SimulationLib {
 
         int nPyramidTimeSeries;
 
-        // Total categories could be used instead in the future 
+        // Total categories could be used instead in the future
         // if assumption that all PyramidTimeSeries having
         // same number of categories is no longer desired
         // int nTotalCategories;
