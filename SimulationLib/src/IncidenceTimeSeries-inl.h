@@ -92,7 +92,7 @@ namespace SimulationLib {
             return false;
         }
 
-        currentPeriod = (int)floor(time / periodLength);
+        currentPeriod = (int)floor(time / periodLength) + 1;
 
         // Call Record if:
         // 1. recordPeriod is set to 'RECORD_ON_ALL': we always call Record,
@@ -106,7 +106,8 @@ namespace SimulationLib {
             stats->Record(time, (double)aggregatedObservation + (double)value);
         else if (stats &&
                  currentPeriod > lastPeriod &&
-                 (lastPeriod % recordPeriod) == 0)
+                 (lastPeriod % recordPeriod) == 0 &&
+                 lastPeriod > 0)
             stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
 
         aggregatedObservation          += value;
@@ -121,7 +122,7 @@ namespace SimulationLib {
     template <typename T>
     void IncidenceTimeSeries<T>::Close(void) {
         if (stats && recordPeriod > 0)
-            stats->Record(lastPeriod, (double)aggregatedObservation);
+            stats->Record(lastPeriod, (double)(*observations)[lastPeriod]);
         writable = false;
         return;
     }

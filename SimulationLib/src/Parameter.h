@@ -5,6 +5,8 @@
 #include <variant>
 #include <random>
 
+// Holds a parameter to the model.
+
 namespace SimulationLib {
   using namespace StatisticalDistributions;
   using namespace std;
