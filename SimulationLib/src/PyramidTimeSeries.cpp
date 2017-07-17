@@ -111,6 +111,10 @@ bool PyramidTimeSeries::_storeCurrentValues(int period) {
     // printf("_storeCurrentValues called for period #%d\n", period);
     bool success = true;
     int nAgeBreaks = ageBreaks.size() + 1;
+
+    if (period >= nPeriods)
+        return true;
+
     for (int i = 0; i < nCategories; ++i)
     {
         for (unsigned long j = 0; j < nAgeBreaks; ++j)

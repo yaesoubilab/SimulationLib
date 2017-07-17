@@ -259,7 +259,7 @@ sftp-config.json
 install_manifest.txt
 SerialBirthDeathSim
 ParallelBirthDeathSim
-PyramidBirthDeathSym
+PyramidBirthDeathSim
 
 # Data output files
 # *.csv is out for now because SimulationLib/tests/tests-CSVExport-files uses them
