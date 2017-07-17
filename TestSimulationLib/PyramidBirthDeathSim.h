@@ -2,17 +2,19 @@
 #include <ctime>
 #include <string>
 #include <map>
-#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
-#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Bernoulli.h"
-#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/RNG.h"
-#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Uniform.h"
-#include "../SimulationLib/PrevalenceTimeSeries.h"
-#include "../SimulationLib/IncidenceTimeSeries.h"
-#include "../SimulationLib/PrevalencePyramidTimeSeries.h"
-#include "../SimulationLib/IncidencePyramidTimeSeries.h"
-#include "../SimulationLib/ContinuousTimeStatistic.h"
-#include "../SimulationLib/DiscreteTimeStatistic.h"
-#include "../SimulationLib/CSVExport.h"
+
+#include <Binomial.h>
+#include <Bernoulli.h>
+#include <RNG.h>
+#include <Uniform.h>
+
+#include <PrevalenceTimeSeries.h>
+#include <IncidenceTimeSeries.h>
+#include <PrevalencePyramidTimeSeries.h>
+#include <IncidencePyramidTimeSeries.h>
+#include <ContinuousTimeStatistic.h>
+#include <DiscreteTimeStatistic.h>
+#include <CSVExport.h>
 
 using namespace std;
 using namespace StatisticalDistributions;
