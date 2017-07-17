@@ -1,12 +1,13 @@
 #pragma once
 #include <ctime>
 #include <string>
-#include "../../StatisticalDistributionsLib/StatisticalDistributionsLib/Binomial.h"
-#include "../SimulationLib/PrevalenceTimeSeries.h"
-#include "../SimulationLib/IncidenceTimeSeries.h"
-#include "../SimulationLib/ContinuousTimeStatistic.h"
-#include "../SimulationLib/DiscreteTimeStatistic.h"
-#include "../SimulationLib/CSVExport.h"
+
+#include <Binomial.h>
+#include <PrevalenceTimeSeries.h>
+#include <IncidenceTimeSeries.h>
+#include <ContinuousTimeStatistic.h>
+#include <DiscreteTimeStatistic.h>
+#include <CSVExport.h>
 
 using namespace std;
 using namespace StatisticalDistributions;
