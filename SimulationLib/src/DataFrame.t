@@ -41,7 +41,7 @@ namespace SimulationLib {
     else
       fscanf(ifile, "%i", &ageCats);
     while((c = getc(ifile)) != EOF && c != '\n');
-    
+
     m.resize(timeCats);
     if(!ignoreGender)
       f.resize(timeCats);
@@ -83,7 +83,7 @@ namespace SimulationLib {
     } while(!feof(ifile)); // If we've hit EOF, then quit.
     fclose(ifile);
   }
-  
+
   template<class C>
   shared_ptr<const C> DataFrame<C>::getValue(double time, bool isFemale, double age)
     const {
@@ -116,7 +116,7 @@ namespace SimulationLib {
       return(ageStart + ageBracket);
     return(((int)((age - ageStart) / ageBracket) + 1) * ageBracket + ageStart);
   }
-  
+
   template<class C>
   double DataFrame<C>::timeToNextBracket(double age) const {
     return(nextBracketStart(age) - age);
@@ -128,6 +128,6 @@ namespace SimulationLib {
 	double *d = (double *)malloc(sizeof(double));
 	*d = atof(str);
 	return(shared_ptr<const double>(d));
-      }) {} 
+      }) {}
 }
 #undef DFRAMEBSIZE

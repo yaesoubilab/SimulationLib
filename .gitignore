@@ -254,8 +254,18 @@ sftp-config.json
 # Executables
 *.out
 *.out.dSYM
+*.a
+*.dSYM/
+install_manifest.txt
 SerialBirthDeathSim
 ParallelBirthDeathSim
+PyramidBirthDeathSim
 
 # Data output files
 # *.csv is out for now because SimulationLib/tests/tests-CSVExport-files uses them
+
+CMakeFiles/
+**/CMakeCache.txt
+CMakeCache.txt
+cmake_install.cmake
+Makefile

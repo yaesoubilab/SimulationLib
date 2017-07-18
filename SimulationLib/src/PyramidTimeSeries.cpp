@@ -1,4 +1,4 @@
-#include "PyramidTimeSeries.h"
+#include "../include/SimulationLib/PyramidTimeSeries.h"
 
 using namespace SimulationLib;
 using namespace std;
@@ -7,7 +7,8 @@ using namespace std;
 PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
                                      int _periodLength,                      \
                                      function<int (int, int)> calcNPeriods,  \
-                                     int _nCategories,  vector<double> _ageBreaks)
+                                     int _nCategories,  vector<double> _ageBreaks, \
+                                     bool _reset)
 {
     if (_time0 < 0)
         throw out_of_range("time0 must be >= 0");
@@ -23,9 +24,19 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     name         = _name;
     time0        = _time0;
     timeMax      = _timeMax;
+    lastTime     = _time0;
+    lastPeriod   = _time0 / _periodLength; // Janky...
     periodLength = _periodLength;
     nCategories  = _nCategories;
     ageBreaks    = _ageBreaks;
+    reset        = _reset;
+
+    int numValsPerPeriod = (ageBreaks.size() + 1) * nCategories;
+
+    currentValues = new int[numValsPerPeriod];
+
+    for (int i = 0; i < numValsPerPeriod; ++i)
+        currentValues[i] = 0;
 
     closed = false;
 
@@ -47,23 +58,7 @@ PyramidTimeSeries::~PyramidTimeSeries()
 }
 
 bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int increment) {
-    int thisPeriod;
-
-    if (closed == true) {
-        printf("Update failed: PyramidTimeSeries has been closed.\n");
-        return false;
-    }
-
-    if (time < time0 || time > timeMax)
-        throw out_of_range("time specified is < time0 or > timeMax");
-    if (category < 0 || category >= nCategories)
-        throw out_of_range("category specified is < 0 or >= nCategories");
-    if (age < 0)
-        throw out_of_range("age is < 0");
-
-    thisPeriod = calcThisPeriod(time, periodLength);
-
-    return pyramids[thisPeriod]->UpdateByAge(category, age, increment);
+    return UpdateByIdx(time, category, _getAgeIdx(age), increment);
 }
 
 bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int increment) {
@@ -76,6 +71,8 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
 
     if (time < time0 || time > timeMax)
         throw out_of_range("time specified is < time0 or > timeMax");
+    if (time < lastTime)
+        throw out_of_range("time specified is < last time inputted");
     if (category < 0 || category >= nCategories)
         throw out_of_range("category specified is < 0 or >= nCategories");
     if (ageGroupIdx < 0)
@@ -83,7 +80,54 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
 
     thisPeriod = calcThisPeriod(time, periodLength);
 
-    return pyramids[thisPeriod]->UpdateByIdx(category, ageGroupIdx, increment);
+    bool res = true;
+    if (thisPeriod > lastPeriod)
+        res = _storeCurrentValues(lastPeriod);
+
+    lastTime   = time;
+    lastPeriod = thisPeriod;
+
+    // printf("assigning %d change to currentValues[%d]\n", increment, category * (ageBreaks.size() + 1) + ageGroupIdx);
+    currentValues[category * (ageBreaks.size() + 1) + ageGroupIdx] += increment;
+
+    return res;
+}
+
+int PyramidTimeSeries::_getAgeIdx(double age) {
+    unsigned long idx;
+
+    if (age < 0)
+        throw out_of_range("Age specified must be >= 0");
+
+    idx = 0;
+    for (; idx < ageBreaks.size(); ++idx)
+        if (ageBreaks[idx] > age)
+            break;
+
+    return idx;
+}
+
+bool PyramidTimeSeries::_storeCurrentValues(int period) {
+    // printf("_storeCurrentValues called for period #%d\n", period);
+    bool success = true;
+    int nAgeBreaks = ageBreaks.size() + 1;
+
+    if (period >= nPeriods)
+        return true;
+
+    for (int i = 0; i < nCategories; ++i)
+    {
+        for (unsigned long j = 0; j < nAgeBreaks; ++j)
+        {
+            // printf("currentValues[%d] = %d\n", i*nAgeBreaks+j, currentValues[i*nAgeBreaks+j]);
+            if (!pyramids[period]->UpdateByIdx(i, j, currentValues[i * nAgeBreaks + j]))
+                success = false;
+            if (reset)
+                currentValues[i * nAgeBreaks + j] = 0;
+        }
+    }
+
+    return success;
 }
 
 bool PyramidTimeSeries::MoveByAge(int time, int oldCategory, double oldAge, \
@@ -271,8 +315,13 @@ int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGrou
 
 void PyramidTimeSeries::Close(void) {
     closed = true;
+    _storeCurrentValues(lastPeriod);
 
     return;
+}
+
+bool PyramidTimeSeries::IsWritable(void) {
+    return !closed;
 }
 
 int PyramidTimeSeries::GetNumberCategories(void) {
@@ -280,7 +329,10 @@ int PyramidTimeSeries::GetNumberCategories(void) {
 }
 
 vector<double> PyramidTimeSeries::GetAgeBreaks(void) {
-    return ageBreaks;
+    vector<double> copy;
+    for (int i = 0; i < ageBreaks.size(); i++)
+        copy.push_back(ageBreaks[i]);
+    return copy;
 }
 
 int PyramidTimeSeries::GetPeriodLength(void) {
@@ -291,10 +343,22 @@ int PyramidTimeSeries::GetTimeMax(void) {
     return timeMax;
 }
 
+int PyramidTimeSeries::GetNPeriods(void) {
+    return nPeriods;
+}
+
 int PyramidTimeSeries::GetTime0(void) {
     return time0;
 }
 
-bool PyramidTimeSeries::IsWritable(void) {
-    return !closed;
+string PyramidTimeSeries::GetName(void) {
+    return name;
+}
+
+void PyramidTimeSeries::PrintPyramidTimeSeries(void) {
+    for (int i = 0; i < nPeriods; ++i)
+    {
+        printf("This is period number %d\n", i);
+        pyramids[i]->PrintPyramid();
+    }
 }

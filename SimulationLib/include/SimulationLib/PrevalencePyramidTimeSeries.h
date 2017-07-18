@@ -5,12 +5,11 @@
 #include <string>
 #include "PyramidTimeSeries.h"
 
-using namespace std;
 using namespace SimulationLib;
 
-class IncidencePyramidTimeSeries : public PyramidTimeSeries {
+class PrevalencePyramidTimeSeries : public PyramidTimeSeries {
 public:
-    // Initializes a new IncidencePyramidTimeSeries.
+    // Initializes a new PrevalencePyramidTimeSeries.
     //
     // 'name': Name of the time series
     //
@@ -34,16 +33,14 @@ public:
     //
     // An out-of-range exception will be thrown for invalid specifications
     //   of any of these parameters
-    IncidencePyramidTimeSeries (string name, int time0, int timeMax, \
-                                int periodLength, int nCategories,   \
-                                vector<double> ageBreaks)            \
-      : PyramidTimeSeries(name, time0, timeMax, periodLength,        \
-                          [] (int tMax, int pLength) -> int          \
-                             {return ceil(tMax/pLength);},           \
-                          nCategories, ageBreaks) {}
-      // ^(Note use of lambda function in call to PyramidTimeSeries constructor)
-
-
+    PrevalencePyramidTimeSeries (string name, int time0, int timeMax,              \
+                                 int periodLength, int nCategories,                \
+                                 vector<double> ageBreaks)                         \
+      : PyramidTimeSeries(name, time0, timeMax, periodLength,                      \
+                          [] (int tMax,int pLength) -> int                         \
+                             {return (tMax % pLength == 0) ? (tMax/pLength + 1)    \
+                                                           : ceil(tMax/pLength) + 1;}, \
+                          nCategories, ageBreaks, false) {}
 private:
     int calcThisPeriod(int time, int periodLength);
 };

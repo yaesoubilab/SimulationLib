@@ -1,4 +1,4 @@
-#include "PrevalenceTimeSeries.h"
+#include "../include/SimulationLib/PrevalenceTimeSeries.h"
 
 namespace SimulationLib {
     using namespace std;
@@ -83,7 +83,7 @@ namespace SimulationLib {
 
     template <typename T>
     void PrevalenceTimeSeries<T>::Close(void) {
-        if (stats && recordPeriod > 0)
+        if (stats != nullptr && recordPeriod > 0)
             stats->Record(lastPeriod, (double)currentPrevalence);
         writable = false;
 

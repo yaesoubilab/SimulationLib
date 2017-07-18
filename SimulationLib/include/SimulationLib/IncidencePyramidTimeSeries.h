@@ -5,11 +5,12 @@
 #include <string>
 #include "PyramidTimeSeries.h"
 
+using namespace std;
 using namespace SimulationLib;
 
-class PrevalencePyramidTimeSeries : public PyramidTimeSeries {
+class IncidencePyramidTimeSeries : public PyramidTimeSeries {
 public:
-    // Initializes a new PrevalencePyramidTimeSeries.
+    // Initializes a new IncidencePyramidTimeSeries.
     //
     // 'name': Name of the time series
     //
@@ -33,14 +34,19 @@ public:
     //
     // An out-of-range exception will be thrown for invalid specifications
     //   of any of these parameters
-    PrevalencePyramidTimeSeries (string name, int time0, int timeMax,              \
-                                 int periodLength, int nCategories,                \
-                                 vector<double> ageBreaks)                         \
-      : PyramidTimeSeries(name, time0, timeMax, periodLength,                      \
-                          [] (int tMax,int pLength) -> int                         \
-                             {return (tMax % pLength == 0) ? (tMax/pLength + 1)    \
-                                                           : ceil(tMax/pLength);}, \
-                          nCategories, ageBreaks) {}
+    IncidencePyramidTimeSeries (string name, int time0, int timeMax, \
+                                int periodLength, int nCategories,   \
+                                vector<double> ageBreaks)            \
+      : PyramidTimeSeries(name, time0, timeMax, periodLength,        \
+                          [] (int tMax, int pLength) -> int          \
+                             {return ceil(tMax/pLength) + 1;},           \
+                          nCategories, ageBreaks, true) {initializeZeroes();}
+      // ^(Note use of lambda function in call to PyramidTimeSeries constructor)
+      // added 1 to ceil and added initializeZeroes function to fix
+      // first period entries as 0
+
+
 private:
     int calcThisPeriod(int time, int periodLength);
+    void initializeZeroes(void);
 };
