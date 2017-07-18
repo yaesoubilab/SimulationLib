@@ -1,6 +1,6 @@
 #include <limits>
 #include "catch.hpp"
-#include "../DiscreteTimeStatistic.h"
+#include "../include/SimulationLib/DiscreteTimeStatistic.h"
 
 using namespace std;
 using namespace SimulationLib;

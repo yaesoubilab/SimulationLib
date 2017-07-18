@@ -5,11 +5,11 @@
 #include <map>
 #include <string>
 #include "utils/compare_files.h"
-#include "../PrevalenceTimeSeries.h"
-#include "../PrevalencePyramidTimeSeries.h"
-#include "../DiscreteTimeStatistic.h"
+#include "../include/SimulationLib/PrevalenceTimeSeries.h"
+#include "../include/SimulationLib/PrevalencePyramidTimeSeries.h"
+#include "../include/SimulationLib/DiscreteTimeStatistic.h"
 
-#include "../CSVExport.h"
+#include "../include/SimulationLib/CSVExport.h"
 
 using namespace std;
 using namespace SimulationLib;

@@ -1,6 +1,6 @@
 #include "catch.hpp"
-#include "../PrevalencePyramidTimeSeries.h"
-#include "../IncidencePyramidTimeSeries.h"
+#include "../include/SimulationLib/PrevalencePyramidTimeSeries.h"
+#include "../include/SimulationLib/IncidencePyramidTimeSeries.h"
 
 using namespace std;
 using namespace SimulationLib;
@@ -151,10 +151,13 @@ TEST_CASE( "Legal behavior" ) {
         ipts.UpdateByIdx(0, 0, 0, 1);
         ppts.UpdateByIdx(0, 0, 0, 1);
 
+        ipts.Close();
+        ppts.Close();
+
         REQUIRE( ppts.GetTotalAtPeriod(0) == 2 );
-        REQUIRE( ipts.GetTotalAtPeriod(0) == 2 );
+        REQUIRE( ipts.GetTotalAtPeriod(1) == 2 );
         REQUIRE( ppts.GetTotalInAgeGroupAtPeriod(0, 0) == 2 );
-        REQUIRE( ipts.GetTotalInAgeGroupAtPeriod(0, 0) == 2 );
+        REQUIRE( ipts.GetTotalInAgeGroupAtPeriod(1, 0) == 2 );
     }
 
     SECTION( "One age group, two categories: things getting separated right" ) {
@@ -171,10 +174,13 @@ TEST_CASE( "Legal behavior" ) {
         ppts.UpdateByAge(0, 1, 100, 18);
         ipts.UpdateByAge(0, 1, 100, 18);
 
+        ipts.Close();
+        ppts.Close();
+
         REQUIRE( ppts.GetTotalInCategoryAtPeriod(0, 0) == 17);
-        REQUIRE( ipts.GetTotalInCategoryAtPeriod(0, 0) == 17);
+        REQUIRE( ipts.GetTotalInCategoryAtPeriod(1, 0) == 17);
         REQUIRE( ppts.GetTotalInCategoryAtPeriod(0, 1) == 18);
-        REQUIRE( ipts.GetTotalInCategoryAtPeriod(0, 1) == 18);
+        REQUIRE( ipts.GetTotalInCategoryAtPeriod(1, 1) == 18);
     }
 
     SECTION( "Borders: Adding things onto borders of age breaks" ) {
@@ -189,10 +195,13 @@ TEST_CASE( "Legal behavior" ) {
         ppts.UpdateByAge(0, 0, 5, 1);
         ipts.UpdateByAge(0, 0, 5, 1);
 
+        ipts.Close();
+        ppts.Close();
+
         REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 1) == 1);
-        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 1) == 1);
+        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(1, 1) == 1);
         REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
-        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
+        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(1, 0) == 0);
     }
 
     // PrevalencePyramidTimeSeries should show x individuals at period0
@@ -213,8 +222,11 @@ TEST_CASE( "Legal behavior" ) {
         ppts.UpdateByAge(1, 0, 5, y); // y individuals at time=1
         ipts.UpdateByAge(1, 0, 5, y);
 
+        ipts.Close();
+        ppts.Close();
+
         REQUIRE(ppts.GetTotalAtPeriod(0) == x);
-        REQUIRE(ipts.GetTotalAtPeriod(0) == x + y);
+        REQUIRE(ipts.GetTotalAtPeriod(1) == x + y);
     }
 
     SECTION( "Moving things into the population they came from" ) {
@@ -231,8 +243,11 @@ TEST_CASE( "Legal behavior" ) {
         ppts.MoveByAge(0, 0, 100, 0, 99, 4);
         ipts.MoveByAge(0, 0, 100, 0, 99, 4);
 
+        ipts.Close();
+        ppts.Close();
+
         REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 0) == 5);
-        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 0) == 5);
+        REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(1, 0) == 5);
     }
 
     SECTION( "Moving things such that the old group is brought to 0" ) {
@@ -246,13 +261,17 @@ TEST_CASE( "Legal behavior" ) {
 
         ppts.UpdateByAge(0, 0, 100, 13);
         ipts.UpdateByAge(0, 0, 100, 13);
+
         ppts.MoveByAge(0, 0, 100, 1, 100, 13);
         ipts.MoveByAge(0, 0, 100, 1, 100, 13);
 
+        ppts.Close();
+        ipts.Close();
+
         REQUIRE(ppts.GetTotalInCategoryAtPeriod(0, 0) == 0);
-        REQUIRE(ipts.GetTotalInCategoryAtPeriod(0, 0) == 0);
+        REQUIRE(ipts.GetTotalInCategoryAtPeriod(1, 0) == 0);
         REQUIRE(ppts.GetTotalInCategoryAtPeriod(0, 1) == 13);
-        REQUIRE(ipts.GetTotalInCategoryAtPeriod(0, 1) == 13);
+        REQUIRE(ipts.GetTotalInCategoryAtPeriod(1, 1) == 13);
     }
 
     SECTION( "Updating to bring to zero" ) {
@@ -268,6 +287,9 @@ TEST_CASE( "Legal behavior" ) {
         ipts.UpdateByAge(0, 0, 100, 13);
         ppts.UpdateByAge(0, 0, 100, -13);
         ipts.UpdateByAge(0, 0, 100, -13);
+
+        ppts.Close();
+        ipts.Close();
 
         REQUIRE(ppts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
         REQUIRE(ipts.GetTotalInAgeGroupAtPeriod(0, 0) == 0);
