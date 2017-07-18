@@ -594,9 +594,22 @@ TimeStatisticsCSVExport::getColumnName(CellSpec columnSpec) {
     int j;
     string rowName;
 
+    j = 0;
+
+    // If we are looking at the first column of the statistics column names
+    //   we should add a "," before the name so that the column names row of 
+    //   the CSV lines up correctly with the rows beneath it
+    if (columnSpec == 0)
+    {
+        for (auto i = columns.cbegin(); \
+         i != columns.cend();                 \
+         ++i, ++j)
+        if (j == (int)columnSpec)
+            return "," + i->second;
+    }
+
     // Look through the columns map in the default sorted order. When map entry
     //   #'columnSpec' is found, return the string associated with this map entry.
-    j = 0;
     for (auto i = columns.cbegin(); \
          i != columns.cend();                 \
          ++i, ++j)

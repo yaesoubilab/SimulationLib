@@ -77,6 +77,12 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
         throw out_of_range("category specified is < 0 or >= nCategories");
     if (ageGroupIdx < 0)
         throw out_of_range("ageGroupIdx is < 0");
+    if (ageGroupIdx > ageBreaks.size())
+        throw out_of_range("ageGroupIdx is > number of age groups");
+
+    // return false if updating will cause value to go below 0
+    if (currentValues[category * (ageBreaks.size() + 1) + ageGroupIdx] + increment < 0)
+        return false;
 
     thisPeriod = calcThisPeriod(time, periodLength);
 
@@ -149,11 +155,32 @@ bool PyramidTimeSeries::MoveByAge(int time, int oldCategory, double oldAge, \
         throw out_of_range("oldAge is < 0");
     if (newAge < 0)
         throw out_of_range("newAge is < 0");
+    if (increment < 0)
+        throw out_of_range("increment moved was negative");
 
     thisPeriod = calcThisPeriod(time, periodLength);
 
-    return pyramids[thisPeriod] \
+    // If the MoveByAge period is the period currently stored in the buffer
+    // update values in the buffer rather than the pyramid data
+    if (thisPeriod == lastPeriod) {
+        int oldAgeIdx, newAgeIdx, oldPopulation;
+        oldAgeIdx = _getAgeIdx(oldAge);
+        newAgeIdx = _getAgeIdx(newAge);
+
+        oldPopulation = currentValues[oldCategory * (ageBreaks.size() + 1) + oldAgeIdx];
+
+        // Check to see if 'increment' is l.t.e to population group size
+        if (oldPopulation - increment < 0)
+            return false;
+
+        currentValues[oldCategory * (ageBreaks.size() + 1) + oldAgeIdx] -= increment;
+        currentValues[newCategory * (ageBreaks.size() + 1) + newAgeIdx] += increment;
+        return true;
+    }
+    else {
+        return pyramids[thisPeriod] \
              ->MoveByAge(oldCategory, oldAge, newCategory, newAge, increment);
+    }
 }
 
 bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
@@ -173,13 +200,76 @@ bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx,
         throw out_of_range("newCategory specified is < 0 or >= nCategories");
     if (oldAgeGroupIdx < 0)
         throw out_of_range("oldAgeGroupIdx is < 0");
+    if (oldAgeGroupIdx > ageBreaks.size())
+        throw out_of_range("oldAgeGroupIdx is > number of age groups");
     if (newAgeGroupIdx < 0)
         throw out_of_range("newAgeGroupIdx is < 0");
+    if (newAgeGroupIdx > ageBreaks.size())
+        throw out_of_range("newAgeGroupIdx is > number of age groups");
+    if (increment < 0)
+        throw out_of_range("increment moved was negative");
 
     thisPeriod = calcThisPeriod(time, periodLength);
 
-    return pyramids[thisPeriod] \
-             ->MoveByAge(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
+    if (thisPeriod == lastPeriod) {
+        int oldPopulation;
+
+        oldPopulation = currentValues[oldCategory * (ageBreaks.size() + 1) + oldAgeGroupIdx];
+
+        // Check to see if 'increment' is l.t.e to population group size
+        if (oldPopulation - increment < 0)
+            return false;
+
+        currentValues[oldCategory * (ageBreaks.size() + 1) + oldAgeGroupIdx] -= increment;
+        currentValues[newCategory * (ageBreaks.size() + 1) + newAgeGroupIdx] += increment;
+        return true;
+    }
+    else {
+        return pyramids[thisPeriod] \
+             ->MoveByIdx(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
+    }
+}
+
+int PyramidTimeSeries::_getTotalInCurrentValues(int periodIdx, \
+                                                bool categoryBool, int categoryIdx, \
+                                                bool ageGroupBool, int ageGroupIdx) {
+    int currentValuesSize = (ageBreaks.size() + 1) * nCategories;
+
+    if (categoryBool) {
+        if (categoryIdx < 0 || categoryIdx >= nCategories)
+            throw out_of_range("category specified is < 0 or >= nCategories");
+    }
+    if (ageGroupBool) {
+        if (ageGroupIdx < 0)
+            throw out_of_range("ageGroupIdx is < 0");
+        if (ageGroupIdx > ageBreaks.size())
+            throw out_of_range("ageGroupIdx is > number of age groups");
+    }
+
+    int total; 
+
+    if (categoryBool && ageGroupBool)
+        return currentValues[categoryIdx * (ageBreaks.size() + 1) + ageGroupIdx];
+    else if (categoryBool) {
+        // indexOffset calculates the number that needs to be added to the index 
+        // in order to pull the correct values from the currentValues array
+        int indexOffset;
+        indexOffset = categoryIdx * (ageBreaks.size() + 1);
+
+        for (int i = 0; i < ageBreaks.size() + 1; ++i)
+            total += currentValues[indexOffset + i];
+        return total;
+    }
+    else if (ageGroupBool) {
+        for (int i = ageGroupIdx; i < currentValuesSize; i += (ageBreaks.size() + 1))
+            total += currentValues[i];
+        return total;
+    }
+    else {
+        for (int i = 0; i < currentValuesSize; ++i)
+            total += currentValues[i];
+        return total;
+    }
 
 }
 
@@ -193,7 +283,16 @@ int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
     if (periodIdx < 0)
         throw out_of_range("periodIdx < 0");
 
-    return pyramids[periodIdx]->GetTotal();
+    // Here we are checking to see whether the values we are searching for are in
+    // the buffer currentValues or not. First we check if the periodIdx is equal 
+    // to the lastPeriod class variable. Futhermore, we must check that the 
+    // PyrmaidTimeSeries is not closed, because we only want to access the buffer
+    // value if the Series hasn't been closed. Else we should access the stored
+    // pyramid data values.
+    if (periodIdx == lastPeriod && !closed)
+        return _getTotalInCurrentValues(periodIdx, false, 0, false, 0);
+    else
+        return pyramids[periodIdx]->GetTotal();
 }
 
 int PyramidTimeSeries::GetTotalAtTime(int time) {
@@ -226,7 +325,10 @@ int PyramidTimeSeries::GetTotalInCategoryAtPeriod(int periodIdx, int category) {
     if (category < 0)
         throw out_of_range("category < 0");
 
-    return pyramids[periodIdx]->GetTotalInCategory(category);
+    if (periodIdx == lastPeriod && !closed)
+        return _getTotalInCurrentValues(periodIdx, true, category, false, 0);
+    else
+        return pyramids[periodIdx]->GetTotalInCategory(category);
 }
 
 int PyramidTimeSeries::GetTotalInCategoryAtTime(int time, int category) {
@@ -259,7 +361,10 @@ int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx
     if (ageGroupIdx < 0)
         throw out_of_range("ageGroupIdx < 0");
 
-    return pyramids[periodIdx]->GetTotalInAgeGroup(ageGroupIdx);
+    if (periodIdx == lastPeriod && !closed)
+        return _getTotalInCurrentValues(periodIdx, false, 0, true, ageGroupIdx);
+    else
+        return pyramids[periodIdx]->GetTotalInAgeGroup(ageGroupIdx);
 }
 
 int PyramidTimeSeries::GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
@@ -295,7 +400,10 @@ int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int 
     if (category < 0)
         throw out_of_range("category < 0");
 
-    return pyramids[periodIdx]->GetTotalInAgeGroupAndCategory(ageGroupIdx, category);
+    if (periodIdx == lastPeriod && !closed)
+        return _getTotalInCurrentValues(periodIdx, true, ageGroupIdx, true, category);
+    else
+        return pyramids[periodIdx]->GetTotalInAgeGroupAndCategory(ageGroupIdx, category);
 }
 
 int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category) {

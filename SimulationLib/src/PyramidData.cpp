@@ -187,7 +187,7 @@ void PyramidData::PrintPyramid(void)
         printf("This is category %d\n", i);
         for (int j = 0; j < numAgeGroups; ++j)
         {
-            printf("%d: %d\n", j, popCounts[i][j]);
+            printf("Age group %d: %d\n", j, popCounts[i][j]);
         }
     }
     return;

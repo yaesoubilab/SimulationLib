@@ -1,6 +1,6 @@
 #include "catch.hpp"
-#include "../PrevalenceTimeSeries.h"
-#include "../DiscreteTimeStatistic.h"
+#include "../include/SimulationLib/PrevalenceTimeSeries.h"
+#include "../include/SimulationLib/DiscreteTimeStatistic.h"
 
 using namespace std;
 using namespace SimulationLib;

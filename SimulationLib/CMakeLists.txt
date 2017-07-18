@@ -20,7 +20,10 @@ set(lib_dest ${main_lib_dest}/${CMAKE_BUILD_TYPE})
 
 # Add subdirectories
 add_subdirectory(src)
-# add_subdirectory(tests)
+
+# Enable testing
+enable_testing()
+add_subdirectory(tests)
 
 install(FILES SimulationLib-config.cmake DESTINATION ${main_lib_dest})
 install(EXPORT SimulationLib DESTINATION ${lib_dest})
