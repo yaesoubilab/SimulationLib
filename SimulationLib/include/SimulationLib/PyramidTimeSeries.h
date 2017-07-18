@@ -41,6 +41,8 @@ namespace SimulationLib
 		virtual int calcThisPeriod(int time, int periodLength) = 0;
 
 		int _getAgeIdx(double age);
+		int _getTotalInCurrentValues(int periodIdx, bool categoryBool, int categoryIdx, \
+									 bool ageGroupBool, int ageGroupIdx);
 
 		bool _storeCurrentValues(int period);
 
