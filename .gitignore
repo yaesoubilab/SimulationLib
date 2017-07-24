@@ -269,3 +269,5 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+*.sln
+/SimulationLib/ReadMe.txt
