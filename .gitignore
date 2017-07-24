@@ -269,5 +269,9 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+
+/AgentBaseSIRLib
+/.vs
+/Debug
 *.sln
 /SimulationLib/ReadMe.txt
