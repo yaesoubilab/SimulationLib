@@ -147,7 +147,13 @@ namespace SimulationLib {
 
     template <typename T>
     T PrevalenceTimeSeries<T>::GetTotalAtTime(double t) {
-        return (*prevalence)[(int)ceil(t / periodLength)];
+        int thisPeriod;
+        thisPeriod = (int)ceil(t / periodLength);
+
+        if (thisPeriod >= lastPeriod)
+            return currentPrevalence;
+        else
+            return (*prevalence)[(int)ceil(t / periodLength)];
     }
 
     template <typename T>
