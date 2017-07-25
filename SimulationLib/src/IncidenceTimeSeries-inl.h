@@ -170,6 +170,11 @@ namespace SimulationLib {
         return (*observations)[(int)floor(lastTime / periodLength)];
     }
 
+    template<typename T>
+    T IncidenceTimeSeries<T>::GetTotalAtTime(double t) {
+        return (*observations)[(int)ceil(t / periodLength)];
+    }
+
     // Returns the summed value of all complete aggregations, and the incomplete
     //   aggregation
     template<typename T>

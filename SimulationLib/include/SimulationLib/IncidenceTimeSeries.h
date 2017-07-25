@@ -81,6 +81,7 @@ namespace SimulationLib
 	    string GetName();
 	    int GetPeriodLength();
 	    bool IsWritable();
+	    T GetTotalAtTime(double t);
 
 	private:
 		double time0;

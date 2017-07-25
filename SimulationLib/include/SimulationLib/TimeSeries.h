@@ -15,5 +15,6 @@ namespace SimulationLib
         virtual int GetPeriodLength(void) = 0;
         virtual bool IsWritable(void) = 0;
         virtual vector<T> *GetVector(void) = 0;
+        virtual T GetTotalAtTime(double t) = 0;
     };
 }
