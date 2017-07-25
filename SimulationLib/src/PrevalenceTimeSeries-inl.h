@@ -72,7 +72,21 @@ namespace SimulationLib {
             stats->Record(lastPeriod, (double)currentPrevalence);
 
         if (thisPeriod > lastPeriod)
-            _storePrevalence(lastPeriod);
+        {
+            //Check if thisPeriod is the period directly following last period
+            if (thisPeriod == (lastPeriod + 1))
+                _storePrevalence(lastPeriod);
+            // Prevalence values are initially zeroed, so if thisPeriod is
+            // not the period directly following lastPeriod, the zeroes must
+            // be updated appropriately
+            else {
+                for (int i = lastPeriod;
+                     i < thisPeriod;
+                     ++i) {
+                    _storePrevalence(i);
+                }
+            }
+        }
 
         currentPrevalence += increment;
         lastTime = time;
