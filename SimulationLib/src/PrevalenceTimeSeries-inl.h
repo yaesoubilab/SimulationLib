@@ -72,7 +72,21 @@ namespace SimulationLib {
             stats->Record(lastPeriod, (double)currentPrevalence);
 
         if (thisPeriod > lastPeriod)
-            _storePrevalence(lastPeriod);
+        {
+            //Check if thisPeriod is the period directly following last period
+            if (thisPeriod == (lastPeriod + 1))
+                _storePrevalence(lastPeriod);
+            // Prevalence values are initially zeroed, so if thisPeriod is
+            // not the period directly following lastPeriod, the zeroes must
+            // be updated appropriately
+            else {
+                for (int i = lastPeriod;
+                     i < thisPeriod;
+                     ++i) {
+                    _storePrevalence(i);
+                }
+            }
+        }
 
         currentPrevalence += increment;
         lastTime = time;
@@ -133,7 +147,13 @@ namespace SimulationLib {
 
     template <typename T>
     T PrevalenceTimeSeries<T>::GetTotalAtTime(double t) {
-        return (*prevalence)[(int)ceil(t / periodLength)];
+        int thisPeriod;
+        thisPeriod = (int)ceil(t / periodLength);
+
+        if (thisPeriod >= lastPeriod)
+            return currentPrevalence;
+        else
+            return (*prevalence)[(int)ceil(t / periodLength)];
     }
 
     template <typename T>

@@ -140,6 +140,46 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
 
 }
 
+TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv]") {
+    PrevalenceTimeSeries<int> *pts5;
+    PrevalenceTimeSeries<int> *pts6;
+    TimeSeriesCSVExport<int> tse5{"test-t05-out.csv"};
+    TimeSeriesCSVExport<int> tse6{"test-t06-out.csv"};
+
+    // Initialize
+    pts5 = new PrevalenceTimeSeries<int>{"Population 5", 10, 2};
+    pts6 = new PrevalenceTimeSeries<int>{"Population 6", 10, 2};
+
+    // Add data
+    REQUIRE( pts5->Record(0.0, 100) == true );
+    REQUIRE( pts5->Record(9.0, 2) == true );
+
+    REQUIRE( pts6->Record(0.0, 100) == true );
+    REQUIRE( pts6->Record(1.0, 1) == true );
+    REQUIRE( pts6->Record(7.0, 2) == true );
+    REQUIRE( pts6->Record(9.0, 3) == true );
+
+    // Close TimeSeries
+    pts5->Close();
+    pts6->Close();
+
+    // Add TimeSeries
+    REQUIRE( tse5.Add(pts5) == true );
+    REQUIRE( tse6.Add(pts6) == true );
+
+    // Write TimeSeries
+    REQUIRE( tse5.Write() == true );
+    REQUIRE( tse6.Write() == true );
+
+    REQUIRE( compare_files("test-t05-out.csv",
+                           "tests-CSVExport-files/test-t05-answer.csv") == true );
+    REQUIRE( compare_files("test-t06-out.csv",
+                           "tests-CSVExport-files/test-t06-answer.csv") == true );
+
+    delete pts5;
+    }
+
+
 TEST_CASE("Basic TimeStatistic export", "[csv]") {
     map<TimeStatType, string> columns {
         {TimeStatType::Mean, "Average"}
