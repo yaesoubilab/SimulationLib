@@ -275,3 +275,6 @@ Makefile
 /Debug
 *.sln
 /SimulationLib/ReadMe.txt
+
+Test
+CTestTestfile.cmake
