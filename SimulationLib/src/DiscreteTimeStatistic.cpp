@@ -8,16 +8,16 @@ namespace SimulationLib
 
     void DiscreteTimeStatistic::Record(double value)
     {
-        return _record(value, count - 1);
+        return _record(value);
     }
 
     void DiscreteTimeStatistic::Record(double _, double value)
     {
-        return _record(value, count - 1);
+        return _record(value);
     }
 
     // TODO: implement storing observations
-    void DiscreteTimeStatistic::_record(double value, long locationIndex)
+    void DiscreteTimeStatistic::_record(double value)
     {
         double inc = value - mean;
 
@@ -32,11 +32,8 @@ namespace SimulationLib
 
         if (count > 1) variance = varianceNominator / (count - 1);
 
-        // Attempt to record the value if observation-recording is enabled
-        if (numObservations > 0 && locationIndex < numObservations)
-            observations[locationIndex] = value;
-        else if (numObservations > 0 && locationIndex >= numObservations)
-            printf("Error: Attempted to record too many observations\n");
+        // Record value
+        observations.push_back(value);
     }
 
     double DiscreteTimeStatistic::GetSum() {return total;}
@@ -46,4 +43,23 @@ namespace SimulationLib
     double DiscreteTimeStatistic::GetMin() {return min;}
     double DiscreteTimeStatistic::GetMax() {return max;}
     vector<double> DiscreteTimeStatistic::GetObservations() {return observations;}
+
+    double DiscreteTimeStatistic::GetPercentile(double alpha) {
+        int size, idx;
+
+        if (alpha <= 0 || alpha > 1) {
+            throw out_of_range("Alpha was <= 0 or > 1");
+        }
+
+        // Sort the vector
+        std::sort(observations.begin(), observations.end());
+    
+        size = observations.size();
+
+        // Used "nearest-rank method" to find percentile
+        // subtract 1 to fit to 0 indexing
+        idx = (int) ceil((double) size * alpha) - 1;
+
+        return observations[idx];
+    }
 }
