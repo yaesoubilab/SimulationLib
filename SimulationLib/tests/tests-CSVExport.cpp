@@ -7,6 +7,7 @@
 #include "utils/compare_files.h"
 #include "../include/SimulationLib/PrevalenceTimeSeries.h"
 #include "../include/SimulationLib/PrevalencePyramidTimeSeries.h"
+#include "../include/SimulationLib/IncidencePyramidTimeSeries.h"
 #include "../include/SimulationLib/DiscreteTimeStatistic.h"
 
 #include "../include/SimulationLib/CSVExport.h"
@@ -177,7 +178,77 @@ TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv
                            "tests-CSVExport-files/test-t06-answer.csv") == true );
 
     delete pts5;
-    }
+}
+
+TEST_CASE("PyramidTimeSeries with intermediate zeroes", "[csv]") {
+    PrevalencePyramidTimeSeries *ppts1;
+    IncidencePyramidTimeSeries *ipts1;
+    PyramidTimeSeriesCSVExport tse7{"test-t07-out.csv"};
+    PyramidTimeSeriesCSVExport tse8{"test-t08-out.csv"};
+
+    // Initialize
+    ppts1 = new PrevalencePyramidTimeSeries{"Population 7", 0, 10, 2, 2, {10,20,30}};
+    ipts1 = new IncidencePyramidTimeSeries{"Population 8", 0, 10, 2, 2, {10,20,30}};
+
+    ppts1->UpdateByAge(0, 0, 5, 10);
+    ppts1->UpdateByAge(0, 0, 15, 20);
+    ppts1->UpdateByAge(0, 0, 25, 30);
+    ppts1->UpdateByAge(0, 0, 35, 40);
+    ppts1->UpdateByAge(0, 1, 5, 15);
+    ppts1->UpdateByAge(0, 1, 15, 25);
+    ppts1->UpdateByAge(0, 1, 25, 35);
+    ppts1->UpdateByAge(0, 1, 35, 45);
+
+    ppts1->UpdateByAge(7, 0, 5, 1);
+    ppts1->UpdateByAge(7, 0, 15, 2);
+    ppts1->UpdateByAge(7, 0, 25, 3);
+    ppts1->UpdateByAge(7, 0, 35, 4);
+    ppts1->UpdateByAge(7, 1, 5, 1);
+    ppts1->UpdateByAge(7, 1, 15, 2);
+    ppts1->UpdateByAge(7, 1, 25, 3);
+    ppts1->UpdateByAge(7, 1, 35, 4);
+
+
+    ipts1->UpdateByAge(0, 0, 5, 10);
+    ipts1->UpdateByAge(0, 0, 15, 20);
+    ipts1->UpdateByAge(0, 0, 25, 30);
+    ipts1->UpdateByAge(0, 0, 35, 40);
+    ipts1->UpdateByAge(0, 1, 5, 15);
+    ipts1->UpdateByAge(0, 1, 15, 25);
+    ipts1->UpdateByAge(0, 1, 25, 35);
+    ipts1->UpdateByAge(0, 1, 35, 45);
+
+    ipts1->UpdateByAge(7, 0, 5, 1);
+    ipts1->UpdateByAge(7, 0, 15, 2);
+    ipts1->UpdateByAge(7, 0, 25, 3);
+    ipts1->UpdateByAge(7, 0, 35, 4);
+    ipts1->UpdateByAge(7, 1, 5, 1);
+    ipts1->UpdateByAge(7, 1, 15, 2);
+    ipts1->UpdateByAge(7, 1, 25, 3);
+    ipts1->UpdateByAge(7, 1, 35, 4);
+
+
+    // Close TimeSeries
+    ppts1->Close();
+    ipts1->Close();
+
+    // Add TimeSeries
+    REQUIRE( tse7.Add(ppts1) == true );
+    REQUIRE( tse8.Add(ipts1) == true );
+
+
+    // Write TimeSeries
+    REQUIRE( tse7.Write() == true );
+    REQUIRE( tse8.Write() == true );
+
+    REQUIRE( compare_files("test-t07-out.csv",
+                           "tests-CSVExport-files/test-t07-answer.csv") == true );
+    REQUIRE( compare_files("test-t08-out.csv",
+                           "tests-CSVExport-files/test-t08-answer.csv") == true );
+
+
+}
+
 
 
 TEST_CASE("Basic TimeStatistic export", "[csv]") {
