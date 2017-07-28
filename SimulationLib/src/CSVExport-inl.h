@@ -303,6 +303,8 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 {
 // Deallocate any memory allocated on instantiation
+    delete columns;
+    delete rows;
 }
 
 bool
