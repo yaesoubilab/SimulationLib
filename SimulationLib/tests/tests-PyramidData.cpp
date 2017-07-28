@@ -14,7 +14,7 @@ TEST_CASE("PyramidData: weird initializations", "[pyramid]") {
         vector<double> ageBreaks = {10, 20, 30};
 
         try {
-            PyramidData pd(0, ageBreaks);
+            PyramidData<int> pd(0, ageBreaks);
         } catch (...) {
             failed = true;
         }
@@ -27,7 +27,7 @@ TEST_CASE("PyramidData: weird initializations", "[pyramid]") {
         vector<double> ageBreaks = {};
 
         try {
-            PyramidData pd(1, ageBreaks);
+            PyramidData<int> pd(1, ageBreaks);
         } catch (...) {
             failed = true;
         }
@@ -40,7 +40,7 @@ TEST_CASE("PyramidData: weird initializations", "[pyramid]") {
         vector<double> ageBreaks = {0, -1, 3};
 
         try {
-            PyramidData pd(1, ageBreaks);
+            PyramidData<int> pd(1, ageBreaks);
         } catch (...) {
             failed = true;
         }
@@ -54,7 +54,7 @@ TEST_CASE( "PyramidData: invalid updates" ) {
     vector<double> ageBreaks = {10};
     bool threw;
 
-    PyramidData pd(numCategories, ageBreaks);
+    PyramidData<int> pd(numCategories, ageBreaks);
 
     REQUIRE( pd.UpdateByAge(0, 5, -10) == false );
     REQUIRE( pd.UpdateByIdx(0, 0, 20) == true );
@@ -74,7 +74,7 @@ TEST_CASE("PyramidData: one category, no age-breaks", "[pyramid]") {
     int numCategories = 1;
     vector<double> ageBreaks = {};
 
-    PyramidData pd(numCategories, ageBreaks);
+    PyramidData<int> pd(numCategories, ageBreaks);
 
     REQUIRE( pd.GetTotalInCategory(0) == 0 );
     REQUIRE( pd.GetTotalInAgeGroup(0) == 0 );
@@ -92,7 +92,7 @@ TEST_CASE("PyramidData: one age-break", "[pyramid]") {
     int numCategories = 1;
     vector<double> ageBreaks = {10};
 
-    PyramidData pd(numCategories, ageBreaks);
+    PyramidData<int> pd(numCategories, ageBreaks);
 
     REQUIRE( pd.GetTotalInCategory(0) == 0 );
     REQUIRE( pd.GetTotalInAgeGroup(0) == 0 );
@@ -124,7 +124,7 @@ TEST_CASE("PyramidData: moving", "[pyramid]") {
     int numCategories = 2;
     vector<double> ageBreaks = {10, 20};
 
-    PyramidData pd(numCategories, ageBreaks);
+    PyramidData<int> pd(numCategories, ageBreaks);
 
     pd.UpdateByAge(0, 5, 33);
     pd.UpdateByAge(0, 15, 66);

@@ -42,10 +42,10 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
 
     nPeriods     = calcNPeriods(timeMax, periodLength);
 
-    pyramids     = new PyramidData *[nPeriods];
+    pyramids     = new PyramidData<int> *[nPeriods];
 
     for (int i = 0; i < nPeriods; ++i)
-        pyramids[i] = new PyramidData(nCategories, ageBreaks);
+        pyramids[i] = new PyramidData<int>(nCategories, ageBreaks);
 }
 
 

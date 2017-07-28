@@ -30,7 +30,7 @@ namespace SimulationLib
 
 		vector<double> ageBreaks;
 
-		PyramidData **pyramids;
+		PyramidData<int> **pyramids;
 
 		// This is implemented in PrevalencePyramidTimeSeries and
 		//   IncidencePyramidTimeSeries, abiding by the Template Method pattern

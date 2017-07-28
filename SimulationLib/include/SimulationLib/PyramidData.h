@@ -8,11 +8,12 @@ using namespace std;
 
 namespace SimulationLib
 {
+	template <typename T>
 	class PyramidData
 	{
 
 	private:
-		int **popCounts;
+		T **popCounts;
 
 		int numCategories;
 		int numAgeGroups;
@@ -42,11 +43,11 @@ namespace SimulationLib
 		//   the size of the specified population to become negative. Values of
 		//   'category' and 'ageGroupIndex' which are out-of-bounds will result
 		//   in an exception being thrown.
-		bool UpdateByIdx(int category, int ageGroupIndex, int increment);
+		bool UpdateByIdx(int category, int ageGroupIndex, T increment);
 
 		// The same, except age is specified directly, and subsequently translated
 		//   into the correct age group.
-		bool UpdateByAge(int category, double age, int increment);
+		bool UpdateByAge(int category, double age, T increment);
 
 		// update the change in the specified category and age group (note that it takes the actual age)
 
@@ -58,27 +59,27 @@ namespace SimulationLib
 		//   group that does not exist, or if 'numberMoved' is a negative
 		//   integer.
 		bool MoveByIdx(int oldCategory, int oldAgeGroupIndex, \
-					   int newCategory, int newAgeGroupIndex, int numberMoved);
+					   int newCategory, int newAgeGroupIndex, T numberMoved);
 
 		// Similar, except age is explicitly specified and translated internally
 		//   into its corresponding age group.
 		bool MoveByAge(int oldCategory, double oldAge, \
-					   int newCategory, double newAge, int numberMoved);
+					   int newCategory, double newAge, T numberMoved);
 
 		// Returns the total number of individuals across all categories and
 		//   age groups
-		int GetTotal(void);
+		T GetTotal(void);
 
 		// Returns the total number of individuals in the specified category.
 		// Throws exception for invalid 'categoryIndex'.
-		int GetTotalInCategory(int categoryIndex);
+		T GetTotalInCategory(int categoryIndex);
 
 		// Returns the total number of individuals in the specified age group.
 		// Throws exception for invalid 'ageGroupIndex'.
-		int GetTotalInAgeGroup(int ageGroupIndex);
+		T GetTotalInAgeGroup(int ageGroupIndex);
 
 		// Returns the total number of individuals in the specified category and age group. 
-		int GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
+		T GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
 
 		// For debugging, prints out the content of the Pyramid data structure.
 		void PrintPyramid(void);
