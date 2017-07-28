@@ -3,10 +3,13 @@ project(TestSimulationLib)
 
 find_package(SimulationLib REQUIRED)
 find_package(StatisticalDistributionsLib REQUIRED)
+find_package(Boost REQUIRED)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(SerialBirthDeathSim run-SerialBirthDeathSim.cpp SerialBirthDeathSim.cpp)
 add_executable(ParallelBirthDeathSim run-ParallelBirthDeathSim.cpp ParallelBirthDeathSim.cpp)
