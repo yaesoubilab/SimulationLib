@@ -10,7 +10,8 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/PyramidData.h
            ${header_path}/PyramidTimeSeries.h
            ${header_path}/TimeSeries.h
-           ${header_path}/TimeStatistic.h)
+           ${header_path}/TimeStatistic.h
+           ${header_path}/EventQueue.h)
 
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
