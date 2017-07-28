@@ -44,7 +44,7 @@ namespace SimulationLib {
       i += k;
     }
     long double min, max;
-    char c;
+    char c = F;
     sscanf(i, "%c,%Lf,%Lf", &c, &min, &max);
     return(make_tuple(c == 'T', min, max));
   }
