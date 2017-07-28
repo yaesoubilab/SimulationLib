@@ -152,5 +152,7 @@ namespace SimulationLib
 
 		// For debugging, prints out all of the contents of the Pyramid Time Series
 		void PrintPyramidTimeSeries(void);
+
+		void PrintCurrentValues(void);
 	};
 }

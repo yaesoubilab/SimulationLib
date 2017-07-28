@@ -264,6 +264,7 @@ int PyramidTimeSeries::_getTotalInCurrentValues(int periodIdx, \
     }
 
     int total; 
+    total = 0;
 
     if (categoryBool && ageGroupBool)
         return currentValues[categoryIdx * (ageBreaks.size() + 1) + ageGroupIdx];
@@ -486,4 +487,15 @@ void PyramidTimeSeries::PrintPyramidTimeSeries(void) {
         printf("This is period number %d\n", i);
         pyramids[i]->PrintPyramid();
     }
+}
+
+void PyramidTimeSeries::PrintCurrentValues(void) {
+    printf("Current values:");
+    int currentValuesSize;
+    currentValuesSize = (ageBreaks.size() + 1) * nCategories;
+
+    for (int i = 0; i < currentValuesSize; ++i) {
+        printf("%d, ", currentValues[i]);
+    }
+    printf("\n");
 }
