@@ -87,8 +87,25 @@ bool PyramidTimeSeries::UpdateByIdx(int time, int category, int ageGroupIdx, int
     thisPeriod = calcThisPeriod(time, periodLength);
 
     bool res = true;
-    if (thisPeriod > lastPeriod)
-        res = _storeCurrentValues(lastPeriod);
+    if (thisPeriod > lastPeriod) {
+        //Check if thisPeriod is the period directly following last period
+        if (thisPeriod == (lastPeriod + 1))
+            res = _storeCurrentValues(lastPeriod);
+
+        // Prevalence values are initially zeroed, so if thisPeriod is
+        //   not the period directly following lastPeriod, the zeroes must
+        //   be updated appropriately
+        // This works for IncidencePTS as well, because currentValues is reset
+        //   to all 0's after _storeCurrentValues is called, so calling
+        //   _storeCurrentValues additional times will not changed the 0'd entries
+        else {
+            for (int i = lastPeriod;
+                     i < thisPeriod;
+                     ++i) {
+                    _storeCurrentValues(i);
+                }
+        }
+    }
 
     lastTime   = time;
     lastPeriod = thisPeriod;

@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <limits>
+#include <math.h>
 #include "TimeStatistic.h"
 
 
@@ -13,13 +15,9 @@ namespace SimulationLib
 	{
 	public:
 		// DiscreteTimeStatistic calculates time-independent point statistics.
-		// To record observations for later access via the ::GetObservations()
-		//   method, specify 'numOfObservationsToStore' on instantiation.
-		DiscreteTimeStatistic(string _name, long numOfObservationsToStore) :
-		  TimeStatistic(_name)
+		// All observations are recorded in a vector to enable calculating the percentile
+		DiscreteTimeStatistic(string _name) : TimeStatistic(_name)
 	    {
-	        numObservations = numOfObservationsToStore;
-
 	        // Min/max begin as the boundaries of 'double'
 	        min = numeric_limits<double>::max();
 	        max = numeric_limits<double>::min();
@@ -31,13 +29,9 @@ namespace SimulationLib
 	        variance = 0;
 
 	        varianceNominator = 0;
-
-	        // If recording, allocate memory for vector and zero everything
-	        if (numObservations)
-	            observations = vector<double>(numObservations, 0);
 	    }
 
-		DiscreteTimeStatistic(string name) : DiscreteTimeStatistic(name, 0) {}
+		// DiscreteTimeStatistic(string name) : DiscreteTimeStatistic(name, 0) {}
 
 		~DiscreteTimeStatistic();
 
@@ -60,11 +54,14 @@ namespace SimulationLib
 		//   specification of 'numOfObservationsToStore'.
 		vector<double> GetObservations();
 
+		// Return the alpha-th percentile. Throws error if alpha out of range;
+		double GetPercentile(double alpha);
+
 	private:
-		void _record(double value, long locationIndex);
+		void _record(double value);
 
 		double mean, variance, min, max, total;
-		long count, numObservations;
+		long count;
 		double varianceNominator;
 		vector<double> observations;
 	};
