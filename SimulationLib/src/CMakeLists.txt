@@ -18,6 +18,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+find_package(Boost REQUIRED)
+
+include_directories(${Boost_INCLUDE_DIRS})
+
 # Set source files
 set(src ContinuousTimeStatistic.cpp
         CSVExport.cpp
@@ -34,6 +38,8 @@ set(src ContinuousTimeStatistic.cpp
 
 # Define library target
 add_library(SimulationLib ${header} ${src})
+
+include_directories(${Boost_INCLUDE_DIRS})
 
 target_include_directories(SimulationLib PUBLIC
   $<BUILD_INTERFACE:${SimulationLib_SOURCE_DIR}/include> # for headers when building
