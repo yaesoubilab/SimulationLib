@@ -18,8 +18,8 @@ using namespace SimulationLib;
 TEST_CASE("Basic PrevalenceTimeSeries", "[csv]") {
     PrevalenceTimeSeries<int> *pts1;
     PrevalenceTimeSeries<int> *pts2;
-    TimeSeriesCSVExport<int> tse1{"test-t01-out.csv"};
-    TimeSeriesCSVExport<int> tse2{"test-t02-out.csv"};
+    TimeSeriesExport<int> tse1{"test-t01-out.csv"};
+    TimeSeriesExport<int> tse2{"test-t02-out.csv"};
 
     // Initialize
     pts1 = new PrevalenceTimeSeries<int>{"Population 1", 10, 5};
@@ -62,8 +62,8 @@ TEST_CASE("Basic PrevalenceTimeSeries", "[csv]") {
 TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
     PrevalencePyramidTimeSeries *ptse1;
     PrevalencePyramidTimeSeries *ptse2;
-    PyramidTimeSeriesCSVExport tse3{"test-t03-out.csv"};
-    PyramidTimeSeriesCSVExport tse4{"test-t04-out.csv"};
+    PyramidTimeSeriesExport tse3{"test-t03-out.csv"};
+    PyramidTimeSeriesExport tse4{"test-t04-out.csv"};
 
     // Initialize
     ptse1 = new PrevalencePyramidTimeSeries{"Population 3", 0, 10, 2, 1, {5,10}};
@@ -144,8 +144,8 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
 TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv]") {
     PrevalenceTimeSeries<int> *pts5;
     PrevalenceTimeSeries<int> *pts6;
-    TimeSeriesCSVExport<int> tse5{"test-t05-out.csv"};
-    TimeSeriesCSVExport<int> tse6{"test-t06-out.csv"};
+    TimeSeriesExport<int> tse5{"test-t05-out.csv"};
+    TimeSeriesExport<int> tse6{"test-t06-out.csv"};
 
     // Initialize
     pts5 = new PrevalenceTimeSeries<int>{"Population 5", 10, 2};
@@ -183,8 +183,8 @@ TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv
 TEST_CASE("PyramidTimeSeries with intermediate zeroes", "[csv]") {
     PrevalencePyramidTimeSeries *ppts1;
     IncidencePyramidTimeSeries *ipts1;
-    PyramidTimeSeriesCSVExport tse7{"test-t07-out.csv"};
-    PyramidTimeSeriesCSVExport tse8{"test-t08-out.csv"};
+    PyramidTimeSeriesExport tse7{"test-t07-out.csv"};
+    PyramidTimeSeriesExport tse8{"test-t08-out.csv"};
 
     // Initialize
     ppts1 = new PrevalencePyramidTimeSeries{"Population 7", 0, 10, 2, 2, {10,20,30}};
@@ -256,7 +256,7 @@ TEST_CASE("Basic TimeStatistic export", "[csv]") {
         {TimeStatType::Mean, "Average"}
     };
     DiscreteTimeStatistic *dts = new DiscreteTimeStatistic("Statistics!");
-    TimeStatisticsCSVExport tse("test-tstats01-out.csv", columns);
+    TimeStatisticsExport tse("test-tstats01-out.csv", columns);
 
     dts->Record(1);
     dts->Record(2);

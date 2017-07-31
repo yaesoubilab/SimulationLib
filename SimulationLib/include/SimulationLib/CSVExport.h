@@ -11,6 +11,7 @@
 #include <fstream>
 
 #include "PyramidTimeSeries.h"
+#include "CSVExport.h"
 #include "TimeSeries.h"
 #include "TimeStatistic.h"
 
@@ -36,20 +37,19 @@ namespace SimulationLib {
 
     // This enum represents the various statistics that are collected by the
     //   TimeStatistics classes. Later on they will be used to articulate
-    //   which statistics are to be exported (for the TimeSeriesCSVExporter)
+    //   which statistics are to be exported (for the TimeSeriesExporter)
     enum class TimeStatType { Sum, Count, Mean, Variance, Min, Max };
 
     /////////////////////////////////////////
     // General CSV Exporter
     /////////////////////////////////////////
-    template <typename T>
-    class CSVExport
+    class CSVExportEngine
     {
     public:
         // 'fname' is the file to be written to. Specify extention (probably
         //   .csv).
-        CSVExport(string fname);
-        ~CSVExport();
+        CSVExportEngine(string fname);
+        ~CSVExportEngine();
 
         // Writes the .csv representation of any classes (TimeSeries,
         //   PyramidTimeSeries, TimeStatistics) which have been added to the
@@ -63,8 +63,8 @@ namespace SimulationLib {
         CellSpecItrs columnItrs;
 
         // The following functions must be implemented by classes inheriting
-        //   from CSVExporter (TimeSeriesCSVExport, PyramidTimeSeriesCSVExport,
-        //   TimeStatisticsCSVExport). They are called by the ::Write() method
+        //   from CSVExporter (TimeSeriesExport, PyramidTimeSeriesExport,
+        //   TimeStatisticsExport). They are called by the ::Write() method
         //   of CSVExport in order to iterate over rows and columns and obtain
         //   values of headers and "cells" to be written.
 
@@ -98,12 +98,12 @@ namespace SimulationLib {
     // TimeSeries CSV Exporter
     /////////////////////////////////////////
     template<typename T>
-    class TimeSeriesCSVExport : public CSVExport<T> {
+    class TimeSeriesExport : public CSVExportEngine {
     public:
-        TimeSeriesCSVExport(string fname) : CSVExport<T>(fname) {
+        TimeSeriesExport(string fname) : CSVExportEngine(fname) {
             // The following five vectors store information about TimeSeries
             //   to be exported. Index 'i' of any of these vectors stores
-            //   information about the 'i'th TimeSeries added to TimeSeriesCSVExport
+            //   information about the 'i'th TimeSeries added to TimeSeriesExport
             //   via ::Add(TimeSeries<T>).
             tsVectors      = vector<vector<T> *>{};
             tsTime0s       = vector<double>{};
@@ -111,14 +111,13 @@ namespace SimulationLib {
             tsNames        = vector<string>{};
             tsSizes        = vector<long>{};
 
-            //
             tsPeriodLength = 0;
             tMax           = 0;
 
             nTimeSeries    = 0;
         };
 
-        ~TimeSeriesCSVExport() {
+        ~TimeSeriesExport() {
             delete rows;
             delete columns;
         };
@@ -165,9 +164,9 @@ namespace SimulationLib {
     // For now, there are no class templates on PyramidTimeSeries, but that
     //   could change...
     // template <typename T>
-    class PyramidTimeSeriesCSVExport/*<T>*/ : public CSVExport<int> {
+    class PyramidTimeSeriesExport/*<T>*/ : public CSVExportEngine {
     public:
-        PyramidTimeSeriesCSVExport(string fname) : CSVExport(fname) {
+        PyramidTimeSeriesExport(string fname) : CSVExportEngine(fname) {
             ptsePointers     = vector<PyramidTimeSeries *>{};
             ptseTime0s       = vector<int>{};
             ptseTimeMaxs     = vector<int>{};
@@ -183,7 +182,7 @@ namespace SimulationLib {
 
         };
 
-        ~PyramidTimeSeriesCSVExport();
+        ~PyramidTimeSeriesExport();
 
         bool Add(PyramidTimeSeries/*<T>*/ *ptse);
 
@@ -227,15 +226,15 @@ namespace SimulationLib {
     /////////////////////////////////////////
     // TimeStatistic CSV Exporter
     /////////////////////////////////////////
-    class TimeStatisticsCSVExport : public CSVExport<double> {
+    class TimeStatisticsExport : public CSVExportEngine {
     public:
-        TimeStatisticsCSVExport(string fname, map<TimeStatType, string> _columns) \
-          : CSVExport<double>(fname) {
+        TimeStatisticsExport(string fname, map<TimeStatType, string> _columns) \
+          : CSVExportEngine(fname) {
             columns = _columns;
             nStats  = 0;
         };
 
-        ~TimeStatisticsCSVExport();
+        ~TimeStatisticsExport();
 
         bool Add(TimeStatistic *tst);
 

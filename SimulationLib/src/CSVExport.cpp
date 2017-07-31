@@ -2,10 +2,10 @@
 
 namespace SimulationLib
 {
-    template class CSVExport<int>;
-    template class CSVExport<double>;
-    template class TimeSeriesCSVExport<int>;
-    template class TimeSeriesCSVExport<double>;
+    template class TimeSeriesExport<int>;
+    template class TimeSeriesExport<double>;
+    class PyramidTimeSeriesExport;
+    class TimeStatisticsExport;
     // template class TimeStatisticsCSVExport<int>;
     // template class TimeStatisticsCSVExport<double>;
     // template class PyramidTimeSeriesCSVExport<int>;

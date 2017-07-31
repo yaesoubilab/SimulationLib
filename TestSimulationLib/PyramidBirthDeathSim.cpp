@@ -150,13 +150,13 @@ namespace SimulationLib {
     // }
 
     void PyramidBirthDeathSim::Run(void) {
-        TimeSeriesCSVExport<int>     exportBirths(fileName + string("-births.csv"));
-        TimeSeriesCSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
-        TimeSeriesCSVExport<int> exportPopulation(fileName + string("-population.csv"));
+        TimeSeriesExport<int>     exportBirths(fileName + string("-births.csv"));
+        TimeSeriesExport<int>     exportDeaths(fileName + string("-deaths.csv"));
+        TimeSeriesExport<int> exportPopulation(fileName + string("-population.csv"));
 
-        PyramidTimeSeriesCSVExport     exportBirthsPyr(fileName + string("-pyramid-births.csv"));
-        PyramidTimeSeriesCSVExport     exportDeathsPyr(fileName + string("-pyramid-deaths.csv"));
-        PyramidTimeSeriesCSVExport exportPopulationPyr(fileName + string("-pyramid-population.csv"));
+        PyramidTimeSeriesExport     exportBirthsPyr(fileName + string("-pyramid-births.csv"));
+        PyramidTimeSeriesExport     exportDeathsPyr(fileName + string("-pyramid-deaths.csv"));
+        PyramidTimeSeriesExport exportPopulationPyr(fileName + string("-pyramid-population.csv"));
 
         map<TimeStatType, string> columnsBirths {
             {TimeStatType::Sum, "Total births"},
@@ -178,9 +178,9 @@ namespace SimulationLib {
             {TimeStatType::Max, "Maximum population size"}
         };
 
-        TimeStatisticsCSVExport      exportBirthStats(fileName + string("-stats-births.csv"), columnsBirths);
-        TimeStatisticsCSVExport      exportDeathStats(fileName + string("-stats-deaths.csv"), columnsDeaths);
-        TimeStatisticsCSVExport exportPopulationStats(fileName + string("-stats-population.csv"), columnsPopulation);
+        TimeStatisticsExport      exportBirthStats(fileName + string("-stats-births.csv"), columnsBirths);
+        TimeStatisticsExport      exportDeathStats(fileName + string("-stats-deaths.csv"), columnsDeaths);
+        TimeStatisticsExport exportPopulationStats(fileName + string("-stats-population.csv"), columnsPopulation);
 
         // Also pending implementation:
         //   Exporting of statistics for each trajectory

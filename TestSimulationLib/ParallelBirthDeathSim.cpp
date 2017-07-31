@@ -122,9 +122,9 @@ namespace SimulationLib {
     // }
 
     void ParallelBirthDeathSim::Run(void) {
-        TimeSeriesCSVExport<int>     exportBirths(fileName + string("-births.csv"));
-        TimeSeriesCSVExport<int>     exportDeaths(fileName + string("-deaths.csv"));
-        TimeSeriesCSVExport<int> exportPopulation(fileName + string("-population.csv"));
+        TimeSeriesExport<int>     exportBirths(fileName + string("-births.csv"));
+        TimeSeriesExport<int>     exportDeaths(fileName + string("-deaths.csv"));
+        TimeSeriesExport<int> exportPopulation(fileName + string("-population.csv"));
 
         future<void> *futures = new future<void>[nTrajectories];
 

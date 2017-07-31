@@ -5,18 +5,14 @@ namespace SimulationLib {
 /////////////////////////////////////////
 // General CSV Exporter
 /////////////////////////////////////////
-template <typename T>
-CSVExport<T>::CSVExport(string _fname) {
+CSVExportEngine::CSVExportEngine(string _fname) {
     fname = _fname;
 }
 
 // Empty destructor, for now.
-template <typename T>
-CSVExport<T>::~CSVExport() {}
+CSVExportEngine::~CSVExportEngine() {}
 
-template <typename T>
-bool
-CSVExport<T>::Write(void) {
+bool CSVExportEngine::Write(void) {
     string comma, newline;             // Strings for commonly used symbols
     CellSpecItrs columnItrs, rowItrs;  // Iterators against rows and columns
 
@@ -100,7 +96,7 @@ CSVExport<T>::Write(void) {
 
 template <typename T>
 bool
-TimeSeriesCSVExport<T>::Add(TimeSeries<T> *ts) {
+TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
     vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
@@ -181,7 +177,7 @@ void printVector(vector<int> *v) {
 //   lost.
 template <typename T>
 CellSpecItrs
-TimeSeriesCSVExport<T>::getColumnIters(void) {
+TimeSeriesExport<T>::getColumnIters(void) {
     // "+1" is to account for the extra column we need to represent time.
     // Therefore, column 0 is for time, not value.
     columns = new vector<CellSpec>(nTimeSeries + 1);
@@ -202,7 +198,7 @@ TimeSeriesCSVExport<T>::getColumnIters(void) {
 // See above
 template <typename T>
 CellSpecItrs
-TimeSeriesCSVExport<T>::getRowIters(void) {
+TimeSeriesExport<T>::getRowIters(void) {
     int nPeriods;
     CellSpecItrs cellSpecItrs;
 
@@ -221,14 +217,14 @@ TimeSeriesCSVExport<T>::getRowIters(void) {
 
 template <typename T>
 bool
-TimeSeriesCSVExport<T>::isColumnHeader(void) {
+TimeSeriesExport<T>::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 template <typename T>
 bool
-TimeSeriesCSVExport<T>::isRowHeader(void) {
+TimeSeriesExport<T>::isRowHeader(void) {
     // We don't represent time/period using a row header, so in this case
     //   we return false.
     return false;
@@ -236,7 +232,7 @@ TimeSeriesCSVExport<T>::isRowHeader(void) {
 
 template <typename T>
 string
-TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
+TimeSeriesExport<T>::getRowName(CellSpec rowSpec) {
     // While ::getRowName(CellSpec) should never be called by CSVExport,
     //   we return a dummy string just to be safe.
     return string("");
@@ -244,7 +240,7 @@ TimeSeriesCSVExport<T>::getRowName(CellSpec rowSpec) {
 
 template <typename T>
 string
-TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
+TimeSeriesExport<T>::getColumnName(CellSpec columnSpec) {
     // Right now, we call the first column "Period". In the future, this
     //   may be changed to "Time," in which case columnSpecs > 0 will
     //   have to return a different value than they currently due, assuming
@@ -259,7 +255,7 @@ TimeSeriesCSVExport<T>::getColumnName(CellSpec columnSpec) {
 
 template <typename T>
 string
-TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     // 'rowSpec' corresponds to period because the first row is period=0.
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
@@ -300,7 +296,7 @@ TimeSeriesCSVExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
 
 
-PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
+PyramidTimeSeriesExport/*<T>*/::~PyramidTimeSeriesExport()
 {
 // Deallocate any memory allocated on instantiation
     delete columns;
@@ -308,7 +304,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::~PyramidTimeSeriesCSVExport()
 }
 
 bool
-PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
+PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 
     int ptseTime0, ptseTimeMax;
     PyramidTimeSeries *ptsePointer;
@@ -379,7 +375,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
 
 
 CellSpecItrs
-PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
+PyramidTimeSeriesExport/*<T>*/::getColumnIters(void) {
     int nTotalCategories = nCategories * nPyramidTimeSeries;
 
     // The first "+1" is to account for the extra column we need to represent time.
@@ -398,7 +394,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnIters(void) {
 }
 
 CellSpecItrs
-PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
+PyramidTimeSeriesExport/*<T>*/::getRowIters(void) {
     int nAgeGroups;
     int nPeriods;
     CellSpecItrs cellSpecItrs;
@@ -417,24 +413,24 @@ PyramidTimeSeriesCSVExport/*<T>*/::getRowIters(void) {
 }
 
 bool
-PyramidTimeSeriesCSVExport/*<T>*/::isColumnHeader(void) {
+PyramidTimeSeriesExport/*<T>*/::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 bool
-PyramidTimeSeriesCSVExport/*<T>*/::isRowHeader(void) {
+PyramidTimeSeriesExport/*<T>*/::isRowHeader(void) {
     // Really?
     return false;
 }
 
 string
-PyramidTimeSeriesCSVExport/*<T>*/::getRowName(CellSpec rowSpec) {
+PyramidTimeSeriesExport/*<T>*/::getRowName(CellSpec rowSpec) {
     return string("");
 }
 
 string
-PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
+PyramidTimeSeriesExport/*<T>*/::getColumnName(CellSpec columnSpec) {
     string timeHeader, categoryStr;
     int ptseIdx, categoryIdx;
 
@@ -461,7 +457,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getColumnName(CellSpec columnSpec) {
 }
 
 string
-PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     int ptseIdx, period, categoryIdx, nAgeGroups, ageGroupIdx, time0, timeMax, cellVal;
 
@@ -523,7 +519,7 @@ PyramidTimeSeriesCSVExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec
 // TimeStatistic CSV Exporter
 /////////////////////////////////////////
 
-TimeStatisticsCSVExport::~TimeStatisticsCSVExport()
+TimeStatisticsExport::~TimeStatisticsExport()
 {
     delete _columns;
     delete _rows;
@@ -531,7 +527,7 @@ TimeStatisticsCSVExport::~TimeStatisticsCSVExport()
 
 
 bool
-TimeStatisticsCSVExport::Add(TimeStatistic *tst) {
+TimeStatisticsExport::Add(TimeStatistic *tst) {
 
     if (tst == nullptr) {
         printf("Error: TimeStatistics pointer was NULL\n");
@@ -546,7 +542,7 @@ TimeStatisticsCSVExport::Add(TimeStatistic *tst) {
 
 
 CellSpecItrs
-TimeStatisticsCSVExport::getColumnIters(void) {
+TimeStatisticsExport::getColumnIters(void) {
     _columns = new vector<CellSpec>(columns.size());
     CellSpecItrs cellSpecItrs;
 
@@ -560,7 +556,7 @@ TimeStatisticsCSVExport::getColumnIters(void) {
 
 
 CellSpecItrs
-TimeStatisticsCSVExport::getRowIters(void) {
+TimeStatisticsExport::getRowIters(void) {
     _rows = new vector<CellSpec>(nStats);
     CellSpecItrs cellSpecItrs;
 
@@ -573,33 +569,33 @@ TimeStatisticsCSVExport::getRowIters(void) {
 }
 
 bool
-TimeStatisticsCSVExport::isColumnHeader(void) {
+TimeStatisticsExport::isColumnHeader(void) {
     // Really?
     return true;
 }
 
 bool
-TimeStatisticsCSVExport::isRowHeader(void) {
+TimeStatisticsExport::isRowHeader(void) {
     // Really?
     return true;
 }
 
 
 string
-TimeStatisticsCSVExport::getRowName(CellSpec rowSpec) {
+TimeStatisticsExport::getRowName(CellSpec rowSpec) {
     return stats.at(rowSpec)->name;
 }
 
 
 string
-TimeStatisticsCSVExport::getColumnName(CellSpec columnSpec) {
+TimeStatisticsExport::getColumnName(CellSpec columnSpec) {
     int j;
     string rowName;
 
     j = 0;
 
     // If we are looking at the first column of the statistics column names
-    //   we should add a "," before the name so that the column names row of 
+    //   we should add a "," before the name so that the column names row of
     //   the CSV lines up correctly with the rows beneath it
     if (columnSpec == 0)
     {
@@ -626,7 +622,7 @@ TimeStatisticsCSVExport::getColumnName(CellSpec columnSpec) {
 
 
 string
-TimeStatisticsCSVExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+TimeStatisticsExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     TimeStatistic *tst;               // Pointer to TimeStatistic referenced by
                                       //   rowSpec
     TimeStatType statType;            // Holds the TimeStatType implied by
