@@ -141,6 +141,64 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
 
 }
 
+TEST_CASE("Basic PyramidData", "[csv]") {
+    PyramidData<int> *pd;
+    PyramidDataExport<int> pde{"test-t09-out.csv"};
+
+    // Initialize
+    pd = new PyramidData<int>{2, {}};
+    pd->UpdateByAge(0, 0, 1);
+    pd->UpdateByAge(1, 100, 2);
+
+    REQUIRE( pde.Add(pd) == true );
+
+    // Write PyramidData
+    REQUIRE( pde.Write() == true );
+
+    REQUIRE( compare_files("test-t09-out.csv",
+                           "tests-CSVExport-files/test-t09-answer.csv") == true );
+
+
+}
+
+TEST_CASE("More complicated PyramidData", "[csv]") {
+    PyramidData<int> *pd;
+    PyramidDataExport<int> pde{"test-t10-out.csv"};
+
+    // Initialize
+    pd = new PyramidData<int>{2, {10, 20, 30}};
+    pd->UpdateByAge(0, 15, 1);
+    pd->UpdateByAge(1, 0, 2);
+    pd->UpdateByAge(0, 100, 150);
+
+    REQUIRE( pde.Add(pd) == true );
+
+    // Write PyramidData
+    REQUIRE( pde.Write() == true );
+
+    REQUIRE( compare_files("test-t10-out.csv",
+                           "tests-CSVExport-files/test-t10-answer.csv") == true );
+}
+
+TEST_CASE("PyramidData<double>", "[csv]") {
+    PyramidData<double> *pd;
+    PyramidDataExport<double> pde{"test-t11-out.csv"};
+
+    // Initialize
+    pd = new PyramidData<double>{2, {10, 20, 30}};
+    pd->UpdateByAge(0, 15, 1.5);
+    pd->UpdateByAge(1, 0, 2.001);
+    pd->UpdateByAge(0, 100, 150.001);
+
+    REQUIRE( pde.Add(pd) == true );
+
+    // Write PyramidData
+    REQUIRE( pde.Write() == true );
+
+    REQUIRE( compare_files("test-t11-out.csv",
+                           "tests-CSVExport-files/test-t11-answer.csv") == true );
+}
+
 TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv]") {
     PrevalenceTimeSeries<int> *pts5;
     PrevalenceTimeSeries<int> *pts6;

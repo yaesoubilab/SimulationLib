@@ -78,8 +78,11 @@ namespace SimulationLib
 		// Throws exception for invalid 'ageGroupIndex'.
 		T GetTotalInAgeGroup(int ageGroupIndex);
 
-		// Returns the total number of individuals in the specified category and age group. 
+		// Returns the total number of individuals in the specified category and age group.
 		T GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
+
+		size_t GetNumCategories(void);
+		vector<double> GetAgeBreaks(void);
 
 		// For debugging, prints out the content of the Pyramid data structure.
 		void PrintPyramid(void);

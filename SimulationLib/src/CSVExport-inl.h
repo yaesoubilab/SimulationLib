@@ -481,8 +481,11 @@ PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     {
 
         // Return different strings depending on age group index
-        if (ageGroupIdx == 0)
+        if (ageGroupIdx == 0 && nAgeGroups == 1)
         {
+            ageRange = string("0-inf");
+        }
+        else if (ageGroupIdx == 0) {
             ageRange = string("0-" + to_string((int)ageBreaks[0]));
         }
         else if (ageGroupIdx == nAgeGroups - 1)
@@ -510,6 +513,145 @@ PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
         return empty;
 
     cellVal = ptsePointers[ptseIdx]->GetTotalInAgeGroupAndCategoryAtPeriod(period, ageGroupIdx, categoryIdx);
+
+    return to_string(cellVal);
+}
+
+template <typename T>
+bool
+PyramidDataExport<T>::Add(PyramidData<T> *_pd) {
+
+    // Make sure PyramidData exists
+    if (_pd == nullptr) {
+        printf("Error: PyramidData pointer was NULL\n");
+        return false;
+    }
+
+    pd = _pd;
+    nCategories = pd->GetNumCategories();
+    ageBreaks = pd->GetAgeBreaks();
+
+    rows        = nullptr;
+    columns     = nullptr;
+
+    return true;
+}
+
+
+template <typename T>
+CellSpecItrs
+PyramidDataExport<T>::getColumnIters(void) {
+
+    // The "+1" is to account for the extra column needed to represent the age group.
+    // Therefore, column 0 is for the age group.
+    int nColumns = 1 + nCategories;
+
+    columns = new vector<CellSpec>(nColumns);
+    CellSpecItrs cellSpecItrs;
+
+    iota(columns->begin(), columns->end(), (CellSpec)0);
+
+    cellSpecItrs.begin = columns->begin();
+    cellSpecItrs.end   = columns->end();
+
+    return cellSpecItrs;
+
+}
+
+template <typename T>
+CellSpecItrs
+PyramidDataExport<T>::getRowIters(void) {
+    CellSpecItrs cellSpecItrs;
+
+    int nRows = 1 + ageBreaks.size();
+
+    // 1 row for the moment
+    rows = new vector<CellSpec>(nRows);
+
+    iota(rows->begin(), rows->end(), (CellSpec)0);
+
+    cellSpecItrs.begin = rows->begin();
+    cellSpecItrs.end   = rows->end();
+
+    return cellSpecItrs;
+}
+
+template <typename T>
+bool
+PyramidDataExport<T>::isColumnHeader(void) {
+    // Really?
+    return true;
+}
+
+template <typename T>
+bool
+PyramidDataExport<T>::isRowHeader(void) {
+    // Really?
+    return false;
+}
+
+template <typename T>
+string
+PyramidDataExport<T>::getRowName(CellSpec rowSpec) {
+    return string("");
+}
+
+template <typename T>
+string
+PyramidDataExport<T>::getColumnName(CellSpec columnSpec) {
+    string categoryStr;
+    int categoryIdx;
+
+    categoryStr = string("");
+
+    // the index of the category can be found using modulo
+    categoryIdx = (columnSpec - 1) % nCategories;
+
+    if (columnSpec == 0)
+        return string("Age Group");
+    else {
+        categoryStr += string("Category ");
+        categoryStr += to_string(categoryIdx);
+        return categoryStr;
+    }
+}
+
+template <typename T>
+string
+PyramidDataExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
+
+    int categoryIdx, nAgeGroups, ageGroupIdx;
+    T cellVal;
+
+    string empty, ageRange;
+
+    // there is one more age group than there are age breaks
+    nAgeGroups = ageBreaks.size() + 1;
+
+    // Find age group index (0,1,...)
+    ageGroupIdx = rowSpec % nAgeGroups;
+
+    // Return ageRange if second column
+    if (columnSpec == 0) {
+        // Return different strings depending on age group index
+        if (ageGroupIdx == 0 && nAgeGroups == 1) {
+            return string("0-inf");
+        }
+        else if (ageGroupIdx == 0) {
+            return string("0-" + to_string((int)ageBreaks[0]));
+        }
+        else if (ageGroupIdx == nAgeGroups - 1) {
+            return string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-inf");
+        }
+        else {
+            return string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-" + to_string((int)ageBreaks[ageGroupIdx]));
+        }
+    }
+    empty = string("");
+
+    categoryIdx = (columnSpec - 1) % nCategories;
+
+    cellVal = pd->GetTotalInAgeGroupAndCategory(ageGroupIdx, categoryIdx);
 
     return to_string(cellVal);
 }

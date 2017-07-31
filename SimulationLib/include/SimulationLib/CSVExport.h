@@ -222,6 +222,45 @@ namespace SimulationLib {
         virtual string getCell(CellSpec rowSpec, CellSpec columnSpec);
     };
 
+    /////////////////////////////////////////
+    // PyramidData CSV Exporter
+    /////////////////////////////////////////
+    template <typename T>
+    class PyramidDataExport : public CSVExportEngine {
+    public:
+        PyramidDataExport(string fname) : CSVExportEngine(fname) {
+            pd = nullptr;
+            rows = nullptr;
+            columns = nullptr;
+        };
+
+        ~PyramidDataExport() {
+            if (rows != nullptr) delete rows;
+            if (columns != nullptr) delete columns;
+        };
+
+        bool Add(PyramidData<T> *pd);
+
+    private:
+        PyramidData<T> *pd;
+        size_t nCategories;
+        vector<double> ageBreaks;
+
+        vector<CellSpec> *rows;
+        vector<CellSpec> *columns;
+
+        // Virtual function implementations
+        CellSpecItrs getColumnIters(void);
+        CellSpecItrs getRowIters(void);
+
+        bool isColumnHeader(void);
+        bool isRowHeader(void);
+
+        string getRowName(CellSpec rowSpec);
+        string getColumnName(CellSpec columnSpec);
+        string getCell(CellSpec rowSpec, CellSpec columnSpec);
+    };
+
 
     /////////////////////////////////////////
     // TimeStatistic CSV Exporter

@@ -193,6 +193,17 @@ T PyramidData<T>::GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryI
 }
 
 template <typename T>
+size_t PyramidData<T>::GetNumCategories(void) {
+    return numCategories;
+}
+
+template <typename T>
+vector<double> PyramidData<T>::GetAgeBreaks(void) {
+    return ageBreaks;
+}
+
+
+template <typename T>
 void PyramidData<T>::PrintPyramid(void)
 {
     for (int i = 0; i < numCategories; ++i)
