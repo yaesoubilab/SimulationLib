@@ -39,6 +39,6 @@ namespace SimulationLib {
     double ContinuousTimeStatistic::GetMean()     { return mean;}
     double ContinuousTimeStatistic::GetCount()    { return count; }
     double ContinuousTimeStatistic::GetVariance() { return variance; }
-    double ContinuousTimeStatistic::GetMin()      { return min; }
-    double ContinuousTimeStatistic::GetMax()      { return max; }
+    double ContinuousTimeStatistic::GetMin()      { if (count == 0) return 0; else return min; }
+    double ContinuousTimeStatistic::GetMax()      { if (count == 0) return 0; else return max; }
 }
