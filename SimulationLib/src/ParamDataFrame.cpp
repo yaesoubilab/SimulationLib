@@ -121,7 +121,7 @@ namespace SimulationLib {
 			     get<1>(f), get<2>(f), get<0>(f));
       }),
     make_pair("Geometric", [](const char *i) -> const Parameter * {
-	long double p = 1;
+	long double p = .5;
 	sscanf(i, "%Lf", &p);
 	auto f = extract(i);
 	return new Parameter(make_shared<Geometric>(p),

@@ -292,3 +292,72 @@ TEST_CASE("GammaD", "[paramFromString]") {
   CHECK(r->cdist.scale() == 5.6L);
   CHECK(r->shift == 3.2L);
 }
+
+TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,,,,,F,,");
+  REQUIRE(p);
+  CHECK_FALSE(p->calibrate);
+  shared_ptr<const StatisticalDistribution<long> > q;
+  REQUIRE(holds_alternative<typeof(q)>(p->dist));
+  q = get<typeof(q)>(p->dist);
+  shared_ptr<const GammaPoisson> r;
+  r = dynamic_pointer_cast<typeof(*r)>(q);
+  REQUIRE(r);
+  CHECK(r->cdist.successes() == 1);
+  CHECK(r->cdist.success_fraction == Approx(.5));
+}
+
+TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,12,,,,F,,");
+  REQUIRE(p);
+  CHECK_FALSE(p->calibrate);
+  shared_ptr<const StatisticalDistribution<long> > q;
+  REQUIRE(holds_alternative<typeof(q)>(p->dist));
+  q = get<typeof(q)>(p->dist);
+  shared_ptr<const GammaPoisson> r;
+  r = dynamic_pointer_cast<typeof(*r)>(q);
+  REQUIRE(r);
+  CHECK(r->cdist.successes() == 12);
+  CHECK(r->cdist.success_fraction == Approx(.5));
+}
+
+TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,43,2,,,F,,");
+  REQUIRE(p);
+  CHECK_FALSE(p->calibrate);
+  shared_ptr<const StatisticalDistribution<long> > q;
+  REQUIRE(holds_alternative<typeof(q)>(p->dist));
+  q = get<typeof(q)>(p->dist);
+  shared_ptr<const GammaPoisson> r;
+  r = dynamic_pointer_cast<typeof(*r)>(q);
+  REQUIRE(r);
+  CHECK(r->cdist.successes() == 43);
+  CHECK(r->cdist.success_fraction == Approx(2./3.));
+}
+
+TEST_CASE("GeometricA", "[paramFromString]") {
+  shared_ptr<const Parameter> p = paramFromString("Geometric,,,,,F,,");
+  REQUIRE(p);
+  CHECK_FALSE(p->calibrate);
+  shared_ptr<const StatisticalDistribution<long> > q;
+  REQUIRE(holds_alternative<typeof(q)>(p->dist));
+  q = get<typeof(q)>(p->dist);
+  shared_ptr<const Geometric> r;
+  r = dynamic_pointer_cast<typeof(*r)>(q);
+  REQUIRE(r);
+  CHECK(r->cdist.success_fraction == .5);
+}
+
+TEST_CASE("GeometricB", "[paramFromString]") {
+  shared_ptr<const Parameter> p = paramFromString("Geometric,.3,,,,F,,");
+  REQUIRE(p);
+  CHECK_FALSE(p->calibrate);
+  shared_ptr<const StatisticalDistribution<long> > q;
+  REQUIRE(holds_alternative<typeof(q)>(p->dist));
+  q = get<typeof(q)>(p->dist);
+  shared_ptr<const Geometric> r;
+  r = dynamic_pointer_cast<typeof(*r)>(q);
+  REQUIRE(r);
+  CHECK(r->cdist.success_fraction == .3);
+}
+
