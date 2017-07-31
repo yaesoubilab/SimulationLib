@@ -12,8 +12,8 @@ TEST_CASE("DiscreteTimeStatistic: No observations", "[statistics]") {
     REQUIRE( dts.GetCount() == 0 );
     REQUIRE( dts.GetMean() == 0 );
     REQUIRE( dts.GetVariance() == 0 );
-    REQUIRE( dts.GetMin() == numeric_limits<double>::max() );
-    REQUIRE( dts.GetMax() == numeric_limits<double>::min() );
+    REQUIRE( dts.GetMin() == 0 );
+    REQUIRE( dts.GetMax() == 0 );
 }
 
 TEST_CASE("DiscreteTimeStatistic: 1 observation", "[statistics]") {
@@ -68,7 +68,7 @@ TEST_CASE("DiscreteTimeStatistic: Percentiles easy", "[statistic]") {
     for (int i = 1; i <= 100; ++i) {
         dts.Record(i);
     }
-    
+
     REQUIRE (dts.GetPercentile(0.01) == 1.0);
     REQUIRE (dts.GetPercentile(0.02) == 2.0);
     REQUIRE (dts.GetPercentile(1.0) == 100);
@@ -82,7 +82,7 @@ TEST_CASE("DiscreteTimeStatistic: Percentiles harder", "[statistic]") {
     dts.Record(2.0);
     dts.Record(3.0);
     dts.Record(-2.0);
-    
+
     REQUIRE (dts.GetPercentile(0.01) == -2.0);
     REQUIRE (dts.GetPercentile(0.02) == -2.0);
     REQUIRE (dts.GetPercentile(0.20) == -2.0);

@@ -180,6 +180,33 @@ TEST_CASE("More complicated PyramidData", "[csv]") {
                            "tests-CSVExport-files/test-t10-answer.csv") == true );
 }
 
+TEST_CASE("More complicated PyramidData with multiple PDs", "[csv]") {
+    PyramidData<int> *pd1;
+    PyramidData<int> *pd2;
+    PyramidDataExport<int> pde{"test-t12-out.csv"};
+
+    // Initialize
+    pd1 = new PyramidData<int>{2, {10, 20, 30}};
+    pd2 = new PyramidData<int>{2, {10, 20, 30}};
+
+    pd1->UpdateByAge(0, 15, 1);
+    pd1->UpdateByAge(1, 0, 2);
+    pd1->UpdateByAge(0, 100, 150);
+
+    pd2->UpdateByAge(0, 15, 1);
+    pd2->UpdateByAge(1, 0, 2);
+    pd2->UpdateByAge(0, 100, 150);
+
+    REQUIRE( pde.Add(pd1) == true );
+    REQUIRE( pde.Add(pd2) == true );
+
+    // Write PyramidData
+    REQUIRE( pde.Write() == true );
+
+    REQUIRE( compare_files("test-t12-out.csv",
+                           "tests-CSVExport-files/test-t12-answer.csv") == true );
+}
+
 TEST_CASE("PyramidData<double>", "[csv]") {
     PyramidData<double> *pd;
     PyramidDataExport<double> pde{"test-t11-out.csv"};

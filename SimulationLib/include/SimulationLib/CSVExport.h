@@ -229,9 +229,12 @@ namespace SimulationLib {
     class PyramidDataExport : public CSVExportEngine {
     public:
         PyramidDataExport(string fname) : CSVExportEngine(fname) {
-            pd = nullptr;
+            pds = vector<PyramidData<T> *>{};
             rows = nullptr;
             columns = nullptr;
+
+            n_pds = 0;
+            nCategories = 0;
         };
 
         ~PyramidDataExport() {
@@ -242,9 +245,10 @@ namespace SimulationLib {
         bool Add(PyramidData<T> *pd);
 
     private:
-        PyramidData<T> *pd;
+        size_t n_pds;
         size_t nCategories;
         vector<double> ageBreaks;
+        vector<PyramidData<T> *> pds;
 
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;

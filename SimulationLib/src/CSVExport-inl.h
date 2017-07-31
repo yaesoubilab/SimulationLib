@@ -527,12 +527,26 @@ PyramidDataExport<T>::Add(PyramidData<T> *_pd) {
         return false;
     }
 
-    pd = _pd;
-    nCategories = pd->GetNumCategories();
-    ageBreaks = pd->GetAgeBreaks();
+    if (n_pds == 0) {
+        nCategories = _pd->GetNumCategories();
+        ageBreaks   = _pd->GetAgeBreaks();
+    }
 
-    rows        = nullptr;
-    columns     = nullptr;
+    // Make sure same number of categories
+    if (nCategories != _pd->GetNumCategories()) {
+        printf("Error: PyramidData had different number of categories. Existing: %d cats, New: %d cats\n", \
+                (int)nCategories, (int)_pd->GetNumCategories());
+        return false;
+    }
+
+    // Make sure same age breaks
+    if (ageBreaks != _pd->GetAgeBreaks()) {
+        printf("Error: PyramidData had different age groups\n");
+        return false;
+    }
+
+    pds.push_back(_pd);
+    n_pds += 1;
 
     return true;
 }
@@ -544,7 +558,7 @@ PyramidDataExport<T>::getColumnIters(void) {
 
     // The "+1" is to account for the extra column needed to represent the age group.
     // Therefore, column 0 is for the age group.
-    int nColumns = 1 + nCategories;
+    int nColumns = 1 + (nCategories * n_pds);
 
     columns = new vector<CellSpec>(nColumns);
     CellSpecItrs cellSpecItrs;
@@ -621,6 +635,7 @@ string
 PyramidDataExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     int categoryIdx, nAgeGroups, ageGroupIdx;
+    int pdIdx;
     T cellVal;
 
     string empty, ageRange;
@@ -630,6 +645,11 @@ PyramidDataExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     // Find age group index (0,1,...)
     ageGroupIdx = rowSpec % nAgeGroups;
+
+    // Find which category is to be printed
+    categoryIdx = (columnSpec - 1) % nCategories;
+
+    pdIdx = (columnSpec - 1) / nCategories;
 
     // Return ageRange if second column
     if (columnSpec == 0) {
@@ -649,9 +669,8 @@ PyramidDataExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     }
     empty = string("");
 
-    categoryIdx = (columnSpec - 1) % nCategories;
 
-    cellVal = pd->GetTotalInAgeGroupAndCategory(ageGroupIdx, categoryIdx);
+    cellVal = pds[pdIdx]->GetTotalInAgeGroupAndCategory(ageGroupIdx, categoryIdx);
 
     return to_string(cellVal);
 }
