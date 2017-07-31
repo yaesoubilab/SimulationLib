@@ -58,6 +58,8 @@ namespace SimulationLib
 		bool IsWritable();
 		T GetTotalAtTime(double t);
 
+		T operator()(double t);
+
 	private:
 		double timeMax;
 		double periodLength;

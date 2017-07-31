@@ -16,5 +16,6 @@ namespace SimulationLib
         virtual bool IsWritable(void) = 0;
         virtual vector<T> *GetVector(void) = 0;
         virtual T GetTotalAtTime(double t) = 0;
+        virtual T operator()(double t) = 0;
     };
 }

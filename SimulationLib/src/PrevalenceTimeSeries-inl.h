@@ -159,6 +159,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    T PrevalenceTimeSeries<T>::operator()(double t) {
+        return GetTotalAtTime(t);
+    }
+
+    template <typename T>
     void PrevalenceTimeSeries<T>::_storePrevalence(int period) {
         (*prevalence)[period] = currentPrevalence;
     }

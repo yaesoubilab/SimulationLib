@@ -14,6 +14,8 @@ TEST_CASE("PrevalenceTimeSeries: initialization w/o statistics", "[statistics]")
     REQUIRE( pts.GetName() == "Test" );
     REQUIRE( pts.IsWritable() == true );
 
+    REQUIRE( pts(5) == 0 );
+
     SECTION( "Closing the vector makes it unwritable" ) {
         pts.Close();
 
@@ -24,6 +26,7 @@ TEST_CASE("PrevalenceTimeSeries: initialization w/o statistics", "[statistics]")
     SECTION( "Vector is writable by default" ) {
         REQUIRE( pts.IsWritable() == true );
         REQUIRE( pts.Record(0.0, 1) == true );
+        REQUIRE( pts(0.0) == 1 );
     }
 
     SECTION( "time > timeMax fails" ) {

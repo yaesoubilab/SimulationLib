@@ -175,6 +175,11 @@ namespace SimulationLib {
         return (*observations)[(int)ceil(t / periodLength)];
     }
 
+    template<typename T>
+    T IncidenceTimeSeries<T>::operator()(double t) {
+        return GetTotalAtTime(t);
+    }
+
     // Returns the summed value of all complete aggregations, and the incomplete
     //   aggregation
     template<typename T>
