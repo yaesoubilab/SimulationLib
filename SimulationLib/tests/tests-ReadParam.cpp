@@ -7,7 +7,7 @@ using namespace std;
 using namespace SimulationLib;
 
 TEST_CASE("BernoulliA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Bernoulli,,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Bernoulli,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -20,7 +20,7 @@ TEST_CASE("BernoulliA", "[paramFromString]") {
 }
 
 TEST_CASE("BernoulliB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Bernoulli,.3,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Bernoulli,.3,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -33,7 +33,7 @@ TEST_CASE("BernoulliB", "[paramFromString]") {
 }
 
 TEST_CASE("Double", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("1.5124,,,,,L,,");
+  shared_ptr<const Parameter> p = paramFromString("1.5124,,,,,L,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   CHECK(p->min == 1.5124L);
@@ -43,7 +43,7 @@ TEST_CASE("Double", "[paramFromString]") {
 }
 
 TEST_CASE("BetaA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Beta,.3,3,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Beta,.3,3,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -59,7 +59,7 @@ TEST_CASE("BetaA", "[paramFromString]") {
 }
 
 TEST_CASE("BetaB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Bernoulli,6,.7,4,,T,1,2");
+  shared_ptr<const Parameter> p = paramFromString("Bernoulli,6,.7,4,,T,,1,2");
   REQUIRE(p);
   CHECK(p->calibrate);
   CHECK(p->min == 1);
@@ -77,7 +77,7 @@ TEST_CASE("BetaB", "[paramFromString]") {
 }
 
 TEST_CASE("BetaC", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Beta,44,32,.6,3,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Beta,44,32,.6,3,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -94,7 +94,7 @@ TEST_CASE("BetaC", "[paramFromString]") {
 
 TEST_CASE("BetaBinomial", "[paramFromString]") {
   shared_ptr<const Parameter> p
-    = paramFromString("Beta-binomial,10.5,4.3,17,,F,,");
+    = paramFromString("Beta-binomial,10.5,4.3,17,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -110,7 +110,7 @@ TEST_CASE("BetaBinomial", "[paramFromString]") {
 
 TEST_CASE("BinomialA", "[paramFromString]") {
   shared_ptr<const Parameter> p
-    = paramFromString("Binomial,,,,,F,,");
+    = paramFromString("Binomial,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -125,7 +125,7 @@ TEST_CASE("BinomialA", "[paramFromString]") {
 
 TEST_CASE("BinomialA", "[paramFromString]") {
   shared_ptr<const Parameter> p
-    = paramFromString("Binomial,45,,,,F,,");
+    = paramFromString("Binomial,45,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -140,7 +140,7 @@ TEST_CASE("BinomialA", "[paramFromString]") {
 
 TEST_CASE("BinomialC", "[paramFromString]") {
   shared_ptr<const Parameter> p
-    = paramFromString("Binomial,24,.6,,,F,,");
+    = paramFromString("Binomial,24,.6,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -154,7 +154,7 @@ TEST_CASE("BinomialC", "[paramFromString]") {
 }
 
 TEST_CASE("ChiA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Chi-squared,,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Chi-squared,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -167,7 +167,7 @@ TEST_CASE("ChiA", "[paramFromString]") {
 }
 
 TEST_CASE("ChiB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Chi-squared,47,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Chi-squared,47,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -180,7 +180,7 @@ TEST_CASE("ChiB", "[paramFromString]") {
 }
 
 TEST_CASE("Kronecker", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Constant,33,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Constant,33,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -193,7 +193,7 @@ TEST_CASE("Kronecker", "[paramFromString]") {
 }
 
 TEST_CASE("Dirac", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Constant,33.,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Constant,33.,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -206,7 +206,7 @@ TEST_CASE("Dirac", "[paramFromString]") {
 }
 
 TEST_CASE("ExponentialA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Exponential,3.6,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Exponential,3.6,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -220,7 +220,8 @@ TEST_CASE("ExponentialA", "[paramFromString]") {
 }
 
 TEST_CASE("ExponentialB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Exponential,1.3,4.2,,,F,,");
+  shared_ptr<const Parameter> p
+    = paramFromString("Exponential,1.3,4.2,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -234,7 +235,7 @@ TEST_CASE("ExponentialB", "[paramFromString]") {
 }
 
 TEST_CASE("GammaA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma,,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -249,7 +250,7 @@ TEST_CASE("GammaA", "[paramFromString]") {
 }
 
 TEST_CASE("GammaB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma,4.3,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma,4.3,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -264,7 +265,7 @@ TEST_CASE("GammaB", "[paramFromString]") {
 }
 
 TEST_CASE("GammaC", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma,432.6,3.5,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma,432.6,3.5,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -279,7 +280,7 @@ TEST_CASE("GammaC", "[paramFromString]") {
 }
 
 TEST_CASE("GammaD", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma,1.3,5.6,3.2,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma,1.3,5.6,3.2,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -294,7 +295,7 @@ TEST_CASE("GammaD", "[paramFromString]") {
 }
 
 TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -308,7 +309,7 @@ TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
 }
 
 TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,12,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,12,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -322,7 +323,7 @@ TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
 }
 
 TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,43,2,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Gamma-Poisson,43,2,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -336,7 +337,7 @@ TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
 }
 
 TEST_CASE("GeometricA", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Geometric,,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Geometric,,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
@@ -349,7 +350,7 @@ TEST_CASE("GeometricA", "[paramFromString]") {
 }
 
 TEST_CASE("GeometricB", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Geometric,.3,,,,F,,");
+  shared_ptr<const Parameter> p = paramFromString("Geometric,.3,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
