@@ -56,7 +56,7 @@ namespace SimulationLib {
     }
     long double min, max;
     char c = F;
-    sscanf(i, "%c,%Lf,%Lf", &c, &min, &max);
+    sscanf(i, "%c,%*[^,],%Lf,%Lf", &c, &min, &max);
     return(make_tuple(c == 'T', min, max));
   }
 

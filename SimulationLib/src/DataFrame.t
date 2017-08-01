@@ -14,9 +14,10 @@ namespace SimulationLib {
     : loopTime(loopTime) {
     char buf[DFRAMEBSIZE];
     FILE *ifile = fopen(file, "r");
-    fscanf(ifile, "%*s"); // Ignore first line.
+    int c;
+    while((c = getc(ifile)) != EOF && c != '\n');   // Ignore first line.
     // Now we read the line that tells us bracket size.
-    int c = getc(ifile);
+    c = getc(ifile);
     if((ignoreTime = (c == '-')))
       timeBracket = 0;
     else {
