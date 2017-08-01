@@ -48,12 +48,12 @@
 // SCOPE I do not understand.
 
 // Marcus: Please elaborate on what scope is
-
+// Eyal: Can't, I don't understand it either. Ask Reza.
 //
 // MIN and MAX are used for a different sort of calibration.
 
 // Marcus: Please elaborate on what sort of calibration you mean
-
+// Eyal: I don't know, ask Reza.
 //
 // That's it.
 
@@ -61,12 +61,12 @@
 // configuration data in.
 
 // Marcus: Describe what happens is Config encounters unexpected input
-
+// Unexpected input? Behavior undefined.
 //
 // Call getVar() to pull out by short name.
 
 // Marcus: Describe what happens when "name" is invalid
-
+// It prints a diagnostic and throws an error.
 namespace SimulationLib {
   using namespace StatisticalDistributions;
   using namespace std;
@@ -79,10 +79,11 @@ namespace SimulationLib {
     // Either gives a parameter, or a data frame thereof.
   private:
     // Marcus: Describe what the key of the map represents
+    // It's the short name of the request.
     std::map<std::string,
 	     std::variant<std::shared_ptr<const Parameter>,
 			  std::shared_ptr<const DataFrame<Parameter> > > > var;
-    // Holds a map from strings to whatevers.
+    // Holds a map from strings to Parameter/DataFrame<Parameter>.
         // Marcus: ^ clarify what you mean by this
   };
 }
