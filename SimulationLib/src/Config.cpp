@@ -3,10 +3,12 @@
 #include <cstdio>
 #include <iostream>
 
+// Marcus: Explain what these macros are used for
 #define ST(x) XST(x)
 #define XST(x) #x
 
 namespace SimulationLib {
+  // Marcus: explain what this constant is and why it is set to 255
 #ifndef BFSZ
 #define BFSZ 255
 #endif
@@ -20,10 +22,13 @@ namespace SimulationLib {
     while((c = getc(ifile)) != EOF && c != '\n');
     while((c = getc(ifile)) != EOF && c != '\n');
     while(!feof(ifile)) {
+      // Marcus: explain what the following line does
       fscanf(ifile, "%*[^,],%" ST(BFSZ) "[^,],%c,", buf, &t);
       std::string item = buf;
       bool loop = false;
       double v;
+      // Marcus: An example of a switch statement for which I would like the indentation
+      //   more in keeping with other the style of other nested C++ syntax
       switch(t) {
       case 'v': // Variable
 	fgets(buf, sizeof(buf), ifile);
@@ -38,6 +43,7 @@ namespace SimulationLib {
       default:
 	std::cerr << "Unknown type character " << t << std::endl;
       }
+      // Explain why the following while loop exists
       while((c = getc(ifile)) != EOF && c != '\n');
       // And kill the rest of the line.
     } // Eesh. Reads a file.

@@ -4,6 +4,7 @@
 namespace SimulationLib {
   using namespace std;
   using namespace StatisticalDistributions;
+  // Marcus: Document what this overload does
   long double Parameter::operator()(mt19937_64 &g) const {
     if(holds_alternative<long double>(dist))
       return(get<long double>(dist));

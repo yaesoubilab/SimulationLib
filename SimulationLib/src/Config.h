@@ -46,15 +46,26 @@
 //   this parameter should be included in calibration.
 //
 // SCOPE I do not understand.
+
+// Marcus: Please elaborate on what scope is
+
 //
 // MIN and MAX are used for a different sort of calibration.
+
+// Marcus: Please elaborate on what sort of calibration you mean
+
 //
 // That's it.
 
 // Call SimulationLib::Config::Config() with the name of the file to find
 // configuration data in.
+
+// Marcus: Describe what happens is Config encounters unexpected input
+
 //
 // Call getVar() to pull out by short name.
+
+// Marcus: Describe what happens when "name" is invalid
 
 namespace SimulationLib {
   using namespace StatisticalDistributions;
@@ -67,9 +78,11 @@ namespace SimulationLib {
     getVar(const std::string &name) const;
     // Either gives a parameter, or a data frame thereof.
   private:
+    // Marcus: Describe what the key of the map represents
     std::map<std::string,
 	     std::variant<std::shared_ptr<const Parameter>,
 			  std::shared_ptr<const DataFrame<Parameter> > > > var;
     // Holds a map from strings to whatevers.
+        // Marcus: ^ clarify what you mean by this
   };
 }

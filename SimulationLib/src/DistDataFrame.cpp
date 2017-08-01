@@ -31,14 +31,18 @@
 namespace SimulationLib {
   using namespace StatisticalDistributions;
 
+  // Marcus: When typedef-ing or aliasing types, it's important to communicate
+  //   what you are typedef-ing or aliasing, especially in situations like this
+  //   where you have chosen to use acronyms instead of words. Write explanations
+  //   for all of these typedefs.
+
   typedef const StatisticalDistribution<long double> *csdp;
 
   typedef const StatisticalDistribution<long> *csip;
-  
   typedef csdp (*ddmk)(const char *);
 
   typedef csip (*idmk)(const char *);
-  
+
   static const std::map<const std::string, const ddmk> mpd = {
       make_pair("Beta", [](const char *i) -> csdp {
 	  long double alpha, beta, scale = 1, shift = 0;
@@ -107,6 +111,9 @@ namespace SimulationLib {
 	  })
   };
 
+  // Marcus: This constructor clearly does a lot in a small number of lines.
+  //   Why not include more documentation for what's going on here?
+
   template<>
   DataFrame<StatisticalDistribution<long double> >::DataFrame(const char *file,
 							     bool loopTime)
@@ -118,7 +125,7 @@ namespace SimulationLib {
 	try {
 	  return(std::shared_ptr<const StatisticalDistribution<long double> >
 		 (mpd.at(buf)(buf + fstcomma + 1)));
-									      
+
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
 		    << buf << '"' << std::endl;
@@ -198,12 +205,12 @@ namespace SimulationLib {
 	try {
 	  return(std::shared_ptr<const StatisticalDistribution<long> >
 		 (mpi.at(buf)(buf + fstcomma + 1)));
-									      
+
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
 		    << buf << '"' << std::endl;
 	  return(std::shared_ptr<const StatisticalDistribution<long> >());
 	}
       }) {}
-  
+
 }

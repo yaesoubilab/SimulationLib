@@ -32,6 +32,17 @@
 
 // Implements DataFrame construction for parameters.
 
+// Marcus: A cursory look at this code reveals a lot of repetition of similar,
+//   yet subtly different code structures. Write a comment here giving an explanation
+//   of the general layout of this code, and an explanation of what the lambdas
+//   which are keys to your map do.
+// Additionally, it's tough to tell what the structure of this .cpp file is.
+//   It seems like it's a mix of functions, containers, and classes, but besides
+//   that I can't tell what's part of classes, what stands alone within the
+//   SimulationLib namespace, and how some of the namespaced functions and
+//   containers play into the biggest picture. Please enlighten the codebase
+//   with your explanations of these aspects of the file.
+
 namespace SimulationLib {
   using namespace StatisticalDistributions;
   using namespace std;
@@ -232,5 +243,5 @@ namespace SimulationLib {
       return(shared_ptr<const Parameter>());
     }
   }
-  
+
 }
