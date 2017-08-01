@@ -36,12 +36,22 @@
 //   yet subtly different code structures. Write a comment here giving an explanation
 //   of the general layout of this code, and an explanation of what the lambdas
 //   which are keys to your map do.
+// They're values.
 // Additionally, it's tough to tell what the structure of this .cpp file is.
 //   It seems like it's a mix of functions, containers, and classes, but besides
 //   that I can't tell what's part of classes, what stands alone within the
 //   SimulationLib namespace, and how some of the namespaced functions and
 //   containers play into the biggest picture. Please enlighten the codebase
 //   with your explanations of these aspects of the file.
+// Right. Everything here stands alone except the constructor near the end.
+
+// Each of the lambdas takes a string,
+// and attempts to interpret it as a description of a Parameter
+// containing the pertinent distribution.
+// These descriptions are like P1,P2,P3,P4,CALIBRATE,SCOPE,MIN,MAX.
+// P1-P4 are given to the distribution.
+// CALIBRATE, MIN, MAX are attributes of the parameter.
+// SCOPE I don't get.
 
 namespace SimulationLib {
   using namespace StatisticalDistributions;
@@ -55,7 +65,7 @@ namespace SimulationLib {
       i += k;
     }
     long double min, max;
-    char c = F;
+    char c = 'F';
     sscanf(i, "%c,%*[^,],%Lf,%Lf", &c, &min, &max);
     return(make_tuple(c == 'T', min, max));
   }
@@ -231,15 +241,14 @@ namespace SimulationLib {
     if(sscanf(str, "%Lf", &d))
       return(make_shared<Parameter>(d));
     int fstcomma = strchr(str, ',') - str;
-    char *buf = (char *)malloc(strlen(str));
-    strcpy(buf, str);
+    string buf(str);
     buf[fstcomma] = 0;
     try {
       return(shared_ptr<const Parameter>
-	     (m.at(buf)(buf + fstcomma + 1)));
+	     (m.at(buf.c_str())(str + fstcomma + 1)));
     } catch(out_of_range x) {
       cerr << "Distribution not found: " << '"'
-		<< buf << '"' << endl;
+	   << buf.c_str() << '"' << endl;
       return(shared_ptr<const Parameter>());
     }
   }

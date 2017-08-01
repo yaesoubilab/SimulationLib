@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include "DataFrame.h"
+#include <string>
 
 #include "Beta.h"
 #include "ChiSquared.h"
@@ -35,12 +36,17 @@ namespace SimulationLib {
   //   what you are typedef-ing or aliasing, especially in situations like this
   //   where you have chosen to use acronyms instead of words. Write explanations
   //   for all of these typedefs.
-
+ 
+  // const statistical distribution (double)
   typedef const StatisticalDistribution<long double> *csdp;
 
+  // const statistical distribution (integer)
   typedef const StatisticalDistribution<long> *csip;
+
+  // double distribution maker
   typedef csdp (*ddmk)(const char *);
 
+  // integer distribution maker
   typedef csip (*idmk)(const char *);
 
   static const std::map<const std::string, const ddmk> mpd = {
@@ -114,21 +120,28 @@ namespace SimulationLib {
   // Marcus: This constructor clearly does a lot in a small number of lines.
   //   Why not include more documentation for what's going on here?
 
+  // Basically, it calls the three-parameter constructor
+  // with the input arguments and a function that does the following:
+  // It takes a string and finds the first comma,
+  // and replaces it by a null character in a copy.
+  // Then it finds the distribution-maker pointed to by the first part,
+  // and passes it the second part of the string.
+  // It then returns a pointer to the distribution, or a null pointer if
+  // it couldn't find one.
+
   template<>
   DataFrame<StatisticalDistribution<long double> >::DataFrame(const char *file,
 							     bool loopTime)
     : DataFrame(file, loopTime, [](const char *str) {
 	int fstcomma = std::strchr(str, ',') - str;
-	char *buf = (char *)malloc(strlen(str));
-	strcpy(buf, str);
+	std::string buf(str);
 	buf[fstcomma] = 0;
 	try {
 	  return(std::shared_ptr<const StatisticalDistribution<long double> >
-		 (mpd.at(buf)(buf + fstcomma + 1)));
-
+		 (mpd.at(buf.data)(str + fstcomma + 1)));
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
-		    << buf << '"' << std::endl;
+		    << buf.c_str() << '"' << std::endl;
 	  return(std::shared_ptr<
 		 const StatisticalDistribution<long double> >());
 	}
@@ -199,16 +212,15 @@ namespace SimulationLib {
 							     bool loopTime)
     : DataFrame(file, loopTime, [](const char *str) {
 	int fstcomma = std::strchr(str, ',') - str;
-	char *buf = (char *)malloc(strlen(str));
-	strcpy(buf, str);
+	std::string buf(str);
 	buf[fstcomma] = 0;
 	try {
 	  return(std::shared_ptr<const StatisticalDistribution<long> >
-		 (mpi.at(buf)(buf + fstcomma + 1)));
+		 (mpi.at(buf.c_str())(str + fstcomma + 1)));
 
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
-		    << buf << '"' << std::endl;
+		    << buf.c_str() << '"' << std::endl;
 	  return(std::shared_ptr<const StatisticalDistribution<long> >());
 	}
       }) {}
