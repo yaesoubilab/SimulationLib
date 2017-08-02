@@ -13,7 +13,7 @@ auto LikelihoodFunction::operator()(TimeT t, ValueT v) {
     BoundInitializerArgs params = dpg(t, y);
 
     // (Re-)Initialize distribution using these parameters
-    std::apply(dist.Init, params);
+    std::apply(dist.init, params);
 
     // Return the probability of function 'f' being valued 'v' at time 't'
     //   by calling the new probability density function with value 'v'

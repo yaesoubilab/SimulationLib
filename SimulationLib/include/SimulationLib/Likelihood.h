@@ -1,9 +1,11 @@
 #pragma once
 
-#include <function>
+#include <functional>
+#include <tuple>
 
 #include <RNG.h>
-#include <StatisticalDistributionsLib>
+#include <StatisticalDistributionsLib.h>
+// Add headers for any supported distributions here...
 
 using namespace std;
 
@@ -26,10 +28,10 @@ namespace SimulationLib
 
         // The type of a Distribution's Init method, with the class instance
         //   already bound
-        using BoundInitializer = std::mem_fn<Distribution::Init::result_type, Distribution::Init>
+        using BoundInitializer = std::mem_fn<Distribution::init::result_type, Distribution::init>
 
         // The types of any arguments (not including class instance) to a Distribution's
-        //   ::Init method
+        //   ::init method
         using BoundInitializerArgs = std::function<BoundInitializer>::argument_type;
 
         // Type of a function which takes a time 't' and a value 'v' and returns
@@ -50,7 +52,7 @@ namespace SimulationLib
         //          a time 't', returns parameters to initialize a distribution
         //          'Distribution' around this value. In other words, a 'dpg'
         //          must return a tuple of arguments to the specified
-        //          'Distribution''s ::Init method
+        //          'Distribution''s ::init method
         LikelihoodFunction(TimeValuedFunction f,
                            DistributionParamGenerator dpg) : f(f), dpg(dpg) {};
 
