@@ -16,7 +16,7 @@ TEST_CASE("BernoulliA", "[paramFromString]") {
   shared_ptr<const Bernoulli> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  REQUIRE(r->cdist.success_fraction() == .5);
+  REQUIRE(r->cdist().success_fraction() == .5);
 }
 
 TEST_CASE("BernoulliB", "[paramFromString]") {
@@ -29,7 +29,7 @@ TEST_CASE("BernoulliB", "[paramFromString]") {
   shared_ptr<const Bernoulli> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  REQUIRE(r->cdist.success_fraction() == .3);
+  REQUIRE(r->cdist().success_fraction() == .3);
 }
 
 TEST_CASE("Double", "[paramFromString]") {
@@ -52,10 +52,10 @@ TEST_CASE("BetaA", "[paramFromString]") {
   shared_ptr<const Beta> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->dist.alpha() == .3L);
-  CHECK(r->dist.beta() == 3);
-  CHECK(r->scale == 1);
-  CHECK(r->shift == 0);
+  CHECK(r->dist().alpha() == .3L);
+  CHECK(r->dist().beta() == 3);
+  CHECK(r->scale() == 1);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("BetaB", "[paramFromString]") {
@@ -70,10 +70,10 @@ TEST_CASE("BetaB", "[paramFromString]") {
   shared_ptr<const Beta> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->dist.alpha() == 6);
-  CHECK(r->dist.beta() == .7L);
-  CHECK(r->scale == 4);
-  CHECK(r->shift == 0);
+  CHECK(r->dist().alpha() == 6);
+  CHECK(r->dist().beta() == .7L);
+  CHECK(r->scale() == 4);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("BetaC", "[paramFromString]") {
@@ -86,10 +86,10 @@ TEST_CASE("BetaC", "[paramFromString]") {
   shared_ptr<const Beta> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->dist.alpha() == 44);
-  CHECK(r->dist.beta() == 32);
-  CHECK(r->scale == .6L);
-  CHECK(r->shift == 3);
+  CHECK(r->dist().alpha() == 44);
+  CHECK(r->dist().beta() == 32);
+  CHECK(r->scale() == .6L);
+  CHECK(r->shift() == 3);
 }
 
 TEST_CASE("BetaBinomial", "[paramFromString]") {
@@ -103,9 +103,9 @@ TEST_CASE("BetaBinomial", "[paramFromString]") {
   shared_ptr<const BetaBinomial> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->alpha == 10.5);
-  CHECK(r->beta == 4.3);
-  CHECK(r->n == 17);
+  CHECK(r->alpha() == 10.5);
+  CHECK(r->beta() == 4.3);
+  CHECK(r->n() == 17);
 }
 
 TEST_CASE("BinomialA", "[paramFromString]") {
@@ -119,8 +119,8 @@ TEST_CASE("BinomialA", "[paramFromString]") {
   shared_ptr<const Binomial> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.success_fraction() == .5);
-  CHECK(r->cdist.trials() == 1);
+  CHECK(r->cdist().success_fraction() == .5);
+  CHECK(r->cdist().trials() == 1);
 }
 
 TEST_CASE("BinomialA", "[paramFromString]") {
@@ -134,8 +134,8 @@ TEST_CASE("BinomialA", "[paramFromString]") {
   shared_ptr<const Binomial> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.success_fraction() == .5);
-  CHECK(r->cdist.trials() == 45);
+  CHECK(r->cdist().success_fraction() == .5);
+  CHECK(r->cdist().trials() == 45);
 }
 
 TEST_CASE("BinomialC", "[paramFromString]") {
@@ -149,8 +149,8 @@ TEST_CASE("BinomialC", "[paramFromString]") {
   shared_ptr<const Binomial> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.success_fraction() == .6L);
-  CHECK(r->cdist.trials() == 45);
+  CHECK(r->cdist().success_fraction() == .6L);
+  CHECK(r->cdist().trials() == 45);
 }
 
 TEST_CASE("ChiA", "[paramFromString]") {
@@ -163,7 +163,7 @@ TEST_CASE("ChiA", "[paramFromString]") {
   shared_ptr<const ChiSquared> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == .5);
+  CHECK(r->cdist().shape() == .5);
 }
 
 TEST_CASE("ChiB", "[paramFromString]") {
@@ -176,7 +176,7 @@ TEST_CASE("ChiB", "[paramFromString]") {
   shared_ptr<const ChiSquared> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == 23.5);
+  CHECK(r->cdist().shape() == 23.5);
 }
 
 TEST_CASE("Kronecker", "[paramFromString]") {
@@ -189,11 +189,11 @@ TEST_CASE("Kronecker", "[paramFromString]") {
   shared_ptr<const KroneckerDelta> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->v == 33);
+  CHECK(r->v() == 33);
 }
 
 TEST_CASE("Dirac", "[paramFromString]") {
-  shared_ptr<const Parameter> p = paramFromString("Constant,33.,,,,F,,,");
+  shared_ptr<const Parameter> p = paramFromString("Constant,33.3124,,,,F,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
@@ -202,7 +202,7 @@ TEST_CASE("Dirac", "[paramFromString]") {
   shared_ptr<const DiracDelta> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->v == 33);
+  CHECK(r->v() == Approx(33.3124));
 }
 
 TEST_CASE("ExponentialA", "[paramFromString]") {
@@ -215,8 +215,8 @@ TEST_CASE("ExponentialA", "[paramFromString]") {
   shared_ptr<const Exponential> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.lambda() == 3.6L);
-  CHECK(r->shift == 0);
+  CHECK(r->cdist().lambda() == 3.6L);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("ExponentialB", "[paramFromString]") {
@@ -230,8 +230,8 @@ TEST_CASE("ExponentialB", "[paramFromString]") {
   shared_ptr<const Exponential> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.lambda() == 1.3L);
-  CHECK(r->shift == 4.2L);
+  CHECK(r->cdist().lambda() == 1.3L);
+  CHECK(r->shift() == 4.2L);
 }
 
 TEST_CASE("GammaA", "[paramFromString]") {
@@ -244,9 +244,9 @@ TEST_CASE("GammaA", "[paramFromString]") {
   shared_ptr<const Gamma> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == 1);
-  CHECK(r->cdist.scale() == 1);
-  CHECK(r->shift == 0);
+  CHECK(r->cdist().shape() == 1);
+  CHECK(r->cdist().scale() == 1);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("GammaB", "[paramFromString]") {
@@ -259,9 +259,9 @@ TEST_CASE("GammaB", "[paramFromString]") {
   shared_ptr<const Gamma> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == 4.3L);
-  CHECK(r->cdist.scale() == 1);
-  CHECK(r->shift == 0);
+  CHECK(r->cdist().shape() == 4.3L);
+  CHECK(r->cdist().scale() == 1);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("GammaC", "[paramFromString]") {
@@ -274,9 +274,9 @@ TEST_CASE("GammaC", "[paramFromString]") {
   shared_ptr<const Gamma> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == 432.6L);
-  CHECK(r->cdist.scale() == 3.5);
-  CHECK(r->shift == 0);
+  CHECK(r->cdist().shape() == 432.6L);
+  CHECK(r->cdist().scale() == 3.5);
+  CHECK(r->shift() == 0);
 }
 
 TEST_CASE("GammaD", "[paramFromString]") {
@@ -289,9 +289,9 @@ TEST_CASE("GammaD", "[paramFromString]") {
   shared_ptr<const Gamma> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.shape() == 1.3L);
-  CHECK(r->cdist.scale() == 5.6L);
-  CHECK(r->shift == 3.2L);
+  CHECK(r->cdist().shape() == 1.3L);
+  CHECK(r->cdist().scale() == 5.6L);
+  CHECK(r->shift() == 3.2L);
 }
 
 TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
@@ -304,8 +304,8 @@ TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
   shared_ptr<const GammaPoisson> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.successes() == 1);
-  CHECK(r->cdist.success_fraction == Approx(.5));
+  CHECK(r->cdist().successes() == 1);
+  CHECK(r->cdist().success_fraction == Approx(.5));
 }
 
 TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
@@ -318,8 +318,8 @@ TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
   shared_ptr<const GammaPoisson> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.successes() == 12);
-  CHECK(r->cdist.success_fraction == Approx(.5));
+  CHECK(r->cdist().successes() == 12);
+  CHECK(r->cdist().success_fraction == Approx(.5));
 }
 
 TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
@@ -332,8 +332,8 @@ TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
   shared_ptr<const GammaPoisson> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.successes() == 43);
-  CHECK(r->cdist.success_fraction == Approx(2./3.));
+  CHECK(r->cdist().successes() == 43);
+  CHECK(r->cdist().success_fraction == Approx(2./3.));
 }
 
 TEST_CASE("GeometricA", "[paramFromString]") {
@@ -346,7 +346,7 @@ TEST_CASE("GeometricA", "[paramFromString]") {
   shared_ptr<const Geometric> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.success_fraction == .5);
+  CHECK(r->cdist().success_fraction == .5);
 }
 
 TEST_CASE("GeometricB", "[paramFromString]") {
@@ -359,6 +359,6 @@ TEST_CASE("GeometricB", "[paramFromString]") {
   shared_ptr<const Geometric> r;
   r = dynamic_pointer_cast<typeof(*r)>(q);
   REQUIRE(r);
-  CHECK(r->cdist.success_fraction == .3);
+  CHECK(r->cdist().success_fraction == .3);
 }
 
