@@ -1,7 +1,21 @@
 #include "catch.hpp"
 
 // Change when needed.
-#include "../src/ReadParam.h"
+#include "ReadParam.h"
+#include "Bernoulli.h"
+#include "Beta.h"
+#include "BetaBinomial.h"
+#include "Binomial.h"
+#include "ChiSquared.h"
+#include "DiracDelta.h"
+#include "Exponential.h"
+#include "Gamma.h"
+#include "GammaPoisson.h"
+#include "Geometric.h"
+#include "JohnsonSb.h"
+#include "JohnsonSl.h"
+#include "JohnsonSu.h"
+#include "KroneckerDelta.h"
 
 using namespace std;
 using namespace SimulationLib;
@@ -11,10 +25,10 @@ TEST_CASE("BernoulliA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Bernoulli> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   REQUIRE(r->cdist().success_fraction() == .5);
 }
@@ -24,10 +38,10 @@ TEST_CASE("BernoulliB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Bernoulli> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   REQUIRE(r->cdist().success_fraction() == .3);
 }
@@ -47,10 +61,10 @@ TEST_CASE("BetaA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Beta> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->dist().alpha() == .3L);
   CHECK(r->dist().beta() == 3);
@@ -65,10 +79,10 @@ TEST_CASE("BetaB", "[paramFromString]") {
   CHECK(p->min == 1);
   CHECK(p->max == 2);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Beta> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->dist().alpha() == 6);
   CHECK(r->dist().beta() == .7L);
@@ -81,10 +95,10 @@ TEST_CASE("BetaC", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Beta> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->dist().alpha() == 44);
   CHECK(r->dist().beta() == 32);
@@ -98,10 +112,10 @@ TEST_CASE("BetaBinomial", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const BetaBinomial> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->alpha() == 10.5);
   CHECK(r->beta() == 4.3);
@@ -114,10 +128,10 @@ TEST_CASE("BinomialA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Binomial> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().success_fraction() == .5);
   CHECK(r->cdist().trials() == 1);
@@ -129,10 +143,10 @@ TEST_CASE("BinomialA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Binomial> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().success_fraction() == .5);
   CHECK(r->cdist().trials() == 45);
@@ -144,10 +158,10 @@ TEST_CASE("BinomialC", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Binomial> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().success_fraction() == .6L);
   CHECK(r->cdist().trials() == 45);
@@ -158,10 +172,10 @@ TEST_CASE("ChiA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const ChiSquared> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == .5);
 }
@@ -171,10 +185,10 @@ TEST_CASE("ChiB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const ChiSquared> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == 23.5);
 }
@@ -184,10 +198,10 @@ TEST_CASE("Kronecker", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const KroneckerDelta> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->v() == 33);
 }
@@ -197,10 +211,10 @@ TEST_CASE("Dirac", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const DiracDelta> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->v() == Approx(33.3124));
 }
@@ -210,10 +224,10 @@ TEST_CASE("ExponentialA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Exponential> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().lambda() == 3.6L);
   CHECK(r->shift() == 0);
@@ -225,10 +239,10 @@ TEST_CASE("ExponentialB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Exponential> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().lambda() == 1.3L);
   CHECK(r->shift() == 4.2L);
@@ -239,10 +253,10 @@ TEST_CASE("GammaA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Gamma> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == 1);
   CHECK(r->cdist().scale() == 1);
@@ -254,10 +268,10 @@ TEST_CASE("GammaB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Gamma> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == 4.3L);
   CHECK(r->cdist().scale() == 1);
@@ -269,10 +283,10 @@ TEST_CASE("GammaC", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Gamma> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == 432.6L);
   CHECK(r->cdist().scale() == 3.5);
@@ -284,10 +298,10 @@ TEST_CASE("GammaD", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long double> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Gamma> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().shape() == 1.3L);
   CHECK(r->cdist().scale() == 5.6L);
@@ -299,13 +313,13 @@ TEST_CASE("Gamma-PoissonA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const GammaPoisson> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().successes() == 1);
-  CHECK(r->cdist().success_fraction == Approx(.5));
+  CHECK(r->cdist().success_fraction() == Approx(.5));
 }
 
 TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
@@ -313,13 +327,13 @@ TEST_CASE("Gamma-PoissonB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const GammaPoisson> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().successes() == 12);
-  CHECK(r->cdist().success_fraction == Approx(.5));
+  CHECK(r->cdist().success_fraction() == Approx(.5));
 }
 
 TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
@@ -327,13 +341,13 @@ TEST_CASE("Gamma-PoissonC", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const GammaPoisson> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
   CHECK(r->cdist().successes() == 43);
-  CHECK(r->cdist().success_fraction == Approx(2./3.));
+  CHECK(r->cdist().success_fraction() == Approx(2./3.));
 }
 
 TEST_CASE("GeometricA", "[paramFromString]") {
@@ -341,12 +355,12 @@ TEST_CASE("GeometricA", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Geometric> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
-  CHECK(r->cdist().success_fraction == .5);
+  CHECK(r->cdist().success_fraction() == .5);
 }
 
 TEST_CASE("GeometricB", "[paramFromString]") {
@@ -354,11 +368,11 @@ TEST_CASE("GeometricB", "[paramFromString]") {
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
   shared_ptr<const StatisticalDistribution<long> > q;
-  REQUIRE(holds_alternative<typeof(q)>(p->dist));
-  q = get<typeof(q)>(p->dist);
+  REQUIRE(holds_alternative<decltype(q)>(p->dist));
+  q = get<decltype(q)>(p->dist);
   shared_ptr<const Geometric> r;
-  r = dynamic_pointer_cast<typeof(*r)>(q);
+  r = dynamic_pointer_cast<std::remove_reference_t<decltype(*r)> >(q);
   REQUIRE(r);
-  CHECK(r->cdist().success_fraction == .3);
+  CHECK(r->cdist().success_fraction() == .3);
 }
 

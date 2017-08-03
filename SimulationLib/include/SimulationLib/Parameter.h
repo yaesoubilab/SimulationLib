@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "StatisticalDistribution.h"
+#include <StatisticalDistribution.h>
 #include <variant>
 #include <random>
 

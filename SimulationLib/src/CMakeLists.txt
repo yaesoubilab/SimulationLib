@@ -11,16 +11,24 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/PyramidTimeSeries.h
            ${header_path}/TimeSeries.h
            ${header_path}/TimeStatistic.h
-           ${header_path}/EventQueue.h)
+           ${header_path}/EventQueue.h
+	   ${header_path}/DataFrame.h
+	   ${header_path}/DataFrame.t
+	   ${header_path}/Config.h
+	   ${header_path}/ReadParam.h
+	   ${header_path}/Parameter.h)
 
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Boost REQUIRED)
+find_package(StatisticalDistributionsLib REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${StatisticalDistributionsLib_INCLUDE_DIRS})
+include_directories(${header_path})
 
 # Set source files
 set(src ContinuousTimeStatistic.cpp
@@ -31,15 +39,17 @@ set(src ContinuousTimeStatistic.cpp
         PrevalencePyramidTimeSeries.cpp
         PrevalenceTimeSeries.cpp
         PyramidData.cpp
-        PyramidTimeSeries.cpp)
+        PyramidTimeSeries.cpp
+	ParamDataFrame.cpp
+	DistDataFrame.cpp
+	Parameter.cpp
+	Config.cpp)
 
 # Configure config.hpp.in
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")
 
 # Define library target
 add_library(SimulationLib ${header} ${src})
-
-include_directories(${Boost_INCLUDE_DIRS})
 
 target_include_directories(SimulationLib PUBLIC
   $<BUILD_INTERFACE:${SimulationLib_SOURCE_DIR}/include> # for headers when building

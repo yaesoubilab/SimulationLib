@@ -1,7 +1,7 @@
 #include "catch.hpp"
 
 // Change when needed.
-#include "../src/DataFrame.h"
+#include "DataFrame.h"
 #include <random>
 #include <ctime>
 #include <cstdio>
@@ -11,10 +11,11 @@ using namespace std;
 using namespace SimulationLib;
 
 TEST_CASE("DataFrameA", "[dataframe]") {
-  mt19937_64 rng(time());
+  mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char *fnam = tmpnam(NULL);
+  char fnam[16] = "frametestXXXXXX";
+  mkstemp(fnam);
   double m[4][3], f[4][3], tsz, asz, tst, ast;
   FILE *out = fopen(fnam, "w");
   fprintf(out, "t,s,a,v\n");
@@ -113,10 +114,11 @@ TEST_CASE("DataFrameA", "[dataframe]") {
 }
 
 TEST_CASE("DataFrameB", "[dataframe]") {
-  mt19937_64 rng(time());
+  mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char *fnam = tmpnam(NULL);
+  char fnam[16] = "frametestXXXXXX";
+  mkstemp(fnam);
   double tsz, asz, tst, ast;
   FILE *out = fopen(fnam, "w");
   fprintf(out, "t,s,a,v\n");
@@ -151,10 +153,11 @@ TEST_CASE("DataFrameB", "[dataframe]") {
 }
 
 TEST_CASE("DataFrameC", "[dataframe]") {
-  mt19937_64 rng(time());
+  mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char *fnam = tmpnam(NULL);
+  char fnam[16] = "frametestXXXXXX";
+  mkstemp(fnam);
   double m[3], f[3], asz, ast;
   FILE *out = fopen(fnam, "w");
   fprintf(out, "t,s,a,v\n");
@@ -163,8 +166,8 @@ TEST_CASE("DataFrameC", "[dataframe]") {
   fprintf(out, "-,,%lf,\n", asz);
   fprintf(out, "-,,3,\n");
   for(int j = 0; j < 3; j++) {
-    fprintf(out, "-,M,%lf,%lf\n", ast + i * asz, m[j] = nd(rng));
-    fprintf(out, "-,F,%lf,%lf\n", ast + i * asz, f[j] = nd(rng));
+    fprintf(out, "-,M,%lf,%lf\n", ast + j * asz, m[j] = nd(rng));
+    fprintf(out, "-,F,%lf,%lf\n", ast + j * asz, f[j] = nd(rng));
   }
   fclose(out);
   DataFrame<double> df(fnam, false);
@@ -183,10 +186,11 @@ TEST_CASE("DataFrameC", "[dataframe]") {
 }
 
 TEST_CASE("DataFrameD", "[dataframe]") {
-  mt19937_64 rng(time());
+  mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char *fnam = tmpnam(NULL);
+  char fnam[16] = "frametestXXXXXX";
+  mkstemp(fnam);
   double m[4], f[4], tsz, tst;
   FILE *out = fopen(fnam, "w");
   fprintf(out, "t,s,a,v\n");
@@ -194,9 +198,9 @@ TEST_CASE("DataFrameD", "[dataframe]") {
   tst = nd(rng);
   fprintf(out, "%lf,,-,\n", tsz);
   fprintf(out, "4,,-,\n");
-  for(int j = 0; j < 3; j++) {
-    fprintf(out, "%lf,M,-,%lf\n", tst + i * tsz, m[j] = nd(rng));
-    fprintf(out, "%lf,F,-,%lf\n", tst + i * tsz, f[j] = nd(rng));
+  for(int i = 0; i < 4; i++) {
+    fprintf(out, "%lf,M,-,%lf\n", tst + i * tsz, m[i] = nd(rng));
+    fprintf(out, "%lf,F,-,%lf\n", tst + i * tsz, f[i] = nd(rng));
   }
   fclose(out);
   DataFrame<double> df(fnam, false);
