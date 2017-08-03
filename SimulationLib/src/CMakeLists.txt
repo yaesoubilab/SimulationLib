@@ -16,7 +16,8 @@ set(header ${header_path}/ContinuousTimeStatistic.h
 	   ${header_path}/DataFrame.t
 	   ${header_path}/Config.h
 	   ${header_path}/ReadParam.h
-	   ${header_path}/Parameter.h)
+	   ${header_path}/Parameter.h
+           ${header_path}/Likelihood.h)
 
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 17)
@@ -25,10 +26,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Boost REQUIRED)
 find_package(StatisticalDistributionsLib REQUIRED)
-
-include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${StatisticalDistributionsLib_INCLUDE_DIRS})
-include_directories(${header_path})
 
 # Set source files
 set(src ContinuousTimeStatistic.cpp
@@ -43,7 +40,8 @@ set(src ContinuousTimeStatistic.cpp
 	ParamDataFrame.cpp
 	DistDataFrame.cpp
 	Parameter.cpp
-	Config.cpp)
+	Config.cpp
+        Likelihood.cpp)
 
 # Configure config.hpp.in
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")
@@ -51,8 +49,14 @@ set(src ContinuousTimeStatistic.cpp
 # Define library target
 add_library(SimulationLib ${header} ${src})
 
+include_directories(${Boost_INCLUDE_DIRS})
+
+target_link_libraries(SimulationLib PUBLIC StatisticalDistributionsLib)
+
+
 target_include_directories(SimulationLib PUBLIC
   $<BUILD_INTERFACE:${SimulationLib_SOURCE_DIR}/include> # for headers when building
+  # $<BUILD_INTERFACE:${StatisticalDistributionsLib_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # for config_impl.hpp when building
   $<INSTALL_INTERFACE:${include_dest}> # for client in install mode
   $<INSTALL_INTERFACE:${lib_dest}>) # for config_impl.hpp in install mode
