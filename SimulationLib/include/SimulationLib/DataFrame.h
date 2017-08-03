@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
 #include <memory>
-#define ACCESSOR(t, x, y) inline t x() const { return(y); }
+#ifndef ACCESSORC
+#define ACCESSORC(x, y) inline auto x() const { return(y); }
+#endif
 namespace SimulationLib {
   // Marcus: What is 'C' meant to be?
   // Whatever the data frame holds.
@@ -33,16 +35,16 @@ namespace SimulationLib {
     double nextBracketStart(double age) const;
     // In how long?
     double timeToNextBracket(double age) const;
-    ACCESSOR(bool, ignoresTime, ignoreTime);
-    ACCESSOR(bool, ignoresPerson, ignoreAge && ignoreGender);
-    ACCESSOR(bool, ignoresAge, ignoreAge);
-    ACCESSOR(bool, ignoresGender, ignoreGender);
-    ACCESSOR(double, timeBracketSize, timeBracket);
-    ACCESSOR(double, ageBracketSize, ageBracket);
-    ACCESSOR(double, timeBracketStart, timeStart);
-    ACCESSOR(double, ageBracketStart, ageStart);
-    ACCESSOR(int, timeBracketCount, timeCats);
-    ACCESSOR(int, ageBracketCount, ageCats);
+    ACCESSORC(ignoresTime, ignoreTime);
+    ACCESSORC(ignoresPerson, ignoreAge && ignoreGender);
+    ACCESSORC(ignoresAge, ignoreAge);
+    ACCESSORC(ignoresGender, ignoreGender);
+    ACCESSORC(timeBracketSize, timeBracket);
+    ACCESSORC(ageBracketSize, ageBracket);
+    ACCESSORC(timeBracketStart, timeStart);
+    ACCESSORC(ageBracketStart, ageStart);
+    ACCESSORC(timeBracketCount, timeCats);
+    ACCESSORC(ageBracketCount, ageCats);
     const bool loopTime;
   private:
     double timeBracket, ageBracket, timeStart, ageStart;

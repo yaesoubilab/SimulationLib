@@ -1,12 +1,3 @@
-#include "Parameter.h"
-#include <map>
-#include <cstdio>
-#include <string>
-#include <iostream>
-#include "DataFrame.h"
-#include <tuple>
-#include "ReadParam.h"
-
 #include "Bernoulli.h"
 #include "Beta.h"
 #include "BetaBinomial.h"
@@ -29,6 +20,15 @@
 #include "Uniform.h"
 #include "UniformDiscrete.h"
 #include "Weibull.h"
+
+#include "Parameter.h"
+#include <map>
+#include <cstdio>
+#include <string>
+#include <iostream>
+#include "DataFrame.h"
+#include <tuple>
+#include "ReadParam.h"
 
 // Implements DataFrame construction for parameters.
 

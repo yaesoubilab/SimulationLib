@@ -4,7 +4,7 @@
 #include <tuple>
 
 #include <RNG.h>
-#include <StatisticalDistributionsLib.h>
+#include <StatisticalDistribution.h>
 // Add headers for any supported distributions here...
 
 using namespace std;
@@ -16,7 +16,7 @@ namespace SimulationLib
     // TimeT:  type of function's time parameter
     // ValueT: type of function's result
     template <class Distribution, typename TimeT = double, typename ValueT = int>
-    class LikelihoodFunction<Distribution, ValueT(TimeT)>
+    class LikelihoodFunction
     {
     public:
         // Type of probability returned, right now probability is represented

@@ -138,7 +138,7 @@ namespace SimulationLib {
 	buf[fstcomma] = 0;
 	try {
 	  return(std::shared_ptr<const StatisticalDistribution<long double> >
-		 (mpd.at(buf.data)(str + fstcomma + 1)));
+		 (mpd.at(buf.c_str())(str + fstcomma + 1)));
 	} catch(std::out_of_range x) {
 	  std::cerr << "Distribution not found: " << '"'
 		    << buf.c_str() << '"' << std::endl;
