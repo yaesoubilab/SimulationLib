@@ -3,19 +3,36 @@
 using namespace std;
 using namespace SimulationLib;
 
-template <class Distribution, typename TimeT, typename ValueT>
-auto LikelihoodFunction::operator()(TimeT t, ValueT v) {
+// 'Distribution', 'ValueT', and 'TypeT' are written shorthand here as
+//   'D', 'VT', 'TT'
+template <class D, typename VT, typename TT>
+typename LikelihoodFunction<D,VT(TT)>::LikelihoodFunctionT
+LikelihoodFunction<D,VT(TT)>::GetLikelihoodFunction(void) {
 
-    // 'y' is the value of the target function at time 't'
-    ValueT y = f(t);
-
-    // Ask for parameters of the distribution for the given 't' and 'y'
-    BoundInitializerArgs params = dpg(t, y);
-
-    // (Re-)Initialize distribution using these parameters
-    std::apply(dist.init, params);
-
-    // Return the probability of function 'f' being valued 'v' at time 't'
-    //   by calling the new probability density function with value 'v'
-    return dist.pdf(v);
+    // Explicitly capture 'this'. Note that if 'this' becomes invalid due
+    //   due object destruction, this lambda will have undefined and unsafe
+    //   behavior!
+    return [this] (TT t, VT v) {
+        return Likelihood(t, v);
+    };
 }
+
+template <class D, typename VT, typename TT>
+typename LikelihoodFunction<D,VT(TT)>::ProbabilityT
+LikelihoodFunction<D,VT(TT)>::Likelihood(TT t, VT v) {
+    // 'y' is the value of 'f' at time 't'
+    VT y = f(t);
+
+    // 'd' is the distribution on f(t)
+    D d = dg(t, y);
+
+    // 'l' is the probability of [f(t) = v]
+    ProbabilityT l = d.pdf(v);
+    return l;
+}
+
+// Implements the () operator for the class by forwarding to the public
+//   member function 'Likelihood'
+template <class D, typename VT, typename TT>
+typename LikelihoodFunction<D,VT(TT)>::ProbabilityT
+LikelihoodFunction<D,VT(TT)>::operator()(TT t, VT v) { return Likelihood(t, v); }
