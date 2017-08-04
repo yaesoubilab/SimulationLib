@@ -17,7 +17,8 @@ add_executable (Test
 				tests-PyramidData.cpp
 				tests-PyramidTimeSeries.cpp
                 tests-EventQueue.cpp
-                tests-EventQueueWithState.cpp)
+                tests-EventQueueWithState.cpp
+                tests-Likelihood.cpp)
 
 target_link_libraries (Test
 					   SimulationLib
