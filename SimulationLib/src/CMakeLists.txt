@@ -38,7 +38,6 @@ set(src ContinuousTimeStatistic.cpp
         PyramidData.cpp
         PyramidTimeSeries.cpp
 	ParamDataFrame.cpp
-	DistDataFrame.cpp
 	Parameter.cpp
 	Config.cpp
         Likelihood.cpp)

@@ -18,8 +18,7 @@ namespace SimulationLib {
     // g turns a const char* into a C.
     DataFrame(const char *file, bool loopTime,
 	      std::shared_ptr<const C> (*g)(const char *));
-    // Only implemented for DataFrame<double>, and for distributions on
-    // long, long double, and for parameters.
+    // Only implemented for DataFrame<double>, and for parameters.
     DataFrame(const char *file, bool loopTime);
 
     // Marcus: Explain what this function does and how it handles errors
@@ -29,6 +28,7 @@ namespace SimulationLib {
     // or takes it modulo timeCats (depending on loopTime).
     // Similarly for age.
     // It then indices into m/f.
+    // Errors are impossible.
     std::shared_ptr<const C>
       getValue(double time, bool isFemale, double age) const; // Get a value
     // When's the next bracket start?
