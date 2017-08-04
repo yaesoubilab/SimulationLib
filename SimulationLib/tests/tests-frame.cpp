@@ -14,7 +14,7 @@ TEST_CASE("DataFrameA", "[dataframe]") {
   mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char fnam[16] = "frametestXXXXXX";
+  char fnam[32] = "/var/tmp/frametestXXXXXX";
   mkstemp(fnam);
   double m[4][3], f[4][3], tsz, asz, tst, ast;
   FILE *out = fopen(fnam, "w");
@@ -38,6 +38,7 @@ TEST_CASE("DataFrameA", "[dataframe]") {
     CHECK_FALSE(df.ignoresTime());
     CHECK_FALSE(df.ignoresAge());
     CHECK_FALSE(df.ignoresGender());
+    CHECK_FALSE(df.ignoresPerson());
     CHECK(df.timeBracketCount() == 4);
     CHECK(df.ageBracketCount() == 3);
     CHECK_FALSE(df.loopTime);
@@ -45,6 +46,17 @@ TEST_CASE("DataFrameA", "[dataframe]") {
     CHECK(df.ageBracketSize() == Approx(asz));
     CHECK(df.timeBracketStart() == Approx(tst));
     CHECK(df.ageBracketStart() == Approx(ast));
+    for(int i = -5; i < 8; i++) {
+      double age = ast + asz * (i + ud(rng));
+      double nbs;
+      if(age < ast)
+	nbs = ast;
+      else if(age - ast > asz * 2)
+	nbs = INFINITY;
+      else
+	nbs = ((int)((age - ast) / asz) + 1) * asz + ast;
+      CHECK(df.nextBracketStart(age) == Approx(nbs));
+      CHECK(df.timeToNextBracket(age) == Approx(nbs - age));
     lognormal_distribution<> lnd;
     for(int i = 0; i < 4; i++) {
       double t = tst + tsz * (i + ud(rng));
@@ -78,12 +90,14 @@ TEST_CASE("DataFrameA", "[dataframe]") {
 	}
       }
     }
+    unlink(fnam);
   }
   SECTION("loop") {
     DataFrame<double> df(fnam, true);
     CHECK_FALSE(df.ignoresTime());
     CHECK_FALSE(df.ignoresAge());
     CHECK_FALSE(df.ignoresGender());
+    CHECK_FALSE(df.ignoresPerson());
     CHECK(df.timeBracketCount() == 4);
     CHECK(df.ageBracketCount() == 3);
     CHECK(df.loopTime);
@@ -110,6 +124,7 @@ TEST_CASE("DataFrameA", "[dataframe]") {
 	}
       }
     }
+    unlink(fnam);
   }
 }
 
@@ -117,7 +132,7 @@ TEST_CASE("DataFrameB", "[dataframe]") {
   mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char fnam[16] = "frametestXXXXXX";
+  char fnam[32] = "/var/tmp/frametestXXXXXX";
   mkstemp(fnam);
   double tsz, asz, tst, ast;
   FILE *out = fopen(fnam, "w");
@@ -136,6 +151,7 @@ TEST_CASE("DataFrameB", "[dataframe]") {
   CHECK_FALSE(df.ignoresTime());
   CHECK_FALSE(df.ignoresAge());
   CHECK(df.ignoresGender());
+  CHECK_FALSE(df.ignoresPerson());
   CHECK(df.timeBracketCount() == 4);
   CHECK(df.ageBracketCount() == 3);
   CHECK_FALSE(df.loopTime);
@@ -150,13 +166,14 @@ TEST_CASE("DataFrameB", "[dataframe]") {
       CHECK(*df.getValue(t, true, a) == *df.getValue(t, false, a));
     }
   }
+  unlink(fnam);
 }
 
 TEST_CASE("DataFrameC", "[dataframe]") {
   mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char fnam[16] = "frametestXXXXXX";
+  char fnam[32] = "/var/tmp/frametestXXXXXX";
   mkstemp(fnam);
   double m[3], f[3], asz, ast;
   FILE *out = fopen(fnam, "w");
@@ -174,6 +191,7 @@ TEST_CASE("DataFrameC", "[dataframe]") {
   CHECK(df.ignoresTime());
   CHECK_FALSE(df.ignoresAge());
   CHECK_FALSE(df.ignoresGender());
+  CHECK_FALSE(df.ignoresPerson());
   CHECK(df.ageBracketCount() == 3);
   CHECK_FALSE(df.loopTime);
   CHECK(df.ageBracketSize() == Approx(asz));
@@ -183,13 +201,14 @@ TEST_CASE("DataFrameC", "[dataframe]") {
     CHECK(*df.getValue(nd(rng), false, a) == Approx(m[j]));
     CHECK(*df.getValue(nd(rng), true, a) == Approx(f[j]));
   }
+  unlink(fnam);
 }
 
 TEST_CASE("DataFrameD", "[dataframe]") {
   mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;
   normal_distribution<> nd;
-  char fnam[16] = "frametestXXXXXX";
+  char fnam[32] = "/var/tmp/frametestXXXXXX";
   mkstemp(fnam);
   double m[4], f[4], tsz, tst;
   FILE *out = fopen(fnam, "w");
@@ -207,6 +226,7 @@ TEST_CASE("DataFrameD", "[dataframe]") {
   CHECK_FALSE(df.ignoresTime());
   CHECK(df.ignoresAge());
   CHECK_FALSE(df.ignoresGender());
+  CHECK_FALSE(df.ignoresPerson());
   CHECK(df.timeBracketCount() == 4);
   CHECK_FALSE(df.loopTime);
   CHECK(df.timeBracketSize() == Approx(tsz));
@@ -216,4 +236,5 @@ TEST_CASE("DataFrameD", "[dataframe]") {
     CHECK(*df.getValue(t, false, nd(rng)) == Approx(m[i]));
     CHECK(*df.getValue(t, true, nd(rng)) == Approx(f[i]));
   }
+  unlink(fnam);
 }

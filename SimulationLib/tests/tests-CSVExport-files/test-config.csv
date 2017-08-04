@@ -1,0 +1,6 @@
+TEST ONLY,,,
+LNAM,SNAM,C,PARAM
+When it's fiesta time in Guadalajara,ptest,v,1234.567
+Then I long to be back once again in old Mexico,ftest,f,test-config-frame.csv
+Where we lived for today never giving a thought to tomarra,Ftest,F,test-config-frame2.csv
+To the strumming of guitars in a hundred grubby bars I would whisper "Te amo".,ptest2,v,8.901
