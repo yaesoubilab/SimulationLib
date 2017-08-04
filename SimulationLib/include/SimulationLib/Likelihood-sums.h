@@ -9,7 +9,7 @@
 //   VT  = type of 'value' in any time-valued functions, or functions
 //           which take the output of a time-valued function as a parameter
 
-// ProbabilityAtTime: A unary function at returns some probability (type PrT)
+// ProbabilityAtTime: A unary function that returns some probability (type PrT)
 //   at some time (type TT)
 template <typename PrT, typename TT>
 using ProbabilityAtTime = function<PrT(TT)>;
@@ -38,6 +38,6 @@ ProbabilityLgSum(ProbabilityAtTime<PrT,TT> &P, vector<TT> &Ts)
         return sum + std::log(p_t);
     };
 
-    // init = log(0)
-    return std::accumulate(Ts.begin(), Ts.end(), std::log( (PrT)0 ));
+    // init = 0
+    return std::accumulate(Ts.begin(), Ts.end(), (PrT)0, reducer);
 }
