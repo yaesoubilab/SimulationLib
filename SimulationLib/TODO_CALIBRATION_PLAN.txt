@@ -1,0 +1,51 @@
+Calibrate:
+
+    DataToColumns
+        string filename -> Columns
+        [takes a filename, converts it to an istream, passes istream to
+         TimeDataToColumns, returns the result]
+
+        ^ write the code that does this, comment it out, and instead return
+            some BS Columns type that has mock data inside of it!
+
+    ColumnsToIncidenceTimeSeries
+        Columns -> vector<IncidenceTimeSeries>
+        [takes a Columns and returns an array of IncidenceTimeSeries. Name
+         of each TimeSeries should be the name of the column header.
+         Try to set all parameters of IncidenceTimeSeries correctly etc.
+         Note that a Columns includes a TimeColumn which should be used to call
+         each IncidenceTimeSeries' .Record() function. This function should
+         be templated on the type parameters of Columns]
+
+    ColumnsToPrevalenceTimeSeries
+        Columns -> PrevalenceTimeSeries
+        [same deal as above but there are probably some minor differences going
+         on here, be careful!]
+
+    CalculateLikelihood:
+        TimeSeries model, TimeSeries data -> product of likelihoods (using
+                                               Likelihood-sums.h)
+
+    [Bonus: There is one more function to write here, which constitutes a
+            loop of some sort where a new model is created using an initial
+            set of parameters, then the output is compared against the
+            observation data(s) using CalculateLikelihood, then some lambda
+            passed to the function decides on new parameters depending
+            on the results of invocations of CalculateLikelihood.
+            This will be a big part of next week's work, most likely.]
+
+
+
+CSVImport: (UNIMPLEMENTED but definitions should not change, do not attempt to
+            use or work on this right now, its X-rated templating shit :/)
+
+    TimeDataToColumns:
+        input stream of a CSV file -> Columns (= pair<TimeColumn,vector<Column>>)
+            where TimeColumn = pair<string, vector<T> > (T is the type of period/time)
+            where Column     = pair<string, vector<V> > (V is the type of value)
+
+    TimeDataToRowsVector
+        input stream of a CSV file -> Rows (= pair<HeaderRow, vector<Row>>)
+            where HeaderRow = vector<string>
+            where Row       = pair<T, vector<V>> (T is the type of period/time)
+                                                 (V is the type of value)
