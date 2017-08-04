@@ -80,6 +80,8 @@ TEST_CASE("Likelihood_normal_sanity", "[calibration]") {
 
         LikelihoodFn::ProbabilityT p = L(t, e);
 
+        printf("P[f(%f) = %f] = %Lf\n", t, e, p);
+
         if (e < f_t)
             REQUIRE(p < L(t, f_t));
         else if (f_t < e)
@@ -119,3 +121,15 @@ TEST_CASE("Likelihood_poisson_sanity", "[calibration]") {
         REQUIRE(true);
     }
 }
+
+// ===================================
+// Tests for Likelihood-adaptors
+// ===================================
+
+// TEST_CASE(...) {...}
+
+// ===================================
+// Tests for Likelihood-sums
+// ===================================
+
+// TEST_CASE(...) {...}

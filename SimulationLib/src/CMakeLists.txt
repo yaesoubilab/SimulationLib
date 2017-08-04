@@ -12,7 +12,9 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/TimeSeries.h
            ${header_path}/TimeStatistic.h
            ${header_path}/EventQueue.h
-           ${header_path}/Likelihood.h)
+           ${header_path}/Likelihood.h
+           ${header_path}/Likelihood-adaptors.h
+           ${header_path}/Likelihood-sums.h)
 
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
