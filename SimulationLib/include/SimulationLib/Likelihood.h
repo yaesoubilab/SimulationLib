@@ -9,12 +9,6 @@ namespace SimulationLib
 {
     // Distribution: a distribution from the StatisticalDistributionsLib
     //
-<<<<<<< HEAD
-    // TimeT:  type of function's time parameter
-    // ValueT: type of function's result
-    template <class Distribution, typename TimeT = double, typename ValueT = int>
-    class LikelihoodFunction
-=======
     // TimeT:  type of a time-valued function's time parameter
     // ValueT: type of a time-valued function's range
     //
@@ -24,7 +18,6 @@ namespace SimulationLib
     template <typename Distribution, typename T> class LikelihoodFunction;
     template <typename Distribution, typename ValueT, typename TimeT>
     class LikelihoodFunction<Distribution, ValueT(TimeT)>
->>>>>>> 6d698805fbd25f784c6d4c9d40fc0109ae4379b5
     {
     public:
         // Type of probability returned, right now probability is represented
