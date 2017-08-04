@@ -243,7 +243,7 @@ namespace SimulationLib {
     try {
       // Skip the reminder with that strchr.
       return(shared_ptr<const Parameter>
-	     (m.at(buf.c_str())(strchr(str + fstcomma + 1, ',') + 1));
+	     (m.at(buf.c_str())(strchr(str + fstcomma + 1, ',') + 1)));
     } catch(out_of_range x) {
       cerr << "Distribution not found: " << '"'
 	   << buf.c_str() << '"' << endl;
