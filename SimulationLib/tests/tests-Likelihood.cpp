@@ -1,5 +1,7 @@
 #include "catch.hpp"
 #include "../include/SimulationLib/Likelihood.h"
+#include "../include/SimulationLib/Likelihood-sums.h"
+#include "../include/SimulationLib/Likelihood-adaptors.h"
 
 #include <Normal.h>
 #include <Poisson.h>

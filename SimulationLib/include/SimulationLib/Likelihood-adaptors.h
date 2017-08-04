@@ -12,7 +12,7 @@ using namespace SimulationLib;
 template <typename Distribution, typename T>
 LikelihoodFunction<Distribution, T(int)>
 LikelihoodOnVector(vector<T>& v,
-                   LikelihoodFunction<Distribution, T(int)>::DistributionGenerator dg)
+                   typename LikelihoodFunction<Distribution, T(int)>::DistributionGenerator dg)
 {
     auto f = [&v] (int t) -> T { return v.at(t); };
 
@@ -26,7 +26,7 @@ LikelihoodOnVector(vector<T>& v,
 template <typename Distribution, typename T>
 LikelihoodFunction<Distribution, T(double)>
 LikelihoodOnTimeSeries(TimeSeries<T>& ts,
-                       LikelihoodFunction<Distribution, T(double)>::DistributionGenerator dg)
+                       typename LikelihoodFunction<Distribution, T(double)>::DistributionGenerator dg)
 {
     auto f = [&ts] (double t) -> T { return ts(t); };
 

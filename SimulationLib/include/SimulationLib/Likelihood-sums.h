@@ -30,9 +30,10 @@ CurriedProbabilityOnG(function<PrT(TT, VT)> &L,
 // Given a function P(t) and a set of time-values 'Ts', calculates
 //   the logarithmic product of P(t) evaluated at every 't' in 'Ts'
 template<typename PrT, typename TT>
-ProbabilityLgSum(ProbabilityAtTime<PrT,TT> P, vector<TT> Ts)
+PrT
+ProbabilityLgSum(ProbabilityAtTime<PrT,TT> &P, vector<TT> &Ts)
 {
-    auto reducer = [] (PrT sum, TT t) {
+    auto reducer = [&P] (PrT sum, TT t) {
         PrT p_t = P(t);
         return sum + std::log(p_t);
     };
