@@ -1,25 +1,95 @@
-OK. There are two kinds of tokens, <NEWLINE> and <OTHER>.
-<NEWLINE> =~ /\n/
-<OTHER> =~ /[^,\n]*/
-Commas are not included in tokens; they are the equivalent of whitespace
-in sane languages.
-(This is because it's really a CSV format.)
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in RFC 2119.
 
-I may refer to a token with a regexp.
-This means a token that additionally matches that regexp.
-Also, tokens may just be <NUMBER> or <INTEGER>,
-which mean that they must be understandable numbers or integers
-(to scanf, right now.)
+A config file SHALL be a dictionary,
+mapping keys (the internal names) to values.
 
+Each value SHALL be a dictionary,
+containing the key 'is_frame', which MUST have a boolean value,
+and the key 'value' which is as follows:
+If is_frame is false, then value MUST be a Parameter
+(which shall be defined later)
+otherwise value MUST be a DataFrame.
 
-<REST OF LINE> := <NEWLINE>
-      	       | <IGNORE> <REST OF LINE>
+A DataFrame SHALL be a dictionary.
+It MAY have only the key 'file',
+in which case it SHOULD be treated as if the dictionary were replaced
+with the contents of the file specified in the value.
+More than one level of indirection in this manner MAY be treated as an error.
 
-<CONFIG FILE> := <REST OF LINE> <REST OF LINE> <CONFIG LINES>
+It MAY have the key 'loop_time', which MUST have a boolean value.
+If there is no key 'loop_time',
+it SHOULD be treated as if it existed and had the value FALSE.
 
-<CONFIG LINE> := <IGNORE> <SHORTNAME> /v/ <PARAMETER> <REST OF LINE>
-	      | <IGNORE> <SHORTNAME> /[fF]/ <FILENAME> <REST OF LINE>
+It MAY have the keys
+'age_bracket_size', 'age_bracket_count', and 'age_bracket_start'.
+The first and third of these MUST have real values,
+while the second MUST have an integer value.
+'age_bracket_size' and 'age_bracket_count' MUST be positive.
+'age_bracket_start' MAY be any real number,
+but negative numbers make little sense.
+It MUST NOT have any number of these keys besides 0 or 3.
 
+It MAY have the keys 'time_bracket_size', 'time_bracket_count',
+and 'time_bracket_start', subject to the same restrictions as for
+their 'age_bracket_*' counterparts, except that they MUST exist if
+'loop_time' has the value TRUE.
 
-Actually, the real issue is that the CSV format is a TERRIBLE idea for config files. Feel free to scrap it all and rewrite.
-To heck with this.
+It MAY have the key 'ignore_gender', which SHALL have a boolean value.
+If this key does not exist, it SHOULD be treated as if it had the
+value FALSE.
+
+It SHALL have the key 'values',
+whose value MUST be a list, each of whose elements MUST be a
+dictionary D,
+containing the keys 'age_bracket' 'time_bracket', 'is_female', and
+'value'.
+
+If in the DataFrame the keys 'age_bracket_*' do not exist,
+in its values the key 'age_bracket' SHALL be optional,
+and MUST be ignored if it is used.
+
+If in the DataFrame the keys 'time_bracket_*' do not exist,
+in its values the key 'time_bracket' SHALL be optional,
+and MUST be ignored if it is used.
+
+If in the DataFrame the key 'ignore_gender' has the value TRUE,
+in its values the key 'is_female' SHALL be optional,
+and MUST be ignored if it is used.
+
+The key 'age_bracket' SHALL have value an integer between 0 and the
+containing DataFrame's 'age_bracket_count' (inclusive on the low,
+exclusive on the high.)
+
+The key 'time_bracket' SHALL have value an integer between 0 and the
+containing DataFrame's 'time_bracket_count' (inclusive on the low,
+exclusive on the high.)
+
+The key 'is_female' SHALL have value a boolean.
+
+The key 'value' SHALL have value a Parameter.
+
+----
+
+Parameters:
+
+A Parameter SHALL be either a real number or a dictionary.
+If it is a dictionary, it SHALL have the key 'distribution'.
+
+It MAY additionally have the key 'configure', which SHALL be a
+boolean, treated as FALSE if absent.
+It MAY have the keys 'min' and 'max', which SHALL be reals.
+
+The key 'distribution' shall have a string value,
+which shall be the name of a distribution.
+
+It SHALL have additional keys with names those of the non-optional parameters
+of the distribution, and MAY have keys with names those of the
+optional parameters. If an optional parameter is absent, it SHALL be
+treated as if it had its default value.
+
+Following is a table of distribution names and parameters thereof.
+
+(Will insert in next commit. - Eyal)
+
