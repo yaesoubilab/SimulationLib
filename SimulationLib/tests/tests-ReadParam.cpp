@@ -1,7 +1,8 @@
 #include "catch.hpp"
+#include <variant>
 
 // Change when needed.
-#include "ReadParam.h"
+#include "../include/SimulationLib/ReadParam.h"
 #include "Bernoulli.h"
 #include "Beta.h"
 #include "BetaBinomial.h"
@@ -31,6 +32,7 @@ using namespace SimulationLib;
 TEST_CASE("Gibberish", "[paramFromString]") {
   shared_ptr<const Parameter> p = paramFromString("fheai,feac,saf,quux");
   CHECK_FALSE(p);
+}
 
 TEST_CASE("BernoulliA", "[paramFromString]") {
   shared_ptr<const Parameter> p = paramFromString("Bernoulli,,,,,F,,,");
@@ -62,10 +64,10 @@ TEST_CASE("Double", "[paramFromString]") {
   shared_ptr<const Parameter> p = paramFromString("1.5124,,,,,L,,,");
   REQUIRE(p);
   CHECK_FALSE(p->calibrate);
-  CHECK(p->min == 1.5124L);
-  CHECK(p->max == 1.5124L);
+  CHECK(p->min == Approx(1.5124L));
+  CHECK(p->max == Approx(1.5124L));
   REQUIRE(holds_alternative<long double>(p->dist));
-  CHECK(get<long double>(p->dist) == 1.5124L);
+  CHECK(get<long double>(p->dist) == Approx(1.5124L));
 }
 
 TEST_CASE("BetaA", "[paramFromString]") {
@@ -149,7 +151,7 @@ TEST_CASE("BinomialA", "[paramFromString]") {
   CHECK(r->cdist().trials() == 1);
 }
 
-TEST_CASE("BinomialA", "[paramFromString]") {
+TEST_CASE("BinomialB", "[paramFromString]") {
   shared_ptr<const Parameter> p
     = paramFromString("Binomial,45,,,,F,,,");
   REQUIRE(p);

@@ -1,12 +1,15 @@
 #include "catch.hpp"
 
 // Change when needed.
-#include "DataFrame.h"
+#include "../include/SimulationLib/DataFrame.h"
 #include <random>
 #include <ctime>
 #include <cstdio>
 #include <vector>
-
+extern "C" {
+#include <unistd.h>
+}
+ 
 using namespace std;
 using namespace SimulationLib;
 
@@ -57,6 +60,7 @@ TEST_CASE("DataFrameA", "[dataframe]") {
 	nbs = ((int)((age - ast) / asz) + 1) * asz + ast;
       CHECK(df.nextBracketStart(age) == Approx(nbs));
       CHECK(df.timeToNextBracket(age) == Approx(nbs - age));
+    }
     lognormal_distribution<> lnd;
     for(int i = 0; i < 4; i++) {
       double t = tst + tsz * (i + ud(rng));
@@ -64,8 +68,8 @@ TEST_CASE("DataFrameA", "[dataframe]") {
       double t1;
       if(i == 0)
 	t1 = tst - lnd(rng);
-      else if(i == 3)
-	t1 = tst + tsz * 4 + lnd(rng);
+	else if(i == 3)
+	  t1 = tst + tsz * 4 + lnd(rng);
       for(int j = 0; j < 3; j++) {
 	double a = ast + asz * (j + ud(rng));
 	bool asp = j != 1;
@@ -127,7 +131,6 @@ TEST_CASE("DataFrameA", "[dataframe]") {
     unlink(fnam);
   }
 }
-
 TEST_CASE("DataFrameB", "[dataframe]") {
   mt19937_64 rng(time(NULL));
   uniform_real_distribution<> ud;

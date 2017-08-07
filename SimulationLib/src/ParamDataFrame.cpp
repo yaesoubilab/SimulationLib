@@ -229,7 +229,7 @@ namespace SimulationLib {
       })
       });
 
-    template<>
+  template<>
   DataFrame<Parameter>::DataFrame(const char *file, bool loopTime)
     : DataFrame(file, loopTime, paramFromString) {}
 

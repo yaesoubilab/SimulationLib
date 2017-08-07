@@ -42,7 +42,8 @@ set(src ContinuousTimeStatistic.cpp
 	ParamDataFrame.cpp
 	Parameter.cpp
 	Config.cpp
-        Likelihood.cpp)
+        Likelihood.cpp
+	DataFrame.cpp)
 
 # Configure config.hpp.in
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")

@@ -1,7 +1,7 @@
 #include "catch.hpp"
 
 // Change when needed.
-#include "Config.h"
+#include "../include/SimulationLib/Config.h"
 #include <random>
 #include <ctime>
 #include <cstdio>
