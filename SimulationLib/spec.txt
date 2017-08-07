@@ -1,0 +1,25 @@
+OK. There are two kinds of tokens, <NEWLINE> and <OTHER>.
+<NEWLINE> =~ /\n/
+<OTHER> =~ /[^,\n]*/
+Commas are not included in tokens; they are the equivalent of whitespace
+in sane languages.
+(This is because it's really a CSV format.)
+
+I may refer to a token with a regexp.
+This means a token that additionally matches that regexp.
+Also, tokens may just be <NUMBER> or <INTEGER>,
+which mean that they must be understandable numbers or integers
+(to scanf, right now.)
+
+
+<REST OF LINE> := <NEWLINE>
+      	       | <IGNORE> <REST OF LINE>
+
+<CONFIG FILE> := <REST OF LINE> <REST OF LINE> <CONFIG LINES>
+
+<CONFIG LINE> := <IGNORE> <SHORTNAME> /v/ <PARAMETER> <REST OF LINE>
+	      | <IGNORE> <SHORTNAME> /[fF]/ <FILENAME> <REST OF LINE>
+
+
+Actually, the real issue is that the CSV format is a TERRIBLE idea for config files. Feel free to scrap it all and rewrite.
+To heck with this.
