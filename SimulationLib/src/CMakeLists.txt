@@ -34,9 +34,9 @@ set(src ContinuousTimeStatistic.cpp
         PrevalenceTimeSeries.cpp
         PyramidData.cpp
         PyramidTimeSeries.cpp
-	ParamDataFrame.cpp
-	Parameter.cpp
-	Config.cpp
+	# ParamDataFrame.cpp
+	# Parameter.cpp
+	# Config.cpp
         Likelihood.cpp)
 
 # Configure config.hpp.in
