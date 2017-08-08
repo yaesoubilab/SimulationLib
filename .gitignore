@@ -278,3 +278,6 @@ Makefile
 
 Test
 CTestTestfile.cmake
+
+*.sublime-workspace
+*.sublime-project
