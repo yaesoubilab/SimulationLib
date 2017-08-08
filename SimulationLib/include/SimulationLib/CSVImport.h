@@ -39,6 +39,7 @@ using DataByRows    = std::pair<HeaderRow, Rows>;
 //   take advantage of the other overload of CSVToColumns, which is defined
 //   after this function overload.
 template <size_t... I, typename... ColumnNames>
+inline
 DataByColumns
 CSVToColumns(std::istream& source,
              std::index_sequence<I...>,
@@ -72,6 +73,7 @@ CSVToColumns(std::istream& source,
 // Given a source istream and a variadic number of string-typed arguments
 //   corresponding to the name of each column, returns a Columns<TimeT, ValsT>
 template <typename... ColumnNames>
+inline
 DataByColumns
 CSVToColumns(std::istream& source,
              ColumnNames&&... columnNames)
@@ -86,6 +88,7 @@ CSVToColumns(std::istream& source,
 //   take advantage of the other overload of CSVToRows, which is defined
 //   after this function overload.
 template <size_t... I, typename... ColumnNames>
+inline
 DataByRows
 CSVToRows(std::istream& source,
            std::index_sequence<I...>,
@@ -116,6 +119,7 @@ CSVToRows(std::istream& source,
 
 
 template <typename... ColumnNames>
+inline
 DataByRows
 CSVToRows(std::istream& source,
           ColumnNames&&... columnNames)
