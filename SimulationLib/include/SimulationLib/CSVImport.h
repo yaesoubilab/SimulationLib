@@ -12,11 +12,13 @@ namespace SimulationLib {
 namespace CSVImport {
 
 // =================
-//   Column types
+//   Common (to Columns and Rows) types
 // =================
-
 using HeaderRow     = std::vector<std::string>;
 
+// =================
+//   Column types
+// =================
 using Column        = std::vector<std::string>;
 using Columns       = std::vector<Column>;
 using DataByColumns = std::pair<HeaderRow, Columns>;
@@ -24,15 +26,18 @@ using DataByColumns = std::pair<HeaderRow, Columns>;
 // =================
 //    Row types
 // =================
-
-using Row        = std::vector<std::string>;
-using Rows       = std::vector<Row>;
-using DataByRows = std::pair<HeaderRow, Rows>;
+using Row           = std::vector<std::string>;
+using Rows          = std::vector<Row>;
+using DataByRows    = std::pair<HeaderRow, Rows>;
 
 // ======================
 //  Function definitions
 // ======================
 
+// This is an overload of CSVToColumns which is called by
+//   CSVToColumns(source, columnNames...). It is recommended that the user
+//   take advantage of the other overload of CSVToColumns, which is defined
+//   after this function overload.
 template <size_t... I, typename... ColumnNames>
 DataByColumns
 CSVToColumns(std::istream& source,
@@ -76,9 +81,13 @@ CSVToColumns(std::istream& source,
                         std::forward<ColumnNames>(columnNames)...);
 }
 
+// This is an overload of CSVToRows which is called by
+//   CSVToRows(source, columnNames...). It is recommended that the user
+//   take advantage of the other overload of CSVToRows, which is defined
+//   after this function overload.
 template <size_t... I, typename... ColumnNames>
 DataByRows
-_CSVToRows(std::istream& source,
+CSVToRows(std::istream& source,
            std::index_sequence<I...>,
            ColumnNames&&... columnNames)
 {
@@ -111,10 +120,13 @@ DataByRows
 CSVToRows(std::istream& source,
           ColumnNames&&... columnNames)
 {
-    return _CSVToRows(std::forward<std::istream &>(source),
-                      std::index_sequence_for<ColumnNames...>{},
-                      std::forward<ColumnNames>(columnNames)...);
+    return CSVToRows(std::forward<std::istream &>(source),
+                     std::index_sequence_for<ColumnNames...>{},
+                     std::forward<ColumnNames>(columnNames)...);
 }
 
 } // </CSVImport>
 } // </SimulationLib>
+
+// Remove definition in case external code wants threaded csv import
+#undef CSV_IO_NO_THREAD
