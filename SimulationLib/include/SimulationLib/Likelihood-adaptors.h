@@ -19,7 +19,7 @@ LikelihoodOnVector(vector<T>& v,
     // Signature of function 'f' is T(size_t) because vectors are index by
     //   size_t
     return LikelihoodFunction<Distribution, T(size_t)>
-      ( std::forward<decltype(f)>(f),
+      ( f,
         std::forward<decltype(dg)>(dg) );
 }
 
@@ -35,6 +35,6 @@ LikelihoodOnTimeSeries(TimeSeries<T>& ts,
     // Signature of function 'f' is T(double), because the 't' parameter for
     //   TimeSeries classes is a double
     return LikelihoodFunction<Distribution, T(double)>
-      ( std::forward<decltype(f)>(f),
+      ( f,
         std::forward<decltype(dg)>(dg) );
 }

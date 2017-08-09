@@ -27,7 +27,7 @@ namespace SimulationLib
 
         // Type of the Likelihood function, returning the probability that
         //   function 'f' is valued at 'OutT' at time 'InTs'.
-        using LikelihoodFunctionT = function<ProbabilityT(InTs..., OutT)>;
+        using LikelihoodFunctionT = function<ProbabilityT(OutT, InTs...)>;
 
         // A unary function which takes a InTs and returns a OutT
         using F = function<OutT(InTs...)>;
@@ -35,7 +35,7 @@ namespace SimulationLib
         // Type of a function which takes parameters to F and a value 'f(params)' and returns
         //   a distribution on f(params).
         using DistributionGenerator =
-          function<Distribution(InTs..., OutT)>;
+          function<Distribution(OutT, InTs...)>;
 
         // The LikelihoodFunction class is a function-like class which can
         //   give the probability of a [time-valued unary function whose output
@@ -60,10 +60,10 @@ namespace SimulationLib
 
         // Given a time 't' and a value 'v', returns the probability that
         //   the function 'f' will be valued 'v' at time 't'.
-        ProbabilityT Likelihood(InTs... inputs, OutT v);
+        ProbabilityT Likelihood(OutT v, InTs... inputs);
 
         // Same as ::Likelihood, but as an operator overload
-        ProbabilityT operator()(InTs... inputs, OutT v);
+        ProbabilityT operator()(OutT v, InTs... inputs);
 
     private:
         // The time-valued function (from the constructor)

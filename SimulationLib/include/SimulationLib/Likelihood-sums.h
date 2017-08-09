@@ -8,24 +8,19 @@
 //   InTs = type of inputs (variadic) to some variadic function f
 //   OutT = type of f's return value
 
-// ProbabilityFunction: A unary function that returns some probability (type PrT)
-//   at on some set of inputs to variadic function (InTs)
-template <typename PrT, typename... InTs>
-using ProbabilityFunction = function<PrT(InTs...)>;
-
 // Given a probability function on '(TT, VT)' (most likely a Likelihood
 //   function), and given a function G(t), returns a function P(t) corresponding
 //   to L(t, v) where v = G(t).
 template <typename PrT, typename OutT, typename... InTs>
 inline
-ProbabilityFunction<PrT, InTs...>
-CurriedProbabilityOnG(function<PrT(InTs..., OutT)> &L,
+std::function<PrT(InTs...)>
+CurriedProbabilityOnG(function<PrT(OutT, InTs...)> &L,
                       function<OutT(InTs...)> &G)
 {
     return [&L, &G] (InTs... ins) -> PrT {
         return L(
-                  std::forward<InTs>(ins)...,
-                  G(std::forward<InTs>(ins)...)
+                  G(std::forward<InTs>(ins)...),
+                  std::forward<InTs>(ins)...
                 );
     };
 }
@@ -33,12 +28,13 @@ CurriedProbabilityOnG(function<PrT(InTs..., OutT)> &L,
 template<size_t... I, typename PrT, typename... InTs>
 inline
 PrT
-_ProbabilityLgSum(const ProbabilityFunction<PrT, InTs...> &P,
-                  const vector<std::tuple<InTs...>> &onParameters,
-                  std::index_sequence<I...>)
+ProbabilityLgSum(function<PrT(InTs...)> &P,
+                 vector<std::tuple<InTs...>> &onParameters,
+                 std::index_sequence<I...>)
 {
     auto reducer = [&P] (PrT sum, std::tuple<InTs...> ins) {
         PrT p = P(std::get<I>(ins)...);
+
         return sum + std::log(p);
     };
 
@@ -54,12 +50,12 @@ _ProbabilityLgSum(const ProbabilityFunction<PrT, InTs...> &P,
 template<typename PrT, typename... InTs>
 inline
 PrT
-ProbabilityLgSum(ProbabilityFunction<PrT, InTs...> &P,
+ProbabilityLgSum(function<PrT(InTs...)> &P,
                  vector<std::tuple<InTs...>> &onParameters)
 {
-    return _ProbabilityLgSum (
-        std::forward<ProbabilityFunction<PrT, InTs...> &>(P),
-        std::forward<std::tuple<InTs...> &>(onParameters),
+    return ProbabilityLgSum (
+        std::forward<decltype(P)>(P),
+        std::forward<decltype(onParameters)>(onParameters),
         std::index_sequence_for<InTs...>{}
     );
 }
