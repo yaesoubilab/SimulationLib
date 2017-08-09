@@ -3,36 +3,42 @@
 using namespace std;
 using namespace SimulationLib;
 
-// 'Distribution', 'ValueT', and 'TypeT' are written shorthand here as
-//   'D', 'VT', 'TT'
-template <class D, typename VT, typename TT>
-typename LikelihoodFunction<D,VT(TT)>::LikelihoodFunctionT
-LikelihoodFunction<D,VT(TT)>::GetLikelihoodFunction(void) {
-
+// 'Distribution', 'OutT', and 'InT' are written shorthand here as
+//   'D', 'OutT', 'InTs'
+template <class D, typename OutT, typename... InTs>
+typename LikelihoodFunction<D,OutT(InTs...)>::LikelihoodFunctionT
+LikelihoodFunction<D,OutT(InTs...)>::GetLikelihoodFunction(void)
+{
     // Explicitly capture 'this'. Note that if 'this' becomes invalid due
     //   due object destruction, this lambda will have undefined and unsafe
     //   behavior!
-    return [this] (TT t, VT v) {
-        return Likelihood(t, v);
+    return [this] (InTs&&... ins, OutT v) {
+        return Likelihood(std::forward<InTs>(ins)..., v);
     };
 }
 
-template <class D, typename VT, typename TT>
-typename LikelihoodFunction<D,VT(TT)>::ProbabilityT
-LikelihoodFunction<D,VT(TT)>::Likelihood(TT t, VT v) {
+template <class D, typename OutT, typename... InTs>
+typename LikelihoodFunction<D,OutT(InTs...)>::ProbabilityT
+LikelihoodFunction<D,OutT(InTs...)>::Likelihood(InTs... ins, OutT v)
+{
     // 'y' is the value of 'f' at time 't'
-    VT y = f(t);
+    OutT y = f(std::forward<InTs>(ins)...);
 
-    // 'd' is the distribution on f(t)
-    D d = dg(t, y);
+    // 'd' is the distribution on f(ins...)
+    D d = dg(std::forward<InTs>(ins)..., y);
 
-    // 'l' is the probability of [f(t) = v]
+    // 'l' is the probability of [f(ins...) = v]
     ProbabilityT l = d.pdf(v);
+
     return l;
 }
 
 // Implements the () operator for the class by forwarding to the public
 //   member function 'Likelihood'
-template <class D, typename VT, typename TT>
-typename LikelihoodFunction<D,VT(TT)>::ProbabilityT
-LikelihoodFunction<D,VT(TT)>::operator()(TT t, VT v) { return Likelihood(t, v); }
+template <class D, typename OutT, typename... InTs>
+typename LikelihoodFunction<D,OutT(InTs...)>::ProbabilityT
+LikelihoodFunction<D,OutT(InTs...)>::operator()(InTs... ins, OutT v)
+{
+    return Likelihood(std::forward<InTs>(ins)...,
+                      std::forward<OutT>(v));
+}

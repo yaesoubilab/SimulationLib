@@ -4,40 +4,62 @@
 #include <numeric>
 
 // Shorthands used:
-//   PrT = type of probability
-//   TT  = type of 'time' in any time-valued functions involved
-//   VT  = type of 'value' in any time-valued functions, or functions
-//           which take the output of a time-valued function as a parameter
+//   PrT  = type of probability
+//   InTs = type of inputs (variadic) to some variadic function f
+//   OutT = type of f's return value
 
-// ProbabilityAtTime: A unary function that returns some probability (type PrT)
-//   at some time (type TT)
-template <typename PrT, typename TT>
-using ProbabilityAtTime = function<PrT(TT)>;
+// ProbabilityFunction: A unary function that returns some probability (type PrT)
+//   at on some set of inputs to variadic function (InTs)
+template <typename PrT, typename... InTs>
+using ProbabilityFunction = function<PrT(InTs...)>;
 
 // Given a probability function on '(TT, VT)' (most likely a Likelihood
-//   function), and given a function g(t), returns a function P(t) corresponding
-//   to L(t, v) where v = g(t).
-template <typename PrT, typename TT, typename VT>
-ProbabilityAtTime<PrT, TT>
-CurriedProbabilityOnG(function<PrT(TT, VT)> &L,
-                      function<VT(TT)> &g)
+//   function), and given a function G(t), returns a function P(t) corresponding
+//   to L(t, v) where v = G(t).
+template <typename PrT, typename... InTs, typename OutT>
+inline
+ProbabilityFunction<PrT, InTs...>
+CurriedProbabilityOnG(function<PrT(InTs..., OutT)> &L,
+                      function<OutT(InTs...)> &G)
 {
-    return [&L, &g] (TT t) {
-        return L(t, g(t));
+    return [&L, &G] (InTs... ins) {
+        return L(
+                  std::forward<InTs>(ins)...,
+                  G(std::forward<InTs>(ins)...)
+                );
     };
+}
+
+template<size_t... I, typename PrT, typename... InTs>
+inline
+PrT
+ProbabilityLgSum(ProbabilityFunction<PrT, InTs...> &P,
+                 vector<std::tuple<InTs...>> &onParameters,
+                 std::index_sequence<I...>)
+{
+    auto reducer = [&P] (PrT sum, std::tuple<InTs...> ins) {
+        PrT p = P(std::get<I>(ins)...);
+        return sum + std::log(p);
+    };
+
+    // init = 0
+    return std::accumulate(onParameters.begin(),
+                           onParameters.end(),
+                           (PrT)0,
+                           reducer);
 }
 
 // Given a function P(t) and a set of time-values 'Ts', calculates
 //   the logarithmic product of P(t) evaluated at every 't' in 'Ts'
-template<typename PrT, typename TT>
+template<typename PrT, typename... InTs>
+inline
 PrT
-ProbabilityLgSum(ProbabilityAtTime<PrT,TT> &P, vector<TT> &Ts)
+ProbabilityLgSum(ProbabilityFunction<PrT, InTs...> &P,
+                 vector<std::tuple<InTs...>> &onParameters)
 {
-    auto reducer = [&P] (PrT sum, TT t) {
-        PrT p_t = P(t);
-        return sum + std::log(p_t);
-    };
-
-    // init = 0
-    return std::accumulate(Ts.begin(), Ts.end(), (PrT)0, reducer);
+    return ProbabilityLgSum (
+        std::forward<ProbabilityFunction<PrT, InTs...> &>(P),
+        std::forward<std::tuple<InTs...> &>(onParameters),
+        std::index_sequence_for<InTs...>{}
+    );
 }

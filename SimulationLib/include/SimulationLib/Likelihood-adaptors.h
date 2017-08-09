@@ -10,15 +10,15 @@ using namespace SimulationLib;
 // Returns a LikelihoodFunction class on vector 'v' using DistributionGenerator
 //   'dg'
 template <typename Distribution, typename T>
-LikelihoodFunction<Distribution, T(int)>
+LikelihoodFunction<Distribution, T(size_t)>
 LikelihoodOnVector(vector<T>& v,
-                   typename LikelihoodFunction<Distribution, T(int)>::DistributionGenerator dg)
+                   typename LikelihoodFunction<Distribution, T(size_t)>::DistributionGenerator dg)
 {
-    auto f = [&v] (int t) -> T { return v.at(t); };
+    auto f = [&v] (size_t i) -> T { return v.at(i); };
 
-    // Signature of function 'f' is T(int) because vectors are index by
-    //   integers
-    return LikelihoodFunction<Distribution, T(int)>(f, dg);
+    // Signature of function 'f' is T(size_t) because vectors are index by
+    //   size_t
+    return LikelihoodFunction<Distribution, T(size_t)>(f, dg);
 }
 
 // Returns a LikelihoodFunction class on TimeSeries 'ts' using

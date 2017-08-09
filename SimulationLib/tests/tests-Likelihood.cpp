@@ -20,7 +20,7 @@ TEST_CASE("Likelihood_basic_lambda_normal", "[calibration]") {
     long double masterP = nDist.pdf(0);
 
 
-    LikelihoodFn::TimeValuedFunction f = [] (auto x) { return 1 * x; };
+    LikelihoodFn::F f = [] (auto x) { return 1 * x; };
 
     LikelihoodFn::DistributionGenerator dg =
       [standardDeviation] (auto t, auto v) {
@@ -46,7 +46,7 @@ TEST_CASE("Likelihood_basic_operator_normal", "[calibration]") {
     long double masterP = nDist.pdf(0);
 
 
-    LikelihoodFn::TimeValuedFunction f = [] (auto x) { return 1 * x; };
+    LikelihoodFn::F f = [] (auto x) { return 1 * x; };
 
     LikelihoodFn::DistributionGenerator dg =
       [standardDeviation] (auto t, auto y) {
@@ -130,7 +130,7 @@ TEST_CASE("Likelihood_poisson_sanity", "[calibration]") {
 // ===================================
 
 TEST_CASE("Likelihood_adaptors_vector_normal", "[calibration]") {
-    using LikelihoodFn = LikelihoodFunction<StatisticalDistributions::Normal, int(int)>;
+    using LikelihoodFn = LikelihoodFunction<StatisticalDistributions::Normal, int(size_t)>;
 
     double standardDeviation = sqrt(2);
     StatisticalDistributions::Normal nDist(0, standardDeviation);
@@ -147,7 +147,7 @@ TEST_CASE("Likelihood_adaptors_vector_normal", "[calibration]") {
 
     auto l_f = Lgen.GetLikelihoodFunction();
 
-    for (int t = 0; t < 10; ++t)
+    for (size_t t = 0; t < 10; ++t)
     {
         int v_t = vec[t];
         LikelihoodFn::ProbabilityT p = l_f(t, v_t);
@@ -236,14 +236,14 @@ TEST_CASE("Likelihood_adaptors_timeseries_normal", "[calibration]") {
 // ===================================
 
 TEST_CASE("Likelihood_sums_ProbabilityOnG_and_ProbabilityLgSum", "[calibration]") {
-    using LikelihoodFn = LikelihoodFunction<StatisticalDistributions::Normal, int(int)>;
+    using LikelihoodFn = LikelihoodFunction<StatisticalDistributions::Normal, int(size_t)>;
 
     double standardDeviation = sqrt(2);
     StatisticalDistributions::Normal nDist(0, standardDeviation);
     long double masterP = nDist.pdf(0);
 
     LikelihoodFn::DistributionGenerator dg =
-      [standardDeviation] (auto t, auto v) {
+      [standardDeviation] (size_t i, int v) {
         return StatisticalDistributions::Normal(v, standardDeviation);
       };
 
@@ -253,14 +253,15 @@ TEST_CASE("Likelihood_sums_ProbabilityOnG_and_ProbabilityLgSum", "[calibration]"
 
     auto l_f = Lgen.GetLikelihoodFunction();
 
-
-    using typeG = function<int(int)>;
-
-    typeG g = [&vec](int t) {
-        return (int) vec[t];
+    auto g = [&vec] (size_t i) -> int {
+        return vec[i];
     };
 
-    ProbabilityAtTime<long double,int> p_f = CurriedProbabilityOnG<long double, int, int>(l_f, g);
+    ProbabilityFunction<long double,size_t> p_f =
+        CurriedProbabilityOnG<long double, // PrT
+                              size_t,      // g's input
+                              int>         // g's output
+          (l_f, g); // pass likelihood function and 'g'
 
     for (int t = 0; t < 10; ++t)
     {

@@ -9,15 +9,16 @@ namespace SimulationLib
 {
     // Distribution: a distribution from the StatisticalDistributionsLib
     //
-    // TimeT:  type of a time-valued function's time parameter
-    // ValueT: type of a time-valued function's range
+    // f: a function which takes arguments InTs and returns OutT
+    // InTs: type of a function's input *(variadic)*
+    // OutT: type of a function's output
     //
     // Here, LikelihoodFunction is forward-declared with 'T' to allow
     //   for template specialization syntax resembling a function signature,
-    //   i.e. ValueT(TimeT)
+    //   i.e. OutT(InTs)
     template <typename Distribution, typename T> class LikelihoodFunction;
-    template <typename Distribution, typename ValueT, typename TimeT>
-    class LikelihoodFunction<Distribution, ValueT(TimeT)>
+    template <typename Distribution, typename OutT, typename... InTs>
+    class LikelihoodFunction<Distribution, OutT(InTs...)>
     {
     public:
         // Type of probability returned, right now probability is represented
@@ -25,28 +26,28 @@ namespace SimulationLib
         using ProbabilityT = long double;
 
         // Type of the Likelihood function, returning the probability that
-        //   function 'f' is valued at 'ValueT' at time 'TimeT'.
-        using LikelihoodFunctionT = function<ProbabilityT(TimeT, ValueT)>;
+        //   function 'f' is valued at 'OutT' at time 'InTs'.
+        using LikelihoodFunctionT = function<ProbabilityT(InTs..., OutT)>;
 
-        // A unary function which takes a TimeT and returns a ValueT
-        using TimeValuedFunction = function<ValueT(TimeT)>;
+        // A unary function which takes a InTs and returns a OutT
+        using F = function<OutT(InTs...)>;
 
-        // Type of a function which takes a time 't' and a value 'f(t)' and returns
-        //   a distribution on f(t).
+        // Type of a function which takes parameters to F and a value 'f(params)' and returns
+        //   a distribution on f(params).
         using DistributionGenerator =
-          function<Distribution (TimeT, ValueT)>;
+          function<Distribution(InTs..., OutT)>;
 
         // The LikelihoodFunction class is a function-like class which can
         //   give the probability of a [time-valued unary function whose output
         //   is parameterized on a specified distribution] being valued at
         //   a specified value at a specified time.
         //
-        //   f: A function f(t) which takes a time parameter TimeT and returns
-        //        a value of type ValueT
+        //   f: A function f(t) which takes a time parameter InTs and returns
+        //        a value of type OutT
         //
         //   dg: A function which, given an actual value of function 'f' at
         //          a time 't', returns a Distribution on f(t)
-        LikelihoodFunction(TimeValuedFunction f,
+        LikelihoodFunction(F f,
                            DistributionGenerator dg) : f(f), dg(dg) {};
 
         // Returns a lambda function which can easily be passed around unencumbered
@@ -59,14 +60,14 @@ namespace SimulationLib
 
         // Given a time 't' and a value 'v', returns the probability that
         //   the function 'f' will be valued 'v' at time 't'.
-        ProbabilityT Likelihood(TimeT t, ValueT v);
+        ProbabilityT Likelihood(InTs... inputs, OutT v);
 
         // Same as ::Likelihood, but as an operator overload
-        ProbabilityT operator()(TimeT t, ValueT v);
+        ProbabilityT operator()(InTs... inputs, OutT v);
 
     private:
         // The time-valued function (from the constructor)
-        TimeValuedFunction f;
+        F f;
 
         // The function which generates parameters for distribution 'dist'
         //   (also from the constructor)

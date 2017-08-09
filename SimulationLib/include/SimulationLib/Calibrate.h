@@ -1,48 +1,53 @@
 #pragma once
 
-#include "CSVImport.h"
+#include <algorithm>
+#include <exception>
 
-#include "IncidenceTimeSeries.h"
-#include "PrevalenceTimeSeries.h"
+#include "TimeSeries.h"
+#include "Likelihood.h"
+#include "Likelihood-sums.h"
+#include "Likelihood-adaptors.h"
 
 namespace SimulationLib {
-
-// DataToColumns
-//     string filename -> Columns
-//     [takes a filename, converts it to an istream, passes istream to
-//      TimeDataToColumns, returns the result]
-
-//     ^ write the code that does this, comment it out, and instead return
-//         some BS Columns type that has mock data inside of it!
-template<typename TimeT, typename ValsT, typename... Args>
-CSVImport::Columns<TimeT, ValsT>
-DataToColumns(string fname, Args &&... columnNames)
-
-// ColumnsToIncidenceTimeSeries
-//     Columns -> vector<IncidenceTimeSeries>
-//     [takes a Columns and returns an array of IncidenceTimeSeries. Name
-//      of each TimeSeries should be the name of the column header.
-//      Try to set all parameters of IncidenceTimeSeries correctly etc.
-//      Note that a Columns includes a TimeColumn which should be used to call
-//      each IncidenceTimeSeries' .Record() function. This function should
-//      be templated on the type parameters of Columns]
-template<typename TimeT, typename ValsT>
-vector<IncidenceTimeSeries<ValsT>>
-ColumnsToIncidenceTimeSeries(CSVImport::Columns<TimeT, ValsT> columns);
-
-// ColumnsToPrevalenceTimeSeries
-//     Columns -> PrevalenceTimeSeries
-//     [same deal as above but there are probably some minor differences going
-//      on here, be careful!]
-template<typename TimeT, typename ValsT>
-vector<PrevalenceTimeSeries<ValsT>>
-ColumnsToPrevalenceTimeSeries(CSVImport::Columns<TimeT, ValsT> columns);
 
 // CalculateLikelihood:
 //     TimeSeries model, TimeSeries data -> product of likelihoods (using
 //                                            Likelihood-sums.h)
-template<typename ValsT, typename PrT>
-PrT CalculateLikelihood(TimeSeries<ValsT> &model, /*distribution generator, */TimeSeries<ValsT> &data);
+template<typename ValT,
+         typename PrT,
+         typename Distribution,
+         typename TimeT = double>
+inline
+PrT
+CalculateLikelihood(TimeSeries<ValT> &model,
+                    LikelihoodFunction<Distribution, ValT(TimeT)>
+                      ::DistributionGenerator dg,
+                    TimeSeries<ValT> &data)
+{
+    double Time0        = std::max(model.GetTime0(),   data.GetTime0());
+    double TimeMax      = std::min(model.GetTimeMax(), data.GetTimeMax());
+    int    PeriodLength = data.GetPeriodLength();
+
+    if (model.GetPeriodLength() != data.GetPeriodLength())
+        throw std::domain_error("Period length of model and data mismatched");
+
+    // ---------------------------
+
+    using LiFn = LikelihoodFunction<Distribution, ValT(TimeT)>;
+
+    LiFn lifn  = LikelihoodOnTimeSeries<LiFn>(model, dg);
+    auto L_t_v = lifn.GetLikelihoodFunction();
+
+    auto G     = [&data] (TimeT t) -> ValT { return data(t); };
+    auto L_t   = CurriedProbabilityOnG(L, G);
+
+    // ---------------------------
+    vector<TimeT> Ts{};
+    for (double t = Time0; t < TimeMax; t += PeriodLength)
+        Ts.emplace_back(t);
+
+    return ProbabilityLgSum<PrT, TimeT>(L_t, Ts);
+}
 
 // Bonus function
 

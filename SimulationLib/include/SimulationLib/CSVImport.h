@@ -78,6 +78,9 @@ DataByColumns
 CSVToColumns(std::istream& source,
              ColumnNames&&... columnNames)
 {
+    // Generate an index sequence (0, 1, 2, n, etc..) for ColumnNames and pass
+    //   it to the 3-"argument" overload of CSVToColumns. This allows easy
+    //   association of a particular column in the .csv file with an array index
     return CSVToColumns(std::forward<std::istream &>(source),
                         std::index_sequence_for<ColumnNames...>{},
                         std::forward<ColumnNames>(columnNames)...);
@@ -124,6 +127,9 @@ DataByRows
 CSVToRows(std::istream& source,
           ColumnNames&&... columnNames)
 {
+    // Generate an index sequence (0, 1, 2, n, etc..) for ColumnNames and pass
+    //   it to the 3-"argument" overload of CSVToRows. This allows easy
+    //   association of a particular column in the .csv file with an array index
     return CSVToRows(std::forward<std::istream &>(source),
                      std::index_sequence_for<ColumnNames...>{},
                      std::forward<ColumnNames>(columnNames)...);
