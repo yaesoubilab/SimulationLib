@@ -12,13 +12,15 @@ using namespace SimulationLib;
 template <typename Distribution, typename T>
 LikelihoodFunction<Distribution, T(size_t)>
 LikelihoodOnVector(vector<T>& v,
-                   typename LikelihoodFunction<Distribution, T(size_t)>::DistributionGenerator dg)
+                   const typename LikelihoodFunction<Distribution, T(size_t)>::DistributionGenerator dg)
 {
     auto f = [&v] (size_t i) -> T { return v.at(i); };
 
     // Signature of function 'f' is T(size_t) because vectors are index by
     //   size_t
-    return LikelihoodFunction<Distribution, T(size_t)>(f, dg);
+    return LikelihoodFunction<Distribution, T(size_t)>
+      ( std::forward<decltype(f)>(f),
+        std::forward<decltype(dg)>(dg) );
 }
 
 // Returns a LikelihoodFunction class on TimeSeries 'ts' using
@@ -26,11 +28,13 @@ LikelihoodOnVector(vector<T>& v,
 template <typename Distribution, typename T>
 LikelihoodFunction<Distribution, T(double)>
 LikelihoodOnTimeSeries(TimeSeries<T>& ts,
-                       typename LikelihoodFunction<Distribution, T(double)>::DistributionGenerator dg)
+                       const typename LikelihoodFunction<Distribution, T(double)>::DistributionGenerator dg)
 {
     auto f = [&ts] (double t) -> T { return ts(t); };
 
     // Signature of function 'f' is T(double), because the 't' parameter for
     //   TimeSeries classes is a double
-    return LikelihoodFunction<Distribution, T(double)>(f, dg);
+    return LikelihoodFunction<Distribution, T(double)>
+      ( std::forward<decltype(f)>(f),
+        std::forward<decltype(dg)>(dg) );
 }

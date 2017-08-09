@@ -16,13 +16,13 @@ using ProbabilityFunction = function<PrT(InTs...)>;
 // Given a probability function on '(TT, VT)' (most likely a Likelihood
 //   function), and given a function G(t), returns a function P(t) corresponding
 //   to L(t, v) where v = G(t).
-template <typename PrT, typename... InTs, typename OutT>
+template <typename PrT, typename OutT, typename... InTs>
 inline
 ProbabilityFunction<PrT, InTs...>
 CurriedProbabilityOnG(function<PrT(InTs..., OutT)> &L,
                       function<OutT(InTs...)> &G)
 {
-    return [&L, &G] (InTs... ins) {
+    return [&L, &G] (InTs... ins) -> PrT {
         return L(
                   std::forward<InTs>(ins)...,
                   G(std::forward<InTs>(ins)...)
@@ -33,9 +33,9 @@ CurriedProbabilityOnG(function<PrT(InTs..., OutT)> &L,
 template<size_t... I, typename PrT, typename... InTs>
 inline
 PrT
-ProbabilityLgSum(ProbabilityFunction<PrT, InTs...> &P,
-                 vector<std::tuple<InTs...>> &onParameters,
-                 std::index_sequence<I...>)
+_ProbabilityLgSum(const ProbabilityFunction<PrT, InTs...> &P,
+                  const vector<std::tuple<InTs...>> &onParameters,
+                  std::index_sequence<I...>)
 {
     auto reducer = [&P] (PrT sum, std::tuple<InTs...> ins) {
         PrT p = P(std::get<I>(ins)...);
@@ -57,7 +57,7 @@ PrT
 ProbabilityLgSum(ProbabilityFunction<PrT, InTs...> &P,
                  vector<std::tuple<InTs...>> &onParameters)
 {
-    return ProbabilityLgSum (
+    return _ProbabilityLgSum (
         std::forward<ProbabilityFunction<PrT, InTs...> &>(P),
         std::forward<std::tuple<InTs...> &>(onParameters),
         std::index_sequence_for<InTs...>{}
