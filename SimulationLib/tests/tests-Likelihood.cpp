@@ -236,39 +236,56 @@ TEST_CASE("Likelihood_adaptors_vector_normal", "[calibration]") {
 // ===================================
 
 TEST_CASE("Likelihood_craziness_test", "[calibration]") {
+    // Type of probability
     using ProbabilityT = long double;
 
+    // Establish signature of functions f and g
     using Base         = int;
     using Scale        = double;
     using Result       = double;
     using Signature    = Result(Base, Scale);
 
+    // Alias parameter sets
     using Params       = std::tuple<Base, Scale>;
     using ParamsVec    = std::vector<Params>;
 
+    // Alias type of likelihood function based on distribution desired and
+    //   signature of f and g
     using LFnGen = LikelihoodFunction<StatisticalDistributions::Normal,
                                       Signature>;
 
-    // f(base, scale) = base * scale
+    // Define f as:
+    //   f(base, scale) = base * scale
     function<Signature> f = [] (Base base, Scale scale) {
         return (Scale)base * scale;
     };
 
-    // f(base, scale) = 2 * base * scale
+    // Define g as:
+    //   f(base, scale) = 2 * base * scale
     function<Signature> g = [] (Base base, Scale scale) {
         return 2 * (Scale)base * scale;
     };
 
+    // A few sets of parameters on which we are interested in finding the
+    //   probability of f(parameters) = g(parameters). In this case our
+    //   parameters set is of length 2, with the first parameter being the Base
+    //   and the second parameter being the Scale.
     ParamsVec params{{1, 1.2}, {1, 1.5}, {2, 1.2}, {2, 1.5}};
 
+    // Define a distribution generator which, given the result of a function
+    //   'f' evaluated on a set of parameters, and that set of parameters,
+    //   returns a distribution on this invocation of 'f'
     function<StatisticalDistributions::Normal(Result, Base, Scale)>
         dg = [] (Result f_b_s, Base base, Scale scale) {
             return StatisticalDistributions::Normal(f_b_s, 1);
         };
 
+    // Generate and retrieve the likelihood function on 'f'
     auto gen     = LFnGen(f, dg);
     auto L_r_b_s = gen.GetLikelihoodFunction();
 
+    // Loop through each parameter set in 'params' and calculate, then print,
+    // the probability that f(parameter) = g(parameter),
     for (auto i = params.begin(); i != params.end(); i++) {
         auto base  = std::get<Base>(*i);
         auto scale = std::get<Scale>(*i);
@@ -284,8 +301,12 @@ TEST_CASE("Likelihood_craziness_test", "[calibration]") {
                                                         f(base, scale));
     }
 
+    // Bind value parameter of likelihood function to result of 'g' invoked
+    //   on a parameter set
     auto P_b_s = CurriedProbabilityOnG(L_r_b_s, g);
 
+    // Calculate the logarithmic product of probabilities over the set of
+    //   parameters to 'f' and 'g', 'params'.
     auto p = ProbabilityLgSum(P_b_s, params);
 
     // This test is just to force the compiler to deduce some types so that
