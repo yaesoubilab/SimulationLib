@@ -285,7 +285,7 @@ TEST_CASE("Likelihood_craziness_test", "[calibration]") {
     auto L_r_b_s = gen.GetLikelihoodFunction();
 
     // Keep track of logarithmic sum of probabilities
-    ProbabilityT logSum = 0;
+    ProbabilityT logSum{0};
 
     // Loop through each parameter set in 'params' and calculate, then print,
     // the probability that f(parameter) = g(parameter),
