@@ -284,6 +284,9 @@ TEST_CASE("Likelihood_craziness_test", "[calibration]") {
     auto gen     = LFnGen(f, dg);
     auto L_r_b_s = gen.GetLikelihoodFunction();
 
+    // Keep track of logarithmic sum of probabilities
+    ProbabilityT logSum = 0;
+
     // Loop through each parameter set in 'params' and calculate, then print,
     // the probability that f(parameter) = g(parameter),
     for (auto i = params.begin(); i != params.end(); i++) {
@@ -292,6 +295,8 @@ TEST_CASE("Likelihood_craziness_test", "[calibration]") {
         auto g_b_s = g(base, scale);
 
         auto p = L_r_b_s(g_b_s, base, scale);
+
+        logSum += std::log(p);
 
         printf("L([f(b=%d, s=%f) = %f]) = %Lf, f(b,s) = %f\n",
                        base,
@@ -309,9 +314,9 @@ TEST_CASE("Likelihood_craziness_test", "[calibration]") {
     //   parameters to 'f' and 'g', 'params'.
     auto p = ProbabilityLgSum(P_b_s, params);
 
-    // This test is just to force the compiler to deduce some types so that
-    //   we can make sure that template type deduction is working right
-    REQUIRE( true );
+    // Does 'ProbabilityLgSum' return the same probability that we iteratively
+    //   calculated in the above 'for' loop?
+    REQUIRE( p == logSum );
 }
 
 TEST_CASE("Likelihood_sums_ProbabilityOnG_and_ProbabilityLgSum", "[calibration]") {

@@ -14,6 +14,7 @@ include_directories (${TEST_SOURCE_DIR}/src
 
 add_executable (Test
 				tests-main.cpp
+                tests-Calibrate.cpp
 				tests-CSVExport.cpp
                 tests-CSVImport.cpp
 				tests-DiscreteTimeStatistic.cpp

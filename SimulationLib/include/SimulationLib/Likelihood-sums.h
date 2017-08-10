@@ -8,7 +8,7 @@
 //   InTs = type of inputs (variadic) to some variadic function f
 //   OutT = type of f's return value
 
-// Given a probability function on '(TT, VT)' (most likely a Likelihood
+// Given a probability function on InT (most likely a Likelihood
 //   function), and given a function G(t), returns a function P(t) corresponding
 //   to L(t, v) where v = G(t).
 template <typename PrT, typename OutT, typename... InTs>
