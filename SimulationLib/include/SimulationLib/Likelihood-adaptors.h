@@ -4,6 +4,8 @@
 
 #include "Likelihood.h"
 #include "TimeSeries.h"
+#include "PyramidData.h"
+#include "PyramidTimeSeries.h"
 
 using namespace SimulationLib;
 
