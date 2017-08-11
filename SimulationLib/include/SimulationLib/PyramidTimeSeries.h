@@ -47,6 +47,9 @@ namespace SimulationLib
 		bool _storeCurrentValues(int period);
 
 	public:
+		using value_type      = int;
+		using query_signature = int(int, int, int);
+
 		// Initializes a new PyramidTimeSeries.
 		//
 		// 'name': Name of the time series
@@ -119,6 +122,7 @@ namespace SimulationLib
 
 		int GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
 		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
+		int operator()(int time, int ageGroupIdx, int category);
 
 		void Close(void);
 
@@ -137,7 +141,7 @@ namespace SimulationLib
 		// Return the max time
 		int GetTimeMax(void);
 
-		// Returns the number of periods 
+		// Returns the number of periods
 		int GetNPeriods(void);
 
 		// Returns a copy of the vector of current values

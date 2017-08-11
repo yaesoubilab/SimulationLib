@@ -263,13 +263,13 @@ int PyramidTimeSeries::_getTotalInCurrentValues(int periodIdx, \
             throw out_of_range("ageGroupIdx is > number of age groups");
     }
 
-    int total; 
+    int total;
     total = 0;
 
     if (categoryBool && ageGroupBool)
         return currentValues[categoryIdx * (ageBreaks.size() + 1) + ageGroupIdx];
     else if (categoryBool) {
-        // indexOffset calculates the number that needs to be added to the index 
+        // indexOffset calculates the number that needs to be added to the index
         // in order to pull the correct values from the currentValues array
         int indexOffset;
         indexOffset = categoryIdx * (ageBreaks.size() + 1);
@@ -302,8 +302,8 @@ int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
         throw out_of_range("periodIdx < 0");
 
     // Here we are checking to see whether the values we are searching for are in
-    // the buffer currentValues or not. First we check if the periodIdx is equal 
-    // to the lastPeriod class variable. Futhermore, we must check that the 
+    // the buffer currentValues or not. First we check if the periodIdx is equal
+    // to the lastPeriod class variable. Futhermore, we must check that the
     // PyrmaidTimeSeries is not closed, because we only want to access the buffer
     // value if the Series hasn't been closed. Else we should access the stored
     // pyramid data values.
@@ -437,6 +437,10 @@ int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGrou
     periodIdx = calcThisPeriod(time, periodLength);
 
     return GetTotalInAgeGroupAndCategoryAtPeriod(periodIdx, ageGroupIdx, category);
+}
+
+int PyramidTimeSeries::operator()(int t, int ageGroupIdx, int category) {
+    return GetTotalInAgeGroupAndCategoryAtTime(t, ageGroupIdx, category);
 }
 
 void PyramidTimeSeries::Close(void) {

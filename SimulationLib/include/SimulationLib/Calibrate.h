@@ -37,7 +37,7 @@ CalculateLikelihood(TimeSeries<ValT> &model,
         throw std::domain_error("Period length of model and data mismatched");
 
     // ---------------------------
-    auto gen   = LikelihoodOnTimeSeries<LiFn>(model, dg);
+    auto gen   = LikelihoodOn(model, dg);
     auto L_v_t = gen.GetLikelihoodFunction();
 
     auto G     = [&data] (TimeT t) -> ValT { return data(t); };

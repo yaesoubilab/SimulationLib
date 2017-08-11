@@ -21,6 +21,9 @@ namespace SimulationLib
 
 		int getAgeIdx(double age);
 	public:
+		using value_type      = T;
+		using query_signature = T(int, int, int);
+
 		string name;
 
 		// Initializes a PyramidData class, allocating memory for
@@ -80,6 +83,8 @@ namespace SimulationLib
 
 		// Returns the total number of individuals in the specified category and age group.
 		T GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
+
+		T operator()(int ageGroupIndex, int categoryIndex);
 
 		size_t GetNumCategories(void);
 		vector<double> GetAgeBreaks(void);

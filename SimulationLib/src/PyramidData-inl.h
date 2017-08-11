@@ -193,6 +193,11 @@ T PyramidData<T>::GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryI
 }
 
 template <typename T>
+T PyramidData<T>::operator()(int ageGroupIndex, int categoryIndex) {
+    return GetTotalInAgeGroupAndCategory(ageGroupIndex, categoryIndex);
+}
+
+template <typename T>
 size_t PyramidData<T>::GetNumCategories(void) {
     return numCategories;
 }

@@ -9,6 +9,9 @@ namespace SimulationLib
     class TimeSeries
     {
     public:
+        using value_type      = T;
+        using query_signature = T(double);
+
         virtual string GetName(void) = 0;
         virtual double GetTime0(void) = 0;
         virtual double GetTimeMax(void) = 0;
