@@ -1,0 +1,55 @@
+Validators ← String
+Validators ← Integer
+Validators ← Number
+Validators ← Boolean
+Validators ← Null
+Validators ← Enum
+Validators ← Day
+Validators ← Timestamp
+Validators ← List
+Validators ← Map
+Validators ← Any
+Validators ← Include
+
+# PRIMARY NONTERMINALS
+
+String    ← 'str(' (MinInt MaxInt)? ExcludeString? ')'
+
+Integer   ← 'int(' (MinInt MaxInt)? ')'
+
+Number    ← 'num(' (MinFloat MaxFloat)? ')'
+
+Boolean   ← 'bool()'
+
+Null      ← 'null()'
+
+Enum      ← 'enum(' Primitives? ')'
+
+Day       ← 'day(' (MinDate MaxDate)? ')'
+
+Timestamp ← 'timestamp(' (MinTime MaxTime)? ')'
+
+List      ← 'list(' ValidatorsList? (MinInt MaxInt)? ')'
+
+Map       ← 'map(' ValidatorsList? ')'
+
+Any       ← 'any(' ValidatorsList? ')'
+
+Include   ← 'include(' '\'' string '\'' ')'
+
+# SECONDARY NONTERMINALS
+
+MinInt         ← 'min=' int
+MaxInt         ← 'max=' int
+MinFloat       ← 'min=' float
+MaxFloat       ← 'max=' float
+ExcludeString  ← 'exclude=\'' string '\''
+Primitives     ← int/string/float/bool
+ValidatorsList ← (Validators ',')* Validators
+
+# TERMINALS
+
+int    ← [0-9]+
+string ← [0-9a-zA-Z]+
+float  ← [0-9]+('.'[0-9]+)?
+bool   ← 'True'/'False'

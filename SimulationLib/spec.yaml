@@ -1,0 +1,85 @@
+# Non-terminals
+Parameter:
+    - Real
+    - Dictionary
+
+Dictionary:
+    Distribution: required
+    Configure:
+        - optional
+        - default: true
+
+Distrbution:
+    - Bernoulli
+    - Beta
+    - Beta-Binomial
+    - Binomial
+    - Chi-Squared
+    - Dirac-Delta
+    - Exponential
+    - Gamma
+    - Gamma-Poisson
+    - Geometric
+    - Johnson-Sb
+    - Johnson-Sl
+    - Johnson-Su
+    - Kronecker-Delta
+    - Lognormal
+    - Negative-Binomial
+    - Normal
+    - Poisson
+    - Triangular
+    - Uniform
+    - Uniform-Discrete
+    - Weibull
+
+Bernoulli:
+
+Beta:
+
+Beta-Binomial:
+
+Binomial:
+
+Chi-Squared:
+
+Dirac-Delta:
+
+Exponential:
+
+Gamma:
+
+Gamma-Poisson:
+
+Geometric:
+
+Johnson-Sb:
+
+Johnson-Sl:
+
+Johnson-Su:
+
+Kronecker-Delta:
+
+Lognormal:
+
+Negative-Binomial:
+
+Normal:
+
+Poisson:
+
+Triangular:
+
+Uniform:
+
+Uniform-Discrete:
+
+Weibull:
+
+
+
+# Terminals
+Configure: boolean
+Real: long doublle
+
