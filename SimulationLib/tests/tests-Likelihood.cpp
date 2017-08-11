@@ -5,6 +5,7 @@
 
 #include "../include/SimulationLib/IncidenceTimeSeries.h"
 #include "../include/SimulationLib/PrevalenceTimeSeries.h"
+#include "../include/SimulationLib/PrevalencePyramidTimeSeries.h"
 
 #include <Normal.h>
 #include <Poisson.h>
@@ -357,4 +358,33 @@ TEST_CASE("Likelihood_sums_ProbabilityOnG_and_ProbabilityLgSum", "[calibration]"
 
     REQUIRE(sum > -12.6552);
     REQUIRE(sum < -12.6551);
+}
+
+TEST_CASE("QueryLambdaForContainer", "[calibration]") {
+
+    using QueryTS  = std::function<TimeSeries<int>::query_signature>;
+
+    using QueryPTS = std::function<PyramidTimeSeries::query_signature>;
+
+    using QueryPD  = std::function<PyramidData<int>::query_signature>;
+
+    // time0=0
+    // timeMax=10
+    // periodLength=5
+    IncidenceTimeSeries<int> its("Test", 0, 10, 5);
+
+    // time0=0
+    // timeMax=10
+    // periodLength=5
+    // nCategories=2
+    // ageBreaks={10}
+    PrevalencePyramidTimeSeries ppts("Test", 0, 10, 5, 2, {10});
+
+    // nCategories=2
+    // ageBreaks={10}
+    PyramidData<int> pd(2, {10});
+
+    QueryTS  f_its  = QueryLambdaForContainer(its);
+    QueryPTS f_ppts = QueryLambdaForContainer(ppts);
+    QueryPD  f_pd   = QueryLambdaForContainer(pd);
 }
