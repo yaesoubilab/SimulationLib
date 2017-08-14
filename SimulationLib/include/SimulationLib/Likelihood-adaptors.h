@@ -11,19 +11,54 @@
 
 using namespace SimulationLib;
 
-// Generates a generic lambda to make a query on some Container class
-//   which implements a () operator of parameters 'QueryParameters' and returns
-//   a value of type Container::value_type.
-template <typename Container,
-          typename QueryResult = typename Container::value_type,
-          typename... QueryParameters>
-function<QueryResult(QueryParameters...)>
-QueryLambdaForContainer(Container &c)
+// Helper method for QueryLambdaForContainer. Takes advantage of an
+//   std::index_sequence by treating its template parameters as a parameter
+//   pack, and unpacking them to specify the parameters of the lambda
+//   function being generated.
+template <size_t... I,
+          class Container,
+          typename QueryResult       = typename Container::value_type,
+          typename QueryType         = typename Container::query_type,
+          typename QuerySignature    = typename Container::query_signature>
+function<QuerySignature>
+_QueryLambdaForContainer(Container &c, std::index_sequence<I...>)
 {
-    return [&c] (QueryParameters&&... params) {
-        return c(std::forward<QueryParameters>(params)...);
+    return [&c] (typename std::tuple_element<I, QueryType>::type... params)
+                   -> QueryResult {
+        return c(std::forward<typename std::tuple_element<I, QueryType>::type>
+                   (params)...);
     };
 }
+
+// Given a Container with member types ::query_type, ::query_signature, and
+//   ::value_type, generates a lambda function of signature ::query_signature
+//   which calls the Container's operator() method and returns the result.
+//
+//   Types:
+//
+//     Container: any class with member types ::query_type, ::query_signature,
+//       and ::value_type which implements an operator() method of signature
+//       ::query_signature.
+//
+//     QueryType: alias to Container::query_type
+//     QuerySignature: alias to Container::query_signature
+//     QueryCardinality: the number of arguments to the Container's operator()
+//       method
+//     QueryIndexSequence: An index {0,1,...} of size=QueryCardinality, used
+//       by the helper method for unpacking the ::query_type tuple
+//
+template <class Container,
+          typename QueryType          = typename Container::query_type,
+          typename QuerySignature     = typename Container::query_signature,
+          size_t   QueryCardinality   = std::tuple_size<QueryType>::value,
+          class    QueryIndexSequence = std::make_index_sequence<QueryCardinality>>
+function<QuerySignature>
+QueryLambdaForContainer(Container &c)
+{
+    return _QueryLambdaForContainer(std::forward<decltype(c)>(c),
+                                    QueryIndexSequence{});
+}
+
 
 // Takes some Container and some DistributionGenerator on values stored
 //   in that Container and returns a LikelihoodFunction on that Container
@@ -37,28 +72,40 @@ QueryLambdaForContainer(Container &c)
 //   below) may be used
 //
 // Types:
+//
 //   Dist: any statistical distribution
-//   Container: any class with member types ::query_signature and ::value_type
-//     and an operator() whose signature (absent object pointer) matches
-//     'query_signature'.
+//
+//   Container: any class with member types ::query_signature, ::value_type,
+//     ::query_type, and an operator() whose signature (absent the object
+//     pointer) matches 'query_signature'. See PyramidTimeSeries.h for an example
+//     of a valid specification of these member types.
+//
 //   QuerySignature: aliased to Container::query_signature
-template <typename Dist,
-          typename Container,
-          typename QuerySignature = typename Container::query_signature>
-LikelihoodFunction<Dist, QuerySignature>
-LikelihoodOn(Container &c,
-             const typename LikelihoodFunction<Dist, QuerySignature>
-                              ::DistributionGenerator dg)
+//
+//   LikelihoodFn: aliased to the type of LikelihoodFunction that would be generated
+//     for the given distribution and query signature
+//
+//   DistributionGenerator: the distribution generator for the specified Dist
+//     and QuerySignature
+template <class Dist,
+          class Container,
+          typename QuerySignature        = typename Container::query_signature,
+          class    LikelihoodFn          = LikelihoodFunction<Dist, QuerySignature>,
+          typename DistributionGenerator = const typename LikelihoodFn::DistributionGenerator>
+LikelihoodFn
+LikelihoodOn(Container &c, DistributionGenerator &dg)
 {
+    // Retrieve a lambda function on the container
     function<QuerySignature> f =
       QueryLambdaForContainer(std::forward<decltype(c)>(c));
 
+    // Construct the LikelihoodFunction
     return {f, std::forward<decltype(dg)>(dg)};
 }
 
 // Returns a LikelihoodFunction class on vector 'v' using DistributionGenerator
 //   'dg'
-template <typename Distribution, typename T>
+template <class Distribution, typename T>
 LikelihoodFunction<Distribution, T(size_t)>
 LikelihoodOnVector(std::vector<T>& v,
                    const typename LikelihoodFunction<Distribution, T(size_t)>::DistributionGenerator dg)

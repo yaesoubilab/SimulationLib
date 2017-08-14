@@ -1,6 +1,7 @@
 # Set headers
 set(header_path "${SimulationLib_SOURCE_DIR}/include/SimulationLib")
 set(header ${header_path}/ContinuousTimeStatistic.h
+           ${header_path}/Calibrate.h
            ${header_path}/CSVExport.h
            ${header_path}/DiscreteTimeStatistic.h
            ${header_path}/IncidencePyramidTimeSeries.h

@@ -22,7 +22,8 @@ namespace SimulationLib
 		int getAgeIdx(double age);
 	public:
 		using value_type      = T;
-		using query_signature = T(int, int, int);
+		using query_type      = std::tuple<int, int>;
+		using query_signature = T(int, int);
 
 		string name;
 
@@ -71,20 +72,20 @@ namespace SimulationLib
 
 		// Returns the total number of individuals across all categories and
 		//   age groups
-		T GetTotal(void);
+		value_type GetTotal(void);
 
 		// Returns the total number of individuals in the specified category.
 		// Throws exception for invalid 'categoryIndex'.
-		T GetTotalInCategory(int categoryIndex);
+		value_type GetTotalInCategory(int categoryIndex);
 
 		// Returns the total number of individuals in the specified age group.
 		// Throws exception for invalid 'ageGroupIndex'.
-		T GetTotalInAgeGroup(int ageGroupIndex);
+		value_type GetTotalInAgeGroup(int ageGroupIndex);
 
 		// Returns the total number of individuals in the specified category and age group.
-		T GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
+		value_type GetTotalInAgeGroupAndCategory(int ageGroupIndex, int categoryIndex);
 
-		T operator()(int ageGroupIndex, int categoryIndex);
+		value_type operator()(int ageGroupIndex, int categoryIndex);
 
 		size_t GetNumCategories(void);
 		vector<double> GetAgeBreaks(void);

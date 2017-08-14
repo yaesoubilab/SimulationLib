@@ -362,16 +362,21 @@ TEST_CASE("Likelihood_sums_ProbabilityOnG_and_ProbabilityLgSum", "[calibration]"
 
 TEST_CASE("QueryLambdaForContainer", "[calibration]") {
 
-    using QueryTS  = std::function<TimeSeries<int>::query_signature>;
+    // using QueryTS  = std::function<TimeSeries<int>::query_signature>;
+    using QueryTS  = std::function<double(double)>;
 
-    using QueryPTS = std::function<PyramidTimeSeries::query_signature>;
+    // using QueryPTS = std::function<PyramidTimeSeries::query_signature>;
+    using QueryPTS = std::function<int(int, int, int)>;
 
-    using QueryPD  = std::function<PyramidData<int>::query_signature>;
+    // using QueryPD  = std::function<PyramidData<int>::query_signature>;
+    using QueryPD  = std::function<int(int, int)>;
 
     // time0=0
     // timeMax=10
     // periodLength=5
     IncidenceTimeSeries<int> its("Test", 0, 10, 5);
+    its.Record(2.5, 10);
+    its.Record(7.5, 1);
 
     // time0=0
     // timeMax=10
@@ -379,12 +384,40 @@ TEST_CASE("QueryLambdaForContainer", "[calibration]") {
     // nCategories=2
     // ageBreaks={10}
     PrevalencePyramidTimeSeries ppts("Test", 0, 10, 5, 2, {10});
+    ppts.UpdateByAge(0, 1, 15, 101); // t=0, 15yo female +101
+    ppts.UpdateByAge(2, 0, 5, 10);   // t=2, 5yo male +10
+    ppts.UpdateByAge(8, 0, 5, -2);   // t=8, 5yo male -2
 
     // nCategories=2
     // ageBreaks={10}
     PyramidData<int> pd(2, {10});
+    pd.UpdateByIdx(0, 0, 10);
+    pd.UpdateByIdx(1, 1, 5);
+
 
     QueryTS  f_its  = QueryLambdaForContainer(its);
     QueryPTS f_ppts = QueryLambdaForContainer(ppts);
     QueryPD  f_pd   = QueryLambdaForContainer(pd);
+
+    // Test TimeSeries
+    REQUIRE_THROWS(f_its(0-0.001));
+    REQUIRE(f_its(0) == 0);
+    REQUIRE(f_its(2.5) == 10);
+    REQUIRE(f_its(7.5) == 1);
+    REQUIRE(f_its(10) == 1);
+    REQUIRE_THROWS(f_its(10.01));
+
+    // Test PyramidTimeSeries
+    REQUIRE_THROWS(f_ppts(-1, 1, 1));
+    REQUIRE(f_ppts(0, 1, 1) == 101);
+    REQUIRE(f_ppts(2, 0, 0) == 10);
+    REQUIRE(f_ppts(8, 0, 0) == 8);
+    REQUIRE_NOTHROW(f_ppts(10, 1, 1));
+    REQUIRE_THROWS(f_ppts(11, 1, 1));
+
+    // Test PyramidData
+    REQUIRE_THROWS(f_pd(2, 2));
+    REQUIRE(f_pd(0, 0) == 10);
+    REQUIRE(f_pd(1, 1) == 5);
+
 }

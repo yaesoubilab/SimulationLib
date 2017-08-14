@@ -48,6 +48,7 @@ namespace SimulationLib
 
 	public:
 		using value_type      = int;
+		using query_type      = std::tuple<int, int, int>;
 		using query_signature = int(int, int, int);
 
 		// Initializes a new PyramidTimeSeries.
@@ -111,18 +112,18 @@ namespace SimulationLib
 		bool MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx, \
 						         int newCategory, int newAgeGroupIdx, int increment);
 
-		int GetTotalAtPeriod(int periodIdx);
-		int GetTotalAtTime(int time);
+		value_type GetTotalAtPeriod(int periodIdx);
+		value_type GetTotalAtTime(int time);
 
-		int GetTotalInCategoryAtPeriod(int periodIdx, int category);
-		int GetTotalInCategoryAtTime(int time, int category);
+		value_type GetTotalInCategoryAtPeriod(int periodIdx, int category);
+		value_type GetTotalInCategoryAtTime(int time, int category);
 
-		int GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
-		int GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
+		value_type GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx);
+		value_type GetTotalInAgeGroupAtTime(int time, int ageGroupIdx);
 
-		int GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
-		int GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
-		int operator()(int time, int ageGroupIdx, int category);
+		value_type GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int ageGroupIdx, int category);
+		value_type GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category);
+		value_type operator()(int time, int ageGroupIdx, int category);
 
 		void Close(void);
 

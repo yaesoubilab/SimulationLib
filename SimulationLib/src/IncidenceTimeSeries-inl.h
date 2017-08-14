@@ -172,6 +172,9 @@ namespace SimulationLib {
 
     template<typename T>
     T IncidenceTimeSeries<T>::GetTotalAtTime(double t) {
+        if (t < time0 || t > timeMax)
+            throw out_of_range("t < time0 || t > timeMax");
+
         return (*observations)[(int)ceil(t / periodLength)];
     }
 
