@@ -14,6 +14,7 @@ include_directories (${TEST_SOURCE_DIR}/src
 
 add_executable (Test
 				tests-main.cpp
+                tests-Bound.cpp
 				tests-CSVExport.cpp
 				tests-DiscreteTimeStatistic.cpp
 				tests-PrevalenceTimeSeries.cpp
@@ -21,8 +22,8 @@ add_executable (Test
 				tests-PyramidTimeSeries.cpp
                 tests-EventQueue.cpp
                 tests-EventQueueWithState.cpp
-		tests-ReadParam.cpp
-		tests-frame.cpp
+		# tests-ReadParam.cpp
+		# tests-frame.cpp
                 tests-Likelihood.cpp)
 
 target_link_libraries (Test

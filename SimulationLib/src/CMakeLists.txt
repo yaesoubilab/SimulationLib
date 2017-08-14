@@ -1,6 +1,7 @@
 # Set headers
 set(header_path "${SimulationLib_SOURCE_DIR}/include/SimulationLib")
-set(header ${header_path}/ContinuousTimeStatistic.h
+set(header ${header_path}/utils/Bound.h
+           ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/CSVExport.h
            ${header_path}/DiscreteTimeStatistic.h
            ${header_path}/IncidencePyramidTimeSeries.h
@@ -12,11 +13,11 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/TimeSeries.h
            ${header_path}/TimeStatistic.h
            ${header_path}/EventQueue.h
-	   ${header_path}/DataFrame.h
-	   ${header_path}/DataFrame.t
-	   ${header_path}/Config.h
-	   ${header_path}/ReadParam.h
-	   ${header_path}/Parameter.h
+	   # ${header_path}/DataFrame.h
+	   # ${header_path}/DataFrame.t
+	   # ${header_path}/Config.h
+	   # ${header_path}/ReadParam.h
+	   # ${header_path}/Parameter.h
            ${header_path}/Likelihood.h
            ${header_path}/Likelihood-adaptors.h
            ${header_path}/Likelihood-sums.h)
@@ -39,11 +40,12 @@ set(src ContinuousTimeStatistic.cpp
         PrevalenceTimeSeries.cpp
         PyramidData.cpp
         PyramidTimeSeries.cpp
-	ParamDataFrame.cpp
-	Parameter.cpp
-	Config.cpp
+	# ParamDataFrame.cpp
+	# Parameter.cpp
+	# Config.cpp
         Likelihood.cpp
-	DataFrame.cpp)
+	# DataFrame.cpp
+  )
 
 # Configure config.hpp.in
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")
