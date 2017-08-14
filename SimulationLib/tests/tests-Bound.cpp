@@ -14,7 +14,7 @@ TEST_CASE("Hello_world_bounds", "[bound]") {
     REQUIRE( n * 1 == 5 );
     REQUIRE( n / 1 == 5 );
 
-    REQUIRE_THROWS(  n += 1 );
+    REQUIRE_THROWS(  n += 1 ); // this would value n at 6, not cool!
     REQUIRE_NOTHROW( n -= 5 ); // n should now be 0
     REQUIRE(         n == 0 );
 
@@ -23,3 +23,23 @@ TEST_CASE("Hello_world_bounds", "[bound]") {
     REQUIRE( n   == 1 );
     REQUIRE( n() == 1 );
 }
+
+// Need to write tests for:
+//
+// - Trying to construct invalid values
+//
+// - Trying to copy-construct invalid values
+//
+// - Prefix and postfix increment and decrement
+//
+// - +=, -=, *=, /=, %/ operators on Bound objects, and on numbers
+//    - explore behavior of numbers of different types from that of Bound object
+//
+// - All comparison operators on Bound objects and on numbers
+//    - explore behavior of numbers of different types from that of Bound object
+//
+// - Assignment from Bound object and from numeric types
+//    - explore behavior of numbers of different types from that of Bound object
+//
+// - All arithmetic operators on a mixture of Bound objects and numeric types
+//    - explore behavior of numbers of different types from that of Bound object
