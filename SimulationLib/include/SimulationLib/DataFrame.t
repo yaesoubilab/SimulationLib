@@ -185,17 +185,9 @@ namespace SimulationLib {
   double DataFrame<C>::timeToNextBracket(double age) const {
     return(nextBracketStart(age) - age);
   }
-
+}
 // Marcus: Another example of indentation and spacing which needs work
   // Eyal: It looks fine to me. Check your tab stops.
-  template<>
-  DataFrame<double>::DataFrame(const char *file, bool loopTime)
-    : DataFrame(file, loopTime, [](const char *str) {
-	double *d = (double *)malloc(sizeof(double));
-	*d = atof(str);
-	return(shared_ptr<const double>(d));
-      }) {}
-}
 
 // Marcus: Explain why you have chosen to undefine this constant
 // Eyal: 

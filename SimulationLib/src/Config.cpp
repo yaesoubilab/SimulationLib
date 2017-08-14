@@ -2,6 +2,7 @@
 #include "ReadParam.h"
 #include <cstdio>
 #include <iostream>
+#include <boost/filesystem.hpp>
 
 // Marcus: Explain what these macros are used for
 // Eyal: Stringification.
@@ -22,6 +23,7 @@ namespace SimulationLib {
   using namespace std;
   Config::Config(const char *file) {
     FILE *ifile = fopen(file, "r");
+    boost::filesystem::path fpath(file);
     int c;
     char buf[BFSZ + 1], t;
     // Skip the first two lines.
@@ -53,9 +55,10 @@ namespace SimulationLib {
 	break;
       case 'F': // A data frame that loops.
 	loop = true;
-      case 'f': // A data frame that doesn't.
+      case 'f': // A data frame that doesn't.	
 	fscanf(ifile, "%" ST(BFSZ) "[^,]", buf);
-	var[item] = make_shared<DataFrame<Parameter> >(buf, loop);
+	var[item]
+	  = make_shared<DataFrame<Parameter> >((fpath / buf).c_str(), loop);
 	break;
       default:
 	std::cerr << "Unknown type character " << t << std::endl;

@@ -1,0 +1,345 @@
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in RFC 2119.
+
+A config file SHALL be a dictionary,
+mapping keys (the internal names) to values.
+
+Each value SHALL be a dictionary,
+containing the key 'is_frame', which MUST have a boolean value,
+and the key 'value' which is as follows:
+If is_frame is false, then value MUST be a Parameter
+(which shall be defined later)
+otherwise value MUST be a DataFrame.
+
+A DataFrame SHALL be a dictionary.
+It MAY have only the key 'file',
+in which case it SHOULD be treated as if the dictionary were replaced
+with the contents of the file specified in the value.
+More than one level of indirection in this manner MAY be treated as an error.
+
+It MAY have the key 'loop_time', which MUST have a boolean value.
+If there is no key 'loop_time',
+it SHOULD be treated as if it existed and had the value FALSE.
+
+It MAY have the keys
+'age_bracket_size', 'age_bracket_count', and 'age_bracket_start'.
+The first and third of these MUST have real values,
+while the second MUST have an integer value.
+'age_bracket_size' and 'age_bracket_count' MUST be positive.
+'age_bracket_start' MAY be any real number,
+but negative numbers make little sense.
+It MUST NOT have any number of these keys besides 0 or 3.
+
+It MAY have the keys 'time_bracket_size', 'time_bracket_count',
+and 'time_bracket_start', subject to the same restrictions as for
+their 'age_bracket_*' counterparts, except that they MUST exist if
+'loop_time' has the value TRUE.
+
+It MAY have the key 'ignore_gender', which SHALL have a boolean value.
+If this key does not exist, it SHOULD be treated as if it had the
+value FALSE.
+
+It SHALL have the key 'values',
+whose value MUST be a list, each of whose elements MUST be a
+dictionary D,
+containing the keys 'age_bracket' 'time_bracket', 'is_female', and
+'value'.
+
+If in the DataFrame the keys 'age_bracket_*' do not exist,
+in its values the key 'age_bracket' SHALL be optional,
+and MUST be ignored if it is used.
+
+If in the DataFrame the keys 'time_bracket_*' do not exist,
+in its values the key 'time_bracket' SHALL be optional,
+and MUST be ignored if it is used.
+
+If in the DataFrame the key 'ignore_gender' has the value TRUE,
+in its values the key 'is_female' SHALL be optional,
+and MUST be ignored if it is used.
+
+The key 'age_bracket' SHALL have value an integer between 0 and the
+containing DataFrame's 'age_bracket_count' (inclusive on the low,
+exclusive on the high.)
+
+The key 'time_bracket' SHALL have value an integer between 0 and the
+containing DataFrame's 'time_bracket_count' (inclusive on the low,
+exclusive on the high.)
+
+The key 'is_female' SHALL have value a boolean.
+
+The key 'value' SHALL have value a Parameter.
+
+----
+
+Parameters:
+
+A Parameter SHALL be either a real number or a dictionary.
+If it is a dictionary, it SHALL have the key 'distribution'.
+
+It MAY additionally have the key 'configure', which SHALL be a
+boolean, treated as FALSE if absent.
+It MAY have the keys 'min' and 'max', which SHALL be reals.
+
+The key 'distribution' shall have a string value,
+which shall be the name of a distribution.
+
+It SHALL have additional keys with names those of the non-optional parameters
+of the distribution, and MAY have keys with names those of the
+optional parameters. If an optional parameter is absent, it SHALL be
+treated as if it had its default value.
+
+Following is a table of parameters for each distribution.
+
+* "Bernoulli"
+PMF: f(0) = 1-p, f(1) = p.
+| Parameter | Type        | Default | In PMF |
+|-----------+-------------+---------+--------|
+| 'p'       | Real, [0,1] |      .5 | p      |
+
+Function to create: Bernoulli(p)
+* "Beta"
+PDF ∝ z^(α-1)(1-z)^(β-1),
+z = x * sc + sh.
+
+| Parameter | Type           | Default | In PDF |
+|-----------+----------------+---------+--------|
+| 'alpha'   | Real, positive | None    | α      |
+| 'beta'    | Real, positive | None    | β      |
+| 'scale'   | Real, nonzero  | 1       | sc     |
+| 'shift'   | Real           | 0       | sh     |
+Function to create: Beta(alpha, beta, scale, shift)
+
+Other options:
+| Parameter | Type           | Default | In PDF  |
+|-----------+----------------+---------+---------|
+| 'alpha'   | Real, positive | None    | α       |
+| 'beta'    | Real, positive | None    | β       |
+| 'min'     | Real           | 0       | sh      |
+| 'max'     | Real           | 1       | sc + sh |
+Function to create: Beta::minmax(alpha, beta, min, max)
+
+| Parameter | Type           | Default | In PDF              |
+|-----------+----------------+---------+---------------------|
+| 'mu'      | Real, (0,1)    | None    | α/(α+β)             |
+| 'sigma'   | Real, (0,m)    | None    | √(αβ/(α+β+1))/(α+β) |
+where m is the largest number
+such that m^2 can be expressed as xy/(x+y+1)/(x+y)^2 with x and y positive.
+If using these, min and max (and scale and shift) SHALL be ignored;
+Function to create: Beta::mean_sdev(mu, sigma)
+* "Beta-binomial"
+Generated by taking p ~ Beta(α, β),
+and then taking x ~ Bin(n, p).
+
+| Parameter | Type             | Default | In description |
+|-----------+------------------+---------+----------------|
+| 'n'       | Positive integer | None    | n              |
+| 'alpha'   | Positive real    | 1       | α              |
+| 'beta'    | Positive real    | 1       | β              |
+
+Function to create: BetaBinomial(n, α, β).
+
+* "Binomial"
+  PMF: f(x) ∝ (n choose x)p^x(1-p)^x
+
+| Parameter | Type             | Default | In PMF |
+|-----------+------------------+---------+--------|
+| 'n'       | Positive integer |       1 | n      |
+| 'p'       | Real, [0,1]      |      .5 | p      |
+
+Function to create: Binomial(n, p)
+* "Chi squared"
+PDF: f(x) ∝ x^(k/2-1)e^(-x/2)
+
+| Parameter | Type           | Default | In PDF |
+|-----------+----------------+---------+--------|
+| 'dof'     | Real, positive | 1       | k      |
+
+Function to create: ChiSquared(dof)
+* "Dirac delta"
+PDF: δ(x,v)
+| Parameter | Type | Default | In PDF |
+|-----------+------+---------+--------|
+| 'value'   | Real | None    | v      |
+
+Function to create: DiracDelta(value)
+* "Exponential"
+PDF: f(x) ∝ e^-(rx) when x ≥ sh, else f(x) = 0.
+| Parameter | Type           | Default | In PMF |
+|-----------+----------------+---------+--------|
+| 'rate'    | Real, positive | None    | r      |
+| 'shift'   | Real           | 0       | s      |
+
+Function to create: Exponential(rate, shift)
+* "Gamma"
+ PDF: f(x) ∝ z^(α-1)e^-(z/β), z = x - s
+| Parameter | Type           | Default | In PDF |
+|-----------+----------------+---------+--------|
+| 'alpha'   | Real, positive |       1 | α      |
+| 'beta'    | Real, positive |       1 | β      |
+| 'shift'   | Real           |       0 | s      |
+
+Function to create: Gamma(alpha, beta, shift)
+
+Option:
+| Parameter | Type           | Default | In PDF |
+|-----------+----------------+---------+--------|
+| 'mu'      | Real, positive |       1 | αβ     |
+| 'sigma'   | Real, positive |       1 | β√α    |
+
+Function to create: Gamma::mean_sdev(mu, sigma)
+
+* "Gamma-Poisson"
+Generated by taking μ ~ Gamma(α, β) (see under Gamma),
+then taking x ~ Pois(μ).
+| Parameter | Type           | Default | In PMF |
+|-----------+----------------+---------+--------|
+| 'alpha'   | Real, positive |       1 | α      |
+| 'beta'    | Real, positive |       1 | β      |
+
+Function to create: GammaPoisson(alpha, beta)
+* "Geometric"
+PMF: f(x) ∝ (1-p)^x
+
+| Parameter | Type        | Default | In PMF |
+|-----------+-------------+---------+--------|
+| 'p'       | Real, [0,1] | .5      | p      |
+
+Function to create: Geometric(p)
+* "Johnson Sb"
+
+If x ~ JSb(μ,σ,γ,δ),
+then set z so that x = σz+μ.
+Then γ + δln(z/(1-z)) ~ N(0,1).
+
+| Parameter | Type          | Default | In PDF |
+|-----------+---------------+---------+--------|
+| 'mu'      | Real          | None    | μ      |
+| 'sigma'   | Real, nonzero | None    | σ      |
+| 'gamma'   | Real          | None    | γ      |
+| 'delta'   | Real, nonzero | None    | δ      |
+
+Function to create: JohnsonSb(mu, sigma, gamma, delta)
+* "Johnson Sl"
+
+If x ~ JSl(μ,σ,γ,δ),
+then set z so that x = σz+μ.
+Then γ + δln z ~ N(0,1).
+
+| Parameter | Type          | Default | In PDF |
+|-----------+---------------+---------+--------|
+| 'mu'      | Real          | None    | μ      |
+| 'sigma'   | Real, nonzero | None    | σ      |
+| 'gamma'   | Real          | None    | γ      |
+| 'delta'   | Real, nonzero | None    | δ      |
+
+Function to create: JohnsonSl(mu, sigma, gamma, delta)
+* "Johnson Su"
+
+If x ~ JSu(μ,σ,γ,δ),
+then set z so that x = σz+μ.
+Then γ + δ asinh(z) ~ N(0,1).
+
+| Parameter | Type          | Default | In PDF |
+|-----------+---------------+---------+--------|
+| 'mu'      | Real          | None    | μ      |
+| 'sigma'   | Real, nonzero | None    | σ      |
+| 'gamma'   | Real          | None    | γ      |
+| 'delta'   | Real, nonzero | None    | δ      |
+
+Function to create: JohnsonSu(mu, sigma, gamma, delta)
+* "Kronecker delta"
+PMF: f(v) = 1; f(x) = 0 otherwise
+
+| Parameter | Type    | Default | In PMF |
+|-----------+---------+---------+--------|
+| 'value'   | Integer | None    | v      |
+
+Function to create: KroneckerDelta(v)
+* "Lognormal"
+
+PDF: e^(x-s) ~ N(μ,σ)
+
+| Parameter | Type          | Default | In PDF |
+|-----------+---------------+---------+--------|
+| 'mu'      | Real          |       0 | μ      |
+| 'sigma'   | Real, nonzero |       1 | σ      |
+| 'shift'   | Real          |       0 | s      |
+
+Function to create: Lognormal(mu, sigma, shift)
+* "Negative Binomial"
+
+PMF: f(x) ∝ (x + n - 1 choose x)p^x
+
+| Parameter | Type              | Default | In PMF |
+|-----------+-------------------+---------+--------|
+| 'n'       | Integer, positive | None    | n      |
+| 'p'       | Real, (0,1]       | .5      | p      |
+
+Function to create: NegBinomial(n, p)
+* "Normal"
+
+PDF: f(x) ∝ √e^(((x-μ)/σ)^2)
+
+| Parameter | Type           | Default | In PDF |
+|-----------+----------------+---------+--------|
+| 'mu'      | Real           |       0 | μ      |
+| 'sigma'   | Real, positive |       1 | σ      |
+
+Function to create: Normal(mu, sigma)
+* "Poisson"
+
+PMF: f(x) = μ^x/x!e^μ
+
+| Parameter | Type           | Default | In PMF |
+|-----------+----------------+---------+--------|
+| 'mu'      | Real, positive | 1       | μ      |
+
+Function to create: Poisson(mu)
+* "Triangular"
+
+PDF: f(x) = 2(x-min)/(max-min)/(mode - min) if min < x < mode,
+f(mode) = 2/(max-min),
+f(x) = 2(max-x)/(max-min)/(max-mode) if mode < x < min,
+else f(x) = 0.
+
+| Parameter | Type | Default | In PDF |
+|-----------+------+---------+--------|
+| 'min'     | Real | None    | min    |
+| 'max'     | Real | None    | max    |
+| 'mode'    | Real | None    | mode   |
+
+Function to create: Triangular(min, max, mode)
+* "Uniform"
+  
+PDF: f(x) = 1/(max-min) if min < x < max,
+f(x) = 0 otherwise
+
+| Parameter | Type | Default | In PDF |
+|-----------+------+---------+--------|
+| 'min'     | Real |       0 | min    |
+| 'max'     | Real |       1 | max    |
+
+Function to create: Uniform(min, max)
+
+* "Uniform discrete"
+
+PMF: f(x) = 1/(max - min) if min ≤ x < max
+f(x) = 0 otherwise
+
+| Parameter | Type    | Default | In PMF |
+|-----------+---------+---------+--------|
+| 'min'     | Integer | 0       | min    |
+| 'max'     | Integer | None    | max    |
+
+Function to create: Uniform(min, max)
+
+* "Weibull"
+PDF: f(x) ∝ x^(a-1)e^-((x/b)^a)
+
+| Parameter | Type           | Default | In PMF |
+|-----------+----------------+---------+--------|
+| 'a'       | Real, positive | 1       | a      |
+| 'b'       | Real, positive | 1       | b      |
+
+Function to create: Weibull(a, b)

@@ -59,11 +59,8 @@ namespace SimulationLib {
   typedef const Parameter *(*pf)(const char *);
 
   static tuple<bool, long double, long double> extract(const char *i) {
-    for(int j = 0; j < 5; j++) {
-      int k;
-      sscanf(i, "%*[^,],%n", &k);
-      i += k;
-    }
+    for(int j = 0; j < 4; j++)
+      i = strchr(i, ',') + 1;
     long double min, max;
     char c = 'F';
     sscanf(i, "%c,%*[^,],%Lf,%Lf", &c, &min, &max);
@@ -232,7 +229,7 @@ namespace SimulationLib {
       })
       });
 
-    template<>
+  template<>
   DataFrame<Parameter>::DataFrame(const char *file, bool loopTime)
     : DataFrame(file, loopTime, paramFromString) {}
 
@@ -244,8 +241,9 @@ namespace SimulationLib {
     string buf(str);
     buf[fstcomma] = 0;
     try {
+      // Skip the reminder with that strchr.
       return(shared_ptr<const Parameter>
-	     (m.at(buf.c_str())(str + fstcomma + 1)));
+	     (m.at(buf.c_str())(strchr(str + fstcomma + 1, ',') + 1)));
     } catch(out_of_range x) {
       cerr << "Distribution not found: " << '"'
 	   << buf.c_str() << '"' << endl;

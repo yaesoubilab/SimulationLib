@@ -280,3 +280,5 @@ Test
 CTestTestfile.cmake
 *.sublime-project
 *.sublime-workspace
+
+test-*-out.csv
