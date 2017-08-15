@@ -1,9 +1,6 @@
 #include "catch.hpp"
 #include "../include/SimulationLib/utils/Bound.h"
 
-template <int lower, int upper>
-using BoundInt = Bound<int, lower, upper>;
-
 TEST_CASE("Hello_world_bounds", "[bound]") {
     BoundInt<0, 5> n{5};
 
@@ -202,7 +199,7 @@ TEST_CASE("+=, -=, *=, /=, %= operators on Bound objects, and on numbers", "[bou
             REQUIRE( n == 4 );
 
             REQUIRE_NOTHROW( m *= n );
-            REQUIRE( n == 10 );
+            REQUIRE( m == 8 );
 
             REQUIRE_NOTHROW( n /= n );
             REQUIRE( n == 1 );

@@ -10,6 +10,9 @@
 //   lower <= upper! Be very careful how you specialize this template!
 
 // Convert an std::ratio object to a numeric value of type T
+template <typename T, typename lower, typename upper> class Bound;
+
+
 template <typename T,
           typename Ratio>
 T
@@ -24,7 +27,10 @@ RatioToNumeric(Ratio ratio)
 // Convert an integer to its equivalent representation as a specialization
 //   of the std::ratio type.
 template <std::intmax_t n>
-using AsRatio = std::ratio<n, 1>;
+using IntAsRatio = std::ratio<n, 1>;
+
+template <std::intmax_t lower, std::intmax_t upper>
+using BoundInt = Bound<int, IntAsRatio<lower>, IntAsRatio<upper>>;
 
 template <typename T,
           typename lower,  // MUST be std::ratio
@@ -32,18 +38,18 @@ template <typename T,
 class Bound
 {
 private:
-void update(T newValue) {
-    if (newValue < Lower)
-        throw std::out_of_range("New value is under lower bound");
-    if (newValue > Lower)
-        throw std::out_of_range("New value is over upper bound");
+    void update(T newValue) {
+        if (newValue < Lower)
+            throw std::out_of_range("New value is under lower bound");
+        if (newValue > Upper)
+            throw std::out_of_range("New value is over upper bound");
 
-    value = newValue;
+        value = newValue;
 
-    return;
-}
+        return;
+    }
 
-T value;
+    T value;
 public:
     using value_type = T;
 
@@ -64,7 +70,7 @@ public:
     // Function call operator
     // ===================================================
 
-    T operator()(void) {
+    T operator()(void) const {
         return value;
     }
 
