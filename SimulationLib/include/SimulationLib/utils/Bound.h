@@ -94,7 +94,7 @@ public:
     // Postfix decrement
     Bound<T,lower,upper> operator--(int) {
         Bound<T,lower,upper> tmp(*this);
-        operator++();
+        operator--();
         return tmp;
     }
 
