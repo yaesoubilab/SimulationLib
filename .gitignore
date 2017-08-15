@@ -281,3 +281,5 @@ CTestTestfile.cmake
 
 *.sublime-workspace
 *.sublime-project
+test-*-out.csv
+update.mdown

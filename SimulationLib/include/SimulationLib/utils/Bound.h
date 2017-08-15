@@ -1,5 +1,12 @@
 #include <stdexcept>
 
+// Design of this class is loosely based on
+// https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading
+// and
+// https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
+
+// Note: lower and upper are NOT checked to ensure satisfaction of
+//   lower <= upper! Be very careful how you specialize this template!
 template <typename T,
           T lower,
           T upper>
@@ -19,6 +26,8 @@ void update(T newValue) {
 
 T value;
 public:
+    using value_type = T;
+
     // Constructor
     Bound(T init) : Lower(lower), Upper(upper) {
         update(init);
@@ -224,6 +233,16 @@ public:
             throw std::out_of_range("Cannot assign: assigner is out of assignee's range.");
 
         swap(*this, other);
+
+        return *this;
+    }
+
+    // Assignment operator, with T
+    Bound<T, lower, upper>& operator=(T other) {
+        if (other < lower || upper < other)
+            throw std::out_of_range("Cannot assign: assigner is out of assignee's range.");
+
+        update(other);
 
         return *this;
     }
