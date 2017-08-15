@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <ratio>
 
 // Design of this class is loosely based on
 // https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading
@@ -7,16 +8,34 @@
 
 // Note: lower and upper are NOT checked to ensure satisfaction of
 //   lower <= upper! Be very careful how you specialize this template!
+
+// Convert an std::ratio object to a numeric value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename Ratio>
+T
+RatioToNumeric(Ratio ratio)
+{
+    T numerator   = (T)ratio.num;
+    T denominator = (T)ratio.den;
+
+    return numerator / denominator;
+}
+
+// Convert an integer to its equivalent representation as a specialization
+//   of the std::ratio type.
+template <std::intmax_t n>
+using AsRatio = std::ratio<n, 1>;
+
+template <typename T,
+          typename lower,  // MUST be std::ratio
+          typename upper>  // MUST be std::ratio
 class Bound
 {
 private:
 void update(T newValue) {
-    if (newValue < lower)
+    if (newValue < Lower)
         throw std::out_of_range("New value is under lower bound");
-    if (newValue > upper)
+    if (newValue > Lower)
         throw std::out_of_range("New value is over upper bound");
 
     value = newValue;
@@ -29,7 +48,8 @@ public:
     using value_type = T;
 
     // Constructor
-    Bound(T init) : Lower(lower), Upper(upper) {
+    Bound(T init) : Lower(RatioToNumeric<T>(lower{})),
+                    Upper(RatioToNumeric<T>(upper{})) {
         update(init);
     };
 
@@ -220,16 +240,16 @@ public:
 
     // Implementing a swap(first, second) method as described in:
     // https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
-    template <T... RHSLowerUpper>
+    template <typename... OtherBounds>
     friend void swap(Bound<T, lower, upper>& first,
-                     Bound<T, RHSLowerUpper...>& second) {
+                     Bound<T, OtherBounds...>& second) {
         first.value = second();
     }
 
     // Assignment operator, as described in the same StackOverflow article
-    template <T... OtherLowerUpper>
-    Bound<T, lower, upper>& operator=(Bound<T, OtherLowerUpper...> other) {
-        if (other() < lower || upper < other())
+    template <typename... OtherBounds>
+    Bound<T, lower, upper>& operator=(Bound<T, OtherBounds...> other) {
+        if (other() < Lower || Upper < other())
             throw std::out_of_range("Cannot assign: assigner is out of assignee's range.");
 
         swap(*this, other);
@@ -239,7 +259,7 @@ public:
 
     // Assignment operator, with T
     Bound<T, lower, upper>& operator=(T other) {
-        if (other < lower || upper < other)
+        if (other < Lower || Upper < other)
             throw std::out_of_range("Cannot assign: assigner is out of assignee's range.");
 
         update(other);
@@ -254,8 +274,8 @@ public:
 
 template <typename... RHSBoundParams,
           typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator+(Bound<T,lower,upper> lhs,
                                       const Bound<RHSBoundParams...> &rhs)
 {
@@ -265,8 +285,8 @@ inline Bound<T,lower,upper> operator+(Bound<T,lower,upper> lhs,
 
 // Addition on value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator+(Bound<T,lower,upper> lhs,
                                       const T &rhs)
 {
@@ -276,8 +296,8 @@ inline Bound<T,lower,upper> operator+(Bound<T,lower,upper> lhs,
 
 template <typename... RHSBoundParams,
           typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator-(Bound<T,lower,upper> lhs,
                                       const Bound<RHSBoundParams...> &rhs)
 {
@@ -287,8 +307,8 @@ inline Bound<T,lower,upper> operator-(Bound<T,lower,upper> lhs,
 
 // Subtraction on value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator-(Bound<T,lower,upper> lhs,
                                       const T &rhs)
 {
@@ -298,8 +318,8 @@ inline Bound<T,lower,upper> operator-(Bound<T,lower,upper> lhs,
 
 template <typename... RHSBoundParams,
           typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator*(Bound<T,lower,upper> lhs,
                                       const Bound<RHSBoundParams...> &rhs)
 {
@@ -309,8 +329,8 @@ inline Bound<T,lower,upper> operator*(Bound<T,lower,upper> lhs,
 
 // Multiply on value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator*(Bound<T,lower,upper> lhs,
                                       const T &rhs)
 {
@@ -320,8 +340,8 @@ inline Bound<T,lower,upper> operator*(Bound<T,lower,upper> lhs,
 
 template <typename... RHSBoundParams,
           typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator/(Bound<T,lower,upper> lhs,
                                       const Bound<RHSBoundParams...> &rhs)
 {
@@ -331,8 +351,8 @@ inline Bound<T,lower,upper> operator/(Bound<T,lower,upper> lhs,
 
 // Divide on value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator/(Bound<T,lower,upper> lhs,
                                       const T &rhs)
 {
@@ -342,8 +362,8 @@ inline Bound<T,lower,upper> operator/(Bound<T,lower,upper> lhs,
 
 template <typename... RHSBoundParams,
           typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator%(Bound<T,lower,upper> lhs,
                                       const Bound<RHSBoundParams...> &rhs)
 {
@@ -353,8 +373,8 @@ inline Bound<T,lower,upper> operator%(Bound<T,lower,upper> lhs,
 
 // Modulus on value of type T
 template <typename T,
-          T lower,
-          T upper>
+          typename lower,
+          typename upper>
 inline Bound<T,lower,upper> operator%(Bound<T,lower,upper> lhs,
                                       const T &rhs)
 {

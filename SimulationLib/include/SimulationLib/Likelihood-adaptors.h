@@ -5,9 +5,6 @@
 #include <functional>
 
 #include "Likelihood.h"
-#include "TimeSeries.h"
-#include "PyramidTimeSeries.h"
-#include "PyramidData.h"
 
 using namespace SimulationLib;
 
