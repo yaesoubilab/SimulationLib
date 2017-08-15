@@ -5,6 +5,8 @@
 // and
 // https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
 
+// Note: lower and upper are NOT checked to ensure satisfaction of
+//   lower <= upper! Be very careful how you specialize this template!
 template <typename T,
           T lower,
           T upper>
@@ -24,6 +26,8 @@ void update(T newValue) {
 
 T value;
 public:
+    using value_type = T;
+
     // Constructor
     Bound(T init) : Lower(lower), Upper(upper) {
         update(init);
@@ -238,7 +242,7 @@ public:
         if (other < lower || upper < other)
             throw std::out_of_range("Cannot assign: assigner is out of assignee's range.");
 
-        swap(*this, other);
+        update(other);
 
         return *this;
     }
