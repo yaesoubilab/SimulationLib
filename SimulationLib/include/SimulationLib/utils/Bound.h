@@ -32,7 +32,7 @@ using IntAsRatio = std::ratio<n, 1>;
 template <std::intmax_t lower, std::intmax_t upper>
 using BoundInt = Bound<int, IntAsRatio<lower>, IntAsRatio<upper>>;
 
-using PI = std::ratio<2646693125139304345, 842468587426513207>;
+using PI_ratio = std::ratio<2646693125139304345, 842468587426513207>;
 
 template <typename T,
           typename lower,  // MUST be std::ratio
