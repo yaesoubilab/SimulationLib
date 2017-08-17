@@ -65,8 +65,8 @@ public:
     Bound(const Bound<T, lower, upper> &other)
         : Lower(other.Lower), Upper(other.Upper), value(other.value) {}
 
-    const T Lower;
-    const T Upper;
+    T Lower;
+    T Upper;
 
     // ===================================================
     // Function call operator
