@@ -210,6 +210,22 @@ CalculateLikelihood(const Containers&            models,       // models
     return ProbabilityLgSum(P, params);
 }
 
+template
+<typename... Params,
+ typename    ValueT,
+ typename    ParamsTpl     = std::tuple<Params...>,
+ typename    Function      = std::function<ValueT(Params...)>,
+ typename    Calibrator    = std::function<ParamsTpl(Function, ParamsTpl)>
+>
+inline
+ParamsTpl // optimal parameters
+Calibrate(ParamsTpl initParams, // input parameters
+          Function f,           // function under calibration
+          Calibrator c)         // calibrator
+{
+    return c(std::forward<decltype(f)>(f),
+             std::forward<decltype(initParams)>(initParams));
+}
 
 
 }
