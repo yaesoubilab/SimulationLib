@@ -311,6 +311,134 @@ TEST_CASE("+=, -=, *=, /=, %= operators on Bound objects, and on numbers", "[bou
 // - All comparison operators on Bound objects and on numbers
 //    - explore behavior of numbers of different types from that of Bound object
 //
+
+TEST_CASE("All comparison operators on Bound objects and on numbers", "[bound]") {
+    SECTION( "Legal behaviors with Bound objects" ) {
+
+        SECTION( "Basic ==, != with same bounds ints" ) {
+            BoundInt<0, 5> n{3};
+            BoundInt<0, 5> m{3};
+
+            REQUIRE( n == m );
+
+            n += 2;
+            REQUIRE( n != m );
+
+            m += 2;
+            REQUIRE( n == m );
+        }
+
+        SECTION( "Basic ==, != with different bounds" ) {
+            BoundInt<0, 5> n{3};
+            BoundInt<0, 10> m{3};
+
+            REQUIRE( n == m );
+
+            m += 3;
+            REQUIRE( n != m );
+
+            m--;
+            REQUIRE( n != m );
+
+            n += 2;
+            REQUIRE( n == m );
+        }
+
+        SECTION( "Basic <, > with same bounds" ) {
+            BoundInt<0, 5> n{2};
+            BoundInt<0, 5> m{3};
+            BoundInt<0, 5> l{4};
+
+            REQUIRE( n < m );
+            REQUIRE( m < l );
+            REQUIRE( n < l );
+
+            REQUIRE( m > n );
+            REQUIRE( l > m );
+            REQUIRE( l > n );
+
+            n += 2;
+            REQUIRE( n > m );
+            REQUIRE( ! (l > n ) );
+            REQUIRE( ! (n > l ) );
+        }
+
+        SECTION( "Basic <, > with different bounds" ) {
+            BoundInt<0, 5> n{1};
+            BoundInt<0, 10> m{6};
+            BoundInt<0, 15> l{11};
+
+            REQUIRE( n < m );
+            REQUIRE( m < l );
+            REQUIRE( n < l );
+
+            REQUIRE( m > n );
+            REQUIRE( l > m );
+            REQUIRE( l > n );
+        }
+
+        SECTION( "Basic <=, >=" ) {
+            BoundInt<0, 5> n{2};
+            BoundInt<0, 10> m{3};
+            BoundInt<0, 15> l{4};
+
+            REQUIRE( n <= m );
+            REQUIRE( m <= l );
+            REQUIRE( n <= l );
+
+            REQUIRE( m >= n );
+            REQUIRE( l >= m );
+            REQUIRE( l >= n );
+
+            n += 2;
+            REQUIRE( n >= m );
+            REQUIRE( l >= n );
+            REQUIRE( n >= l );
+        }
+    }
+
+    SECTION( "Legal behaviors with ints" ) {
+
+        SECTION( "Basic ==, != with ints" ) {
+            BoundInt<0, 5> n{3};
+
+            REQUIRE( n == 3 );
+
+            n += 2;
+            REQUIRE( n != 3 );
+            REQUIRE( n == 5 );
+        }
+
+        SECTION( "Basic <, > with ints" ) {
+            BoundInt<0, 5> n{2};
+
+            REQUIRE( n < 3 );
+            REQUIRE( n < 4 );
+            REQUIRE( 3 > n );
+            REQUIRE( 4 > n );
+
+            n += 2;
+            REQUIRE( n > 3 );
+            REQUIRE( ! (4 > n ) );
+            REQUIRE( ! (n > 4 ) );
+        }
+
+        SECTION( "Basic <=, >= with ints" ) {
+            BoundInt<0, 5> n{2};
+
+            REQUIRE( n <= 3 );
+            REQUIRE( n <= 4 );
+            REQUIRE( 3 >= n );
+            REQUIRE( 4 >= n );
+
+            n += 2;
+            REQUIRE( n >= 3 );
+            REQUIRE( 4 >= n );
+            REQUIRE( n >= 4 );
+        }
+    }
+}
+
 // - Assignment from Bound object and from numeric types
 //    - explore behavior of numbers of different types from that of Bound object
 //
