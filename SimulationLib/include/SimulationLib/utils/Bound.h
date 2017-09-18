@@ -278,6 +278,7 @@ public:
 
 // ===================================================
 // Arithmetic operators (defined outside class)
+// Bound x Other
 // ===================================================
 
 template <typename... RHSBoundParams,
@@ -388,4 +389,167 @@ inline Bound<T,lower,upper> operator%(Bound<T,lower,upper> lhs,
 {
     lhs %= rhs;
     return lhs;
+}
+
+// ===================================================
+// Arithmetic value-modifying operators
+// ===================================================
+
+// Increment
+template <typename T,
+          typename... RHSBoundParams>
+inline T operator+=(T lhs,
+                    const Bound<RHSBoundParams...>&rhs) {
+    return lhs + rhs();
+}
+
+
+// Decrement
+template <typename T,
+          typename... RHSBoundParams>
+inline T operator-=(T lhs,
+                    const Bound<RHSBoundParams...>&rhs) {
+    return lhs - rhs();
+}
+
+
+// Multiply
+template <typename T,
+          typename... RHSBoundParams>
+inline T operator*=(T lhs,
+                    const Bound<RHSBoundParams...>&rhs) {
+    return lhs * rhs();
+}
+
+
+// Divide
+template <typename T,
+          typename... RHSBoundParams>
+inline T operator/=(T lhs,
+                    const Bound<RHSBoundParams...>&rhs) {
+    return lhs / rhs();
+}
+
+
+// Modulus
+template <typename T,
+          typename... RHSBoundParams>
+inline T operator%=(T lhs,
+                    const Bound<RHSBoundParams...>&rhs) {
+    return lhs % rhs();
+}
+
+
+// ===================================================
+// Arithmetic operators (defined outside class)
+// Other x Bound
+// ===================================================
+
+// Addition on value of type T
+template <typename T,
+          typename lower,
+          typename upper>
+const T operator+(const T &lhs,
+                  Bound<T,lower,upper> rhs)
+{
+    lhs += rhs;
+    return lhs;
+}
+
+// Subtraction on value of type T
+template <typename T,
+          typename lower,
+          typename upper>
+const T operator-(const T &lhs,
+                  Bound<T,lower,upper> rhs)
+{
+    lhs -= rhs;
+    return lhs;
+}
+
+// Multiply on value of type T
+template <typename T,
+          typename lower,
+          typename upper>
+const T operator*(const T &lhs,
+                  Bound<T,lower,upper> rhs)
+{
+    lhs *= rhs;
+    return lhs;
+}
+
+// Divide on value of type T
+template <typename T,
+          typename lower,
+          typename upper>
+const T operator/(const T &lhs,
+                  Bound<T,lower,upper> rhs)
+{
+    lhs /= rhs;
+    return lhs;
+}
+
+// Modulus on value of type T
+template <typename T,
+          typename lower,
+          typename upper>
+const T operator%(const T &lhs,
+                  Bound<T,lower,upper> rhs)
+{
+    lhs %= rhs;
+    return lhs;
+}
+
+// ===================================================
+// Comparison operators (defined outside class)
+// Other x Bound
+// ===================================================
+
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator==(const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs == rhs() ? true : false;
+}
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator< (const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs < rhs() ? true : false;
+}
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator> (const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs > rhs() ? true : false;
+}
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator!=(const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs != rhs() ? true : false;
+}
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator<=(const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs <= rhs() ? true : false;
+}
+
+template <typename    T,
+          typename... RHSBoundParams>
+inline const bool operator>=(const T &lhs,
+                             Bound<RHSBoundParams...> rhs)
+{
+    return lhs >= rhs() ? true : false;
 }
