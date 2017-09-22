@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 project (SimulationLib)
 
+find_package(Boost REQUIRED)
+
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -20,6 +22,8 @@ set(lib_dest ${main_lib_dest}/${CMAKE_BUILD_TYPE})
 
 # Add subdirectories
 add_subdirectory(src)
+
+include_directories(${Boost_INCLUDE_DIRS})
 
 # Enable testing
 enable_testing()

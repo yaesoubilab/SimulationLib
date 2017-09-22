@@ -1,5 +1,5 @@
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -9,12 +9,15 @@ include_directories(${StatisticalDistributionsLib_INCLUDE_DIRS})
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-include_directories (${TEST_SOURCE_DIR}/src
-                     )
+include_directories (${TEST_SOURCE_DIR}/src)
+
+find_package(Boost REQUIRED)
+
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable (Test
 				tests-main.cpp
-                tests-Calibrate.cpp
+                # tests-Calibrate.cpp (we deleted this because ???)
                 tests-Bound.cpp
 				tests-CSVExport.cpp
                 tests-CSVImport.cpp

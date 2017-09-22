@@ -24,7 +24,7 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/Likelihood-sums.h)
 
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -52,9 +52,9 @@ set(src ContinuousTimeStatistic.cpp
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")
 
 # Define library target
+include_directories(${Boost_INCLUDE_DIRS})
 add_library(SimulationLib ${header} ${src})
 
-include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${header_path})
 
 target_link_libraries(SimulationLib PUBLIC StatisticalDistributionsLib)
