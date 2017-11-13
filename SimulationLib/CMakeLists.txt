@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.3)
 project (SimulationLib)
 
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS ON)
 
 # Define library version
 set(SimulationLib_VERSION_MAJOR 0 CACHE STRING "major version" FORCE)

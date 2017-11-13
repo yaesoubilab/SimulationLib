@@ -148,9 +148,8 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    T PrevalenceTimeSeries<T>::GetTotalAtTime(double t) {
-        int thisPeriod;
-        thisPeriod = (int)ceil(t / periodLength);
+    T PrevalenceTimeSeries<T>::GetTotalAtTime(double t) const {
+        int thisPeriod { (int)ceil(t / periodLength) };
 
         if (thisPeriod >= lastPeriod)
             return currentPrevalence;
@@ -159,7 +158,7 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    T PrevalenceTimeSeries<T>::operator()(double t) {
+    T PrevalenceTimeSeries<T>::operator()(double t) const {
         return GetTotalAtTime(t);
     }
 

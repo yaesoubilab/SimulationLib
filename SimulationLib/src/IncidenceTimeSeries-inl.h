@@ -171,7 +171,7 @@ namespace SimulationLib {
     }
 
     template<typename T>
-    T IncidenceTimeSeries<T>::GetTotalAtTime(double t) {
+    T IncidenceTimeSeries<T>::GetTotalAtTime(double t) const {
         if (t < time0 || t > timeMax)
             throw out_of_range("t < time0 || t > timeMax");
 
@@ -179,7 +179,7 @@ namespace SimulationLib {
     }
 
     template<typename T>
-    T IncidenceTimeSeries<T>::operator()(double t) {
+    T IncidenceTimeSeries<T>::operator()(double t) const {
         return GetTotalAtTime(t);
     }
 

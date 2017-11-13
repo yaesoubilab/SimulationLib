@@ -24,8 +24,6 @@ add_executable (Test
 				tests-PyramidTimeSeries.cpp
                 tests-EventQueue.cpp
                 tests-EventQueueWithState.cpp
-		# tests-ReadParam.cpp
-		# tests-frame.cpp
                 tests-Likelihood.cpp)
 
 target_link_libraries (Test
