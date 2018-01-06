@@ -14,6 +14,7 @@ include_directories (${TEST_SOURCE_DIR}/src
 
 add_executable (Test
 				tests-main.cpp
+				# tests-config.cpp
                 tests-Calibrate.cpp
                 tests-Bound.cpp
 				tests-CSVExport.cpp
@@ -26,7 +27,8 @@ add_executable (Test
                 tests-EventQueueWithState.cpp
 		# tests-ReadParam.cpp
 		# tests-frame.cpp
-                tests-Likelihood.cpp)
+                tests-Likelihood.cpp
+                tests-JSON_param.cpp)
 
 target_link_libraries (Test
 					   SimulationLib

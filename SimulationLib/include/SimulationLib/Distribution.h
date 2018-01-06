@@ -35,10 +35,10 @@ namespace SimulationLib {
     inline Parameter(double d)
       : dist(d), min(d), max(d), calibrate(false) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long> > dist,
-		     long double min, long double max, bool c)
+         long double min, long double max, bool c)
       : dist(dist), min(min), max(max), calibrate(c) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long double> > dist,
-		     long double min, long double max, bool c)
+         long double min, long double max, bool c)
       : dist(dist), min(min), max(max), calibrate(c) {}
   };
 }

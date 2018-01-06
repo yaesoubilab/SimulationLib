@@ -6,7 +6,7 @@
 
 // Disable threading for CSV library
 #define CSV_IO_NO_THREAD
-#include "../include/SimulationLib/utils/csv.h"
+#include "SimulationLib-0.2/csv.h"
 
 namespace SimulationLib {
 namespace CSVImport {
@@ -135,6 +135,17 @@ CSVToRows(std::istream& source,
                      std::forward<ColumnNames>(columnNames)...);
 }
 
+// template <typename Distribution>
+// inline
+// Distribution
+// DataToDistribution(DataByRows d, int row)
+// {
+//     std::string param = d.second[row][3];
+//     return CSVToRows(std::forward<std::istream &>(source),
+//                      std::index_sequence_for<ColumnNames...>{},
+//                      std::forward<ColumnNames>(columnNames)...);
+// }
+ 
 } // </CSVImport>
 } // </SimulationLib>
 

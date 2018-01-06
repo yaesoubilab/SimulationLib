@@ -9,9 +9,10 @@
 #include "../include/SimulationLib/PrevalencePyramidTimeSeries.h"
 #include "../include/SimulationLib/IncidencePyramidTimeSeries.h"
 #include "../include/SimulationLib/DiscreteTimeStatistic.h"
-
+#include "../include/SimulationLib/ContinuousTimeStatistic.h"
 #include "../include/SimulationLib/CSVExport.h"
 
+#define CMAKE_LOC ""
 using namespace std;
 using namespace SimulationLib;
 
@@ -49,10 +50,15 @@ TEST_CASE("Basic PrevalenceTimeSeries", "[csv]") {
     REQUIRE( tse1.Write() == true );
     REQUIRE( tse2.Write() == true );
 
-    REQUIRE( compare_files("test-t01-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t01-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t01-answer.csv") == true );
 
-    REQUIRE( compare_files("test-t02-out.csv",
+    outloc = CMAKE_LOC;
+    outloc += "test-t02-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t02-answer.csv") == true );
 
     delete pts1;
@@ -133,9 +139,15 @@ TEST_CASE("Basic PyramidTimeSeries", "[csv]") {
     REQUIRE( tse3.Write() == true );
     REQUIRE( tse4.Write() == true );
 
-    REQUIRE( compare_files("test-t03-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t03-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t03-answer.csv") == true );
-    REQUIRE( compare_files("test-t04-out.csv",
+
+    outloc = CMAKE_LOC;
+    outloc += "test-t04-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t04-answer.csv") == true );
 
 
@@ -155,7 +167,10 @@ TEST_CASE("Basic PyramidData", "[csv]") {
     // Write PyramidData
     REQUIRE( pde.Write() == true );
 
-    REQUIRE( compare_files("test-t09-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t09-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t09-answer.csv") == true );
 
 
@@ -176,7 +191,10 @@ TEST_CASE("More complicated PyramidData", "[csv]") {
     // Write PyramidData
     REQUIRE( pde.Write() == true );
 
-    REQUIRE( compare_files("test-t10-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t10-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t10-answer.csv") == true );
 }
 
@@ -203,7 +221,10 @@ TEST_CASE("More complicated PyramidData with multiple PDs", "[csv]") {
     // Write PyramidData
     REQUIRE( pde.Write() == true );
 
-    REQUIRE( compare_files("test-t12-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t12-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t12-answer.csv") == true );
 }
 
@@ -222,7 +243,10 @@ TEST_CASE("PyramidData<double>", "[csv]") {
     // Write PyramidData
     REQUIRE( pde.Write() == true );
 
-    REQUIRE( compare_files("test-t11-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t11-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t11-answer.csv") == true );
 }
 
@@ -257,9 +281,15 @@ TEST_CASE("PrevalenceTimeSeries intermediate values should not be zeroed", "[csv
     REQUIRE( tse5.Write() == true );
     REQUIRE( tse6.Write() == true );
 
-    REQUIRE( compare_files("test-t05-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t05-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t05-answer.csv") == true );
-    REQUIRE( compare_files("test-t06-out.csv",
+    
+    outloc = CMAKE_LOC;
+    outloc += "test-t06-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t06-answer.csv") == true );
 
     delete pts5;
@@ -326,9 +356,15 @@ TEST_CASE("PyramidTimeSeries with intermediate zeroes", "[csv]") {
     REQUIRE( tse7.Write() == true );
     REQUIRE( tse8.Write() == true );
 
-    REQUIRE( compare_files("test-t07-out.csv",
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-t07-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t07-answer.csv") == true );
-    REQUIRE( compare_files("test-t08-out.csv",
+    
+    outloc = CMAKE_LOC;
+    outloc += "test-t08-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-t08-answer.csv") == true );
 
 
@@ -349,6 +385,100 @@ TEST_CASE("Basic TimeStatistic export", "[csv]") {
 
     REQUIRE( tse.Add(dts) == true );
     REQUIRE( tse.Write()  == true );
-    REQUIRE( compare_files("test-tstats01-out.csv",
+
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-tstats01-out.csv";
+    REQUIRE( compare_files(outloc,
                            "tests-CSVExport-files/test-tstats01-answer.csv") == true );
+}
+
+TEST_CASE("Continuous TimeStatistic export", "[csv]") {
+    map<TimeStatType, string> columns {
+        {TimeStatType::Mean, "Average"},
+        {TimeStatType::Variance, "Variance"},
+        {TimeStatType::Sum, "Sum"},
+        {TimeStatType::Min, "Min"},
+        {TimeStatType::Max, "Max"}
+    };
+    ContinuousTimeStatistic *cts = new ContinuousTimeStatistic("Statistics1");
+    ContinuousTimeStatistic *cts2 = new ContinuousTimeStatistic("Statistics2");
+    TimeStatisticsExport tse("test-tstats02-out.csv", columns);
+
+    cts->Record(1, 5);
+    cts->Record(3, 3);
+    cts->Record(4, 3);
+
+    cts2->Record(5, 5);
+    cts2->Record(3, 3);
+    cts2->Record(3, 3);
+
+    REQUIRE( tse.Add(cts) == true );
+    REQUIRE( tse.Add(cts2) == true );
+    REQUIRE( tse.Write()  == true );
+    
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-tstats02-out.csv";
+    REQUIRE( compare_files(outloc,
+                           "tests-CSVExport-files/test-tstats02-answer.csv") == true );
+}
+
+TEST_CASE("Continuous/Discrete TimeStatistic Mix", "[csv]") {
+    map<TimeStatType, string> columns {
+        {TimeStatType::Mean, "Average"},
+        {TimeStatType::Variance, "Variance"},
+        {TimeStatType::Sum, "Sum"},
+        {TimeStatType::Min, "Min"},
+        {TimeStatType::Max, "Max"}
+    };
+    DiscreteTimeStatistic *dts = new DiscreteTimeStatistic("Statistics1");
+    ContinuousTimeStatistic *cts = new ContinuousTimeStatistic("Statistics2");
+    TimeStatisticsExport tse("test-tstats03-out.csv", columns);
+
+    dts->Record(1);
+    dts->Record(3);
+    dts->Record(4);
+
+    cts->Record(5, 5);
+    cts->Record(3, 3);
+    cts->Record(3, 5);
+
+    REQUIRE( tse.Add(dts) == true );
+    REQUIRE( tse.Add(cts) == true );
+    REQUIRE( tse.Write()  == true );
+
+    std::string outloc;
+    outloc += CMAKE_LOC;
+    outloc += "test-tstats03-out.csv";
+    REQUIRE( compare_files(outloc,
+                           "tests-CSVExport-files/test-tstats03-answer.csv") == true );
+}
+
+//this case produces strange results: may be result of ContinuousTimeStatistic, not export
+TEST_CASE("TimeStatistic 0 Mix", "[csv]") {
+    map<TimeStatType, string> columns {
+        {TimeStatType::Mean, "Average"},
+        {TimeStatType::Variance, "Variance"},
+        {TimeStatType::Sum, "Sum"},
+        {TimeStatType::Min, "Min"},
+        {TimeStatType::Max, "Max"}
+    };
+    DiscreteTimeStatistic *dts = new DiscreteTimeStatistic("Statistics1");
+    ContinuousTimeStatistic *cts = new ContinuousTimeStatistic("Statistics2");
+    TimeStatisticsExport tse("test-tstats04-out.csv", columns);
+
+    dts->Record(0, 0);
+    dts->Record(0, 0);
+    dts->Record(0, 0);
+
+    cts->Record(0, 0);
+    cts->Record(0, 0);
+    cts->Record(0, 0);
+
+    REQUIRE( tse.Add(dts) == true );
+    REQUIRE( tse.Add(cts) == true );
+    REQUIRE( tse.Write()  == true );
+    REQUIRE( compare_files("test-tstats04-out.csv",
+                           "tests-CSVExport-files/test-tstats04-answer.csv") == true );
 }

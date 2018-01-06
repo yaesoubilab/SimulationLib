@@ -17,8 +17,6 @@ TEST_CASE("JSON_Parameterize", "[JSON IMPORT]"){
 
 	json::iterator it;
 
-	// p.push_back(parameterize(j[0]));
-	// p.push_back(parameterize(j[5]));
 	for (it = j.begin(); it != j.end(); ++it){
 		p.push_back(parameterize(*it));
 	}

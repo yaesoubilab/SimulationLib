@@ -12,11 +12,14 @@ namespace SimulationLib {
 
     void ContinuousTimeStatistic::Record(double time, double increment) {
         count += 1;
-        value = increment;
-
+        // printf("min: %f; max: %f; value: %f\n", min, max, value);
         if (time == baseTime) {
             lastTime = time;
             lastValue = increment;
+            value = increment;
+
+            min = (value < min) ? value : min;
+            max = (value > max) ? value : max;
         } else if (time > baseTime) {
             tot += (lastTime - baseTime) * (time - lastTime) * pow(value - mean, 2);
             mean = (mean * (lastTime - baseTime) + (time - lastTime) * lastValue) / \
@@ -24,6 +27,7 @@ namespace SimulationLib {
 
             lastTime = time;
             lastValue = value;
+            value += increment;
 
             min = (value < min) ? value : min;
             max = (value > max) ? value : max;
@@ -31,9 +35,8 @@ namespace SimulationLib {
             if (count > 1)
                 variance = tot / (lastTime - baseTime);
         }
-
     }
-
+    
     // Getter methods
     double ContinuousTimeStatistic::GetSum()      { return 0; } // WARNING: not properly implemented at the moment!
     double ContinuousTimeStatistic::GetMean()     { return mean;}

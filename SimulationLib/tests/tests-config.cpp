@@ -86,3 +86,24 @@ TEST_CASE("Config", "[config]") {
     }
   }
 }
+
+TEST_CASE("Config2", "[config]") {
+  Config c("tests-CSVExport-files/SIR_Parameters.csv");
+  CHECK_THROWS_AS(c.getVar("gibberish"), out_of_range);
+  SECTION("duration_infect") {
+    auto p = c.getVar("duration_infect");
+    shared_ptr<const Parameter> q;
+    REQUIRE(holds_alternative<decltype(q)>(p));
+    q = get<decltype(q)>(p);
+    output("duration_infect ", q.get())
+  }
+  SECTION("transmission") {
+    auto p = c.getVar("transmission");
+    shared_ptr<const Parameter> q;
+    REQUIRE(holds_alternative<decltype(q)>(p));
+      q = get<decltype(q)>(p);
+      int i = 1
+    REQUIRE(i == 0)
+    output("transmission ", q.get())
+  }
+}
