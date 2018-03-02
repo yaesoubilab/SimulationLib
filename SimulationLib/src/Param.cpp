@@ -1,12 +1,21 @@
 #include "../include/SimulationLib/Param.h"
 #include <iostream>
 #include <limits>
-
+#include "Constant.h"
 
 namespace SimulationLib {
   using namespace std;
   using namespace StatisticalDistributions;
 
+  Param::Param(): distribution(GeneralStatDist(Constant(0))), 
+  description(""), 
+  type(Type::inv_type),
+  filename(""),
+  calibrate(false) {
+  }
+  // Param::~Param(){
+
+  // }
   string Param::getDescription(){
   	return description;
   }

@@ -28,11 +28,12 @@ namespace SimulationLib {
   public:
     //must creates json_obj
     // Param(JSON_OBJ);
-
+    Param();
     Param(string desc, SimulationLib::Type t, GeneralStatDist dist, string fn, bool cal) 
       : description{desc}, type{t}, distribution{dist}, filename{fn}, calibrate{cal} {
 
     }
+    // ~Param();
 
     string getDescription();
     SimulationLib::Type getType();

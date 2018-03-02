@@ -1,5 +1,6 @@
 #include "../include/SimulationLib/JSONImport.h"
 #include "../include/SimulationLib/Param.h"
+#include "../include/SimulationLib/DataFrame.h"
 #include "GeneralStatDist.h"
 #include <StatisticalDistribution.h>
 #include <json.hpp>
@@ -36,8 +37,15 @@
 namespace SimulationLib{
 	using namespace StatisticalDistributions;
 	using json = nlohmann::json;
+
+	// Two ways of parameterizing, one by taking in json, another by taking in a string with filename
 	Param parameterize(json jobj);
 	Param parameterize(string fname);
+	// Main Function - fills map so that shortname corresponds with a parameter
+	void mapShortNames(json j, std::map<string, Param>& m);
+
+	// function is made public for access by other classes
 	GeneralStatDist mapDistribution(json obj);
+
 	// StatisticalDistribution mapDistribution(json jobj);
 }

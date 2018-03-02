@@ -5,28 +5,68 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "../include/SimulationLib/JSONParameterize.h"
+#include "../include/SimulationLib/DataFrame.h"
+#include "../include/SimulationLib/Param.h"
+#include "RNG.h"
+#include "Uniform.h"
+#include "JohnsonSu.h"
 using namespace std;
 using namespace SimulationLib;
 
-TEST_CASE("JSON_Parameterize", "[JSON IMPORT]"){
+
+TEST_CASE("Annual Mortality Rates - Constant", "[DATAFRAME]"){
 	vector<Param> p;
-	string input_file = "input/demographic-settings.json";
+	string input_file = "input/AnMortRates.json";
 	json j = JSONImport::fileToJSON(input_file);
 	cout << j[0] << "\n";
 	cout << j[1] << "\n";
+	int seed = 10;
+  	RNG myRNG(seed);
+	json::iterator it;
+	// DataFrameFile d{j, false};
+	DataFrameFile d {j};
 
+	REQUIRE(d.getTimeBracket() == 1);
+	REQUIRE(d.getAgeBracket() == 5);
+	REQUIRE(d.getTimeCats() == 43);
+	REQUIRE(d.getAgeCats() == 17);
+	REQUIRE(d.getTimeStart() == 1998);
+	REQUIRE(d.getAgeStart() == 0);
+	REQUIRE(d.nextBracketStart(6.4) == 10);
+
+	// Loops through all values in file to check that d returns correct values
+	for (int i = 2; i < j.size(); i++){
+		int sex = 0;
+		if (j[i]["Sex"] == "F")
+			sex  = 1;
+		double year = j[i]["Year"];
+		double rate = j[i]["Annual mortality rate"];
+		double age = j[i]["Age"];
+		REQUIRE(d.getValue(year, sex, age, myRNG) - rate < 0.00005);
+	}
+}
+TEST_CASE("Time in Marraige - Distribution", "[DATAFRAME]"){
+	vector<Param> p;
+	string input_file = "input/TimeInMarraige.json";
+	json j = JSONImport::fileToJSON(input_file);
+	cout << j[0] << "\n";
+	cout << j[1] << "\n";
+	int seed = 10;
+  	RNG myRNG(seed);
 	json::iterator it;
 
-	// p.push_back(parameterize(j[0]));
-	// p.push_back(parameterize(j[5]));
-	for (it = j.begin(); it != j.end(); ++it){
-		p.push_back(parameterize(*it));
-	}
+	DataFrameFile d {j};
 
-	REQUIRE(p.at(0).getDescription() == j[0]["description"]);
-	REQUIRE(p.at(1).getType() == 
-		(j[1]["type"] == "v" ? Type::val_type : Type::file_type));
-	REQUIRE(p.at(5).getFileName() == j[5]["distribution"]);
-	REQUIRE(p.at(2).getCalibration() == j[2]["included-in-calibration"]);
-	REQUIRE(p.at(4).getCalibration() == false);
+	REQUIRE(d.getAgeBracket() == 5);
+	REQUIRE(d.getAgeCats() == 7);
+	REQUIRE(d.getAgeStart() == 15);
+
+	// Uniform
+	for (int i = 3; i < j.size(); i++){
+		int sex = 0;
+		double rate = j[i]["Annual mortality rate"];
+		double age = j[i]["Age"];
+
+		// REQUIRE(d.getValue(null, sex, age, myRNG) - rate < 0.00005);
+	}
 }

@@ -19,7 +19,7 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/JSONImport.h
            ${header_path}/JSONParameterize.h
 	   ${header_path}/utils/csv.h
-	   # ${header_path}/DataFrame.t
+	   ${header_path}/DataFrame.h
 	   # ${header_path}/Config.h
 	   # ${header_path}/ReadParam.h
 	         ${header_path}/Param.h
@@ -54,7 +54,7 @@ set(src ContinuousTimeStatistic.cpp
 	# Config.cpp
         Param.cpp
         Likelihood.cpp
-	# DataFrame.cpp
+	     DataFrame.cpp
   )
 
 # Configure config.hpp.in
