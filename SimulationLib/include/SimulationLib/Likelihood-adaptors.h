@@ -18,12 +18,11 @@ template <size_t... I,
           typename QueryType         = typename Container::query_type,
           typename QuerySignature    = typename Container::query_signature>
 function<QuerySignature>
-_QueryLambdaForContainer(Container &c, std::index_sequence<I...>)
+QueryLambdaForContainer(Container &c, std::index_sequence<I...>)
 {
     return [&c] (typename std::tuple_element<I, QueryType>::type... params)
                    -> QueryResult {
-        return c(std::forward<typename std::tuple_element<I, QueryType>::type>
-                   (params)...);
+        return c(params...);
     };
 }
 
@@ -48,12 +47,13 @@ template <class Container,
           typename QueryType          = typename Container::query_type,
           typename QuerySignature     = typename Container::query_signature,
           size_t   QueryCardinality   = std::tuple_size<QueryType>::value,
-          class    QueryIndexSequence = std::make_index_sequence<QueryCardinality>>
+          class    QueryIndexSequence = 
+            std::make_index_sequence<QueryCardinality>>
 function<QuerySignature>
 QueryLambdaForContainer(Container &c)
 {
-    return _QueryLambdaForContainer(std::forward<decltype(c)>(c),
-                                    QueryIndexSequence{});
+    return QueryLambdaForContainer(std::forward<decltype(c)>(c),
+                                   QueryIndexSequence{});
 }
 
 
@@ -81,23 +81,21 @@ QueryLambdaForContainer(Container &c)
 //
 //   LikelihoodFn: aliased to the type of LikelihoodFunction that would be generated
 //     for the given distribution and query signature
-//
-//   DistributionGenerator: the distribution generator for the specified Dist
-//     and QuerySignature
-template <class Dist,
+template <typename Dist,
           class Container,
           typename QuerySignature        = typename Container::query_signature,
           class    LikelihoodFn          = LikelihoodFunction<Dist, QuerySignature>,
-          typename DistributionGenerator = const typename LikelihoodFn::DistributionGenerator>
+          typename... Args>
 LikelihoodFn
-LikelihoodOn(Container &c, DistributionGenerator &dg)
+LikelihoodOn(const Container &c,
+             const std::function<Dist(Args...)> &dg)
 {
     // Retrieve a lambda function on the container
     function<QuerySignature> f =
       QueryLambdaForContainer(std::forward<decltype(c)>(c));
 
     // Construct the LikelihoodFunction
-    return {f, std::forward<decltype(dg)>(dg)};
+    return {f, dg};
 }
 
 // Returns a LikelihoodFunction class on vector 'v' using DistributionGenerator

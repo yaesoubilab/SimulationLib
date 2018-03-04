@@ -97,7 +97,7 @@ bool CSVExportEngine::Write(void) {
 template <typename T>
 bool
 TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
-    vector<T> *tsPointer;
+    // vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
     string     tsName;
@@ -138,9 +138,9 @@ TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
     //   t=0.
     tsTime0   = ceil(ts->GetTime0());
     tsTimeMax = ts->GetTimeMax();
-    tsPointer = ts->GetVector();
+    auto tsPointer = ts;
     tsName    = ts->GetName();
-    tsSize    = tsPointer->size();
+    tsSize    = ts->GetVector()->size();
 
     rows      = nullptr;
     columns   = nullptr;
@@ -281,7 +281,7 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     // Otherwise, retrieve value from the timeSeries, convert to a string,
     //   and return.
-    cellVal  = tsVectors[tsIdx]->at(period);
+    cellVal  = tsVectors[tsIdx]->GetTotalAtTime(period*tsPeriodLength);
 
     // printf("Printing tsVectors[%d]\n", tsIdx);
     // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)

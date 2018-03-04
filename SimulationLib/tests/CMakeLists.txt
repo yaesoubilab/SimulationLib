@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.9)
+
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,6 +17,8 @@ find_package(Boost REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
 add_executable (Test
 				tests-main.cpp
                 # tests-Calibrate.cpp (we deleted this because ???)
@@ -27,8 +31,6 @@ add_executable (Test
 				tests-PyramidTimeSeries.cpp
                 tests-EventQueue.cpp
                 tests-EventQueueWithState.cpp
-		# tests-ReadParam.cpp
-		# tests-frame.cpp
                 tests-Likelihood.cpp)
 
 target_link_libraries (Test

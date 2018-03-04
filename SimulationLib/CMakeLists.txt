@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.9)
 project (SimulationLib)
 
 find_package(Boost REQUIRED)
 
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS ON)
 
 # Define library version
 set(SimulationLib_VERSION_MAJOR 0 CACHE STRING "major version" FORCE)
@@ -17,6 +17,8 @@ set(SimulationLib_VERSION ${SimulationLib_VERSION_MAJOR}.${SimulationLib_VERSION
 set(include_dest "include/SimulationLib-${SimulationLib_VERSION}")
 set(main_lib_dest "lib/SimulationLib-${SimulationLib_VERSION}")
 set(lib_dest ${main_lib_dest}/${CMAKE_BUILD_TYPE})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 # Define options here
 

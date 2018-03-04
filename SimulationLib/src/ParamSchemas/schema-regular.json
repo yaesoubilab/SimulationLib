@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "description": {
+      "type": "string"
+    },
+    "short-name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "v",
+        "f"
+      ]
+    },
+    "included-in-calibration": {
+      "enum": [
+        true,
+        false,
+        null
+      ]
+    },
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/description"
+        },
+        "short-name": {
+          "$ref": "#/definitions/short-name"
+        },
+        "type": {
+          "$ref": "#/definitions/type"
+        },
+        "included-in-calibration": {
+          "$ref": "#/definitions/included-in-calibration"
+        }
+      },
+      "oneOf": [
+        {"$ref": "distributions/bernoulli.json#/bernoulli"},
+        {"$ref": "distributions/beta-binomial.json#/beta-binomial"},
+        {"$ref": "distributions/beta.json#/beta"},
+        {"$ref": "distributions/constant.json#/constant"},
+        {"$ref": "distributions/johnson-su.json#/johnson-su"},
+        {"$ref": "distributions/normal.json#/normal"},
+        {"$ref": "distributions/weibull.json#/weibullt"}
+      ],
+      "required": [
+        "description",
+        "short-name",
+        "type",
+        "distribution",
+        "parameter-description",
+        "parameter-1",
+        "parameter-2",
+        "parameter-3",
+        "parameter-4",
+        "included-in-calibration"
+      ]
+    }
+  },
+  "title": "List of parameters",
+  "type": "array",
+  "uniqueItems": true,
+  "items": {
+    "$ref": "#/definitions/parameter"
+  }
+}

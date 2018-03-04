@@ -10,57 +10,42 @@
 
 // Given a probability function L on parameters (OutT, InTs...), returns a
 //   function P(InTs...) equivalent to L(G(InTs...), InTs...)
-template <typename PrT, typename OutT, typename... InTs>
+template <typename PrT = long double, typename OutT, typename... InTs>
 inline
 std::function<PrT(InTs...)>
-CurriedProbabilityOnG(function<PrT(OutT, InTs...)> &L,
-                      function<OutT(InTs...)> &G)
+CurriedProbabilityOnG(std::function<PrT(OutT, InTs...)> &L,
+                      std::function<OutT(InTs...)> &G)
 {
     // Capture L and G by reference
     return [&L, &G] (InTs... ins) -> PrT {
-        return L(
-                  G(std::forward<InTs>(ins)...),
-                  std::forward<InTs>(ins)...
-                );
+        // printf("G(%f) = %d\n", ins..., G(ins...));
+
+        return L( G(ins...), ins... );
     };
 }
 
-// This overload is intended to be called by the overload defined
-//   below - third argument is an index sequence for InTs... to allow
-//   template-based expansion of of elements of onParameters during call to
-//   'P'
-template<size_t... I, typename PrT, typename... InTs>
-inline
-PrT
-ProbabilityLgSum(function<PrT(InTs...)> &P,
-                 vector<std::tuple<InTs...>> &onParameters,
-                 std::index_sequence<I...>)
+template <typename PTpl, typename F, size_t... I>
+long double
+ProbabilityLgSum_impl(F f, std::vector<PTpl> pv,
+                      std::index_sequence<I...>)
 {
-    auto reducer = [&P] (PrT sum, std::tuple<InTs...> ins) {
-        PrT p = P(std::get<I>(ins)...);
+    long double sum {0.};
+    for (size_t i = 0; i < pv.size(); i++) {
+      // printf("Running P(%f)\n", (double)std::get<I>(pv[i])...);
+      sum += std::log( f(std::get<I>(pv[i])...) );
+    }
 
-        return sum + std::log(p);
-    };
-
-    // init = 0
-    return std::accumulate(onParameters.begin(),
-                           onParameters.end(),
-                           (PrT)0,
-                           reducer);
+    return sum;
 }
 
-// Given a function P(InTs...) and a vector of parameters of type 'InTs',
-//   calculates the logarithmic product of P(InTs...) evaluated at every
-//   parameter set in the 'onParameters' vector.
-template<typename PrT, typename... InTs>
-inline
-PrT
-ProbabilityLgSum(function<PrT(InTs...)> &P,
-                 vector<std::tuple<InTs...>> &onParameters)
+
+template <typename PTpl, typename F>
+long double
+ProbabilityLgSum(F f, std::vector<PTpl> pv)
 {
-    return ProbabilityLgSum (
-        std::forward<decltype(P)>(P),
-        std::forward<decltype(onParameters)>(onParameters),
-        std::index_sequence_for<InTs...>{}
-    );
+    auto i = std::tuple_size<PTpl>{};
+
+    return ProbabilityLgSum_impl(std::forward<F>(f),
+                                 std::forward<decltype(pv)>(pv),
+                                 std::make_index_sequence<i>{});
 }

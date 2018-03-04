@@ -68,12 +68,12 @@ TEST_CASE("Basic adding, running, and popping events", "[csv]") {
     eq.Schedule(eq.MakeScheduledEvent(1, genGoodbye(2)));
 
     auto e1 = eq.Top();
-    REQUIRE(e1.run());
+    REQUIRE(e1->run());
     eq.Pop();
     REQUIRE(eq.Empty() == false);
 
     auto e2 = eq.Top();
-    REQUIRE(e2.run());
+    REQUIRE(e2->run());
     eq.Pop();
     REQUIRE(eq.Empty() == true);
 }

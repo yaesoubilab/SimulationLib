@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "normal": {
+    "type": "object",
+    "properties": {
+      "distribution": {
+        "type": "string",
+        "enum": [
+          "Normal"
+        ]
+      },
+      "parameter-description": {
+        "type": "string",
+        "enum": [
+          "(mu-sigma)"
+        ]
+      },
+      "parameter-1": {
+        "type": "number"
+      },
+      "parameter-2": {
+        "type": "number"
+      },
+      "parameter-3": {
+        "type": "null"
+      },
+      "parameter-4": {
+        "type": "null"
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.9)
+
 # Set headers
 set(header_path "${SimulationLib_SOURCE_DIR}/include/SimulationLib")
 set(header ${header_path}/ContinuousTimeStatistic.h
@@ -21,12 +23,15 @@ set(header ${header_path}/ContinuousTimeStatistic.h
 	   # ${header_path}/Parameter.h
            ${header_path}/Likelihood.h
            ${header_path}/Likelihood-adaptors.h
-           ${header_path}/Likelihood-sums.h)
+           ${header_path}/Likelihood-sums.h
+           ${header_path}/ParseParams.h)
 
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS ON)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 find_package(Boost REQUIRED)
 find_package(StatisticalDistributionsLib REQUIRED)
@@ -62,7 +67,6 @@ target_link_libraries(SimulationLib PUBLIC StatisticalDistributionsLib)
 
 target_include_directories(SimulationLib PUBLIC
   $<BUILD_INTERFACE:${SimulationLib_SOURCE_DIR}/include> # for headers when building
-  # $<BUILD_INTERFACE:${StatisticalDistributionsLib_INCLUDE_DIRS}>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # for config_impl.hpp when building
   $<INSTALL_INTERFACE:${include_dest}> # for client in install mode
   $<INSTALL_INTERFACE:${lib_dest}>) # for config_impl.hpp in install mode

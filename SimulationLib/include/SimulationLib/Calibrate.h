@@ -53,9 +53,12 @@ template
  typename QueryType             = typename Container::query_type,
  typename Queries               = std::vector<QueryType>,
 
- // Distribution: the type of distribution on which the model's output is valued
+ //  // Distribution: the type of distribution on which the model's output is valued
+
  // ProbabilityT: the type of probability returned by that distribution's pdf.
- class Distribution,
+ 
+ // class Distribution,
+ 
  typename ProbabilityT          = long double,
 
  // LFnGen: the type of Likelihood function generator corresponding to the
@@ -63,11 +66,13 @@ template
  //   distribution used to value model output.
  // DistributionGenerator: a std::function type which takes model parameters
  //   and output and returns a distribution on that output.
- class LFnGen                   = LikelihoodFunction<Distribution, QuerySig>,
- typename DistributionGenerator = typename LFnGen::DistributionGenerator>
+
+ // class LFnGen                   = LikelihoodFunction<Distribution, QuerySig>,
+
+ typename DistributionGenerator/* = typename LFnGen::DistributionGenerator*/>
 
 inline
-ProbabilityT
+long double
 CalculateLikelihood(const Container&             model,  // model data
                     const Container&             obs,    // observational data
                     const Queries&               params, // params on which we query
@@ -75,7 +80,7 @@ CalculateLikelihood(const Container&             model,  // model data
                                                          //   distributions
 {
     // Construct Likelihood function generator on the model data
-    LFnGen lgen = LikelihoodOn(std::forward<decltype(model)>(model), dg);
+    auto lgen = LikelihoodOn(std::forward<decltype(model)>(model), dg);
 
     // Get Likelihood function L, which calculates the probability that
     //   some model output would occur under some set of parameters, which
@@ -84,7 +89,7 @@ CalculateLikelihood(const Container&             model,  // model data
 
     // Create a lambda function 'g' which will have signature
     //   g: QueryType... => Container::value_type
-    auto g = QueryLambdaForContainer(std::forward<decltype(obs)>(obs));
+    auto g = QueryLambdaForContainer(obs);
 
     // Curry L using 'g': P will now have signature
     //   P: QueryType => ProbabilityT
@@ -96,7 +101,9 @@ CalculateLikelihood(const Container&             model,  // model data
 
     // Evaluate P on each set of parameters contained in 'params' and return
     //   its lg-sum.
-    return ProbabilityLgSum(P, params);
+    long double sum = ProbabilityLgSum(P, params);
+
+    return sum;
 }
 
 
@@ -116,12 +123,12 @@ template
  //                 and returns a ValueT representing some composition of these
  //                 values (an average, median, etc...)
  class       Container,
- typename    Containers            = std::vector<Container &>,
- typename    ValueT                = typename Container::value_type,
- typename    QuerySig              = typename Container::query_signature,
- typename    QueryType             = typename Container::query_type,
- typename    Queries               = std::vector<QueryType>,
- typename    ModelReducer          = function<ValueT(std::vector<ValueT>)>,
+ typename    Containers   = std::vector<Container &>,
+ typename    ValueT       = typename Container::value_type,
+ typename    QuerySig     = typename Container::query_signature,
+ typename    QueryType    = typename Container::query_type,
+ typename    Queries      = std::vector<QueryType>,
+ typename    ModelReducer = function<ValueT(std::vector<ValueT>)>,
 
  // Distribution: the type of distribution on which the model's output is valued
  // ProbabilityT: the type of probability returned by that distribution's pdf.
@@ -157,7 +164,7 @@ CalculateLikelihood(const Containers&            models,       // models
                    QueryLambdaForContainer);
 
     // The function 'f' to be used by the Likelihood function. 'f' is a composite
-    //   of lambas for each model data in 'models', and the composition of these
+    //   of lambdas for each model data in 'models', and the composition of these
     //   lambdas into 'f' is dictated by the 'modelReducer'.
     std::function<QuerySig> f = [&modelReducer] (auto&&... ps) {
 
@@ -213,9 +220,9 @@ CalculateLikelihood(const Containers&            models,       // models
 template
 <typename... Params,
  typename    ValueT,
- typename    ParamsTpl     = std::tuple<Params...>,
- typename    Function      = std::function<ValueT(Params...)>,
- typename    Calibrator    = std::function<ParamsTpl(Function, ParamsTpl)>
+ typename    ParamsTpl  = std::tuple<Params...>,
+ typename    Function   = std::function<ValueT(Params...)>,
+ typename    Calibrator = std::function<ParamsTpl(Function, ParamsTpl)>
 >
 inline
 ParamsTpl // optimal parameters
