@@ -107,19 +107,19 @@ TEST_CASE("Check if object variables can get altered", "[csv]") {
     eq.Schedule(eq.MakeScheduledEvent(3, genColorChange(0)));
 
     auto e1 = eq.Top();
-    REQUIRE(e1.run());
+    REQUIRE(e1->run());
     eq.Pop();
 
     auto e2 = eq.Top();
-    REQUIRE(e2.run());
+    REQUIRE(e2->run());
     eq.Pop();
 
     auto e3 = eq.Top();
-    REQUIRE(e3.run());
+    REQUIRE(e3->run());
     eq.Pop();
 
     auto e4 = eq.Top();
-    REQUIRE(e4.run());
+    REQUIRE(e4->run());
     eq.Pop();
 }
 
@@ -135,7 +135,7 @@ TEST_CASE("Test while loop", "[csv]") {
 
     while(!eq.Empty()) {
         auto e = eq.Top();
-        REQUIRE(e.run());
+        REQUIRE(e->run());
         eq.Pop();
     }
 }

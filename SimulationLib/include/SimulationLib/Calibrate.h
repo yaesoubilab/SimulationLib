@@ -72,7 +72,7 @@ template
  typename DistributionGenerator/* = typename LFnGen::DistributionGenerator*/>
 
 inline
-ProbabilityT
+long double
 CalculateLikelihood(const Container&             model,  // model data
                     const Container&             obs,    // observational data
                     const Queries&               params, // params on which we query
@@ -89,7 +89,7 @@ CalculateLikelihood(const Container&             model,  // model data
 
     // Create a lambda function 'g' which will have signature
     //   g: QueryType... => Container::value_type
-    auto g = QueryLambdaForContainer(std::forward<decltype(obs)>(obs));
+    auto g = QueryLambdaForContainer(obs);
 
     // Curry L using 'g': P will now have signature
     //   P: QueryType => ProbabilityT
@@ -101,7 +101,9 @@ CalculateLikelihood(const Container&             model,  // model data
 
     // Evaluate P on each set of parameters contained in 'params' and return
     //   its lg-sum.
-    return ProbabilityLgSum(P, params);
+    long double sum = ProbabilityLgSum(P, params);
+
+    return sum;
 }
 
 

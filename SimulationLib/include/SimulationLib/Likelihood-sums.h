@@ -10,7 +10,7 @@
 
 // Given a probability function L on parameters (OutT, InTs...), returns a
 //   function P(InTs...) equivalent to L(G(InTs...), InTs...)
-template <typename PrT, typename OutT, typename... InTs>
+template <typename PrT = long double, typename OutT, typename... InTs>
 inline
 std::function<PrT(InTs...)>
 CurriedProbabilityOnG(std::function<PrT(OutT, InTs...)> &L,
@@ -18,29 +18,29 @@ CurriedProbabilityOnG(std::function<PrT(OutT, InTs...)> &L,
 {
     // Capture L and G by reference
     return [&L, &G] (InTs... ins) -> PrT {
-        return L(
-                  G(std::forward<InTs>(ins)...),
-                  std::forward<InTs>(ins)...
-                );
+        // printf("G(%f) = %d\n", ins..., G(ins...));
+
+        return L( G(ins...), ins... );
     };
 }
 
 template <typename PTpl, typename F, size_t... I>
-double
+long double
 ProbabilityLgSum_impl(F f, std::vector<PTpl> pv,
                       std::index_sequence<I...>)
 {
-    double sum {0.};
-
-    for (size_t i = 0; i < pv.size(); i++)
-        sum += std::log( f(std::get<I>(pv[i])...) );
+    long double sum {0.};
+    for (size_t i = 0; i < pv.size(); i++) {
+      // printf("Running P(%f)\n", (double)std::get<I>(pv[i])...);
+      sum += std::log( f(std::get<I>(pv[i])...) );
+    }
 
     return sum;
 }
 
 
 template <typename PTpl, typename F>
-double
+long double
 ProbabilityLgSum(F f, std::vector<PTpl> pv)
 {
     auto i = std::tuple_size<PTpl>{};

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "bernoulli": {
+    "type": "object",
+    "properties": {
+      "distribution": {
+        "enum": [
+          "Bernoulli"
+        ]
+      },
+      "parameter-description": {
+        "enum": [
+          "(probability)"
+        ]
+      },
+      "parameter-1": {
+        "type": "number"
+      },
+      "parameter-2": {
+        "type": "null"
+      },
+      "parameter-3": {
+        "type": "null"
+      },
+      "parameter-4": {
+        "type": "null"
+      }
+    }
+  }
+}

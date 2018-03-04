@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "johnson-su": {
+    "type": "object",
+    "properties": {
+      "distribution": {
+        "type": "string",
+        "enum": [
+          "Johnson Su"
+        ]
+      },
+      "parameter-description": {
+        "type": "string",
+        "enum": [
+          "(shape-shape-location-scale)"
+        ]
+      },
+      "parameter-1": {
+        "type": "number"
+      },
+      "parameter-2": {
+        "type": "number"
+      },
+      "parameter-3": {
+        "type": "number"
+      },
+      "parameter-4": {
+        "type": "number"
+      }
+    }
+  }
+}

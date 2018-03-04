@@ -1,4 +1,5 @@
 #include "../include/SimulationLib/Likelihood.h"
+#include <iostream>
 
 using namespace std;
 using namespace SimulationLib;
@@ -13,7 +14,7 @@ LikelihoodFunction<D,OutT(InTs...)>::GetLikelihoodFunction(void)
     //   due object destruction, this lambda will have undefined and unsafe
     //   behavior!
     return [this] (OutT v, InTs&&... ins) {
-        return Likelihood(std::forward<InTs>(ins)..., v);
+        return Likelihood(v, ins...);
     };
 }
 
@@ -22,13 +23,17 @@ typename LikelihoodFunction<D,OutT(InTs...)>::ProbabilityT
 LikelihoodFunction<D,OutT(InTs...)>::Likelihood(OutT v, InTs... ins)
 {
     // 'y' is the value of 'f' at time 't'
-    OutT y = f(std::forward<InTs>(ins)...);
+    OutT y = f(ins...);
 
     // 'd' is the distribution on f(ins...)
-    D d = dg(y, std::forward<InTs>(ins)...);
+    D d = dg(y, ins...);
 
     // 'l' is the probability of [f(ins...) = v]
+    // printf("value of model(%f)=%d\n", ins..., y);
+    // printf("passing to pdf: %d\n", v);
     ProbabilityT l = d.pdf(v);
+
+    // printf("pdf is %Le\n\n", l);
 
     return l;
 }
@@ -39,6 +44,5 @@ template <class D, typename OutT, typename... InTs>
 typename LikelihoodFunction<D,OutT(InTs...)>::ProbabilityT
 LikelihoodFunction<D,OutT(InTs...)>::operator()(OutT v, InTs... ins)
 {
-    return Likelihood(std::forward<OutT>(v),
-                      std::forward<InTs>(ins)...);
+    return Likelihood(v, ins...);
 }

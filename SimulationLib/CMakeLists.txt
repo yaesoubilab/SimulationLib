@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.9)
 project (SimulationLib)
 
 # Require C++14 compilation
@@ -15,6 +15,8 @@ set(SimulationLib_VERSION ${SimulationLib_VERSION_MAJOR}.${SimulationLib_VERSION
 set(include_dest "include/SimulationLib-${SimulationLib_VERSION}")
 set(main_lib_dest "lib/SimulationLib-${SimulationLib_VERSION}")
 set(lib_dest ${main_lib_dest}/${CMAKE_BUILD_TYPE})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 # Define options here
 

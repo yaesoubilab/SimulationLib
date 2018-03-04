@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "beta": {
+    "type": "object",
+    "properties": {
+      "distribution": {
+        "type": "string",
+        "enum": [
+          "Beta"
+        ]
+      },
+      "parameter-description": {
+        "type": "string",
+        "enum": [
+          "(alpha-beta)"
+        ]
+      },
+      "parameter-1": {
+        "type": "number"
+      },
+      "parameter-2": {
+        "type": "number"
+      },
+      "parameter-3": {
+        "type": "null"
+      },
+      "parameter-4": {
+        "type": "null"
+      }
+    }
+  }
+}

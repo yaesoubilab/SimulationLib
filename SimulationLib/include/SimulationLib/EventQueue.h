@@ -24,13 +24,13 @@ public:
 
     // Object to pass to the queue: contains the time 't' at which the EventFunc
     //   will be run via execution of 'run'
-    using ScheduledEvent = struct {
+    using ScheduledEvent = struct SE {
         TimeT t;
         EventFuncRunner run;
     };
 
     // Type of scheduler passed to an EventFunc
-    using SchedulerT = function<void(ScheduledEvent)>;
+    using SchedulerT = function<void(ScheduledEvent *)>;
 
     // An EventFunc takes a time and a scheduler and outputs a ResultT
     using EventFunc = function<ResultT(TimeT, SchedulerT)>;
@@ -38,8 +38,8 @@ public:
     // Package an EventFunc 'ef' to into a ScheduledEvent to be run at time 't'.
     //   This method should be called to produce ScheduledEvents to feed to the
     //   'Schedule' function.
-    ScheduledEvent MakeScheduledEvent(TimeT t, EventFunc ef) {
-        ScheduledEvent se;
+    ScheduledEvent *MakeScheduledEvent(TimeT t, EventFunc ef) {
+        ScheduledEvent *se = new ScheduledEvent;
 
         // Bind 'this' to the Schedule function
         auto boundScheduler = bind(&EventQueue::Schedule, this, placeholders::_1);
@@ -50,8 +50,8 @@ public:
         };
 
         // Set 't' and 'run' fields of EventRunner struct
-        se.t   = t;
-        se.run = efr;
+        se->t   = t;
+        se->run = efr;
 
         return se;
     }
@@ -59,11 +59,11 @@ public:
     // The following three methods forward to the underlying data structure
     //   to allow access to the EventFuncs
     bool                  Empty(void) { return pq->empty(); };
-    const ScheduledEvent&   Top(void) { return pq->top(); };
+    const ScheduledEvent   *Top(void) { return pq->top(); };
     void                    Pop(void) { return pq->pop(); };
 
     // Schedule 'e' for execution
-    void Schedule(ScheduledEvent e)   { return pq->push(e); }
+    void Schedule(ScheduledEvent *e)   { return pq->push(e); }
 
 
     // Constructor
@@ -81,14 +81,14 @@ public:
 
 private:
     // Allows comparison of ScheduledEvents for insertion into priority queue
-    int scheduledEventCmp(const ScheduledEvent& se1, const ScheduledEvent& se2)
-        { return se1.t > se2.t; };
+    int scheduledEventCmp(const ScheduledEvent *se1, const ScheduledEvent *se2)
+        { return se1->t > se2->t; };
 
     // Specialized priority_queue for storing 'ScheudledEvent's
     using ScheduledEventPQ =
-      priority_queue<ScheduledEvent,
-                     vector<ScheduledEvent>,
-                     function<int(const ScheduledEvent&, const ScheduledEvent&)>>;
+      priority_queue<ScheduledEvent *,
+                     vector<ScheduledEvent *>,
+                     function<int(const ScheduledEvent*, const ScheduledEvent*)>>;
 
     ScheduledEventPQ *pq;
 };
