@@ -46,17 +46,17 @@ namespace SimulationLib {
 	void DataFrameFile::fillArray(json j){
 		// Extract age and time bracket information
 		string curr;
-		if ((ignoreTime = (j[0]["Year"] == '-' || j[0]["Year"].is_null()))){
+		if ((ignoreTime = (j[0]["Year"] == "-" || j[0]["Year"].is_null()))){
 			timeBracket = 0;
 		} else {
 			timeBracket = j[0]["Year"];
 		}
 
-		if ((ignoreGender = (j[0]["Sex"] == '-' || j[0]["Sex"].is_null()))){
+		if ((ignoreGender = (j[0]["Sex"] == "-" || j[0]["Sex"].is_null()))){
 
 		} 
 
-		if ((ignoreAge = (j[0]["Age"] == '-' || j[0]["Age"].is_null()))){
+		if ((ignoreAge = (j[0]["Age"] == "-" || j[0]["Age"].is_null()))){
 			ageBracket = 0;
 		} else{
 			ageBracket = j[0]["Age"];
@@ -189,5 +189,4 @@ namespace SimulationLib {
 	double DataFrameFile::timeToNextBracket(double age){
 		return (nextBracketStart(age) - age);
 	}
-
 }

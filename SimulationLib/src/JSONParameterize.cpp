@@ -5,7 +5,7 @@ namespace SimulationLib {
 
   GeneralStatDist mapDistribution(json jobj){
 
-    if (jobj.find("distribution") == jobj.end()){
+    if (jobj.find("distribution") == jobj.end() && jobj.find("Distribution") == jobj.end()){
         // no distibution found
         long double p1 = 0;
         for (auto it = jobj.begin(); it != jobj.end(); ++it)
