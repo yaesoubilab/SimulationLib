@@ -1,0 +1,10 @@
+Year,Sex,Age,Distribution,Parameters,Par 1,Par 2,Par 3,Par 4
+-,-,5,,,,,, 
+,,7,,,,,,
+,,15,Uniform,(min-max),0,2,,
+,,20,Johnson Su,(shape-shape-location-scale),-37.59976,1.7788313,-1.829739,5.63E-09
+,,25,Johnson Su,(shape-shape-location-scale),-82.26008,5.4189257,-13.6086,9.76E-06
+,,30,Johnson Su,(shape-shape-location-scale),177.35664,14.721365,77.126833,0.0007871
+,,35,Johnson Su,(shape-shape-location-scale),1.5778755,2.786923,21.858427,11.918556
+,,40,Johnson Su,(shape-shape-location-scale),2.5231835,2.3305066,29.829741,7.4199398
+,,45,Johnson Su,(shape-shape-location-scale),0.998504,1.4955192,2.91E+01,5.4323279

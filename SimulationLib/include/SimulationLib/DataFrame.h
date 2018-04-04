@@ -45,6 +45,7 @@ namespace SimulationLib {
     int timeCats, ageCats;
     void fillArray(json j);
     int getIndex(double time, int sex, double age);
+    DataFrame *df; 
   public:
     DataFrameFile();
     DataFrameFile(json j);
