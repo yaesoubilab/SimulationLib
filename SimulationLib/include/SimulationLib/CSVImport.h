@@ -6,7 +6,7 @@
 
 // Disable threading for CSV library
 #define CSV_IO_NO_THREAD
-#include "SimulationLib-0.2/csv.h"
+#include "utils/csv.h"
 
 namespace SimulationLib {
 namespace CSVImport {

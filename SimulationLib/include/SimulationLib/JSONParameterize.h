@@ -1,6 +1,6 @@
-#include "../include/SimulationLib/JSONImport.h"
-#include "../include/SimulationLib/Param.h"
-#include "../include/SimulationLib/DataFrame.h"
+#include "JSONImport.h"
+#include "Param.h"
+#include "DataFrame.h"
 #include "GeneralStatDist.h"
 #include <StatisticalDistribution.h>
 #include <json.hpp>

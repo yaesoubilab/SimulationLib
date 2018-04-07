@@ -28,7 +28,8 @@ add_executable (Test
 		# tests-ReadParam.cpp
 		# tests-frame.cpp
                 tests-Likelihood.cpp
-                tests-JSON_param.cpp)
+                tests-JSON_param.cpp
+                tests-Params.cpp)
 
 target_link_libraries (Test
 					   SimulationLib
