@@ -15,7 +15,7 @@
 // #include "Dirichlet.h"
 // #include "DirichletMultinomial.h"
 #include "Empirical.h"
-// #include "Exponential.h"
+#include "Exponential.h"
 #include "Gamma.h"
 #include "GammaPoisson.h"
 #include "Geometric.h"

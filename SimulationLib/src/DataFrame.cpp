@@ -46,32 +46,32 @@ namespace SimulationLib {
 	void DataFrameFile::fillArray(json j){
 		// Extract age and time bracket information
 		string curr;
-		if ((ignoreTime = (j[0]["Year"] == "-" || j[0]["Year"].is_null()))){
+		if (ignoreTime = (j[0]["year"] == "-" || j[0]["year"].is_null())){
 			timeBracket = 0;
 		} else {
-			timeBracket = j[0]["Year"];
+			timeBracket = j[0]["year"];
 		}
 
-		if ((ignoreGender = (j[0]["Sex"] == "-" || j[0]["Sex"].is_null()))){
+		if ((ignoreGender = (j[0]["sex"] == "-" || j[0]["sex"].is_null()))){
 
 		} 
 
-		if ((ignoreAge = (j[0]["Age"] == "-" || j[0]["Age"].is_null()))){
+		if ((ignoreAge = (j[0]["age"] == "-" || j[0]["age"].is_null()))){
 			ageBracket = 0;
 		} else{
-			ageBracket = j[0]["Age"];
+			ageBracket = j[0]["age"];
 		}
 
 		if (ignoreTime){
 			timeCats = 1;
 		} else{
-			timeCats = j[1]["Year"];
+			timeCats = j[1]["year"];
 		}
 
 		if (ignoreAge){
 			ageCats = 1;
 		} else{
-			ageCats = j[1]["Age"];
+			ageCats = j[1]["age"];
 		}
 		
 		df = new DataFrame[2*(timeCats*ageCats + 10)];
@@ -80,10 +80,10 @@ namespace SimulationLib {
 			return; //some type of error
 		}
 		if (!ignoreTime){
-			timeStart = j[2]["Year"];
+			timeStart = j[2]["year"];
 		}
 		if (!ignoreAge){
-			ageStart = j[2]["Age"];
+			ageStart = j[2]["age"];
 		}
 		
 
@@ -92,7 +92,7 @@ namespace SimulationLib {
 		
 			int s = 0;
 			int m = index-2;		// -2 to account for first two info rows in file
-			if (j[index]["Sex"] == "F"){
+			if (j[index]["sex"] == "F"){
 				s = 1;
 				m = femaleindex;
 				femaleindex++;
@@ -100,10 +100,10 @@ namespace SimulationLib {
 			double year = 1990;
 			double age = 0;
 			if (!ignoreTime){
-				year = j[index]["Year"];
+				year = j[index]["year"];
 			}
 			if (!ignoreAge){
-				age = j[index]["Age"];
+				age = j[index]["age"];
 			}
 			DataFrame d (year, s, age,
 			 mapDistribution(j[index]));
@@ -159,7 +159,7 @@ namespace SimulationLib {
 
 		if (sex == 1){
 			//adjust for female index;
-			index += timeCats*ageCats + 10 ;
+			index += timeCats*ageCats + 10;
 		}
 		return index;
 	}
@@ -172,8 +172,9 @@ namespace SimulationLib {
 		cout << "Age: " << df[index].getAge() << "\n";
 	}
 
-	long double DataFrameFile::getValue(double time, int sex, double age, RNG myRNG){
+	long double DataFrameFile::getValue(double time, int sex, double age, RNG &myRNG){
 		int index = getIndex(time, sex, age);
+		// printf("index=%d\n", index);
 		return df[index].Sample(myRNG);
 	}
 

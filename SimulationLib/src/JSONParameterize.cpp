@@ -53,7 +53,13 @@ namespace SimulationLib {
       long double p1 = jobj["parameter-1"], p2 = jobj["parameter-2"];
         Weibull d(p1, p2);
         return GeneralStatDist(d);
-    } 
+    } else if (jobj["distribution"] == "Exponential") {
+      long double p1 = jobj["parameter-1"], p2 = jobj["parameter-2"];
+      Exponential d(p1, p2);
+      return GeneralStatDist(d);
+    } else {
+        printf("Warning: No matching distribution");
+    }
 
     Constant d(0);
     // Default is to return constant distribution containing 0.

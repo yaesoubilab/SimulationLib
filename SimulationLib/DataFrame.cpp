@@ -23,7 +23,7 @@ namespace SimulationLib {
 		return distribution;
 	}
 
-	long double DataFrame::Sample(RNG &rng) {
+	long double DataFrame::Sample(RNG rng) {
 		return distribution.Sample(rng);
 	}
 

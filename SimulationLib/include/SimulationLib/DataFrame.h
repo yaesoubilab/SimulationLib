@@ -49,7 +49,7 @@ namespace SimulationLib {
   public:
     DataFrameFile();
     DataFrameFile(json j);
-    long double getValue(double time, int sex, double age, RNG myRNG);
+    long double getValue(double time, int sex, double age, RNG &myRNG);
     double nextBracketStart(double age);
     double timeToNextBracket(double age);
     double getTimeBracket();
