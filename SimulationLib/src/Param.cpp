@@ -32,6 +32,10 @@ namespace SimulationLib {
 		return distribution.Sample(rng);
 	}
 
+	long double Param::pdf(long double val) {
+		return distribution.pdf(val);
+	}
+
 	string Param::getFileName() {
 		return filename;
 	}

@@ -57,8 +57,16 @@ namespace SimulationLib {
       long double p1 = jobj["parameter-1"], p2 = jobj["parameter-2"];
       Exponential d(p1, p2);
       return GeneralStatDist(d);
-    } else {
-        printf("Warning: No matching distribution");
+    } else if (jobj["distribution"] == "Lognormal") {
+        long double p1 = jobj["parameter-1"], p2 = jobj["parameter-2"], p3 = jobj["parameter-3"];
+        Lognormal d(p1, p2, p3);
+        return GeneralStatDist(d);
+    } else if (jobj["distribution"] == "Gamma") {
+        long double p1 = jobj["parameter-1"], p2 = jobj["parameter-2"];
+        Gamma d(p1, p2);
+        return GeneralStatDist(d);
+    } else if (jobj["type"] == "v") {
+        printf("Warning: No matching distribution\n");
     }
 
     Constant d(0);

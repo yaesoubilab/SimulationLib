@@ -178,9 +178,8 @@ void printVector(vector<int> *v) {
 template <typename T>
 CellSpecItrs
 TimeSeriesExport<T>::getColumnIters(void) {
-    // "+1" is to account for the extra column we need to represent time.
-    // Therefore, column 0 is for time, not value.
-    columns = new vector<CellSpec>(nTimeSeries + 1);
+    // 3 columns: time, value, run
+    columns = new vector<CellSpec>(3);
     CellSpecItrs cellSpecItrs;
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
@@ -204,7 +203,7 @@ TimeSeriesExport<T>::getRowIters(void) {
 
     nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
 
-    rows = new vector<CellSpec>(nPeriods);
+    rows = new vector<CellSpec>(nPeriods * nTimeSeries);
 
     // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
     iota(rows->begin(), rows->end(), (CellSpec)0);
@@ -251,6 +250,14 @@ TimeSeriesExport<T>::getColumnName(CellSpec columnSpec) {
         return timeHeader;
     else
         return tsNames[columnSpec - 1];
+
+    switch (columnSpec)
+    {
+        case 0:  return timeHeader;
+        case 1:  return string("trajectory");
+        case 2:  return string("value");
+        default: return string("unsupported columnSpec");
+    }
 }
 
 template <typename T>
@@ -260,8 +267,11 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
     int period, tsIdx, tsTime0, tsTimeMax;
+    int nPeriods;
     T cellVal;
     string empty;
+
+    nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
 
     // Return period # if first column
     if (columnSpec == 0)
@@ -269,10 +279,10 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     empty     = string("");
 
-    period    = rowSpec;           // Which period is being requested
-    tsIdx     = columnSpec - 1;    // Which timeSeries is being requested
-    tsTime0   = tsTime0s[tsIdx];   // time0 for this timeSeries
-    tsTimeMax = tsTimeMaxs[tsIdx]; // timeMax for this timeSeries
+    period    = rowSpec % nPeriods;  // Which period is being requested
+    tsIdx     = rowSpec / nPeriods;  // Which timeSeries is being requested
+    tsTime0   = tsTime0s[tsIdx];     // time0 for this timeSeries
+    tsTimeMax = tsTimeMaxs[tsIdx];   // timeMax for this timeSeries
 
     // If time is below time0 or above timeMax, output empty string
     if ( (period * tsPeriodLength) < tsTime0   || \

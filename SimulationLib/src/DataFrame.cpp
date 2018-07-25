@@ -46,7 +46,7 @@ namespace SimulationLib {
 	void DataFrameFile::fillArray(json j){
 		// Extract age and time bracket information
 		string curr;
-		if (ignoreTime = (j[0]["year"] == "-" || j[0]["year"].is_null())){
+		if ((ignoreTime = (j[0]["year"] == "-" || j[0]["year"].is_null()))){
 			timeBracket = 0;
 		} else {
 			timeBracket = j[0]["year"];

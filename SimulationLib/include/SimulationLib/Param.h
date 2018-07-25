@@ -39,6 +39,8 @@ namespace SimulationLib {
     SimulationLib::Type getType();
     GeneralStatDist getDistribution();
     long double Sample(RNG &rng);
+    long double Get(void);
+    long double pdf(long double val);
     string getFileName();
     bool getCalibration();
   };
