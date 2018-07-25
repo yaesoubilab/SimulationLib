@@ -244,16 +244,9 @@ TimeSeriesExport<T>::getColumnName(CellSpec columnSpec) {
     //   may be changed to "Time," in which case columnSpecs > 0 will
     //   have to return a different value than they currently due, assuming
     //   periodLength != 1.
-    string timeHeader = string("Period");
-
-    if (columnSpec == 0)
-        return timeHeader;
-    else
-        return tsNames[columnSpec - 1];
-
     switch (columnSpec)
     {
-        case 0:  return timeHeader;
+        case 0:  return string("period");
         case 1:  return string("trajectory");
         case 2:  return string("value");
         default: return string("unsupported columnSpec");
@@ -275,7 +268,10 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     // Return period # if first column
     if (columnSpec == 0)
-        return to_string(rowSpec);
+        return to_string(rowSpec % nPeriods);
+
+    if (columnSpec == 1)
+        return to_string(rowSpec / nPeriods);
 
     empty     = string("");
 
