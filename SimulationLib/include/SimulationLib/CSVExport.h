@@ -104,6 +104,7 @@ namespace SimulationLib {
             //   to be exported. Index 'i' of any of these vectors stores
             //   information about the 'i'th TimeSeries added to TimeSeriesExport
             //   via ::Add(TimeSeries<T>).
+            tsPtrs         = vector<TimeSeries<T> *>{};
             tsVectors      = vector<vector<T> *>{};
             tsTime0s       = vector<double>{};
             tsTimeMaxs     = vector<double>{};
@@ -144,6 +145,7 @@ namespace SimulationLib {
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;
 
+        vector<TimeSeries<T> *> tsPtrs;
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;
         vector<double>      tsTimeMaxs;

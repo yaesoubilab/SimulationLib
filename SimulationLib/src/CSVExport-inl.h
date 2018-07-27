@@ -138,18 +138,15 @@ TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
     //   t=0.
     tsTime0   = ceil(ts->GetTime0());
     tsTimeMax = ts->GetTimeMax();
-    tsPointer = ts->GetVector();
     tsName    = ts->GetName();
-    tsSize    = tsPointer->size();
 
     rows      = nullptr;
     columns   = nullptr;
 
+    tsPtrs.push_back(ts);
     tsTime0s.push_back(tsTime0);
     tsTimeMaxs.push_back(tsTimeMax);
-    tsVectors.push_back(tsPointer);
     tsNames.push_back(tsName);
-    tsSizes.push_back(tsSize);
 
     // Update the largest value of 't' that will be written to CSV
     // file, and the number of TimeSeries subject to export.
@@ -233,7 +230,7 @@ template <typename T>
 string
 TimeSeriesExport<T>::getRowName(CellSpec rowSpec) {
     // While ::getRowName(CellSpec) should never be called by CSVExport,
-    //   we return a dummy string just to be safe.
+    //   we return a dummy string just to be safe.w
     return string("");
 }
 
@@ -287,7 +284,7 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     // Otherwise, retrieve value from the timeSeries, convert to a string,
     //   and return.
-    cellVal  = tsVectors[tsIdx]->at(period);
+    cellVal  = tsPtrs[tsIdx]->GetTotalAtTime(period * tsPeriodLength);
 
     // printf("Printing tsVectors[%d]\n", tsIdx);
     // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
