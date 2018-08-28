@@ -4,7 +4,7 @@ project (SimulationLib)
 find_package(Boost REQUIRED)
 
 # Require C++14 compilation
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
