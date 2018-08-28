@@ -1,0 +1,9 @@
+description,short-name,type,distribution,parameter-description,parameter-1,parameter-2,parameter-3,parameter-4,included-in-calibration
+Annual household increase rate,rHouseholdIncrease,v,constant,value,0.02,,,,T
+Probability of male at birth,pMale,v,constant,value,0.5,,,,F
+Probability of marriage failure,pMarriageFailure,v,constant,value,0.5,,,,T
+Marriage age difference,marriageAgeDiff,v,Johnson Su,(shape-shape-location-scale),-0.502093,1.0766871,2.0047795,3.998667,F
+Marriage duration,marriageDuration,v,Weibull,(alpha-beta),1.3400948,12.9101607,,,
+Mortality rate,mRate,f,Annual mortality rates.csv,,,,,,
+Probability of marriage failure,divProb,f,Probability of marriage failure.csv,,,,,,
+Probability of death,deathProb,f,,,,,,,

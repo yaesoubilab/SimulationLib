@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <StatisticalDistribution.h>
-#include <variant>
+#include "boost/variant.hpp"
 #include <random>
 
 // Holds a parameter to the model.
@@ -23,7 +23,7 @@ namespace SimulationLib {
   using namespace std;
   // The type of the 'distribution'. Might just be a long double.
   using dist_type
-    = variant<shared_ptr<const StatisticalDistribution<long> >,
+    = boost::variant<shared_ptr<const StatisticalDistribution<long> >,
               shared_ptr<const StatisticalDistribution<long double> >,
               long double>;
   class Parameter {
@@ -35,10 +35,10 @@ namespace SimulationLib {
     inline Parameter(double d)
       : dist(d), min(d), max(d), calibrate(false) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long> > dist,
-		     long double min, long double max, bool c)
+         long double min, long double max, bool c)
       : dist(dist), min(min), max(max), calibrate(c) {}
     inline Parameter(shared_ptr<StatisticalDistribution<long double> > dist,
-		     long double min, long double max, bool c)
+         long double min, long double max, bool c)
       : dist(dist), min(min), max(max), calibrate(c) {}
   };
 }

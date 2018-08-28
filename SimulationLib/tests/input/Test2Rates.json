@@ -1,0 +1,218 @@
+[
+  {
+    "Year": 1.0,
+    "Sex": null,
+    "Age": 5.0,
+    "Annual mortality rate": null
+  },
+  {
+    "Year": 2.0,
+    "Sex": null,
+    "Age": 17.0,
+    "Annual mortality rate": null
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011791531
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000675644
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000554381
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000791879
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00158679
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003832597
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006282832
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008131343
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009138431
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010860173
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.013305164
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015639423
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.021222689
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.031091704
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.048499288
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.072599585
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.120500317
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011607315
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000678098
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000595584
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00074374
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001363359
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003521683
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006169252
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008217598
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00914819
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010651363
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.013056821
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015241217
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02067991
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.030436006
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.048273954
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.074057312
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.124816203
+  }
+]

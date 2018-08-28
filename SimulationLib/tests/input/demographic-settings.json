@@ -1,0 +1,86 @@
+[
+  {
+    "description": "Annual household increase rate",
+    "short-name": "rHouseholdIncrease",
+    "type": "v",
+    "distribution": "constant",
+    "parameter-description": "value",
+    "parameter-1": 0.02,
+    "parameter-2": null,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": true
+  },
+  {
+    "description": "Probability of male at birth",
+    "short-name": "pMale",
+    "type": "v",
+    "distribution": "constant",
+    "parameter-description": "value",
+    "parameter-1": 0.5,
+    "parameter-2": null,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": false
+  },
+  {
+    "description": "Probability of marriage failure",
+    "short-name": "pMarriageFailure",
+    "type": "v",
+    "distribution": "constant",
+    "parameter-description": "value",
+    "parameter-1": 0.5,
+    "parameter-2": null,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": true
+  },
+  {
+    "description": "Marriage age difference",
+    "short-name": "marriageAgeDiff",
+    "type": "v",
+    "distribution": "Johnson Su",
+    "parameter-description": "(shape-shape-location-scale)",
+    "parameter-1": -0.502093,
+    "parameter-2": 1.0766871,
+    "parameter-3": 2.0047795,
+    "parameter-4": 3.998667,
+    "included-in-calibration": false
+  },
+  {
+    "description": "Marriage duration",
+    "short-name": "marriageDuration",
+    "type": "v",
+    "distribution": "Weibull",
+    "parameter-description": "(alpha-beta)",
+    "parameter-1": 1.3400948,
+    "parameter-2": 12.9101607,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": null
+  },
+  {
+    "description": "Mortality rate",
+    "short-name": "mRate",
+    "type": "f",
+    "distribution": "Annual mortality rates.csv",
+    "parameter-description": null,
+    "parameter-1": null,
+    "parameter-2": null,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": null
+  },
+  {
+    "description": "Probability of marriage failure",
+    "short-name": "divProb",
+    "type": "f",
+    "distribution": "Probability of marriage failure.csv",
+    "parameter-description": null,
+    "parameter-1": null,
+    "parameter-2": null,
+    "parameter-3": null,
+    "parameter-4": null,
+    "included-in-calibration": null
+  }
+]

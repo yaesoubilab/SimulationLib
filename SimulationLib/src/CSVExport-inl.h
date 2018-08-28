@@ -138,18 +138,15 @@ TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
     //   t=0.
     tsTime0   = ceil(ts->GetTime0());
     tsTimeMax = ts->GetTimeMax();
-    auto tsPointer = ts;
     tsName    = ts->GetName();
-    tsSize    = ts->GetVector()->size();
 
     rows      = nullptr;
     columns   = nullptr;
 
+    tsPtrs.push_back(ts);
     tsTime0s.push_back(tsTime0);
     tsTimeMaxs.push_back(tsTimeMax);
-    tsVectors.push_back(tsPointer);
     tsNames.push_back(tsName);
-    tsSizes.push_back(tsSize);
 
     // Update the largest value of 't' that will be written to CSV
     // file, and the number of TimeSeries subject to export.
@@ -178,9 +175,8 @@ void printVector(vector<int> *v) {
 template <typename T>
 CellSpecItrs
 TimeSeriesExport<T>::getColumnIters(void) {
-    // "+1" is to account for the extra column we need to represent time.
-    // Therefore, column 0 is for time, not value.
-    columns = new vector<CellSpec>(nTimeSeries + 1);
+    // 3 columns: time, value, run
+    columns = new vector<CellSpec>(3);
     CellSpecItrs cellSpecItrs;
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
@@ -204,7 +200,7 @@ TimeSeriesExport<T>::getRowIters(void) {
 
     nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
 
-    rows = new vector<CellSpec>(nPeriods);
+    rows = new vector<CellSpec>(nPeriods * nTimeSeries);
 
     // printf("tMax=%f, tsPeriodLength=%d, nPeriods=%d\n", tMax, tsPeriodLength, nPeriods);
     iota(rows->begin(), rows->end(), (CellSpec)0);
@@ -234,7 +230,7 @@ template <typename T>
 string
 TimeSeriesExport<T>::getRowName(CellSpec rowSpec) {
     // While ::getRowName(CellSpec) should never be called by CSVExport,
-    //   we return a dummy string just to be safe.
+    //   we return a dummy string just to be safe.w
     return string("");
 }
 
@@ -245,12 +241,13 @@ TimeSeriesExport<T>::getColumnName(CellSpec columnSpec) {
     //   may be changed to "Time," in which case columnSpecs > 0 will
     //   have to return a different value than they currently due, assuming
     //   periodLength != 1.
-    string timeHeader = string("Period");
-
-    if (columnSpec == 0)
-        return timeHeader;
-    else
-        return tsNames[columnSpec - 1];
+    switch (columnSpec)
+    {
+        case 0:  return string("period");
+        case 1:  return string("trajectory");
+        case 2:  return string("value");
+        default: return string("unsupported columnSpec");
+    }
 }
 
 template <typename T>
@@ -260,19 +257,25 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
     int period, tsIdx, tsTime0, tsTimeMax;
+    int nPeriods;
     T cellVal;
     string empty;
 
+    nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
+
     // Return period # if first column
     if (columnSpec == 0)
-        return to_string(rowSpec);
+        return to_string(rowSpec % nPeriods);
+
+    if (columnSpec == 1)
+        return to_string(rowSpec / nPeriods);
 
     empty     = string("");
 
-    period    = rowSpec;           // Which period is being requested
-    tsIdx     = columnSpec - 1;    // Which timeSeries is being requested
-    tsTime0   = tsTime0s[tsIdx];   // time0 for this timeSeries
-    tsTimeMax = tsTimeMaxs[tsIdx]; // timeMax for this timeSeries
+    period    = rowSpec % nPeriods;  // Which period is being requested
+    tsIdx     = rowSpec / nPeriods;  // Which timeSeries is being requested
+    tsTime0   = tsTime0s[tsIdx];     // time0 for this timeSeries
+    tsTimeMax = tsTimeMaxs[tsIdx];   // timeMax for this timeSeries
 
     // If time is below time0 or above timeMax, output empty string
     if ( (period * tsPeriodLength) < tsTime0   || \
@@ -281,7 +284,7 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     // Otherwise, retrieve value from the timeSeries, convert to a string,
     //   and return.
-    cellVal  = tsVectors[tsIdx]->GetTotalAtTime(period*tsPeriodLength);
+    cellVal  = tsPtrs[tsIdx]->GetTotalAtTime(period * tsPeriodLength);
 
     // printf("Printing tsVectors[%d]\n", tsIdx);
     // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
@@ -328,9 +331,9 @@ PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
         ptse->GetPeriodLength() != ptsePeriodLength) {
         printf("Error: All PyramidTimeSeries must have the same periodLength\n");
         return false;
-    } else if (nPyramidTimeSeries == 0) {
-        ptsePeriodLength = ptse->GetPeriodLength();
     }
+
+    ptsePeriodLength = ptse->GetPeriodLength();
 
     // Make sure that new PyramidTimeSeries has same number of age groups
     if (nPyramidTimeSeries != 0 &&
@@ -379,9 +382,10 @@ PyramidTimeSeriesExport/*<T>*/::getColumnIters(void) {
     int nTotalCategories = nCategories * nPyramidTimeSeries;
 
     // The first "+1" is to account for the extra column we need to represent time.
-    // The second "+1" is to account for the extra column needed to represent the age group.
-    // Therefore, column 0 is for time, not value, and column 1 is for the age group.
-    columns = new vector<CellSpec>(1 + 1 + nTotalCategories);
+    // The second "+1" is for trajectory
+    // The third "+1" is to account for the extra column needed to represent the age group.
+    // The fourth "+1" is for category
+    columns = new vector<CellSpec>(1 + 1 + 1 + 1 + 1);
     CellSpecItrs cellSpecItrs;
 
     iota(columns->begin(), columns->end(), (CellSpec)0);
@@ -402,7 +406,7 @@ PyramidTimeSeriesExport/*<T>*/::getRowIters(void) {
     nPeriods = (int)ceil((double)tMax/(double)ptsePeriodLength) + 1;
     nAgeGroups = ageBreaks.size() + 1;
 
-    rows = new vector<CellSpec>(nPeriods * nAgeGroups);
+    rows = new vector<CellSpec>(nPeriods * nPyramidTimeSeries * nAgeGroups * nCategories);
 
     iota(rows->begin(), rows->end(), (CellSpec)0);
 
@@ -431,28 +435,14 @@ PyramidTimeSeriesExport/*<T>*/::getRowName(CellSpec rowSpec) {
 
 string
 PyramidTimeSeriesExport/*<T>*/::getColumnName(CellSpec columnSpec) {
-    string timeHeader, categoryStr;
-    int ptseIdx, categoryIdx;
+    switch (columnSpec) {
+        case 0: return string("period"); break;
+        case 1: return string("trajectory"); break;
+        case 2: return string("age group"); break;
+        case 3: return string("category"); break;
+        case 4: return string("value"); break;
 
-    timeHeader = string("Period");
-    categoryStr = string("");
-
-    // the index of the ptse can be found using division/truncation
-    ptseIdx = (columnSpec-2)/nCategories;
-
-    // the index of the category can be found using modulo
-    categoryIdx = (columnSpec-2)%nCategories;
-
-    if (columnSpec == 0) {
-        return timeHeader;
-    } else if (columnSpec == 1) {
-        return string("Age Group");
-    } else {
-        categoryStr += string("[");
-        categoryStr += ptsePointers[ptseIdx]->GetName();
-        categoryStr += string("]Category ");
-        categoryStr += to_string(categoryIdx);
-        return categoryStr;
+        default: return string("UNKNOWN COLUMN"); break;
     }
 }
 
@@ -463,47 +453,53 @@ PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
     string empty, ageRange;
 
+    int nPeriods = (int)ceil((double)tMax/(double)ptsePeriodLength) + 1;
+
     // there is one more age group than there are age breaks
     nAgeGroups = ageBreaks.size() + 1;
 
     // calculate period by finding the quotient of rowSpec and nAgeGroups
-    period = rowSpec/nAgeGroups;
+    period = (rowSpec / (nCategories*nAgeGroups)) % nPeriods;
 
     // Find age group index (0,1,...)
-    ageGroupIdx = rowSpec % nAgeGroups;
+    ageGroupIdx = (rowSpec/nCategories) % nAgeGroups;
+
+    // Find category (i.e. gender) index
+    categoryIdx = rowSpec % nCategories;
+
+    // Find trajectory
+    ptseIdx = rowSpec / (nPeriods*nAgeGroups*nCategories);
 
     // Return period # if first column
     if (columnSpec == 0)
         return to_string(period);
 
-    // Return ageRange if second column
     if (columnSpec == 1)
+        return to_string(ptseIdx);
+
+    // Return ageRange if third column
+    if (columnSpec == 2)
     {
 
         // Return different strings depending on age group index
         if (ageGroupIdx == 0 && nAgeGroups == 1)
-        {
             ageRange = string("0-inf");
-        }
-        else if (ageGroupIdx == 0) {
+        else if (ageGroupIdx == 0)
             ageRange = string("0-" + to_string((int)ageBreaks[0]));
-        }
         else if (ageGroupIdx == nAgeGroups - 1)
-        {
             ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-inf");
-        }
         else
-        {
-            ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + "-" + to_string((int)ageBreaks[ageGroupIdx]));
-        }
+            ageRange = string(to_string((int)ageBreaks[ageGroupIdx-1]) + \
+                              "-" + \
+                              to_string((int)ageBreaks[ageGroupIdx]));
 
         return ageRange;
     }
 
-    empty = string("");
+    if (columnSpec == 3)
+        return to_string(categoryIdx);
 
-    ptseIdx = (columnSpec-2)/nCategories;
-    categoryIdx = (columnSpec-2)%nCategories;
+    empty = string("");
 
     time0 = ptseTime0s[ptseIdx];
     timeMax = tMax;

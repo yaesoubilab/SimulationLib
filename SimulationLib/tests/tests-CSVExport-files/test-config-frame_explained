@@ -1,0 +1,17 @@
+T,G,A, (ignored, stands for Time, Gender, Age, Parameter)
+-,,1.2, (TIMEBSIZE, USEGENDER, AGEBSIZE.*)
+-,,4 (TIMEBCOUNT, BLANK, AGEBCOUNT.*)
+,M,3,1.1 Rest are all (Time, Gender, Age, Parameter)
+,F,3,2.1
+,M,4.2,1.2
+,F,4.2,2.2
+,M,5.4,1.3
+,F,5.4,2.3
+,M,6.6,1.4
+,F,6.6,2.4
+
+TIMEBSIZE and TIMEBCOUNT are - here, so they are ignored and all lines with Time are blank
+All Parameters here are a number, but they could also be in format: DISTNAME,REMINDER,PAR1,PAR2,PAR3,PAR4,CALINC,SCOPE,MIN,MAX.
+
+The first two lines describe the rest of the data, with AGEBSIZE = ageBracketSize, or approximately what age range a perosn fits into. AGEBCOUNT describes the number of age ranges present in this set of data
+For example, this set of data contains AGEBCOUNT=4 age ranges (3 - 4.2, 4.2 - 5.4, 5.4 - 6.6, 6.6 - 7.8) 

@@ -21,7 +21,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 add_executable (Test
 				tests-main.cpp
-                # tests-Calibrate.cpp (we deleted this because ???)
+				# tests-config.cpp
+                tests-Calibrate.cpp
                 tests-Bound.cpp
 				tests-CSVExport.cpp
                 tests-CSVImport.cpp
@@ -31,7 +32,11 @@ add_executable (Test
 				tests-PyramidTimeSeries.cpp
                 tests-EventQueue.cpp
                 tests-EventQueueWithState.cpp
-                tests-Likelihood.cpp)
+		# tests-ReadParam.cpp
+		# tests-frame.cpp
+                tests-Likelihood.cpp
+                tests-JSON_param.cpp
+                tests-Params.cpp)
 
 target_link_libraries (Test
 					   SimulationLib

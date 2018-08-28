@@ -1,0 +1,26 @@
+[
+  {
+    "Description": "Duration of infectiousness",
+    "Short Name": null,
+    "Type": "v",
+    "Distribution": "Gamma",
+    "Parameter Description": "(mean, stDev)",
+    "Par 1": 2.0,
+    "Par 2": true,
+    "Par 3": null,
+    "Par 4": null,
+    "Included in Calibration": true
+  },
+  {
+    "Description": "Transmission",
+    "Short Name": null,
+    "Type": "v",
+    "Distribution": "Constant",
+    "Parameter Description": "value",
+    "Par 1": 0.2,
+    "Par 2": null,
+    "Par 3": null,
+    "Par 4": null,
+    "Included in Calibration": true
+  }
+]

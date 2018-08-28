@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.9)
 
 # Set headers
+set(JSON_INCLUDE "-I/usr/local/homebrew/Cellar/nlohmann_json/1.1.0/include")
 set(header_path "${SimulationLib_SOURCE_DIR}/include/SimulationLib")
 set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/Calibrate.h
            ${header_path}/utils/Bound.h
            ${header_path}/CSVExport.h
+           ${header_path}/CSVImport.h
            ${header_path}/DiscreteTimeStatistic.h
            ${header_path}/IncidencePyramidTimeSeries.h
            ${header_path}/IncidenceTimeSeries.h
@@ -16,11 +18,14 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/TimeSeries.h
            ${header_path}/TimeStatistic.h
            ${header_path}/EventQueue.h
-	   # ${header_path}/DataFrame.h
-	   # ${header_path}/DataFrame.t
+           ${header_path}/JSONImport.h
+           ${header_path}/JSONParameterize.h
+	   ${header_path}/utils/csv.h
+	   ${header_path}/DataFrame.h
 	   # ${header_path}/Config.h
 	   # ${header_path}/ReadParam.h
-	   # ${header_path}/Parameter.h
+	         ${header_path}/Param.h
+           ${header_path}/JSONImport.h
            ${header_path}/Likelihood.h
            ${header_path}/Likelihood-adaptors.h
            ${header_path}/Likelihood-sums.h
@@ -42,24 +47,29 @@ set(src ContinuousTimeStatistic.cpp
         DiscreteTimeStatistic.cpp
         IncidencePyramidTimeSeries.cpp
         IncidenceTimeSeries.cpp
+        JSONImport.cpp
+        JSONParameterize.cpp
         PrevalencePyramidTimeSeries.cpp
         PrevalenceTimeSeries.cpp
         PyramidData.cpp
         PyramidTimeSeries.cpp
+
 	# ParamDataFrame.cpp
 	# Parameter.cpp
 	# Config.cpp
+        Param.cpp
         Likelihood.cpp
-	# DataFrame.cpp
+	     DataFrame.cpp
   )
 
 # Configure config.hpp.in
 # configure_file("config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/config_impl.hpp")
 
 # Define library target
-include_directories(${Boost_INCLUDE_DIRS})
 add_library(SimulationLib ${header} ${src})
 
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${JSON_INCLUDE})
 include_directories(${header_path})
 
 target_link_libraries(SimulationLib PUBLIC StatisticalDistributionsLib)

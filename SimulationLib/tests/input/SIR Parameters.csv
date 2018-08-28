@@ -1,0 +1,4 @@
+SIR parameters,,,,,,,,,[]
+Description,Short Name,Type,Distribution,Parameter Description ,Par 1,Par 2,Par 3,Par 4,Included in Calibration 
+Duration of infectiousness,,v,Gamma,"(mean stDev)",2,1,,,T
+Transmission ,,v,Constant,value,0.2,,,,T

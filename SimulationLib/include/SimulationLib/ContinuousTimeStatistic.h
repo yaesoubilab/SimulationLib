@@ -24,8 +24,10 @@ namespace SimulationLib
 	        variance  = 0;
 
 	        // Guarantees that first value will be recorded as the max and the min
-	        min       = numeric_limits<double>::max();
-	        max       = numeric_limits<double>::min();
+	        min       = numeric_limits<double>::max()-1;
+	        max       = numeric_limits<double>::lowest()+1;
+
+	        value     = 0;
 
 	        lastValue = 0;
 	        lastTime  = 0;

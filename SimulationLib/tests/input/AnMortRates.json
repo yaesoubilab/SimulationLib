@@ -1,0 +1,8786 @@
+[
+  {
+    "Year": 1.0,
+    "Sex": null,
+    "Age": 5.0,
+    "Annual mortality rate": null
+  },
+  {
+    "Year": 43.0,
+    "Sex": null,
+    "Age": 17.0,
+    "Annual mortality rate": null
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011791531
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000675644
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000554381
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000791879
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00158679
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003832597
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006282832
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008131343
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009138431
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010860173
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.013305164
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015639423
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.021222689
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.031091704
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.048499288
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.072599585
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.120500317
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011607315
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000678098
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000595584
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00074374
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001363359
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003521683
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006169252
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008217598
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00914819
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010651363
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.013056821
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015241217
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02067991
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.030436006
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.048273954
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.074057312
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.124816203
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011354388
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00067304
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000646474
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000708766
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001128022
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002997631
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.00585553
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008063078
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008947359
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010275638
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.012525999
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01468398
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.019848547
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.029630849
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.047662624
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.075325993
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.132089919
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011068564
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000662916
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000703771
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000680645
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000838584
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00226915
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005292652
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007692305
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008710495
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009935448
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.012006179
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014255912
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.018987763
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.028465041
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.044830908
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.0737237
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.129678982
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010727912
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000653788
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000763618
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000682342
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000559842
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001516816
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004621471
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007318891
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00846618
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009630859
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011536137
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.013854246
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.018379177
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.027517723
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.042774352
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.07076864
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.129850547
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010489299
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000664583
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000826945
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000702013
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000325538
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000796745
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003862598
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006939059
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008162518
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.00929158
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010984286
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01335168
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017845896
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026564001
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.041358718
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.06643776
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.131236347
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010366387
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000685602
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000895914
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000746269
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000175966
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000226921
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003311813
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006626574
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007975811
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008951779
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010518675
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012766825
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017453763
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025692933
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.040570448
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.062006289
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.132992371
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010285027
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000718333
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000970069
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000794316
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000140294
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.0000927
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.00308254
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006731995
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008095699
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008840216
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010249869
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01228647
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017215584
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025024484
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.039945323
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.058528941
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.133104947
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010180115
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000770377
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001058025
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000846693
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000180977
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000113078
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003316553
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007203304
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00845145
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008954907
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010096116
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011964671
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017142639
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.024856715
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.039655232
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.056476186
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.127793278
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010192585
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000841214
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001176584
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000916831
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000367867
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000448688
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004072937
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008126336
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00929508
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009355586
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010204961
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011917344
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017062556
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025120294
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.039265122
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.056264674
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.119991652
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.01013856
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000909277
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001316666
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000978416
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000548701
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00077482
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004904272
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008957784
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010223552
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009794029
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010418338
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011973732
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017052491
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025698265
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.038856014
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.057597015
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.111365603
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.01028952
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00100328
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001460943
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001012137
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000587562
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000658822
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005013585
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009225939
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010547023
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009754086
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010256277
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011874782
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016845248
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026170905
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.038393591
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.059319904
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.103815216
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010611112
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001139855
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00166071
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001040687
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000567402
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000362421
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004842873
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009032377
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010522501
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009434129
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.00985578
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01150684
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016407615
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026210522
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.038033188
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.060185264
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.09822474
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010468473
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001218227
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001851526
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001096194
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000654737
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.000675535
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005346785
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009766926
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.011164981
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.00983378
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009896387
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011353845
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.01619007
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026073042
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.038537718
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061577802
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.098305358
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010182466
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001253757
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002020092
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001199237
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000864018
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001566194
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006404623
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.011237932
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012395736
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010955015
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010499911
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011814725
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016606749
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026184816
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.039768274
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061876696
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.100749644
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.009922903
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001268261
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00214499
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001318621
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001022437
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002187044
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006933186
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.012255653
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.01321983
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011887877
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.01108838
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012533366
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017337566
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026547198
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.041285685
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061776255
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.104798098
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.009605396
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00123212
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002185791
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001372873
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00100209
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002099177
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006593767
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.012019937
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.01313508
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011919393
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010983039
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012348375
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.017135574
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.026041231
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.04144879
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061034983
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.108729541
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.009267533
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001190396
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002201588
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001422239
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000984426
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002024679
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006316196
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.011711651
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.013079851
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011947401
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010945491
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012198608
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016930238
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025624689
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.041161693
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.060776324
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.112779696
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008998129
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001142295
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002183614
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001458821
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000971489
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00197017
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.006110141
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.011367328
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.013014715
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011945842
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010934738
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012059288
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016727926
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025313655
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.040593463
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.060782437
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.112063256
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008637767
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001094717
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002141082
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001485156
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000961562
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001929141
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005947208
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.010992296
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012994495
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011941534
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010990499
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011943166
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016533995
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.025064044
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.039817795
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061147157
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.112063544
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008236454
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001047197
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002075726
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001499425
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000953455
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001898616
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005818036
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.01062395
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012976295
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011934984
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011087483
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011853947
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016347693
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.024833058
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.038980542
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061481444
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.112333957
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007863174
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000996217
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001993365
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001499239
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000945378
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001874121
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005712638
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.010302639
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012891232
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011932825
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011182906
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01179806
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.016164799
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.024569386
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.03820852
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.061308368
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.113649966
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007557592
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000937808
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001902565
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001483874
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000936157
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001852463
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005625428
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.010040902
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012701771
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011938212
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011248637
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01178149
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015986531
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.024257538
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.037533145
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.060472958
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.115930815
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00725199
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000872515
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001805858
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001451686
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000928206
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001842596
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005585593
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009846741
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012407215
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011930866
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011260799
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011804331
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015846393
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.024020828
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.037075946
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.059438513
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.114402943
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007024763
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000804305
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001703833
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001403899
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000917341
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001833649
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005560443
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009684242
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.012041671
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011926667
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011233217
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011854601
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015687457
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.02374085
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.036655138
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.058126387
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.11338829
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006856088
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000735929
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001595738
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001345583
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000903193
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001823334
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005540755
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009544066
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.011658573
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011885756
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011180497
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011910429
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.01552925
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.023428149
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.036236374
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.056741289
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.113059276
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006709235
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000670981
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001479607
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001282587
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000885902
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001809099
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005517057
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009420562
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.011315216
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011760679
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011123965
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011942369
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015401401
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.023105507
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.035784865
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.055496768
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.113448541
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006559351
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000611972
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001355645
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001218612
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000865988
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001789113
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005483867
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009310297
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.011030904
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011537612
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011070103
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011935945
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015319694
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.02279034
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.035282615
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.054447738
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.114347482
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006433664
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000558806
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001227921
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001152116
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000844479
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001769046
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.00546188
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009221402
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010751589
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.01120344
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010972093
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011882436
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015297606
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.02255791
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.034876657
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.053742942
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.111222245
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006296491
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000511717
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001102031
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001087013
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000819207
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001742399
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005433125
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009150566
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010509397
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010807305
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010878488
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011785708
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015311918
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.022306208
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.034439941
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.053150731
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.109008143
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006152554
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000470811
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000982517
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001022881
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000792013
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001708873
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005390129
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.00908347
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010299872
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010394934
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010760769
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011659969
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015335682
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.022055754
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.033985439
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.052572592
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.107550512
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006016129
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00043568
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000873962
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000958017
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000765355
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001668346
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005323845
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.009002706
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010114205
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010017215
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010575106
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011525848
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015325414
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021839625
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.033522016
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.051924021
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.106724908
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005895127
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000405235
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000777816
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000891811
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000740833
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001621538
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005229932
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008898548
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009945095
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009697404
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010304929
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011394426
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.01525794
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021678744
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.033052171
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.051182583
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.106520785
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005773847
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00037879
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000693416
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000825915
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00071968
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001574501
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005129955
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008784259
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009766302
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009396741
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.00994142
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011260207
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015169973
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021661194
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.032720952
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.050659063
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.103973119
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005668239
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000356099
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00062017
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000761825
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000700295
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00152104
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005009498
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008658716
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009608088
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.0091301
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009528192
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011129224
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.015024848
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021687927
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.032351463
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.050087441
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.102161487
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005575122
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000336694
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000557525
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000702033
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000681462
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001465224
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004869821
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008513372
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009462706
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008892134
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009112708
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.010971403
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014845364
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021715989
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.03198654
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.049460832
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.101053741
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00548782
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000320282
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000504688
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00064886
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000661361
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001412156
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004713335
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.00833866
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009317209
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008679037
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008742006
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.010746805
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014660868
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021688077
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.03168298
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.048795509
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.100574243
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005401652
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000306689
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000460376
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000602679
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000639256
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001364428
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004543231
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008129378
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009161174
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008490142
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008432609
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.010445052
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014482326
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021577538
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031463165
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.048111233
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.100600094
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00531402
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000295369
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000423559
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000562597
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000617006
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001324999
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004374141
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.00789613
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008973964
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008305863
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008146537
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01008602
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014335358
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021491106
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031461699
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.047680695
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.098558167
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005233165
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000285748
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000393235
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00052813
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000593537
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00128984
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004194453
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007644387
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008784527
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008144412
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007895856
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.009677461
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014194908
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.021328885
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031526712
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.047193038
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.097170407
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005156583
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000277376
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000368334
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00049867
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000569931
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00125642
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004015091
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007376609
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008588666
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007996834
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007678344
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.009265342
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.014023044
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.02111647
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031600399
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.046693538
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.096332851
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00508293
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00026989
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000347864
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000473331
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000547538
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001221055
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003849309
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007095792
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008377904
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007852287
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007490079
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.00889804
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.013765188
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.020890202
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031595182
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.046267005
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.095960855
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005011113
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000263171
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000331109
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000451298
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 20.0,
+    "Annual mortality rate": 0.000527034
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001182071
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003703
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006805279
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00814558
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007705558
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007327896
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 55.0,
+    "Annual mortality rate": 0.008595257
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 60.0,
+    "Annual mortality rate": 0.013403007
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 65.0,
+    "Annual mortality rate": 0.020665118
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 70.0,
+    "Annual mortality rate": 0.031462373
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 75.0,
+    "Annual mortality rate": 0.045957218
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "M",
+    "Age": 80.0,
+    "Annual mortality rate": 0.096016714
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014284771
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001192829
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001125313
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001608179
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002171943
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003148621
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005428071
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.0087071
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010477681
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.01281977
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.017120837
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.021154585
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.033488405
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.051167423
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.079468076
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.116694354
+  },
+  {
+    "Year": 1998.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.160660472
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013677471
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001197221
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001172497
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001604994
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002176028
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.003002591
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.005135529
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008546763
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.010438725
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.012520844
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.017883518
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.021024011
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.032739121
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.049528533
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.075957836
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.116249685
+  },
+  {
+    "Year": 1999.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.153263512
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013319044
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001184576
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001225054
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001600623
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00218062
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002798671
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004717627
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.008110915
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009969999
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.011878501
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.018187898
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.021286849
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031927147
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.048026548
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.072541433
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.11410841
+  },
+  {
+    "Year": 2000.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.147014769
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013015124
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001171188
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001288663
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001569942
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002128677
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002507571
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.004303171
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007698787
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009198248
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010650975
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.016137704
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.020794393
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031146102
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.048161552
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.070463138
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.114183968
+  },
+  {
+    "Year": 2001.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.148402576
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013116514
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001151452
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001361751
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001558109
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002114255
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002358693
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003875664
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007302572
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008544889
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009722018
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.014199062
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.020556739
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.030486004
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.048174303
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.06946807
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.110284007
+  },
+  {
+    "Year": 2002.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.155265687
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013555924
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001136732
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001442325
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001558718
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002083973
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002226882
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003341051
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006845023
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007872673
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008802938
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.012280688
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.019849853
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.029833957
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.047686017
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.069230073
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.103448807
+  },
+  {
+    "Year": 2003.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.165357251
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014048417
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001131443
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001524397
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001581409
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002074842
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002117343
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002960175
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006366815
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007312475
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008037503
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010943767
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.018864716
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.029636338
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.046972176
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.070042292
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.097183765
+  },
+  {
+    "Year": 2004.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.17639458
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014320001
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001141897
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00159748
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001620129
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00205876
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002090167
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002696247
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006066761
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007047643
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007507025
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010160408
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.017666801
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.029838144
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.046273962
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.071076594
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.093208391
+  },
+  {
+    "Year": 2005.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.184585903
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014835589
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001188739
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001661043
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001663486
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00206005
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002116438
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002568834
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005979582
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00704705
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007338607
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009743526
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.016678691
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.030423384
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.045862119
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.070952864
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.090616686
+  },
+  {
+    "Year": 2006.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.17217244
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014771443
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001271951
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001740484
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001730235
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002065345
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002194002
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002826371
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006200496
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007490185
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007666591
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009942061
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.016205265
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031217242
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.046399559
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.070182754
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.091446432
+  },
+  {
+    "Year": 2007.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.158296695
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.014130304
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001374119
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001820448
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001806387
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002070296
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002282434
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003263067
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.00650818
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008023066
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008158705
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010461257
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.0160299
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031979681
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.047949405
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.068850208
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.094952427
+  },
+  {
+    "Year": 2008.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.145186648
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013698746
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001515362
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001921522
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.00187114
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002080641
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002300663
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003464039
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006694854
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008316823
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008418916
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010744336
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015997116
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031988025
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.049981788
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.067467108
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.099027761
+  },
+  {
+    "Year": 2009.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.135105036
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013691121
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001687979
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002094099
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001904474
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002049132
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002145455
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003368119
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006577409
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00827572
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008473652
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010732348
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015851258
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.031286318
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.051811746
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.066755724
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.101263009
+  },
+  {
+    "Year": 2010.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.128766717
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.013013014
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001787554
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002287695
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001918344
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002035128
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002089017
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003384052
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006719536
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008435558
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008853146
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010984932
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01577295
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.030419819
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.05271512
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.06855881
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.102720446
+  },
+  {
+    "Year": 2011.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.128301817
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.012617
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001807852
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002478343
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001908903
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002011544
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00210032
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003549123
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007251137
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00887335
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009501233
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011471374
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.01622029
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.029758455
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.053205327
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.071434292
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.101383924
+  },
+  {
+    "Year": 2012.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.131592702
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.01251159
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001769025
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002669011
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001907713
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.002002218
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002132879
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003639665
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007830454
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009259863
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010161793
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.012114063
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.017031094
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.029419908
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.053612925
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.074996334
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.099653686
+  },
+  {
+    "Year": 2013.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.138011077
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.012374573
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001667147
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002791226
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001937932
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001989593
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.002043119
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003398469
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007725367
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009232903
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010093397
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011866319
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.016822624
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.028358641
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.052785676
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.077526315
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.099278658
+  },
+  {
+    "Year": 2014.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.146233071
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.012059844
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00157687
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002849399
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001990232
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001965424
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001979075
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003204785
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007503716
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00925617
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.01006776
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011711489
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.016568461
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02765089
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.051274921
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.079197807
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.101270372
+  },
+  {
+    "Year": 2015.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.157612696
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011891325
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001496463
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002823672
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002050631
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001929005
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001938469
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.003050287
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.007203859
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009304389
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010054267
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011586241
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.016278802
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.027224311
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.049258041
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.079422344
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.101674814
+  },
+  {
+    "Year": 2016.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.153023557
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.011422931
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001430421
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00273552
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002135509
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001881076
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001922953
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002922427
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006849747
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009424631
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010073796
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011527695
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015973499
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02702616
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.047128857
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.079654146
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.103817874
+  },
+  {
+    "Year": 2017.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.150778402
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.01076821
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001376621
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002602362
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002228456
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001832789
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001920636
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002819869
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006489746
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009547207
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010119987
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011517306
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015682083
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.026897114
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.045230381
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.079476705
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.106896469
+  },
+  {
+    "Year": 2018.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.151029374
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.010143881
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001324352
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002456198
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002292696
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001799253
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001912485
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002741587
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.006167043
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009554571
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010186891
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011523871
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015432865
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.026653703
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.043782782
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.078277291
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.109807839
+  },
+  {
+    "Year": 2019.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.155308565
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.009664062
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001259561
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002321945
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002300665
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001788199
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001887602
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002686111
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005895034
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009382484
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010271742
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011531929
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015241996
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.026236083
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.042760262
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.075924222
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.111926265
+  },
+  {
+    "Year": 2020.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.165105319
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.009177374
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001181852
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002199262
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002253882
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00180215
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001856261
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002666441
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005681825
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.009082875
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010392241
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011543459
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015146686
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.025854357
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.042167611
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.072670899
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.111083379
+  },
+  {
+    "Year": 2021.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.160090946
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008831763
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001097895
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.002082175
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002152286
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001838088
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001806739
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002667947
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.00548662
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00867381
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010544902
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011539613
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015062936
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02535035
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.04182127
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.069316275
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.110684209
+  },
+  {
+    "Year": 2022.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.157804972
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008592181
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.001011416
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001965751
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.002021731
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001882709
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001752139
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002676134
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005316192
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.008231715
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010657633
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011537865
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014984168
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.024807502
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.04151963
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.066399164
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.110079946
+  },
+  {
+    "Year": 2023.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.158758935
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008383702
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000928692
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001841023
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001893768
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001910302
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001710922
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002670116
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005183443
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007831224
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010626331
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011564024
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014914042
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.024335486
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.041069416
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.064319881
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.108424728
+  },
+  {
+    "Year": 2024.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.163089146
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.008156832
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000854833
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001703164
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001782308
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001902159
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001691542
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002637902
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005091454
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007495486
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010402378
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011623363
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014861044
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023977838
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.040399316
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.063027289
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.105538744
+  },
+  {
+    "Year": 2025.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.172668425
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007960479
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000789204
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001557662
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001678612
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001860659
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001693507
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002589296
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005043576
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.007192073
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.010019714
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011687759
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014839038
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023781809
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.039652169
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.061966565
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.100083881
+  },
+  {
+    "Year": 2026.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.166764086
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007742069
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000731532
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00141243
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001586929
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001784499
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001716893
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002514842
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005036385
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006918147
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009528826
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011799194
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014808577
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023628587
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.038816923
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.061452553
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.095248678
+  },
+  {
+    "Year": 2027.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.16403926
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.007508197
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00068166
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00127351
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001502026
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001692046
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001748779
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002431906
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005040533
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006683349
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.009008612
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011882008
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014782976
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023495726
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.038005805
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.06111247
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.091606998
+  },
+  {
+    "Year": 2028.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.163697733
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00728336
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000638491
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001147438
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001415359
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001606232
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001763824
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002363925
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.005012144
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006497903
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.008533951
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011811599
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014783002
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.02336871
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.03732929
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.060567694
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.089414181
+  },
+  {
+    "Year": 2029.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.165094741
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00708083
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000600156
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.001036671
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001323018
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00153758
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001744532
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002322227
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004928031
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00636199
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.00813252
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011527025
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014819014
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023252595
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.036809975
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.059689528
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.088408458
+  },
+  {
+    "Year": 2030.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.168654245
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006878037
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000565589
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000939803
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001228653
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001482906
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001697829
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002310014
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004805999
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006266176
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007777925
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.011072148
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014927595
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023251779
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.036496209
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.058476373
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.086742457
+  },
+  {
+    "Year": 2031.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.158950321
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006694318
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000534872
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000855854
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001135123
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00143967
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001620554
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002324779
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004635822
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006219849
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007455066
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.010502128
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015091798
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023231264
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.036250129
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.057217057
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.086048844
+  },
+  {
+    "Year": 2032.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.151884066
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.00652575
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000507458
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000783781
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.001046805
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001402287
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001530363
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002348849
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004451981
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.006189885
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.007174434
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009912041
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015208355
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023210271
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.036046524
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.05606453
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.08576801
+  },
+  {
+    "Year": 2033.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.147770729
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006363293
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000483088
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000722186
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000968201
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001362199
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001448497
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002349527
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.0042996
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00612586
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006951355
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.009385476
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.015120118
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023230233
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035878994
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.055174573
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.085329874
+  },
+  {
+    "Year": 2034.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.146812769
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006201439
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.00046173
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000669422
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000900425
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001315079
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001383895
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.00230533
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004198642
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.00600009
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006789638
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008947323
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.014759781
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023308724
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035747835
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.05455975
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.084517339
+  },
+  {
+    "Year": 2035.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.149035276
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.006036693
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000442683
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000624363
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000841685
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001264774
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001333987
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002227541
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004147093
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.005818261
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006679496
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008563402
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.0142383
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023564778
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035758964
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.05404271
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.082375445
+  },
+  {
+    "Year": 2036.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.142663297
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005881078
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000425453
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000586115
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000791369
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.00121092
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.00129547
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.002113368
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004146925
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.005584603
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006625523
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.008216406
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.013565717
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023924308
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035761951
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.053676079
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.080455505
+  },
+  {
+    "Year": 2037.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.139248157
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005732008
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000409635
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000553584
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000748356
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001156711
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001263213
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.001986102
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004165784
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.005343697
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006590229
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007921555
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012859799
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.024207595
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035790201
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.053416606
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.078963788
+  },
+  {
+    "Year": 2038.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.138085071
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005588366
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000394936
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.00052578
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000711128
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001106229
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001229351
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.001872792
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004145917
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.005149089
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.006519797
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.007696059
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.012227558
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.024144078
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.035909298
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.053260348
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.07804183
+  },
+  {
+    "Year": 2039.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.138536542
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 0.0,
+    "Annual mortality rate": 0.005449385
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 5.0,
+    "Annual mortality rate": 0.000381329
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 10.0,
+    "Annual mortality rate": 0.000502003
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 15.0,
+    "Annual mortality rate": 0.000678476
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 20.0,
+    "Annual mortality rate": 0.001061414
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 25.0,
+    "Annual mortality rate": 0.001189765
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 30.0,
+    "Annual mortality rate": 0.001784212
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 35.0,
+    "Annual mortality rate": 0.004050539
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 40.0,
+    "Annual mortality rate": 0.005022306
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 45.0,
+    "Annual mortality rate": 0.00638785
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 50.0,
+    "Annual mortality rate": 0.00754198
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 55.0,
+    "Annual mortality rate": 0.011705187
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 60.0,
+    "Annual mortality rate": 0.023616819
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 65.0,
+    "Annual mortality rate": 0.036135024
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 70.0,
+    "Annual mortality rate": 0.053207373
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 75.0,
+    "Annual mortality rate": 0.077615428
+  },
+  {
+    "Year": 2040.0,
+    "Sex": "F",
+    "Age": 80.0,
+    "Annual mortality rate": 0.140521955
+  }
+]

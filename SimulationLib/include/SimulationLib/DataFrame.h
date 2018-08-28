@@ -1,66 +1,65 @@
 #pragma once
-#include <vector>
 #include <memory>
-#ifndef ACCESSORC
-#define ACCESSORC(x, y) inline auto x() const { return(y); }
-#endif
+#include "GeneralStatDist.h"
+#include <random>
+#include "RNG.h"
+#include <json.hpp>
+
+// Holds a parameter to the model.
+// Christina: Simpler implementation of dataframe class.
+// Does not use variant or require C++17.
+
 namespace SimulationLib {
-  // Marcus: What is 'C' meant to be?
-  // Whatever the data frame holds.
-  template<class C>
-    class DataFrame {
-  public:
-    // Marcus: Explain what each of these parameters represents, and what
-    //   any constraints upon their values are.
-    // file should be a file that exists.
-    // loopTime is true if we want the value of time (in getValue)
-    // to matter only modulo timeBracket * timeCats.
-    // g turns a const char* into a C.
-    DataFrame(const char *file, bool loopTime,
-	      std::shared_ptr<const C> (*g)(const char *));
-    // Only implemented for DataFrame<double>, and for parameters.
-    DataFrame(const char *file, bool loopTime);
 
-    // Marcus: Explain what this function does and how it handles errors
-    // Eyal: It extracts the value it read out of the input file.
-    // So it computes (time-timeStart)/timeBracket,
-    // rounds down, and either caps to fit within [0, timeCats)
-    // or takes it modulo timeCats (depending on loopTime).
-    // Similarly for age.
-    // It then indices into m/f.
-    // Errors are impossible.
-    std::shared_ptr<const C>
-      getValue(double time, bool isFemale, double age) const; // Get a value
-    // When's the next bracket start?
-    double nextBracketStart(double age) const;
-    // In how long?
-    double timeToNextBracket(double age) const;
-    ACCESSORC(ignoresTime, ignoreTime);
-    ACCESSORC(ignoresPerson, ignoreAge && ignoreGender);
-    ACCESSORC(ignoresAge, ignoreAge);
-    ACCESSORC(ignoresGender, ignoreGender);
-    ACCESSORC(timeBracketSize, timeBracket);
-    ACCESSORC(ageBracketSize, ageBracket);
-    ACCESSORC(timeBracketStart, timeStart);
-    ACCESSORC(ageBracketStart, ageStart);
-    ACCESSORC(timeBracketCount, timeCats);
-    ACCESSORC(ageBracketCount, ageCats);
-    const bool loopTime;
+  using namespace std;
+  using namespace StatisticalDistributions;
+  using json = nlohmann::json;
+  // The type of the 'distribution'. Might just be a long double.
+  class DataFrame {
   private:
-    double timeBracket, ageBracket, timeStart, ageStart;
-    // The data.
-    std::vector<std::vector<std::shared_ptr<const C> > > m, f;
-    // Marcus: Explain what each of the following variables does
-    // Eyal: timeCats: the number of brackets for time
-    // ageCats: ditto age.
-    // ignoreAge: does the age of the person matter?
-    // ignoreTime: does the year matter?
-    // ignoreGender: does the gender of the person matter?
-    // loopTime: Is this something that goes on a yearly cycle or something?
-    int timeCats, ageCats;
-    bool ignoreAge, ignoreTime, ignoreGender;
-  };
-}
-#undef ACCESSOR
+    double year;
+    int sex; //0 is male, 1 is female
+    double age; 
+    GeneralStatDist distribution;
 
-#include "DataFrame.t"
+  public:
+    //must creates json_obj
+    // Param(JSON_OBJ);
+    DataFrame();
+    DataFrame(double yr, int sx, double a, GeneralStatDist dist) 
+      : year{yr}, sex{sx}, age{a}, distribution{dist} {
+
+    }
+
+    double getYear();
+    int getSex();
+    double getAge();
+    GeneralStatDist getDistribution();
+    long double Sample(RNG &rng);
+  };
+
+  class DataFrameFile{
+  private:
+    bool ignoreTime, ignoreAge, ignoreGender;
+    double timeBracket, ageBracket, timeStart, ageStart;
+    int timeCats, ageCats;
+    void fillArray(json j);
+    int getIndex(double time, int sex, double age);
+    DataFrame *df; 
+  public:
+    DataFrameFile();
+    DataFrameFile(json j);
+    long double getValue(double time, int sex, double age, RNG &myRNG);
+    double nextBracketStart(double age);
+    double timeToNextBracket(double age);
+    double getTimeBracket();
+    int getTimeCats();
+    double getAgeBracket();
+    int getAgeCats();
+    double getTimeStart();
+    double getAgeStart();
+    void printLine(double time, int sex, double age);
+  };
+
+
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "Year": "-",
+    "Sex": "-",
+    "Age": 5.0,
+    "Distribution": null,
+    "Parameters": null,
+    "Par 1": null,
+    "Par 2": null,
+    "Par 3": null,
+    "Par 4": null
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 7.0,
+    "Distribution": null,
+    "Parameters": null,
+    "Par 1": null,
+    "Par 2": null,
+    "Par 3": null,
+    "Par 4": null
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 15.0,
+    "Distribution": "Uniform",
+    "Parameters": "(min-max)",
+    "Par 1": 0.0,
+    "Par 2": 2.0,
+    "Par 3": null,
+    "Par 4": null
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 20.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": -37.59976,
+    "Par 2": 1.7788313,
+    "Par 3": -1.829739,
+    "Par 4": 5.63E-9
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 25.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": -82.26008,
+    "Par 2": 5.4189257,
+    "Par 3": -13.6086,
+    "Par 4": 0.00000976
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 30.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": 177.35664,
+    "Par 2": 14.721365,
+    "Par 3": 77.126833,
+    "Par 4": 0.0007871
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 35.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": 1.5778755,
+    "Par 2": 2.786923,
+    "Par 3": 21.858427,
+    "Par 4": 11.918556
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 40.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": 2.5231835,
+    "Par 2": 2.3305066,
+    "Par 3": 29.829741,
+    "Par 4": 7.4199398
+  },
+  {
+    "Year": null,
+    "Sex": null,
+    "Age": 45.0,
+    "Distribution": "Johnson Su",
+    "Parameters": "(shape-shape-location-scale)",
+    "Par 1": 0.998504,
+    "Par 2": 1.4955192,
+    "Par 3": 29.1,
+    "Par 4": 5.4323279
+  }
+]
