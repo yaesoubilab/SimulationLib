@@ -3,7 +3,7 @@
 #include "DataFrame.h"
 #include "GeneralStatDist.h"
 #include <StatisticalDistribution.h>
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include <string>
 #include "Bernoulli.h"
 #include "Beta.h"

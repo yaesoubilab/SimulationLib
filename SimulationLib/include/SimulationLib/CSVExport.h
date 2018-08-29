@@ -29,10 +29,14 @@ namespace SimulationLib {
 
     using CellSpec = int;
     using CellSpecItr = vector<CellSpec>::iterator;
-    using CellSpecItrs = struct {
+
+    // Looks like a problem with G++ and the keyword using for structs
+    // i'm changing the implemenation to typedef here. See more:
+    // https://stackoverflow.com/questions/48613758/using-vs-typedef-is-there-a-subtle-lesser-known-difference
+    typedef struct {
         CellSpecItr begin;
         CellSpecItr end;
-    };
+    } CellSpecItrs;
 
     // This enum represents the various statistics that are collected by the
     //   TimeStatistics classes. Later on they will be used to articulate

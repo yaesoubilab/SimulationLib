@@ -1,3 +1,4 @@
+#include <iostream>
 #include "catch.hpp"
 #include "../include/SimulationLib/JSONParameterize.h"
 #include "../include/SimulationLib/DataFrame.h"
