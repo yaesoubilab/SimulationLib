@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include "../include/SimulationLib/IncidenceTimeSeries.h"
 
 namespace SimulationLib {

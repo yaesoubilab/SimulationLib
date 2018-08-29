@@ -2,6 +2,7 @@
 //   all Catch tests available via linkage to other tests-*.cpp files
 //   and produces an executable to run all tests
 
+#include <iostream>
 #include "catch.hpp"
 #include "../include/SimulationLib/JSONParameterize.h"
 #include "../include/SimulationLib/DataFrame.h"

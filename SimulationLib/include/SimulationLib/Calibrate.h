@@ -166,7 +166,7 @@ CalculateLikelihood(const Containers&            models,       // models
     // The function 'f' to be used by the Likelihood function. 'f' is a composite
     //   of lambdas for each model data in 'models', and the composition of these
     //   lambdas into 'f' is dictated by the 'modelReducer'.
-    std::function<QuerySig> f = [&modelReducer] (auto&&... ps) {
+    std::function<QuerySig> f = [&modelReducer, &modelLambdas] (auto&&... ps) {
 
         // Holds results of queries to each model data in 'models'
         std::vector<ValueT> modelQueryResults{};

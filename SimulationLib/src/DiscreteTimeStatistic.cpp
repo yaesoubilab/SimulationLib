@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "../include/SimulationLib/DiscreteTimeStatistic.h"
 
 using namespace std;

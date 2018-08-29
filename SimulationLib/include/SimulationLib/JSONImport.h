@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 
 // JSONImporter
 // Uses json.hpp class
