@@ -13,165 +13,168 @@
 using namespace SimulationLib;
 using namespace StatisticalDistributions;
 
-TEST_CASE("Hello_world_calibrate", "[CalculateLikelihood]") {
-	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
-	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
+// The following test cases are commented as work on the calibration
+// suite continues.
 
-	model.Record(0., 1);
-	// model.Record(1, 2);
-	// model.Record(2, 3);
+// TEST_CASE("Hello_world_calibrate", "[CalculateLikelihood]") {
+// 	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
 
-	obs.Record(0., 1);
-	// obs.Record(1, 2);
-	// obs.Record(2, 3);
+// 	model.Record(0., 1);
+// 	// model.Record(1, 2);
+// 	// model.Record(2, 3);
 
-    using DG = std::function<UniformDiscrete(double,double)>;
-	DG dg = [] (double v, double t) {
-		return UniformDiscrete(v-1, v+1);
-	};
+// 	obs.Record(0., 1);
+// 	// obs.Record(1, 2);
+// 	// obs.Record(2, 3);
 
-	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<UniformDiscrete(double,double)>;
+// 	DG dg = [] (double v, double t) {
+// 		return UniformDiscrete(v-1, v+1);
+// 	};
 
-	Params ps {std::make_tuple(0)}; // t=0
+// 	using Params = std::vector<std::tuple<double>>;
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	Params ps {std::make_tuple(0)}; // t=0
 
-	REQUIRE(result == Approx(std::log(1./2)));
-}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
 
-TEST_CASE("Hello_world_calibrate 2", "[CalculateLikelihood]") {
-	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
-	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
+// 	REQUIRE(result == Approx(std::log(1./2)));
+// }
 
-	model.Record(0., 1);
-	// model.Record(1, 2);
-	model.Record(2, 3);
+// TEST_CASE("Hello_world_calibrate 2", "[CalculateLikelihood]") {
+// 	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
 
-	obs.Record(0., 1);
-	// obs.Record(1, 2);
-	obs.Record(2, 3);
+// 	model.Record(0., 1);
+// 	// model.Record(1, 2);
+// 	model.Record(2, 3);
 
-    using DG = std::function<UniformDiscrete(double,double)>;
-	DG dg = [] (double v, double t) {
-		return UniformDiscrete(0, 10);
-	};
+// 	obs.Record(0., 1);
+// 	// obs.Record(1, 2);
+// 	obs.Record(2, 3);
 
-	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<UniformDiscrete(double,double)>;
+// 	DG dg = [] (double v, double t) {
+// 		return UniformDiscrete(0, 10);
+// 	};
 
-	Params ps {std::make_tuple(2)}; // t=0, 2
+// 	using Params = std::vector<std::tuple<double>>;
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	Params ps {std::make_tuple(2)}; // t=0, 2
 
-	REQUIRE(result == Approx(std::log(1./10)));
-}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
 
-TEST_CASE("Hello_world_calibrate 3", "[CalculateLikelihood]") {
-	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
-	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
+// 	REQUIRE(result == Approx(std::log(1./10)));
+// }
 
-	model.Record(0., 1);
-	obs.Record(0., 2);
+// TEST_CASE("Hello_world_calibrate 3", "[CalculateLikelihood]") {
+// 	auto model = PrevalenceTimeSeries<int>("test", 2, 1);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 2, 1);
 
-    using DG = std::function<Normal(double,double)>;
-	DG dg = [] (double v, double t) {
-		return Normal(v, v);
-	};
+// 	model.Record(0., 1);
+// 	obs.Record(0., 2);
 
-	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<Normal(double,double)>;
+// 	DG dg = [] (double v, double t) {
+// 		return Normal(v, v);
+// 	};
 
-	Params ps {std::make_tuple(0)}; // t=0
+// 	using Params = std::vector<std::tuple<double>>;
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
-	long double answer = std::log(Normal(1, 1).pdf(2));
+// 	Params ps {std::make_tuple(0)}; // t=0
 
-	REQUIRE(result == Approx(answer));
-}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	long double answer = std::log(Normal(1, 1).pdf(2));
 
-TEST_CASE("Hello_world_calibrate_4", "[CalculateLikelihood]") {
-	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
-	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	REQUIRE(result == Approx(answer));
+// }
 
-	model.Record(0., 1);
-	// model.Record(1., 1);
-	// model.Record(2., 1);
+// TEST_CASE("Hello_world_calibrate_4", "[CalculateLikelihood]") {
+// 	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
 
-	obs.Record(0., 1);
-	// obs.Record(1., 2000);
-	// obs.Record(2., 2);
+// 	model.Record(0., 1);
+// 	// model.Record(1., 1);
+// 	// model.Record(2., 1);
 
-    using DG = std::function<Normal(double,double)>;
-	DG dg = [] (double v, double t) {
-		return Normal(v, v);
-	};
+// 	obs.Record(0., 1);
+// 	// obs.Record(1., 2000);
+// 	// obs.Record(2., 2);
 
-	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<Normal(double,double)>;
+// 	DG dg = [] (double v, double t) {
+// 		return Normal(v, v);
+// 	};
 
-	Params ps {std::make_tuple(0)}; // t=0
+// 	using Params = std::vector<std::tuple<double>>;
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
-	long double actual = Normal(1, 1).pdf(1);
+// 	Params ps {std::make_tuple(0)}; // t=0
 
-	REQUIRE(result == Approx(std::log(actual)));
-}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	long double actual = Normal(1, 1).pdf(1);
 
-TEST_CASE("Hello_world_calibrate 5", "[CalculateLikelihood]") {
-	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
-	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	REQUIRE(result == Approx(std::log(actual)));
+// }
 
-	model.Record(0., 1);
-	model.Record(7., 1);
-	model.Record(14., 1);
+// TEST_CASE("Hello_world_calibrate 5", "[CalculateLikelihood]") {
+// 	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
 
-	obs.Record(0., 2);
-	obs.Record(7., 2);
-	obs.Record(14., 2);
+// 	model.Record(0., 1);
+// 	model.Record(7., 1);
+// 	model.Record(14., 1);
 
-    using DG = std::function<Normal(double,double)>;
-	DG dg = [] (double v, double t) {
-		return Normal(v, v);
-	};
+// 	obs.Record(0., 2);
+// 	obs.Record(7., 2);
+// 	obs.Record(14., 2);
 
-	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<Normal(double,double)>;
+// 	DG dg = [] (double v, double t) {
+// 		return Normal(v, v);
+// 	};
 
-	Params ps {std::make_tuple(0),
-			   std::make_tuple(7),
-			   std::make_tuple(14)}; // t=0,1,2
+// 	using Params = std::vector<std::tuple<double>>;
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
-	long double actual {0};
-	actual += std::log(Normal(1,1).pdf(2));
-	actual += std::log(Normal(2,2).pdf(4));
-	actual += std::log(Normal(3,3).pdf(6));
+// 	Params ps {std::make_tuple(0),
+// 			   std::make_tuple(7),
+// 			   std::make_tuple(14)}; // t=0,1,2
 
-	REQUIRE(result == Approx(actual));
-}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	long double actual {0};
+// 	actual += std::log(Normal(1,1).pdf(2));
+// 	actual += std::log(Normal(2,2).pdf(4));
+// 	actual += std::log(Normal(3,3).pdf(6));
 
-TEST_CASE("Hello_world_calibrate 6", "[CalculateLikelihood]") {
-	using Params = std::vector<std::tuple<double>>;
-    using DG = std::function<Normal(double,double)>;
+// 	REQUIRE(result == Approx(actual));
+// }
+
+// TEST_CASE("Hello_world_calibrate 6", "[CalculateLikelihood]") {
+// 	using Params = std::vector<std::tuple<double>>;
+//     using DG = std::function<Normal(double,double)>;
 	
-	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
-	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
-	Params ps {}; // t=0,1,2
+// 	auto model = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	auto obs   = PrevalenceTimeSeries<int>("test", 364, 7);
+// 	Params ps {}; // t=0,1,2
 
-	for (int i=0; i<364; i++) {
-		model.Record(i+1, 1);
-		obs.Record(i+1, 2);
-		ps.push_back(std::make_tuple(i+1));
-	}
+// 	for (int i=0; i<364; i++) {
+// 		model.Record(i+1, 1);
+// 		obs.Record(i+1, 2);
+// 		ps.push_back(std::make_tuple(i+1));
+// 	}
 
-	DG dg = [] (double v, double t) {
-		return Normal(v, v);
-	};
+// 	DG dg = [] (double v, double t) {
+// 		return Normal(v, v);
+// 	};
 
 
-	long double result = CalculateLikelihood(model, obs, ps, dg);
-	long double actual {0};
-	for (int i=0; i<364; i++) {
-		auto modelVal = model(i+1);
-		auto obsVal = obs(i+1);
-		actual += std::log(Normal(modelVal,modelVal).pdf(obsVal));
-	}
+// 	long double result = CalculateLikelihood(model, obs, ps, dg);
+// 	long double actual {0};
+// 	for (int i=0; i<364; i++) {
+// 		auto modelVal = model(i+1);
+// 		auto obsVal = obs(i+1);
+// 		actual += std::log(Normal(modelVal,modelVal).pdf(obsVal));
+// 	}
 
-	REQUIRE(result == Approx(actual));
-}
+// 	REQUIRE(result == Approx(actual));
+// }
