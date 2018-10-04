@@ -32,7 +32,8 @@ ProbabilityLgSum_impl(F f, std::vector<PTpl> pv,
     long double sum {0.};
     for (size_t i = 0; i < pv.size(); i++) {
       // printf("Running P(%f)\n", (double)std::get<I>(pv[i])...);
-      sum += std::log( f(std::get<I>(pv[i])...) );
+      auto val = std::max(f(std::get<I>(pv[i])...), std::numeric_limits< long double >::min());
+      sum += std::log(val);
     }
 
     return sum;
