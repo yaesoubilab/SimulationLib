@@ -65,6 +65,9 @@ public:
     // Schedule 'e' for execution
     void Schedule(ScheduledEvent *e)   { return pq->push(e); }
 
+    void QuickSchedule(TimeT t, EventFunc ef) {
+        return Schedule(MakeScheduledEvent(t, ef));
+    }
 
     // Constructor
     EventQueue(void) {
