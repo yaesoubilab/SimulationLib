@@ -3,7 +3,7 @@
 #include "GeneralStatDist.h"
 #include <random>
 #include "RNG.h"
-#include <nlohmann/json.hpp>
+#include "nlohmann/json.hpp"
 
 // Holds a parameter to the model.
 // Christina: Simpler implementation of dataframe class.
