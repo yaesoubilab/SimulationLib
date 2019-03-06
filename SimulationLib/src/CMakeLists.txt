@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 
 # Set headers
 set(JSON_INCLUDE "-I/usr/local/homebrew/Cellar/nlohmann_json/1.1.0/include")
@@ -20,10 +20,8 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/EventQueue.h
            ${header_path}/JSONImport.h
            ${header_path}/JSONParameterize.h
-	   ${header_path}/utils/csv.h
-	   ${header_path}/DataFrame.h
-	   # ${header_path}/Config.h
-	   # ${header_path}/ReadParam.h
+      	   ${header_path}/utils/csv.h
+	         ${header_path}/DataFrame.h
 	         ${header_path}/Param.h
            ${header_path}/JSONImport.h
            ${header_path}/Likelihood.h
@@ -53,13 +51,9 @@ set(src ContinuousTimeStatistic.cpp
         PrevalenceTimeSeries.cpp
         PyramidData.cpp
         PyramidTimeSeries.cpp
-
-	# ParamDataFrame.cpp
-	# Parameter.cpp
-	# Config.cpp
         Param.cpp
         Likelihood.cpp
-	     DataFrame.cpp
+  	    DataFrame.cpp
   )
 
 # Configure config.hpp.in
@@ -73,7 +67,6 @@ include_directories(${JSON_INCLUDE})
 include_directories(${header_path})
 
 target_link_libraries(SimulationLib PUBLIC StatisticalDistributionsLib)
-
 
 target_include_directories(SimulationLib PUBLIC
   $<BUILD_INTERFACE:${SimulationLib_SOURCE_DIR}/include> # for headers when building

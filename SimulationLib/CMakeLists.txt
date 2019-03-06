@@ -31,5 +31,5 @@ include_directories(${Boost_INCLUDE_DIRS})
 enable_testing()
 add_subdirectory(tests)
 
-install(FILES SimulationLib-config.cmake DESTINATION ${main_lib_dest})
+install(FILES SimulationLibConfig.cmake DESTINATION ${main_lib_dest})
 install(EXPORT SimulationLib DESTINATION ${lib_dest})
