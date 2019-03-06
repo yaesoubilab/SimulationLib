@@ -27,7 +27,8 @@ set(header ${header_path}/ContinuousTimeStatistic.h
            ${header_path}/Likelihood.h
            ${header_path}/Likelihood-adaptors.h
            ${header_path}/Likelihood-sums.h
-           ${header_path}/ParseParams.h)
+           ${header_path}/ParseParams.h
+           ${header_path}/nlohmann_json.hpp)
 
 # Require C++14 compilation
 set(CMAKE_CXX_STANDARD 14)
