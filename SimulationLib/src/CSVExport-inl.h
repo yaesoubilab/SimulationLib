@@ -96,7 +96,7 @@ bool CSVExportEngine::Write(void) {
 
 template <typename T>
 bool
-TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
+TimeSeriesExport<T>::Add(TimeSeries<T> *ts, int id) {
     // vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
@@ -147,6 +147,7 @@ TimeSeriesExport<T>::Add(TimeSeries<T> *ts) {
     tsTime0s.push_back(tsTime0);
     tsTimeMaxs.push_back(tsTimeMax);
     tsNames.push_back(tsName);
+    trajectoryID.push_back(id);
 
     // Update the largest value of 't' that will be written to CSV
     // file, and the number of TimeSeries subject to export.
@@ -268,7 +269,7 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
         return to_string(rowSpec % nPeriods);
 
     if (columnSpec == 1)
-        return to_string(rowSpec / nPeriods);
+        return to_string(trajectoryID[rowSpec / nPeriods]);
 
     empty     = string("");
 
@@ -307,7 +308,7 @@ PyramidTimeSeriesExport/*<T>*/::~PyramidTimeSeriesExport()
 }
 
 bool
-PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
+PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse, int id) {
 
     int ptseTime0, ptseTimeMax;
     PyramidTimeSeries *ptsePointer;
@@ -367,6 +368,7 @@ PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse) {
     ptseTime0s.push_back(ptseTime0);
     ptseTimeMaxs.push_back(ptseTimeMax);
     ptsePointers.push_back(ptsePointer);
+    trajectoryID.push_back(id);
 
     tMax =   ptseTimeMax > tMax \
            ? ptseTimeMax : tMax;
@@ -475,7 +477,7 @@ PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
         return to_string(period);
 
     if (columnSpec == 1)
-        return to_string(ptseIdx);
+        return to_string(trajectoryID[ptseIdx]);
 
     // Return ageRange if third column
     if (columnSpec == 2)
