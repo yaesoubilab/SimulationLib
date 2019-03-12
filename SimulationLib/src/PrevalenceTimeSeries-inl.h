@@ -21,17 +21,12 @@ namespace SimulationLib {
         lastTime          = (T)0;
         lastPeriod        = 0;
 
-        prevalence        = new vector<T>(numPeriods + 1, (T)0);
+        prevalence        = make_shared<vector<T>>(numPeriods + 1, (T)0);
 
         recordPeriod      = _recordPeriod;
         stats             = _stats;
 
         writable          = true;
-    }
-
-    template <typename T>
-    PrevalenceTimeSeries<T>::~PrevalenceTimeSeries(void) {
-        delete prevalence;
     }
 
     template <typename T>
@@ -107,7 +102,8 @@ namespace SimulationLib {
     }
 
     template <typename T>
-    vector<T> *PrevalenceTimeSeries<T>::GetVector(void) {
+    std::shared_ptr<vector<T>>
+    PrevalenceTimeSeries<T>::GetVector(void) {
         if (writable)
             printf("Warning: TimeSeries is still writable\n");
 

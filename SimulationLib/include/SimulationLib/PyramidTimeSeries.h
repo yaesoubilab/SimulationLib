@@ -30,7 +30,7 @@ namespace SimulationLib
 
 		vector<double> ageBreaks;
 
-		PyramidData<int> **pyramids;
+		std::vector< PyramidData<int> > pyramids;
 
 		// This is implemented in PrevalencePyramidTimeSeries and
 		//   IncidencePyramidTimeSeries, abiding by the Template Method pattern
@@ -82,8 +82,6 @@ namespace SimulationLib
 		PyramidTimeSeries(string name, int time0, int timeMax, int periodLength,  \
 						  function<int (int, int)> calcNPeriods, int nCategories, \
 						  vector<double> ageBreaks, bool reset);
-
-		~PyramidTimeSeries();
 
 		// Given a 'time'     (time0 <= time <= timeMax),
 		// 		   'category' (0 <= category < nCategories)

@@ -49,15 +49,10 @@ namespace SimulationLib {
     class CSVExportEngine
     {
     public:
-        // 'fname' is the file to be written to. Specify extention (probably
-        //   .csv).
-        CSVExportEngine(string fname);
-        ~CSVExportEngine();
-
         // Writes the .csv representation of any classes (TimeSeries,
         //   PyramidTimeSeries, TimeStatistics) which have been added to the
         //   exporter out to disk. Returns false if the write fails.
-        bool Write(void);
+        bool Write(string fname);
 
     private:
         string fname;
@@ -103,12 +98,12 @@ namespace SimulationLib {
     template<typename T>
     class TimeSeriesExport : public CSVExportEngine {
     public:
-        TimeSeriesExport(string fname) : CSVExportEngine(fname) {
+        TimeSeriesExport() : CSVExportEngine() {
             // The following five vectors store information about TimeSeries
             //   to be exported. Index 'i' of any of these vectors stores
             //   information about the 'i'th TimeSeries added to TimeSeriesExport
             //   via ::Add(TimeSeries<T>).
-            tsPtrs         = vector<TimeSeries<T> *>{};
+            tsPtrs         = vector< std::shared_ptr< TimeSeries<T> > >{};
             tsVectors      = vector<vector<T> *>{};
             tsTime0s       = vector<double>{};
             tsTimeMaxs     = vector<double>{};
@@ -132,7 +127,7 @@ namespace SimulationLib {
         //   any other TimeSeries already ::Add()'ed. Returns false if this
         //   condition is not met, or if 'tse' is =nullptr, or if ::Close()
         //   has not been called on 'tse'.
-        bool Add(TimeSeries<T> *tse, int t);
+        bool Add(std::shared_ptr<TimeSeries<T>> tse, int t);
 
     private:
         // Implementations of virtual methods inherited from CSVExport
@@ -150,7 +145,7 @@ namespace SimulationLib {
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;
 
-        vector<TimeSeries<T> *> tsPtrs;
+        vector< std::shared_ptr< TimeSeries<T> > > tsPtrs;
         vector<vector<T> *> tsVectors;
         vector<double>      tsTime0s;
         vector<double>      tsTimeMaxs;
@@ -173,8 +168,8 @@ namespace SimulationLib {
     // template <typename T>
     class PyramidTimeSeriesExport/*<T>*/ : public CSVExportEngine {
     public:
-        PyramidTimeSeriesExport(string fname) : CSVExportEngine(fname) {
-            ptsePointers     = vector<PyramidTimeSeries *>{};
+        PyramidTimeSeriesExport() : CSVExportEngine() {
+            ptsePointers     = vector< std::shared_ptr<PyramidTimeSeries> >{};
             ptseTime0s       = vector<int>{};
             ptseTimeMaxs     = vector<int>{};
 
@@ -191,7 +186,7 @@ namespace SimulationLib {
 
         ~PyramidTimeSeriesExport();
 
-        bool Add(PyramidTimeSeries/*<T>*/ *ptse, int id);
+        bool Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, int id);
 
     private:
         vector<CellSpec> *rows;
@@ -199,7 +194,7 @@ namespace SimulationLib {
 
         vector<int>      ptseTime0s;
         vector<int>      ptseTimeMaxs;
-        vector<PyramidTimeSeries *> ptsePointers;
+        vector< std::shared_ptr<PyramidTimeSeries> > ptsePointers;
         vector<int>      trajectoryID;
 
         vector<string> categoryNames;
@@ -236,8 +231,8 @@ namespace SimulationLib {
     template <typename T>
     class PyramidDataExport : public CSVExportEngine {
     public:
-        PyramidDataExport(string fname) : CSVExportEngine(fname) {
-            pds = vector<PyramidData<T> *>{};
+        PyramidDataExport() : CSVExportEngine() {
+            pds = vector< std::shared_ptr<PyramidData<T>> >{};
             rows = nullptr;
             columns = nullptr;
 
@@ -250,13 +245,13 @@ namespace SimulationLib {
             if (columns != nullptr) delete columns;
         };
 
-        bool Add(PyramidData<T> *pd);
+        bool Add(std::shared_ptr<PyramidData<T>> pd);
 
     private:
         size_t n_pds;
         size_t nCategories;
         vector<double> ageBreaks;
-        vector<PyramidData<T> *> pds;
+        vector< std::shared_ptr<PyramidData<T>> > pds;
 
         vector<CellSpec> *rows;
         vector<CellSpec> *columns;
@@ -279,15 +274,15 @@ namespace SimulationLib {
     /////////////////////////////////////////
     class TimeStatisticsExport : public CSVExportEngine {
     public:
-        TimeStatisticsExport(string fname, map<TimeStatType, string> _columns) \
-          : CSVExportEngine(fname) {
+        TimeStatisticsExport(map<TimeStatType, string> _columns) \
+          : CSVExportEngine() {
             columns = _columns;
             nStats  = 0;
         };
 
         ~TimeStatisticsExport();
 
-        bool Add(TimeStatistic *tst);
+        bool Add(std::shared_ptr<TimeStatistic> tst);
 
         function<uint8_t (TimeStatType)> Flag = \
           [](auto a) { return static_cast<uint8_t>(a); };
@@ -309,6 +304,6 @@ namespace SimulationLib {
         vector<CellSpec> *_columns;
 
         map<TimeStatType, string> columns;
-        vector<TimeStatistic *> stats;
+        vector< std::shared_ptr<TimeStatistic> > stats;
     };
 };

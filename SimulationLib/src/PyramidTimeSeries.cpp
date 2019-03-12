@@ -42,19 +42,10 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
 
     nPeriods     = calcNPeriods(timeMax, periodLength);
 
-    pyramids     = new PyramidData<int> *[nPeriods];
+    pyramids     = std::vector< PyramidData<int> >();
 
     for (int i = 0; i < nPeriods; ++i)
-        pyramids[i] = new PyramidData<int>(nCategories, ageBreaks);
-}
-
-
-PyramidTimeSeries::~PyramidTimeSeries()
-{
-    for (int i = 0; i < nPeriods; ++i)
-        delete pyramids[i];
-
-    delete pyramids;
+        pyramids.push_back(PyramidData<int>(nCategories, ageBreaks));
 }
 
 bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int increment) {
@@ -143,7 +134,7 @@ bool PyramidTimeSeries::_storeCurrentValues(int period) {
         for (unsigned long j = 0; j < nAgeBreaks; ++j)
         {
             // printf("currentValues[%d] = %d\n", i*nAgeBreaks+j, currentValues[i*nAgeBreaks+j]);
-            if (!pyramids[period]->UpdateByIdx(i, j, currentValues[i * nAgeBreaks + j]))
+            if (!pyramids[period].UpdateByIdx(i, j, currentValues[i * nAgeBreaks + j]))
                 success = false;
             if (reset)
                 currentValues[i * nAgeBreaks + j] = 0;
@@ -196,7 +187,7 @@ bool PyramidTimeSeries::MoveByAge(int time, int oldCategory, double oldAge, \
     }
     else {
         return pyramids[thisPeriod] \
-             ->MoveByAge(oldCategory, oldAge, newCategory, newAge, increment);
+             .MoveByAge(oldCategory, oldAge, newCategory, newAge, increment);
     }
 }
 
@@ -243,7 +234,7 @@ bool PyramidTimeSeries::MoveByIdx(int time, int oldCategory, int oldAgeGroupIdx,
     }
     else {
         return pyramids[thisPeriod] \
-             ->MoveByIdx(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
+             .MoveByIdx(oldCategory, oldAgeGroupIdx, newCategory, newAgeGroupIdx, increment);
     }
 }
 
@@ -310,7 +301,7 @@ int PyramidTimeSeries::GetTotalAtPeriod(int periodIdx) {
     if (periodIdx == lastPeriod && !closed)
         return _getTotalInCurrentValues(periodIdx, false, 0, false, 0);
     else
-        return pyramids[periodIdx]->GetTotal();
+        return pyramids[periodIdx].GetTotal();
 }
 
 int PyramidTimeSeries::GetTotalAtTime(int time) {
@@ -346,7 +337,7 @@ int PyramidTimeSeries::GetTotalInCategoryAtPeriod(int periodIdx, int category) {
     if (periodIdx == lastPeriod && !closed)
         return _getTotalInCurrentValues(periodIdx, true, category, false, 0);
     else
-        return pyramids[periodIdx]->GetTotalInCategory(category);
+        return pyramids[periodIdx].GetTotalInCategory(category);
 }
 
 int PyramidTimeSeries::GetTotalInCategoryAtTime(int time, int category) {
@@ -382,7 +373,7 @@ int PyramidTimeSeries::GetTotalInAgeGroupAtPeriod(int periodIdx, int ageGroupIdx
     if (periodIdx == lastPeriod && !closed)
         return _getTotalInCurrentValues(periodIdx, false, 0, true, ageGroupIdx);
     else
-        return pyramids[periodIdx]->GetTotalInAgeGroup(ageGroupIdx);
+        return pyramids[periodIdx].GetTotalInAgeGroup(ageGroupIdx);
 }
 
 int PyramidTimeSeries::GetTotalInAgeGroupAtTime(int time, int ageGroupIdx) {
@@ -421,7 +412,7 @@ int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtPeriod(int periodIdx, int 
     if (periodIdx == lastPeriod && !closed)
         return _getTotalInCurrentValues(periodIdx, true, ageGroupIdx, true, category);
     else
-        return pyramids[periodIdx]->GetTotalInAgeGroupAndCategory(ageGroupIdx, category);
+        return pyramids[periodIdx].GetTotalInAgeGroupAndCategory(ageGroupIdx, category);
 }
 
 int PyramidTimeSeries::GetTotalInAgeGroupAndCategoryAtTime(int time, int ageGroupIdx, int category) {
@@ -489,7 +480,7 @@ void PyramidTimeSeries::PrintPyramidTimeSeries(void) {
     for (int i = 0; i < nPeriods; ++i)
     {
         printf("This is period number %d\n", i);
-        pyramids[i]->PrintPyramid();
+        pyramids[i].PrintPyramid();
     }
 }
 

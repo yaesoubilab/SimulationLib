@@ -5,14 +5,7 @@ namespace SimulationLib {
 /////////////////////////////////////////
 // General CSV Exporter
 /////////////////////////////////////////
-CSVExportEngine::CSVExportEngine(string _fname) {
-    fname = _fname;
-}
-
-// Empty destructor, for now.
-CSVExportEngine::~CSVExportEngine() {}
-
-bool CSVExportEngine::Write(void) {
+bool CSVExportEngine::Write(string fname) {
     string comma, newline;             // Strings for commonly used symbols
     CellSpecItrs columnItrs, rowItrs;  // Iterators against rows and columns
 
@@ -96,7 +89,7 @@ bool CSVExportEngine::Write(void) {
 
 template <typename T>
 bool
-TimeSeriesExport<T>::Add(TimeSeries<T> *ts, int id) {
+TimeSeriesExport<T>::Add(std::shared_ptr<TimeSeries<T>> ts, int id) {
     // vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
@@ -308,10 +301,9 @@ PyramidTimeSeriesExport/*<T>*/::~PyramidTimeSeriesExport()
 }
 
 bool
-PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse, int id) {
+PyramidTimeSeriesExport/*<T>*/::Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, int id) {
 
     int ptseTime0, ptseTimeMax;
-    PyramidTimeSeries *ptsePointer;
 
     // Make sure PyramidTimeSeries exists
     if (ptse == nullptr) {
@@ -360,14 +352,13 @@ PyramidTimeSeriesExport/*<T>*/::Add(PyramidTimeSeries/*<T>*/ *ptse, int id) {
 
     ptseTime0   = ptse->GetTime0();
     ptseTimeMax = ptse->GetTimeMax();
-    ptsePointer = ptse;
 
     rows        = nullptr;
     columns     = nullptr;
 
     ptseTime0s.push_back(ptseTime0);
     ptseTimeMaxs.push_back(ptseTimeMax);
-    ptsePointers.push_back(ptsePointer);
+    ptsePointers.push_back(ptse);
     trajectoryID.push_back(id);
 
     tMax =   ptseTimeMax > tMax \
@@ -517,7 +508,7 @@ PyramidTimeSeriesExport/*<T>*/::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
 template <typename T>
 bool
-PyramidDataExport<T>::Add(PyramidData<T> *_pd) {
+PyramidDataExport<T>::Add(std::shared_ptr<PyramidData<T>> _pd) {
 
     // Make sure PyramidData exists
     if (_pd == nullptr) {
@@ -686,7 +677,7 @@ TimeStatisticsExport::~TimeStatisticsExport()
 
 
 bool
-TimeStatisticsExport::Add(TimeStatistic *tst) {
+TimeStatisticsExport::Add(std::shared_ptr<TimeStatistic> tst) {
 
     if (tst == nullptr) {
         printf("Error: TimeStatistics pointer was NULL\n");
@@ -782,16 +773,16 @@ TimeStatisticsExport::getColumnName(CellSpec columnSpec) {
 
 string
 TimeStatisticsExport::getCell(CellSpec rowSpec, CellSpec columnSpec) {
-    TimeStatistic *tst;               // Pointer to TimeStatistic referenced by
-                                      //   rowSpec
-    TimeStatType statType;            // Holds the TimeStatType implied by
-                                      //   'columnSpec'
-    double result;                    // Holds result of call to TimeStatistic
-                                      //   getter class
-    int j;                            // To keep track of numeric index on columns
-                                      //   std::map
-    bool found;                       // Indicates whether columnSpec specified
-                                      //   a valid column
+    std::shared_ptr<TimeStatistic> tst; // Pointer to TimeStatistic referenced by
+                                        //   rowSpec
+    TimeStatType statType;              // Holds the TimeStatType implied by
+                                        //   'columnSpec'
+    double result;                      // Holds result of call to TimeStatistic
+                                        //   getter class
+    int j;                              // To keep track of numeric index on columns
+                                        //   std::map
+    bool found;                         // Indicates whether columnSpec specified
+                                        //   a valid column
 
     j     = 0;
     found = false;

@@ -26,33 +26,18 @@ PyramidData<T>::PyramidData(int _numCategories, vector<double> _ageBreaks)
     }
 
     // Allocate all memory for popCounts
-    popCounts = new T *[numCategories];
+    popCounts = std::vector< std::vector<T> >();
     for (int i = 0; i < numCategories; ++i)
-    {
-        popCounts[i] = new T [numAgeGroups];
-    }
+        popCounts.emplace_back(std::vector<T>());
 
     // Zero out all population groups
     for (int i = 0; i < numCategories; ++i)
     {
         for (int j = 0; j < numAgeGroups; ++j)
         {
-            popCounts[i][j] = 0;
+            popCounts[i].emplace_back(0);
         }
     }
-}
-
-template <typename T>
-PyramidData<T>::~PyramidData(void)
-{
-    // Free each category array
-    for (int i = 0; i < numCategories; ++i)
-    {
-        delete popCounts[i];
-    }
-
-    // Free the array itself
-    delete popCounts;
 }
 
 // Returns the age group index corresponding to age 'age'. Throws exception

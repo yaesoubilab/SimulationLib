@@ -51,18 +51,13 @@ namespace SimulationLib {
         periodLength          = _periodLength;
         numPeriods            = (int)ceil(timeMax / periodLength) + 1;
 
-        observations          = new vector<T>(numPeriods, (T)0);
+        observations          = std::make_shared<vector<T>>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
 
         writable              = true;
 
         recordPeriod          = _recordPeriod;
         stats                 = _stats;
-    }
-
-    template <typename T>
-    IncidenceTimeSeries<T>::~IncidenceTimeSeries(void) {
-        delete observations;
     }
 
     // Records a new value at time 'time' and adds it to the current
@@ -131,7 +126,8 @@ namespace SimulationLib {
     // Returns a vector containing all complete aggregations, and the current
     //   incomplete aggregation.
     template<typename T>
-    vector<T> *IncidenceTimeSeries<T>::GetVector() {
+    std::shared_ptr<vector<T>>
+    IncidenceTimeSeries<T>::GetVector() {
         if (writable)
             printf("Warning: IncidenceTimeSeries is still writable.\n");
 

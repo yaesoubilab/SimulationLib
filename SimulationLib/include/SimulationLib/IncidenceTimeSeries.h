@@ -50,8 +50,6 @@ namespace SimulationLib
 		IncidenceTimeSeries(string name, double time0, double timeMax, double periodLength) :\
 		  IncidenceTimeSeries(name, time0, timeMax, periodLength, 0, NULL) {}
 
-		~IncidenceTimeSeries();
-
 	    // Records a new value at time 'time' and adds it to the current
 	    //   aggregation.
 	    // For successive calls, 'time' must monotonically increase. In other words,
@@ -65,7 +63,7 @@ namespace SimulationLib
 
 	    // Returns a vector containing all complete aggregations, and the current
 	    //   incomplete aggregation.
-	    virtual vector<T> *GetVector();
+	    virtual std::shared_ptr<vector<T>> GetVector();
 
 	    // Returns a value of type 'T' containing the sum of the incomplete
 	    //   aggregation. If no points have yet been added to this aggregation,
@@ -94,7 +92,7 @@ namespace SimulationLib
 		int    lastPeriod;
 
 		T aggregatedObservation;
-		vector<T> *observations;
+		std::shared_ptr<vector<T>> observations;
 
 		bool writable;
 

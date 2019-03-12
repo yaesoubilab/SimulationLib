@@ -18,7 +18,7 @@ namespace SimulationLib
         virtual double GetTimeMax(void) = 0;
         virtual int GetPeriodLength(void) = 0;
         virtual bool IsWritable(void) = 0;
-        virtual vector<value_type> *GetVector(void) = 0;
+        virtual std::shared_ptr<vector< value_type >> GetVector(void) = 0;
         virtual value_type GetTotalAtTime(double t) const = 0;
         virtual value_type operator()(double t) const = 0;
     };

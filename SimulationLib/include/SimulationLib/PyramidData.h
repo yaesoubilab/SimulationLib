@@ -13,7 +13,7 @@ namespace SimulationLib
 	{
 
 	private:
-		T **popCounts;
+		std::vector< std::vector< T > > popCounts;
 
 		int numCategories;
 		int numAgeGroups;
@@ -40,7 +40,6 @@ namespace SimulationLib
 		//   [0, +inf]. Each member of the vector must be a positive, nonzero
 		//   double.
 		PyramidData(int numCategories, vector<double> ageBreaks);
-		~PyramidData(void);
 
 		// Updates the specified category and age group index by 'increment'.
 		// Returns true on success, and false if the increment would cause
