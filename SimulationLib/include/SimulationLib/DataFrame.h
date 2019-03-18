@@ -47,6 +47,7 @@ namespace SimulationLib {
     int getIndex(double time, int sex, double age);
     DataFrame *df; 
   public:
+    ~DataFrameFile();
     DataFrameFile();
     DataFrameFile(json j);
     long double getValue(double time, int sex, double age, RNG &myRNG);

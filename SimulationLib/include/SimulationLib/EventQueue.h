@@ -27,10 +27,11 @@ public:
     using ScheduledEvent = struct SE {
         TimeT t;
         EventFuncRunner run;
+        SE(TimeT t, EventFuncRunner run) : t(t), run(run) {};
     };
 
     // Type of scheduler passed to an EventFunc
-    using SchedulerT = function<void(ScheduledEvent *)>;
+    using SchedulerT = function<void(std::shared_ptr<ScheduledEvent>)>;
 
     // An EventFunc takes a time and a scheduler and outputs a ResultT
     using EventFunc = function<ResultT(TimeT, SchedulerT)>;
@@ -38,32 +39,33 @@ public:
     // Package an EventFunc 'ef' to into a ScheduledEvent to be run at time 't'.
     //   This method should be called to produce ScheduledEvents to feed to the
     //   'Schedule' function.
-    ScheduledEvent *MakeScheduledEvent(TimeT t, EventFunc ef) {
-        ScheduledEvent *se = new ScheduledEvent;
+    std::shared_ptr<ScheduledEvent> MakeScheduledEvent(TimeT t, EventFunc ef) {
 
         // Bind 'this' to the Schedule function
         auto boundScheduler = bind(&EventQueue::Schedule, this, placeholders::_1);
 
         // Wrap 'ef' into an EventFuncRunner
-        EventFuncRunner efr = [this, t, ef, boundScheduler] (void) {
+        EventFuncRunner efr = [t, ef, boundScheduler] (void) {
             return ef(t, boundScheduler);
         };
 
         // Set 't' and 'run' fields of EventRunner struct
-        se->t   = t;
-        se->run = efr;
-
-        return se;
+        return std::make_shared<ScheduledEvent>(t, efr);
     }
 
     // The following three methods forward to the underlying data structure
     //   to allow access to the EventFuncs
-    bool                  Empty(void) { return pq->empty(); };
-    const ScheduledEvent   *Top(void) { return pq->top(); };
-    void                    Pop(void) { return pq->pop(); };
+    bool Empty(void) { return pq.empty(); };
+
+    std::shared_ptr<ScheduledEvent>
+    Top(void) { return pq.top(); };
+    
+    void Pop(void) {
+        pq.pop();
+    };
 
     // Schedule 'e' for execution
-    void Schedule(ScheduledEvent *e)   { return pq->push(e); }
+    void Schedule(std::shared_ptr<ScheduledEvent> e)   { return pq.push(e); }
 
     void QuickSchedule(TimeT t, EventFunc ef) {
         return Schedule(MakeScheduledEvent(t, ef));
@@ -74,25 +76,22 @@ public:
         auto boundScheduledEventCmp =
           bind(&EventQueue::scheduledEventCmp, this, placeholders::_1, placeholders::_2);
 
-        pq = new ScheduledEventPQ(boundScheduledEventCmp);
-    }
-
-    // Destructor
-    ~EventQueue(void) {
-        delete pq;
+        pq = ScheduledEventPQ(boundScheduledEventCmp);
     }
 
 private:
     // Allows comparison of ScheduledEvents for insertion into priority queue
-    int scheduledEventCmp(const ScheduledEvent *se1, const ScheduledEvent *se2)
+    int scheduledEventCmp(const std::shared_ptr<ScheduledEvent>& se1, 
+                          const std::shared_ptr<ScheduledEvent>& se2)
         { return se1->t > se2->t; };
 
     // Specialized priority_queue for storing 'ScheudledEvent's
     using ScheduledEventPQ =
-      priority_queue<ScheduledEvent *,
-                     vector<ScheduledEvent *>,
-                     function<int(const ScheduledEvent*, const ScheduledEvent*)>>;
+      priority_queue<std::shared_ptr<ScheduledEvent>,
+                     vector<std::shared_ptr<ScheduledEvent>>,
+                     function<int(const std::shared_ptr<ScheduledEvent>&, 
+                                  const std::shared_ptr<ScheduledEvent>&)>>;
 
-    ScheduledEventPQ *pq;
+    ScheduledEventPQ pq;
 };
 }

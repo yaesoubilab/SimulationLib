@@ -35,7 +35,12 @@ namespace SimulationLib {
 
 	DataFrameFile::DataFrameFile(){
 		//instantiate empty array
-		df = 0;
+		df = nullptr;
+	}
+
+	DataFrameFile::~DataFrameFile() {
+		if (df)
+			delete df;
 	}
 
 
