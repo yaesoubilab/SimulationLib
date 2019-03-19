@@ -9,6 +9,8 @@
 #include <utility>
 #include <map>
 #include <fstream>
+#include <memory>
+#include <iostream>
 
 #include "PyramidTimeSeries.h"
 #include "TimeSeries.h"

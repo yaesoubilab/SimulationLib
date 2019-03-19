@@ -5,6 +5,7 @@
 #include <map>
 #include <utility>
 #include <functional>
+#include <memory>
 
 using namespace std;
 
