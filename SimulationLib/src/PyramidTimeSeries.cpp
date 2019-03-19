@@ -31,21 +31,16 @@ PyramidTimeSeries::PyramidTimeSeries(string _name, int _time0, int _timeMax, \
     ageBreaks    = _ageBreaks;
     reset        = _reset;
 
-    int numValsPerPeriod = (ageBreaks.size() + 1) * nCategories;
+    int numValuesPerPeriod = (ageBreaks.size() + 1) * nCategories;
 
-    currentValues = new int[numValsPerPeriod];
-
-    for (int i = 0; i < numValsPerPeriod; ++i)
-        currentValues[i] = 0;
+    // Initialize 'currentValues' to be full of zeroes
+    currentValues = std::vector<int>(numValuesPerPeriod, 0);
 
     closed = false;
 
-    nPeriods     = calcNPeriods(timeMax, periodLength);
+    nPeriods = calcNPeriods(timeMax, periodLength);
 
-    pyramids     = std::vector< PyramidData<int> >();
-
-    for (int i = 0; i < nPeriods; ++i)
-        pyramids.push_back(PyramidData<int>(nCategories, ageBreaks));
+    pyramids = std::vector< PyramidData<int> >(nPeriods, PyramidData<int>(nCategories, ageBreaks));
 }
 
 bool PyramidTimeSeries::UpdateByAge(int time, int category, double age, int increment) {

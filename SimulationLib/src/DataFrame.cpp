@@ -33,16 +33,12 @@ namespace SimulationLib {
 		return age;
 	}
 
-	DataFrameFile::DataFrameFile(){
-		//instantiate empty array
-		df = nullptr;
-	}
 
-	DataFrameFile::~DataFrameFile() {
-		if (df)
-			delete df;
-	}
 
+
+
+
+	DataFrameFile::DataFrameFile() {}
 
 	DataFrameFile::DataFrameFile(json j){
 		fillArray(j);
@@ -79,7 +75,8 @@ namespace SimulationLib {
 			ageCats = j[1]["age"];
 		}
 		
-		df = new DataFrame[2*(timeCats*ageCats + 10)];
+ 		size_t vector_length = 2*(timeCats*ageCats + 10);
+ 		df = std::vector<DataFrame>(vector_length);
 
 		if (j.size() < 3){
 			return; //some type of error
@@ -120,7 +117,6 @@ namespace SimulationLib {
 	double DataFrameFile::getTimeBracket(){
 		return timeBracket;
 	}   
-
 
 	double DataFrameFile::getAgeBracket(){
 		return ageBracket;
@@ -179,7 +175,9 @@ namespace SimulationLib {
 
 	long double DataFrameFile::getValue(double time, int sex, double age, RNG &myRNG){
 		int index = getIndex(time, sex, age);
-		// printf("index=%d\n", index);
+
+		assert(index < df.size());
+
 		return df[index].Sample(myRNG);
 	}
 

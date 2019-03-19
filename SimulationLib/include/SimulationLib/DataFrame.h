@@ -45,9 +45,8 @@ namespace SimulationLib {
     int timeCats, ageCats;
     void fillArray(json j);
     int getIndex(double time, int sex, double age);
-    DataFrame *df; 
+    std::vector<DataFrame> df;
   public:
-    ~DataFrameFile();
     DataFrameFile();
     DataFrameFile(json j);
     long double getValue(double time, int sex, double age, RNG &myRNG);

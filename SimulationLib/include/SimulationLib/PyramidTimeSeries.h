@@ -26,10 +26,9 @@ namespace SimulationLib
 		int nPeriods;
 		bool closed;
 		bool reset;
-		int *currentValues;
 
-		vector<double> ageBreaks;
-
+		std::vector<int> currentValues;
+		std::vector<double> ageBreaks;
 		std::vector< PyramidData<int> > pyramids;
 
 		// This is implemented in PrevalencePyramidTimeSeries and
