@@ -88,7 +88,7 @@ namespace SimulationLib {
             return false;
         }
 
-        currentPeriod = (int)floor(time / periodLength) + 1;
+        currentPeriod = (int)floor(time / periodLength);
 
         // Call Record if:
         // 1. recordPeriod is set to 'RECORD_ON_ALL': we always call Record,
