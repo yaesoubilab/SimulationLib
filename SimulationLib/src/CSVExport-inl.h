@@ -149,6 +149,8 @@ TimeSeriesExport<T>::Add(std::shared_ptr<TimeSeries<T>> ts, int id) {
 
     nTimeSeries += 1;
 
+    nPeriods = ts->GetNPeriods();
+
     return true;
 }
 
@@ -189,10 +191,8 @@ TimeSeriesExport<T>::getColumnIters(void) {
 template <typename T>
 CellSpecItrs
 TimeSeriesExport<T>::getRowIters(void) {
-    int nPeriods;
-    CellSpecItrs cellSpecItrs;
 
-    nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
+    CellSpecItrs cellSpecItrs;
 
     rows = new vector<CellSpec>(nPeriods * nTimeSeries);
 
@@ -251,11 +251,8 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     // 'columnSpec'-1 corresponds to the index of the TimeSeries being
     //   referenced.
     int period, tsIdx, tsTime0, tsTimeMax;
-    int nPeriods;
     T cellVal;
     string empty;
-
-    nPeriods = (int)ceil(tMax / (double)tsPeriodLength) + 1;
 
     // Return period # if first column
     if (columnSpec == 0)
@@ -271,18 +268,14 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
     tsTime0   = tsTime0s[tsIdx];     // time0 for this timeSeries
     tsTimeMax = tsTimeMaxs[tsIdx];   // timeMax for this timeSeries
 
-    // If time is below time0 or above timeMax, output empty string
+    // If time is below time0 or at/above timeMax, output empty string
     if ( (period * tsPeriodLength) < tsTime0   || \
-         (period * tsPeriodLength) > tsTimeMax     )
+         (period * tsPeriodLength) >= tsTimeMax )
         return empty;
 
     // Otherwise, retrieve value from the timeSeries, convert to a string,
     //   and return.
     cellVal  = tsPtrs[tsIdx]->GetTotalAtTime(period * tsPeriodLength);
-
-    // printf("Printing tsVectors[%d]\n", tsIdx);
-    // for (int i = 0; i < tsVectors[tsIdx]->size(); ++i)
-    //     printf("\tPrinting element: %4f\n", (double)tsVectors[tsIdx]->at(i));
 
     return to_string(cellVal);
 }

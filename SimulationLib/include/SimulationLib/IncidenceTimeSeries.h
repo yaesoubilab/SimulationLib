@@ -79,6 +79,7 @@ namespace SimulationLib
 	    string GetName();
 	    int GetPeriodLength();
 	    bool IsWritable();
+	    int GetNPeriods(void);
 
 	    T GetTotalAtTime(double t) const;
 	    T operator()(double t) const;
@@ -87,7 +88,8 @@ namespace SimulationLib
 		double time0;
 		double timeMax;
 		double periodLength;
-
+		int numPeriods;
+		
 		double lastTime;
 		int    lastPeriod;
 

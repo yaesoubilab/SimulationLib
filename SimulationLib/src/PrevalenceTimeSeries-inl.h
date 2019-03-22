@@ -1,5 +1,7 @@
 #include "../include/SimulationLib/PrevalenceTimeSeries.h"
 
+#include <cassert>
+
 namespace SimulationLib {
     using namespace std;
 
@@ -8,20 +10,18 @@ namespace SimulationLib {
       (string _name, double _timeMax, double _periodLength,
        int _recordPeriod, TimeStatistic *_stats) {
 
-        int numPeriods; // Number of periods to allocate memory for
-
         name              = _name;
 
         timeMax           = _timeMax;
         periodLength      = _periodLength;
-        numPeriods        = (int)ceil(timeMax / periodLength);
+        numPeriods        = (int)(timeMax / periodLength) + 1;
 
         currentPrevalence = (T)0;
 
         lastTime          = (T)0;
         lastPeriod        = 0;
 
-        prevalence        = make_shared<vector<T>>(numPeriods + 1, (T)0);
+        prevalence        = make_shared<vector<T>>(numPeriods, (T)0);
 
         recordPeriod      = _recordPeriod;
         stats             = _stats;
@@ -139,6 +139,11 @@ namespace SimulationLib {
     }
 
     template <typename T>
+    int PrevalenceTimeSeries<T>::GetNPeriods(void) {
+        return numPeriods;
+    }
+
+    template <typename T>
     T PrevalenceTimeSeries<T>::GetCurrentPrevalence(void) {
         return currentPrevalence;
     }
@@ -147,10 +152,13 @@ namespace SimulationLib {
     T PrevalenceTimeSeries<T>::GetTotalAtTime(double t) const {
         int thisPeriod { (int)ceil(t / periodLength) };
 
+        if (t > timeMax)
+            return 0;
+
         if (thisPeriod >= lastPeriod)
             return currentPrevalence;
         else
-            return (*prevalence)[(int)ceil(t / periodLength)];
+            return prevalence->at((int)ceil(t / periodLength));
     }
 
     template <typename T>
@@ -160,6 +168,7 @@ namespace SimulationLib {
 
     template <typename T>
     void PrevalenceTimeSeries<T>::_storePrevalence(int period) {
+        assert(period < numPeriods);
         (*prevalence)[period] = currentPrevalence;
     }
 }

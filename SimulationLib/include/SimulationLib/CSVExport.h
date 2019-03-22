@@ -116,6 +116,7 @@ namespace SimulationLib {
             tsPeriodLength = 0;
             tMax           = 0;
 
+            nPeriods       = 0;
             nTimeSeries    = 0;
         };
 
@@ -157,6 +158,7 @@ namespace SimulationLib {
 
         int tsPeriodLength;
         double tMax;
+        int nPeriods;
 
         int nTimeSeries;
     };

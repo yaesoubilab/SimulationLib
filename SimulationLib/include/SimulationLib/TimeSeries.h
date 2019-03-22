@@ -18,6 +18,7 @@ namespace SimulationLib
         virtual string GetName(void) = 0;
         virtual double GetTime0(void) = 0;
         virtual double GetTimeMax(void) = 0;
+        virtual int GetNPeriods(void) = 0;
         virtual int GetPeriodLength(void) = 0;
         virtual bool IsWritable(void) = 0;
         virtual std::shared_ptr<vector< value_type >> GetVector(void) = 0;

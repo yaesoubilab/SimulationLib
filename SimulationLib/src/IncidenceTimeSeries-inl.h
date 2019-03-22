@@ -25,9 +25,6 @@ namespace SimulationLib {
       (string _name, double _time0, double _timeMax, double _periodLength,
         int _recordPeriod, TimeStatistic *_stats) {
 
-        // Number of periods which will be recorded
-        int numPeriods;
-
         if (_time0 < 0)
             printf("Error: time0 must be non-negative\n");
         if (_periodLength <= 0)
@@ -49,7 +46,7 @@ namespace SimulationLib {
 
         lastPeriod            = 0;
         periodLength          = _periodLength;
-        numPeriods            = (int)ceil(timeMax / periodLength) + 1;
+        numPeriods            = (int)ceil(timeMax / periodLength);
 
         observations          = std::make_shared<vector<T>>(numPeriods, (T)0);
         aggregatedObservation = (T)0;
@@ -85,6 +82,11 @@ namespace SimulationLib {
         // Is 'time' previous to the latest time yet seen?
         if (time < lastTime) {
             printf("Error: successive entries must be monotonically non-decreasing\n");
+            return false;
+        }
+
+        // Don't record if at timeMax or above
+        if (time >= timeMax) {
             return false;
         }
 
@@ -159,6 +161,11 @@ namespace SimulationLib {
         return writable;
     }
 
+    template <typename T>
+    int IncidenceTimeSeries<T>::GetNPeriods(void) {
+        return numPeriods;
+    }
+
     // Returns a value of type 'T' containing the sum of the incomplete
     //   aggregation. If no points have yet been added to this aggregation,
     //   returns 0.
@@ -172,7 +179,7 @@ namespace SimulationLib {
         if (t < time0 || t > timeMax)
             throw out_of_range("t < time0 || t > timeMax");
 
-        return (*observations)[(int)ceil(t / periodLength)];
+        return (*observations)[(int)floor(t / periodLength)];
     }
 
     template<typename T>

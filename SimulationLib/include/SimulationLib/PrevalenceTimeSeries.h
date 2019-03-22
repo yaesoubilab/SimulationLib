@@ -54,6 +54,7 @@ namespace SimulationLib
 		string GetName();
 		int GetPeriodLength();
 		bool IsWritable();
+		int GetNPeriods(void);
 
 		T GetTotalAtTime(double t) const;
 		T operator()(double t) const;
@@ -67,6 +68,7 @@ namespace SimulationLib
 
 		double lastTime;
 		int lastPeriod;
+		int numPeriods;
 
 		// Each element of 'prevalence' represents a period of length
 		//   'periodLength', who value is the most recent observation (the
