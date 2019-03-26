@@ -65,6 +65,8 @@ public:
         pq.pop();
     };
 
+    size_t size(void) { return pq.size(); };
+
     // Schedule 'e' for execution
     void Schedule(std::shared_ptr<ScheduledEvent> e)   { return pq.push(e); }
 
