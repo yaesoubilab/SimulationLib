@@ -89,7 +89,7 @@ bool CSVExportEngine::Write(string fname) {
 
 template <typename T>
 bool
-TimeSeriesExport<T>::Add(std::shared_ptr<TimeSeries<T>> ts, int id) {
+TimeSeriesExport<T>::Add(std::shared_ptr<TimeSeries<T>> ts, long id) {
     // vector<T> *tsPointer;
     double     tsTime0;
     double     tsTimeMax;
@@ -294,7 +294,7 @@ PyramidTimeSeriesExport/*<T>*/::~PyramidTimeSeriesExport()
 }
 
 bool
-PyramidTimeSeriesExport/*<T>*/::Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, int id) {
+PyramidTimeSeriesExport/*<T>*/::Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, long id) {
 
     int ptseTime0, ptseTimeMax;
 

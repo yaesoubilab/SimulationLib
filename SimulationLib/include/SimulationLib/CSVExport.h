@@ -111,7 +111,7 @@ namespace SimulationLib {
             tsTimeMaxs     = vector<double>{};
             tsNames        = vector<string>{};
             tsSizes        = vector<long>{};
-            trajectoryID   = vector<int>{};
+            trajectoryID   = vector<long>{};
 
             tsPeriodLength = 0;
             tMax           = 0;
@@ -130,7 +130,7 @@ namespace SimulationLib {
         //   any other TimeSeries already ::Add()'ed. Returns false if this
         //   condition is not met, or if 'tse' is =nullptr, or if ::Close()
         //   has not been called on 'tse'.
-        bool Add(std::shared_ptr<TimeSeries<T>> tse, int t);
+        bool Add(std::shared_ptr<TimeSeries<T>> tse, long t);
 
     private:
         // Implementations of virtual methods inherited from CSVExport
@@ -154,7 +154,7 @@ namespace SimulationLib {
         vector<double>      tsTimeMaxs;
         vector<string>      tsNames;
         vector<long>        tsSizes;
-        vector<int>         trajectoryID;
+        vector<long>        trajectoryID;
 
         int tsPeriodLength;
         double tMax;
@@ -190,7 +190,7 @@ namespace SimulationLib {
 
         ~PyramidTimeSeriesExport();
 
-        bool Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, int id);
+        bool Add(std::shared_ptr<PyramidTimeSeries>/*<T>*/ ptse, long id);
 
     private:
         vector<CellSpec> *rows;
@@ -199,7 +199,7 @@ namespace SimulationLib {
         vector<int>      ptseTime0s;
         vector<int>      ptseTimeMaxs;
         vector< std::shared_ptr<PyramidTimeSeries> > ptsePointers;
-        vector<int>      trajectoryID;
+        vector<long>     trajectoryID;
 
         vector<string> categoryNames;
         vector<double> ageBreaks;
