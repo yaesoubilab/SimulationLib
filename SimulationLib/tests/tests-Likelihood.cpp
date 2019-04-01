@@ -402,10 +402,11 @@ TEST_CASE("QueryLambdaForContainer", "[calibration]") {
 
     // Test TimeSeries
     REQUIRE_THROWS(f_its(0-0.001));
-    REQUIRE(f_its(0) == 0);
+    REQUIRE(f_its(0) == 10);
     REQUIRE(f_its(2.5) == 10);
     REQUIRE(f_its(7.5) == 1);
-    REQUIRE(f_its(10) == 1);
+    REQUIRE(f_its(9) == 1);
+    REQUIRE_THROWS(f_its(10));
     REQUIRE_THROWS(f_its(10.01));
 
     // Test PyramidTimeSeries

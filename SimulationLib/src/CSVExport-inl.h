@@ -288,7 +288,7 @@ TimeSeriesExport<T>::getCell(CellSpec rowSpec, CellSpec columnSpec) {
 
 PyramidTimeSeriesExport/*<T>*/::~PyramidTimeSeriesExport()
 {
-// Deallocate any memory allocated on instantiation
+    // Deallocate any memory allocated on instantiation
     delete columns;
     delete rows;
 }
