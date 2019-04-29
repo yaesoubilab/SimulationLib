@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.7)
 
 # Set headers
 set(JSON_INCLUDE "-I/usr/local/homebrew/Cellar/nlohmann_json/1.1.0/include")
