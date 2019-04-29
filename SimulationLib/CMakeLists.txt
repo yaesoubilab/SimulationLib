@@ -18,8 +18,6 @@ set(include_dest "include/SimulationLib-${SimulationLib_VERSION}")
 set(main_lib_dest "lib/SimulationLib-${SimulationLib_VERSION}")
 set(lib_dest ${main_lib_dest}/${CMAKE_BUILD_TYPE})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-
 # Define options here
 
 # Add subdirectories
